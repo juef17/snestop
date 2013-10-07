@@ -85,7 +85,7 @@ DROP TABLE IF EXISTS `Review`;
 CREATE TABLE `Review` (
   `idTrack` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
-  `text` varchar(1000) NOT NULL,
+  `text` varchar(6000) NOT NULL,
   `approved` bit(1) NOT NULL,
   PRIMARY KEY (`idTrack`,`idUser`),
   KEY `fk_Review_Track` (`idTrack`),
@@ -304,7 +304,7 @@ DROP TABLE IF EXISTS `User`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `User` (
   `idUser` int(11) NOT NULL AUTO_INCREMENT,
-  `idCommunity` int(11) NOT NULL,
+  `idCommunity` int(11),
   `email` varchar(100) NOT NULL,
   `password` varchar(25) NOT NULL,
   `language` varchar(25) NOT NULL,
@@ -313,7 +313,7 @@ CREATE TABLE `User` (
   `userName` varchar(45) NOT NULL,
   PRIMARY KEY (`idUser`),
   KEY `fk_User_Community` (`idCommunity`),
-  CONSTRAINT `fk_User_Community` FOREIGN KEY (`idCommunity`) REFERENCES `Community` (`idCommunity`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_User_Community` FOREIGN KEY (`idCommunity`) REFERENCES `Community` (`idCommunity`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
