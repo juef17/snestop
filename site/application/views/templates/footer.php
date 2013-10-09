@@ -1,6 +1,3 @@
-<?php
-require_once('application/views/includes/scripts.php');
-
-?>
+</div> <!--mainContainer-->
 </body>
 </html>
