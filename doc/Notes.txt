@@ -1,0 +1,19 @@
+Éléments à savoir pour faire fonctionner le site.
+==================================================
+
+De base, le compte utiliatuer MySQL doit être:
+
+ramoutz
+SkyPeanutz!
+
+Et doit avoir full access à la base de données "snestop"
+
+-------
+
+Le nom d'utilisateur et mot de passe pour accéder au contenu du dossier dbtools dans un fureteur est:
+
+admin
+Peanutz!
+
+-------
+

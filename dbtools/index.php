@@ -1,6 +1,7 @@
 <?php
 	
-	if(!isset($_POST['dbhost'])) require_once("config.php");
+	if(!isset($_POST['dbhost']))
+		require_once("config.php");
 	else
 	{
 		$dbhost = $_POST['dbhost'];
@@ -35,7 +36,7 @@
 						case "text": 
 						case "password": 
 						case "textarea":
-						case "hidden":	
+						case "hidden":
 							elements[i].value = "";
 							break;
 						case "radio":
@@ -67,36 +68,36 @@
 							<tr>
 								<td>Host:</td>
 								<td>
-									<input type="text" size=10 maxlength=255 name="dbhost" id="dbhost" value="<?php echo $dbhost; ?>">
+									<input type="text" size=10 maxlength=255 name="dbhost" id="dbhost" value="<?= $dbhost ?>">
 								</td>
 							</tr>
 							<tr>
 								<td>User:</td>
 								<td>
-									<input type="text" size=10 maxlength=255 name="dbusername" id="dbusername" value="<?php echo $dbusername; ?>">
+									<input type="text" size=10 maxlength=255 name="dbusername" id="dbusername" value="<?= $dbusername ?>">
 								</td>
 							</tr>
 							<tr>
 								<td>Pass:</td>
 								<td>
-									<input type="text" size=10 maxlength=255 name="dbpass" id="dbpass" value="<?php echo $dbpass; ?>">
+									<input type="text" size=10 maxlength=255 name="dbpass" id="dbpass" value="<?= $dbpass ?>">
 								</td>
 							</tr>
 							<tr>
 								<td>Port:</td>
 								<td>
-									<input type="text" size=10 maxlength=255 name="dbport" id="dbport" value="<?php echo $dbport; ?>">
+									<input type="text" size=10 maxlength=255 name="dbport" id="dbport" value="<?= $dbport ?>">
 								</td>
 							</tr>
 						</table>
-						<br><br>
-						<input type="button" value="Clear" onclick="clearForm(this.form);"><br><br>
-						<input type="reset" value="Reset"><br><br>
-						Submit à venir
+						<p><a href="peuplement.php">Peuplement</a></p>
+						<p><input type="button" value="Clear" onclick="clearForm(this.form);"></p>
+						<p><input type="reset" value="Reset"></p>
+						<p>Submit à venir</p>
 						<!--<input type="submit" value="Submit">-->
 					</td>
 					<td>
-						<textarea cols=70 rows=20 name="query" id="query"><?php echo file_get_contents("DDL.sql"); ?></textarea>
+						<textarea cols=70 rows=20 name="query" id="query"><?= file_get_contents("DDL.sql") ?></textarea>
 					</td>
 				</tr>
 			</table>
