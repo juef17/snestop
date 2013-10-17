@@ -310,6 +310,7 @@ CREATE TABLE `User` (
   `language` varchar(25) NOT NULL,
   `canStreamMP3` bit(1) NOT NULL DEFAULT b'0',
   `autoplay` bit(1) NOT NULL,
+  `isAdmin` bit(1) NOT NULL,
   `userName` varchar(45) NOT NULL,
   PRIMARY KEY (`idUser`),
   KEY `fk_User_Community` (`idCommunity`),

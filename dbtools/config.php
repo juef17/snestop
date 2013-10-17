@@ -2,8 +2,8 @@
 
 	$dbhost = "localhost";
 	$dbport = 3306;
-	$dbusername = "";
-	$dbpass = "";
+	$dbusername = "ramoutz";
+	$dbpass = "SkyPeanutz!";
 	
 	$sqlcode = "DDL.sql";
 	
