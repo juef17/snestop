@@ -1,0 +1,44 @@
+ul#sliding-navigation
+{
+	list-style: none;
+	font-size: .75em;
+	margin: 10px 0;
+	padding: 0;
+}
+
+ul#sliding-navigation li.sliding-element a
+{
+	display: block;
+	width: 167px;
+	padding: 5px 18px;
+	margin: 0;
+	margin-bottom: 5px;
+}
+
+ul#sliding-navigation li.sliding-element a
+{
+	color: #111111;
+	background-image: linear-gradient(right bottom, rgb(187,200,252) 14%, rgb(85,85,175) 100%);
+	background-image: -o-linear-gradient(right bottom, rgb(187,200,252) 14%, rgb(85,85,175) 100%);
+	background-image: -moz-linear-gradient(right bottom, rgb(187,200,252) 14%, rgb(85,85,175) 100%);
+	background-image: -webkit-linear-gradient(right bottom, rgb(187,200,252) 14%, rgb(85,85,175) 100%);
+	background-image: -ms-linear-gradient(right bottom, rgb(187,200,252) 14%, rgb(85,85,175) 100%);
+
+	background-image: -webkit-gradient(
+		linear,
+		right bottom,
+		left top,
+		color-stop(0.14, rgb(187,200,252)),
+		color-stop(1, rgb(85,85,175))
+	);
+	border: 1px solid #999999af;
+	text-decoration: none;
+	-webkit-border-top-right-radius: 8px;
+	-webkit-border-bottom-right-radius: 8px;
+	-moz-border-radius-topright: 8px;
+	-moz-border-radius-bottomright: 8px;
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+
+ul#sliding-navigation li.sliding-element a:hover { color: #ffff66; }
