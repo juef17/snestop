@@ -17,3 +17,10 @@ Peanutz!
 
 -------
 
+Infos sur le serveur Zymic:
+Adresse du site: topsnestracks.zymichost.com
+Control panel Zymic: http://www.zymic.com/zcp/
+user/pass: topsnestracks / yayspcs!
+FTP Zymic: ftp://topsnestracks.zymichost.com
+user/pass du FTP: topsnestracks_zymichost / yayspcs!
+Path complet: /www/zymichost.com/t/o/p/topsnestracks/htdocs/
