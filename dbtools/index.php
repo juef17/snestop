@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 	
-	if(!isset($_POST['dbhost']))
-		require_once("config.php");
-	else
+	require_once("base.php");
+	
+	if(isset($_POST['dbhost']))
 	{
 		$dbhost = $_POST['dbhost'];
 		$dbusername = $_POST['dbusername'];
@@ -10,19 +10,13 @@
 		$dbport = $_POST['dbport'];
 	}
 	
-	/*$db = new mysqli($dbhost, $dbusername, $dbpass, "snestop", $dbport);
-
-	if(mysqli_connect_errno())
-	{
-		printf("Connect failed: %s\n", mysqli_connect_error());
-		exit();
-	}*/
+	$db = CreateConnection();
 	
 ?>
 
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<script>
 			function clearForm(oForm)
 			{
@@ -93,20 +87,46 @@
 						<p><a href="peuplement.php">Peuplement</a></p>
 						<p><input type="button" value="Clear" onclick="clearForm(this.form);"></p>
 						<p><input type="reset" value="Reset"></p>
-						<p>Submit � venir</p>
-						<!--<input type="submit" value="Submit">-->
+						<p><input type="submit" value="Submit"></p>
 					</td>
 					<td>
-						<textarea cols=70 rows=20 name="query" id="query"><?= file_get_contents("DDL.sql") ?></textarea>
+						<textarea cols=70 rows=20 name="query" id="query"><?= (isset($_POST['query']) ? $_POST['query'] : file_get_contents("DDL.sql")) ?></textarea>
 					</td>
 				</tr>
 			</table>
 		</form>
+		<?php
+
+			if(isset($_POST['query']))
+			{
+				echo "<h2>Executed query:</h2>" . $_POST['query'] . "<br><br>";
+				$result = $db->multi_query($_POST['query']);
+				if($db->error)
+					echo "<h2>ERREUR!</h2>" . $db->error;
+				else
+				{
+					echo "<h2>OK!</h2>";
+					if($db->affected_rows > 0) echo $db->affected_rows . " lignes traitées par le dernier query.<br>";
+					do
+					{
+						if($result = $db->store_result())
+						{
+							echo "<table style='border: 1px solid black;'>";
+							while ($row = $result->fetch_row())
+							{
+								echo "<tr>";
+								foreach($row as $colonne) echo "<td style='border: 1px solid black; padding:3px;'>" . $colonne . "</td>";
+								echo "</tr>";
+							}
+							$result->free();
+							echo "</table>";
+						}
+					} while($db->more_results() && $db->next_result());
+				}
+			}
+	
+			mysqli_close($db);
+			
+		?>
 	</body>
 </html>
-
-<?php
-	
-	//mysqli_close($db);
-	
-?>
