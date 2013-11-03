@@ -52,13 +52,13 @@
 			<?php endif; ?>
 			
 			<ul id="menuprincipal" style="width: 100%; margin: 5px 0;" class="jdropdown-menu dropdown-menu-skin">
-				<li><a>Requests</a>
+				<li><a href="<?=base_url()?>">Home</a></li>
+				<li><a href="#">Requests</a>
 					<ul>
-						<li><a href="<?= base_url(); ?>index.php/request_track">Request a track</a>
-						</li>
+						<li><a href="<?= base_url(); ?>index.php/request_track">Request a track</a></li>
 					</ul>
 				</li>
-				<li><a>Playlists</a>
+				<li><a href="#">Playlists</a>
 					<ul>
 						<li><a>Category 1.2</a>
 							<li><a>Category 1.3</a></li>
@@ -67,7 +67,7 @@
 						</li>
 					</ul>
 				</li>
-				<li><a>Mowe's shtuff</a>
+				<li><a href="#">Mowe's shtuff</a>
 					<ul>
 						<li><a>Category 1.2</a>
 							<li><a>Category 1.3</a></li>
@@ -76,13 +76,9 @@
 						</li>
 					</ul>
 				</li>
-				<li><a>Goody hair brushes</a>
+				<li><a href="#">Administration</a>
 					<ul>
-						<li><a>Category 1.2</a>
-							<li><a>Category 1.3</a></li>
-							<li><a>Category 1.3</a></li>
-							<li><a>Category 1.3</a></li>
-						</li>
+						<li><a href="<?= base_url(); ?>index.php/news_dashboard">News dashboard</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -108,8 +104,6 @@
 			</script>
 		</div>
 	</div>
-	<div class="container_12">
-		<?php require_once($view); ?>
-	</div>
+	<?php require_once(views_dir() . $view); ?>
 </body>
 </html>

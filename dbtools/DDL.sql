@@ -320,6 +320,25 @@ CREATE TABLE `User` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `News`
+--
+
+DROP TABLE IF EXISTS `News`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `News` (
+  `idNews` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL,
+  `text` varchar(2000) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`idNews`),
+  KEY `fk_News_User` (`idUser`),
+  CONSTRAINT `fk_News_User` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `TrackScreenshotRequest`
 --
 
@@ -383,4 +402,4 @@ CREATE TABLE `MistakeRequest` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-11-02 22:29:39
+-- Dump completed on 2013-11-03 18:04:41

@@ -1,7 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Account extends CI_Controller {
-
 	function __construct() {
 		parent::__construct();
 		$this->load->model('User_model','',TRUE);
@@ -26,8 +25,7 @@ class Account extends CI_Controller {
 			$this->input->set_cookie($cookie);
 			$this->User_model->set_token($this->input->post('username'), $token);
 		}
-		$data['view'] = 'home.php';
-		$this->load->view('template.php', $data);
+		redirect('/home');
 	}
 
 	function autologin() {
@@ -40,8 +38,7 @@ class Account extends CI_Controller {
 		$username = $this->session->userdata('logged_in')['username'];
 		$this->User_model->set_token($username, NULL);
 		$this->session->set_userdata('logged_in', NULL);
-		$data['view'] = 'home.php';
-		$this->load->view('template.php', $data);
+		redirect('/home');
 	}
 
 	function check_database($password) {
@@ -52,7 +49,7 @@ class Account extends CI_Controller {
 		$result = $this->User_model->login($username, $password);
 		
 		if($result) {
-			$this->set_session($result[0]->userName);
+			$this->set_session($result[0]->idUser, $result[0]->userName);
 			return TRUE;
 		} else {
 			$this->form_validation->set_message('check_database', 'Invalid username or password');
@@ -69,8 +66,9 @@ class Account extends CI_Controller {
 		return $randomString;
 	}
 
-	function set_session($username) {
+	function set_session($idUser, $username) {
 		$sess_array = array(
+			'idUser' => $idUser,
 			'username' => $username
 		);
 		$this->session->set_userdata('logged_in', $sess_array);
