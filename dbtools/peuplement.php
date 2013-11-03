@@ -46,7 +46,7 @@
 	{
 		EchoQuery($mysqli,"
 			INSERT INTO User(idCommunity, email, password, language, canStreamMP3, autoPlay, userName, isAdmin)
-			VALUES($idCommunity, '$email', '$password', '$language', $canStreamMP3, $autoPlay, '$userName', $isAdmin)
+			VALUES($idCommunity, '$email', '" . MD5($password) . "', '$language', $canStreamMP3, $autoPlay, '$userName', $isAdmin)
 		");
 	}
 ?>
@@ -59,6 +59,7 @@
 		<p><a href="peuplement.php?action=clear">Vider la base de données</a></p>
 		<p><a href="peuplement.php?action=users">Peupler les utilisateurs</a></p>
 		<p><a href="peuplement.php?action=full">Peuplement entier</a></p>
+		<p><a href="index.php">Retour à l'outil principal</a></p>
 		<?php
 			if (isset($_GET['action']))
 			{

@@ -70,8 +70,8 @@ CREATE TABLE `ShitTrack` (
   PRIMARY KEY (`idTrack`,`idUser`),
   KEY `fk_ShitTrack_User` (`idUser`),
   KEY `fk_ShitTrack_Track` (`idTrack`),
-  CONSTRAINT `fk_ShitTrack_User` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_ShitTrack_Track` FOREIGN KEY (`idTrack`) REFERENCES `Track` (`idTrack`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_ShitTrack_Track` FOREIGN KEY (`idTrack`) REFERENCES `Track` (`idTrack`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_ShitTrack_User` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -110,8 +110,8 @@ CREATE TABLE `DuelResult` (
   KEY `fk_DuelResult_TrackWon` (`idTrackWon`),
   KEY `fk_DuelResult_TrackLost` (`idTrackLost`),
   KEY `fk_DuelResult_User` (`idUser`),
-  CONSTRAINT `fk_DuelResult_TrackWon` FOREIGN KEY (`idTrackWon`) REFERENCES `Track` (`idTrack`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_DuelResult_TrackLost` FOREIGN KEY (`idTrackLost`) REFERENCES `Track` (`idTrack`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_DuelResult_TrackWon` FOREIGN KEY (`idTrackWon`) REFERENCES `Track` (`idTrack`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_DuelResult_User` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -146,8 +146,8 @@ CREATE TABLE `PlaylistVote` (
   PRIMARY KEY (`idUser`,`idPlaylist`),
   KEY `fk_PlaylistVote_User` (`idUser`),
   KEY `fk_PlaylistVote_Playlist` (`idPlaylist`),
-  CONSTRAINT `fk_PlaylistVote_User` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_PlaylistVote_Playlist` FOREIGN KEY (`idPlaylist`) REFERENCES `Playlist` (`idPlaylist`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_PlaylistVote_Playlist` FOREIGN KEY (`idPlaylist`) REFERENCES `Playlist` (`idPlaylist`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_PlaylistVote_User` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -251,8 +251,8 @@ CREATE TABLE `RatingPersonal` (
   PRIMARY KEY (`idUser`,`idTrack`),
   KEY `fk_RatingPersonal_User` (`idUser`),
   KEY `fk_RatingPersonal_Track` (`idTrack`),
-  CONSTRAINT `fk_RatingPersonal_User` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_RatingPersonal_Track` FOREIGN KEY (`idTrack`) REFERENCES `Track` (`idTrack`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_RatingPersonal_Track` FOREIGN KEY (`idTrack`) REFERENCES `Track` (`idTrack`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_RatingPersonal_User` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -271,8 +271,8 @@ CREATE TABLE `ReviewVote` (
   PRIMARY KEY (`idUser`,`idReviewTrack`,`idReviewUser`),
   KEY `fk_ReviewVote_User` (`idUser`),
   KEY `fk_ReviewVote_Review` (`idReviewTrack`,`idReviewUser`),
-  CONSTRAINT `fk_ReviewVote_User` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_ReviewVote_Review` FOREIGN KEY (`idReviewTrack`, `idReviewUser`) REFERENCES `Review` (`idTrack`, `idUser`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_ReviewVote_Review` FOREIGN KEY (`idReviewTrack`, `idReviewUser`) REFERENCES `Review` (`idTrack`, `idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_ReviewVote_User` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -304,18 +304,19 @@ DROP TABLE IF EXISTS `User`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `User` (
   `idUser` int(11) NOT NULL AUTO_INCREMENT,
-  `idCommunity` int(11),
+  `idCommunity` int(11) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(25) NOT NULL,
+  `password` varchar(32) NOT NULL,
   `language` varchar(25) NOT NULL,
   `canStreamMP3` bit(1) NOT NULL DEFAULT b'0',
   `autoplay` bit(1) NOT NULL,
-  `isAdmin` bit(1) NOT NULL,
   `userName` varchar(45) NOT NULL,
+  `isAdmin` bit(1) NOT NULL,
+  `rememberMeSnestopToken` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idUser`),
   KEY `fk_User_Community` (`idCommunity`),
   CONSTRAINT `fk_User_Community` FOREIGN KEY (`idCommunity`) REFERENCES `Community` (`idCommunity`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,8 +333,8 @@ CREATE TABLE `TrackScreenshotRequest` (
   PRIMARY KEY (`idTrack`,`idUserRequester`),
   KEY `fk_TrackScreenshotRequest_Track` (`idTrack`),
   KEY `fk_TrackScreenshotRequest_User` (`idUserRequester`),
-  CONSTRAINT `fk_TrackScreenshotRequest_User` FOREIGN KEY (`idUserRequester`) REFERENCES `User` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_TrackScreenshotRequest_Track` FOREIGN KEY (`idTrack`) REFERENCES `Track` (`idTrack`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_TrackScreenshotRequest_Track` FOREIGN KEY (`idTrack`) REFERENCES `Track` (`idTrack`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_TrackScreenshotRequest_User` FOREIGN KEY (`idUserRequester`) REFERENCES `User` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -382,4 +383,4 @@ CREATE TABLE `MistakeRequest` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-04 21:56:44
+-- Dump completed on 2013-11-02 22:29:39
