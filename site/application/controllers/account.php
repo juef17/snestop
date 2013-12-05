@@ -1,12 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Account extends CI_Controller {
-	function __construct() {
+class Account extends Public_Controller {
+	public function __construct() {
 		parent::__construct();
 		$this->load->model('User_model','',TRUE);
 	}
 
-	function login() {
+	public function login() {
 		//This method will have the credentials validation
 		$this->load->library('form_validation');
 		
@@ -25,23 +25,24 @@ class Account extends CI_Controller {
 			$this->input->set_cookie($cookie);
 			$this->User_model->set_token($this->input->post('username'), $token);
 		}
+		$_SESSION['loginError'] = validation_errors();
 		redirect('/home');
 	}
 
-	function autologin() {
+	public function autologin() {
 		$token = $this->input->post('token');
 
 		var_dump($this->User_model->remembered_login($token)); //un result ici...
 	}
 
-	function logout() {
-		$username = $this->session->userdata('logged_in')['username'];
+	public function logout() {
+		$username = $_SESSION['loggedUser']->userName;
 		$this->User_model->set_token($username, NULL);
-		$this->session->set_userdata('logged_in', NULL);
+		session_unset();
 		redirect('/home');
 	}
 
-	function check_database($password) {
+	public function check_database($password) {
 		//Field validation succeeded.  Validate against database
 		$username = $this->input->post('username');
 
@@ -49,29 +50,22 @@ class Account extends CI_Controller {
 		$result = $this->User_model->login($username, $password);
 		
 		if($result) {
-			$this->set_session($result[0]->idUser, $result[0]->userName);
+			$_SESSION['loggedUser'] = $result;
 			return TRUE;
 		} else {
+			session_unset();
 			$this->form_validation->set_message('check_database', 'Invalid username or password');
 			return false;
 		}
 	}
 
-	function generate_random_string($length = 50) {
+	private function generate_random_string($length = 50) {
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$randomString = '';
 		for ($i = 0; $i < $length; $i++) {
 			$randomString .= $characters[rand(0, strlen($characters) - 1)];
 		}
 		return $randomString;
-	}
-
-	function set_session($idUser, $username) {
-		$sess_array = array(
-			'idUser' => $idUser,
-			'username' => $username
-		);
-		$this->session->set_userdata('logged_in', $sess_array);
 	}
 }
 ?>

@@ -5,17 +5,20 @@ class User_model extends CI_Model {
 	}
 
 	function login($username, $password) {
-		$this->db->select('idUser, userName');
+		$this->db->select('idUser, userName, isAdmin');
 		$this->db->from('User');
 		$this->db->where('userName', $username);
 		$this->db->where('password', MD5($password));
 		$this->db->limit(1);
 
 		$query = $this->db->get();
-		if($query->num_rows() == 1)
-			return $query->result();
-		else
+		if($query->num_rows() == 1) {
+			$user = $query->result()[0];
+			$user->isAdmin = (bool)$user->isAdmin;
+			return $user;
+		} else {
 			return false;
+		}
 	}
 
 	function remembered_login($token) {

@@ -1,12 +1,3 @@
-<?php
-	session_start(); //we need to call PHP's session object to access it through CI
-	$session_data = $this->session->userdata('logged_in');
-	if($session_data)
-		$username = $session_data['username'];
-	else
-		$username = NULL;
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,11 +15,10 @@
 			</a>
 		</div>
 		<div class="grid_10">
-			<?php if($username == NULL): ?>
-				<div class="login-errors" style="display: inline-block;">
-					<?= validation_errors() ?>
-				</div>
-				<?php
+			<div class="login-errors" style="display: inline-block;">
+				<?= $loginError ?>
+			</div>
+			<?php if($loggedUserUserName == NULL):
 					$attributes = array('class' => 'form-inline', 'role' => 'form', 'style' => 'float: right; padding: 5px 0;');
 					echo form_open('account/login', $attributes);
 				?>
@@ -48,7 +38,7 @@
 					<button type="submit" class="btn btn-default">Sign in</button>
 				</form>
 			<?php else: ?>
-				<p style="float: right; padding: 5px 0;">Hi <?= $username ?>! <a href="<?= base_url() ?>index.php/account/logout">Logout</a></p>
+				<p style="float: right; padding: 5px 0;">Hi <?= $loggedUserUserName ?>! <a href="<?= base_url() ?>index.php/account/logout">Logout</a></p>
 			<?php endif; ?>
 			
 			<ul id="menuprincipal" style="width: 100%; margin: 5px 0;" class="jdropdown-menu dropdown-menu-skin">
@@ -76,11 +66,13 @@
 						</li>
 					</ul>
 				</li>
-				<li><a href="#">Administration</a>
-					<ul>
-						<li><a href="<?= base_url(); ?>index.php/news_dashboard">News dashboard</a></li>
-					</ul>
-				</li>
+				<?php if($loggedUserIsAdmin): ?>
+					<li><a href="#">Administration</a>
+						<ul>
+							<li><a href="<?= base_url(); ?>index.php/news_dashboard">News dashboard</a></li>
+						</ul>
+					</li>
+				<?php endif; ?>
 			</ul>
 			<script type="text/javascript">
 				$(function() {

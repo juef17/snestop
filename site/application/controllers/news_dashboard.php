@@ -1,7 +1,7 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class News_Dashboard extends CI_Controller {
+class News_Dashboard extends Secure_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('News_model','',TRUE);
@@ -9,12 +9,14 @@ class News_Dashboard extends CI_Controller {
 
 	public function index()
 	{
+		$data = $this->getUserViewData();
 		$data['news'] = $this->News_model->get_news();
 		$data['view'] = 'news_dashboard.php';
 		$this->load->view('template.php', $data);
 	}
 
 	public function create() {
+		$data = $this->getUserViewData();
 		$data['newsitem'] = array(
 			'title' => '',
 			'date' => '',
@@ -27,6 +29,7 @@ class News_Dashboard extends CI_Controller {
 	}
 
 	public function edit($id) {
+		$data = $this->getUserViewData();
 		$data['newsitem'] = $this->News_model->get_news($id)[0];
 		$data['view'] = 'news_details.php';
 		$this->load->view('template.php', $data);
@@ -35,7 +38,7 @@ class News_Dashboard extends CI_Controller {
 	public function submit() {
 		$title = $this->input->post('title', TRUE);
 		$text = $this->input->post('text', TRUE);
-		$idUser = $this->session->userdata('logged_in')['idUser'];
+		$idUser = $_SESSION['loggedUser']->idUser;
 		$id = $this->input->post('idNews', TRUE);
 		$this->News_model->set_news($id, $title, $text, $idUser);
 		redirect('/news_dashboard');
