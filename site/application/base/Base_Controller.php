@@ -4,7 +4,10 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Base_Controller extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
+		$this->load->model('User_model','',TRUE);
 		session_start();
+		if(!$this->isUserLogged())
+			$this->tryAutoLogin();
 	}
 
 	protected function isLoggedUserAdmin() {
@@ -39,5 +42,16 @@ class Base_Controller extends CI_Controller {
 		}
 
 		return $data;
+	}
+
+	private function tryAutoLogin() {
+		unset($_SESSION['loggedUser']);
+		$token = $this->input->cookie('rememberMeSnestopToken');
+		if($token) {
+			$user = $this->User_model->remembered_login($token);
+			if($user) {
+				$_SESSION['loggedUser'] = $user;
+			}
+		}
 	}
 }

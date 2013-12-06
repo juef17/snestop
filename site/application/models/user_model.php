@@ -1,10 +1,11 @@
 <?php
 class User_model extends CI_Model {
 	public function __construct() {
+		parent::__construct();
 		$this->load->database();
 	}
 
-	function login($username, $password) {
+	public function login($username, $password) {
 		$this->db->select('idUser, userName, isAdmin');
 		$this->db->from('User');
 		$this->db->where('userName', $username);
@@ -12,26 +13,28 @@ class User_model extends CI_Model {
 		$this->db->limit(1);
 
 		$query = $this->db->get();
-		if($query->num_rows() == 1) {
-			$user = $query->result()[0];
-			$user->isAdmin = (bool)$user->isAdmin;
-			return $user;
-		} else {
+		if($query->num_rows() == 1)
+			return $this->getUserFromRow($query->result()[0]);
+		else
 			return false;
-		}
 	}
 
-	function remembered_login($token) {
-		$this->db->select('userName');
+	public function remembered_login($token) {
+		$this->db->select('idUser, userName, isAdmin');
 		$this->db->from('User');
 		$this->db->where('rememberMeSnestopToken', $token);
 		$this->db->limit(1);
 
 		$query = $this->db->get();
 		if($query->num_rows() == 1)
-			return $query->result();
+			return $this->getUserFromRow($query->result()[0]);
 		else
 			return false;
+	}
+
+	private function getUserFromRow($row) {
+		$row->isAdmin = (bool)$row->isAdmin;
+		return $row;
 	}
 
 	public function set_token($username, $token) {

@@ -3,7 +3,6 @@
 class Account extends Public_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('User_model','',TRUE);
 	}
 
 	public function login() {
@@ -13,31 +12,42 @@ class Account extends Public_Controller {
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');
 		
-		if($this->form_validation->run() && $this->input->post('rememberme')) {
-			$token = $this->generate_random_string();
-			$cookie = array(
-				'name'   => 'rememberMeSnestopToken',
-				'value'  => $token,
-				'expire' => '1209600',  // Two weeks
-				'domain' => 'snestop.com',
-				'path'   => '/'
-			);
-			$this->input->set_cookie($cookie);
-			$this->User_model->set_token($this->input->post('username'), $token);
+		if($this->form_validation->run()) {
+			if ($this->input->post('rememberme'))
+				$this->setCookie();
+		} else {
+			session_unset();
+			$this->form_validation->set_message('check_database', 'Invalid username or password');
 		}
+		
 		$_SESSION['loginError'] = validation_errors();
 		redirect('/home');
 	}
 
-	public function autologin() {
-		$token = $this->input->post('token');
+	private function setCookie($token) {
+		$token = $this->generate_random_string();
+		$cookie = array(
+			'name'   => 'rememberMeSnestopToken',
+			'value'  => $token,
+			'expire' => '1209600'  // Two weeks
+		);
+		$this->input->set_cookie($cookie);
+		$this->User_model->set_token($this->input->post('username'), $token);
+	}
 
-		var_dump($this->User_model->remembered_login($token)); //un result ici...
+	private function deleteCookie() {
+		$cookie = array(
+			 'name'=>'rememberMeSnestopToken',
+			 'value'=>'',
+			 'expire'=>'0'
+		 );
+		$this->input->set_cookie($cookie);
+		$username = $_SESSION['loggedUser']->userName;
+		$this->User_model->set_token($username, NULL);
 	}
 
 	public function logout() {
-		$username = $_SESSION['loggedUser']->userName;
-		$this->User_model->set_token($username, NULL);
+		$this->deleteCookie();
 		session_unset();
 		redirect('/home');
 	}
@@ -53,8 +63,6 @@ class Account extends Public_Controller {
 			$_SESSION['loggedUser'] = $result;
 			return TRUE;
 		} else {
-			session_unset();
-			$this->form_validation->set_message('check_database', 'Invalid username or password');
 			return false;
 		}
 	}
