@@ -1,6 +1,6 @@
 <div class="container_12">
 	<div class="grid_12">
-		<h1>News details</h1>
+		<h1>Request a track</h1>
 	</div>
 </div>
 

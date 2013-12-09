@@ -5,7 +5,8 @@ class Track_Request_model extends CI_Model {
 		$this->load->database();
 	}
 
-	public function get_track_request($idTrackRequest) {
+	public function get_track_request($idTrackRequest = FALSE) {
+		$this->db->join('User', 'TrackRequest.idUserRequester = User.idUser', 'inner');
 		if ($idTrackRequest === FALSE) {
 			$query = $this->db->get('TrackRequest');
 			return $query->result_array();
@@ -24,5 +25,9 @@ class Track_Request_model extends CI_Model {
 		);
 
 		return $this->db->insert('TrackRequest', $data);
+	}
+
+	public function delete_track_request($idTrackRequest) {
+		return $this->db->delete('TrackRequest', array('idTrackRequest' => $idTrackRequest));
 	}
 }

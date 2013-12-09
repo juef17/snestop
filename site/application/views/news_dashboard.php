@@ -1,6 +1,6 @@
 <div class="container_12">
 	<div class="grid_12">
-		<h2>News dashboard</h2>
+		<h1>News dashboard</h1>
 		<p><a href="<?= base_url() . 'index.php/news_dashboard/create' ?>">Create</a></p>
 	</div>
 </div>
