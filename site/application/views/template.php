@@ -15,7 +15,7 @@
 			</a>
 		</div>
 		<div class="grid_10">
-			<div class="login-errors" style="display: inline-block;">
+			<div class="errors" style="display: inline-block;">
 				<?= $loginError ?>
 			</div>
 			<?php if($loggedUserUserName == NULL):
@@ -43,11 +43,13 @@
 			
 			<ul id="menuprincipal" style="width: 100%; margin: 5px 0;" class="jdropdown-menu dropdown-menu-skin">
 				<li><a href="<?=base_url()?>">Home</a></li>
-				<li><a href="#">Requests</a>
-					<ul>
-						<li><a href="<?= base_url(); ?>index.php/request_track">Request a track</a></li>
-					</ul>
-				</li>
+				<?php if($isUserLogged): ?>
+					<li><a href="#">Requests</a>
+						<ul>
+							<li><a href="<?= base_url(); ?>index.php/request_track">Request a track</a></li>
+						</ul>
+					</li>
+				<?php endif; ?>
 				<li><a href="#">Playlists</a>
 					<ul>
 						<li><a>Category 1.2</a>

@@ -29,9 +29,11 @@ class Base_Controller extends CI_Controller {
 			$loggedUser = $_SESSION['loggedUser'];
 			$data['loggedUserUserName'] = $loggedUser->userName;
 			$data['loggedUserIsAdmin'] = $loggedUser->isAdmin == 1;
+			$data['isUserLogged'] = true;
 		} else {
 			$data['loggedUserUserName'] = NULL;
 			$data['loggedUserIsAdmin'] = FALSE;
+			$data['isUserLogged'] = FALSE;
 		}
 
 		if(isset($_SESSION['loginError'])) {

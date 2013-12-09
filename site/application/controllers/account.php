@@ -6,7 +6,6 @@ class Account extends Public_Controller {
 	}
 
 	public function login() {
-		//This method will have the credentials validation
 		$this->load->library('form_validation');
 		
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
@@ -17,7 +16,6 @@ class Account extends Public_Controller {
 				$this->setCookie();
 		} else {
 			session_unset();
-			$this->form_validation->set_message('check_database', 'Invalid username or password');
 		}
 		
 		$_SESSION['loginError'] = validation_errors();
@@ -63,6 +61,7 @@ class Account extends Public_Controller {
 			$_SESSION['loggedUser'] = $result;
 			return TRUE;
 		} else {
+			$this->form_validation->set_message('check_database', 'Invalid username or password');
 			return false;
 		}
 	}

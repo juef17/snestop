@@ -1,10 +1,11 @@
 <?php
 class Track_Request_model extends CI_Model {
 	public function __construct() {
+		parent::__construct();
 		$this->load->database();
 	}
 
-	public function get_track_request($idTrackRequest = FALSE) {
+	public function get_track_request($idTrackRequest) {
 		if ($idTrackRequest === FALSE) {
 			$query = $this->db->get('TrackRequest');
 			return $query->result_array();
@@ -14,17 +15,14 @@ class Track_Request_model extends CI_Model {
 		}
 	}
 
-	public function set_track_request() {
-		$this->load->helper('url');
-		
-		$slug = url_title($this->input->post('title'), 'dash', TRUE);
-		
+	public function set_track_request($idUser, $game, $title, $trackUrl) {
 		$data = array(
-			'title' => $this->input->post('title'),
-			'slug' => $slug,
-			'text' => $this->input->post('text')
+			'idUserRequester' => $idUser,
+			'game' => $game,
+			'title' => $title,
+			'trackURL' => $trackUrl
 		);
 
-		return $this->db->insert('news', $data);
+		return $this->db->insert('TrackRequest', $data);
 	}
 }
