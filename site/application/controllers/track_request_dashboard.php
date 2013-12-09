@@ -1,7 +1,7 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Track_Request_Dashboard extends Secure_Controller {
+class Track_Request_Dashboard extends Admin_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('Track_Request_model','',TRUE);

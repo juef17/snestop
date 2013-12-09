@@ -1,7 +1,7 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class News_Dashboard extends Secure_Controller {
+class News_Dashboard extends Admin_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('News_model','',TRUE);
