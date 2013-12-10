@@ -51,18 +51,20 @@ class Account extends Public_Controller {
 	}
 
 	public function check_database($password) {
-		//Field validation succeeded.  Validate against database
 		$username = $this->input->post('username');
 
-		//query the database
-		$result = $this->User_model->login($username, $password);
-		
-		if($result) {
-			$_SESSION['loggedUser'] = $result;
-			return TRUE;
+		$user = $this->User_model->login($username, $password);
+		if($user) {
+			if($user->enabled) {
+				$_SESSION['loggedUser'] = $user;
+				return TRUE;
+			} else {
+				$this->form_validation->set_message('check_database', 'Sorry, your account has been disabled.');
+				return FALSE;
+			}
 		} else {
 			$this->form_validation->set_message('check_database', 'Invalid username or password');
-			return false;
+			return FALSE;
 		}
 	}
 

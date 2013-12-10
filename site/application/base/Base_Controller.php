@@ -11,8 +11,8 @@ class Base_Controller extends CI_Controller {
 	}
 
 	protected function isLoggedUserAdmin() {
-		if(isset($_SESION['loggedUser'])) {
-			return $_SESION['loggedUser']->isAdmin;
+		if(isset($_SESSION['loggedUser'])) {
+			return $_SESSION['loggedUser']->isAdmin;
 		} else {
 			return FALSE;
 		}
