@@ -23,7 +23,7 @@ class Account extends Public_Controller {
 	}
 
 	private function setCookie($token) {
-		$token = $this->generate_random_string();
+		$token = generate_random_string();
 		$cookie = array(
 			'name'   => 'rememberMeSnestopToken',
 			'value'  => $token,
@@ -54,27 +54,19 @@ class Account extends Public_Controller {
 		$username = $this->input->post('username');
 
 		$user = $this->User_model->login($username, $password);
-		if($user) {
-			if($user->enabled) {
-				$_SESSION['loggedUser'] = $user;
-				return TRUE;
-			} else {
-				$this->form_validation->set_message('check_database', 'Sorry, your account has been disabled.');
-				return FALSE;
-			}
-		} else {
+		if(!$user) {
 			$this->form_validation->set_message('check_database', 'Invalid username or password');
 			return FALSE;
+		} else if(!$user->enabled) {
+			$this->form_validation->set_message('check_database', 'Sorry, your account has been disabled.');
+			return FALSE;
+		} else if($user->registrationToken != NULL) {
+			$this->form_validation->set_message('check_database', 'You must confirm your<br />email address first!');
+			return FALSE;
+		} else {
+			$_SESSION['loggedUser'] = $user;
+			return TRUE;
 		}
-	}
-
-	private function generate_random_string($length = 50) {
-		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$randomString = '';
-		for ($i = 0; $i < $length; $i++) {
-			$randomString .= $characters[rand(0, strlen($characters) - 1)];
-		}
-		return $randomString;
 	}
 }
 ?>

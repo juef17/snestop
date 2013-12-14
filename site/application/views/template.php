@@ -28,7 +28,7 @@
 					</div>
 					<div class="form-group">
 						<label class="sr-only" for="exampleInputPassword2">Password</label>
-						<input type="password" name="password" maxlength="10" class="form-control" placeholder="Password">
+						<input style="width: 100px;" type="password" name="password" maxlength="10" class="form-control" placeholder="Password">
 					</div>
 					<div class="checkbox">
 						<label>
@@ -36,6 +36,7 @@
 						</label>
 					</div>
 					<button type="submit" class="btn btn-default">Sign in</button>
+					<a href="<?= base_url() ?>index.php/register" class="btn btn-success">Register!</a>
 				</form>
 			<?php else: ?>
 				<p style="float: right; padding: 5px 0;">Hi <?= $loggedUserUserName ?>! <a href="<?= base_url() ?>index.php/account/logout">Logout</a></p>

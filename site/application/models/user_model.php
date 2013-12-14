@@ -6,13 +6,15 @@ class User_model extends CI_Model {
 	}
 
 	public function login($username, $password) {
+		$this->pruneUnconfirmedUsers(); //ca me prenait un trigger quelconque, 1 fois par jour...
+		
 		$this->db->where('userName', $username);
 		$this->db->where('password', MD5($password));
 		$this->db->limit(1);
 
 		$query = $this->db->get('User');
 		if($query->num_rows() == 1)
-			return $this->getUserFromRow($query->result()[0]);
+			return $this->getUserFromRow($query->row());
 		else
 			return false;
 	}
@@ -23,7 +25,7 @@ class User_model extends CI_Model {
 
 		$query = $this->db->get('User');
 		if($query->num_rows() == 1)
-			return $this->getUserFromRow($query->result()[0]);
+			return $this->getUserFromRow($query->row());
 		else
 			return false;
 	}
@@ -54,7 +56,7 @@ class User_model extends CI_Model {
 	}
 
 	public function get_users_list() {
-		$this->db->select('idUser, userName, email, language, canStreamMP3, autoplay, isAdmin, enabled, Community.name as communityName');
+		$this->db->select('idUser, userName, email, language, canStreamMP3, registrationToken, isAdmin, enabled, registrationDate, Community.name as communityName');
 		$this->db->from('User');
 		$this->db->join('Community', 'User.idCommunity = Community.idCommunity', 'left');
 		$query = $this->db->get();
@@ -76,5 +78,40 @@ class User_model extends CI_Model {
 
 	public function deleteUser($id) {
 		return $this->db->delete('User', array('idUser' => $id));
+	}
+
+	public function addUser($username, $password, $email, $language, $registerToken) {
+		$data = array(
+			'userName' => $username,
+			'password' => MD5($password),
+			'email' => $email,
+			'language' => $language,
+			'registrationToken' => $registerToken
+		);
+		$this->db->set('registrationDate', 'NOW()', FALSE);
+		return $this->db->insert('User', $data);
+	}
+
+	public function removeRegistrationToken($token) {
+		$this->db->select('idUser');
+		$this->db->from('User');
+		$this->db->where('registrationToken', $token);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		
+		if($query->num_rows() == 1) {
+			$id = $query->row()->idUser;
+			return $this->db->update('User', array('registrationToken' => NULL), "idUser = $id");
+		} else {
+			return FALSE;
+		}
+	}
+
+	public function pruneUnconfirmedUsers() {
+		$this->db->where('registrationToken IS NOT NULL', NULL, FALSE);
+		$this->db->where('registrationDate < DATE_SUB(NOW(),INTERVAL 1 DAY)', NULL, FALSE);
+		$this->db->where('isAdmin', 0);
+		$this->db->delete('User');
+		return $this->db->last_query();
 	}
 }

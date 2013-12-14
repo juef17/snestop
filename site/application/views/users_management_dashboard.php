@@ -5,24 +5,27 @@
 </div>
 
 <?php $b = FALSE; ?>
-<div style="border-bottom: 1px; <?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_12">
+<div style="border-bottom: 1px; <?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
 	<div class="grid_2">
 		<p style="font-weight:bold;">Username</p>
 	</div>
 	<div class="grid_2">
+		<p style="font-weight:bold;">Registration date</p>
+	</div>
+	<div class="grid_1">
+		<p style="font-weight:bold;">Confirmed</p>
+	</div>
+	<div class="grid_3">
 		<p style="font-weight:bold;">Email</p>
 	</div>
 	<div class="grid_2">
 		<p style="font-weight:bold;">Community</p>
 	</div>
-	<div class="grid_1">
+	<div class="grid_2">
 		<p style="font-weight:bold;">Language</p>
 	</div>
 	<div class="grid_1">
 		<p style="font-weight:bold;">Can stream MP3</p>
-	</div>
-	<div class="grid_1">
-		<p style="font-weight:bold;">Autoplay</p>
 	</div>
 	<div class="grid_1">
 		<p style="font-weight:bold;">Admin</p>
@@ -33,24 +36,27 @@
 </div>
 
 <?php foreach($users as $user): ?>
-	<div style="border-bottom: 1px; <?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_12">
+	<div style="border-bottom: 1px; <?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
 		<div class="grid_2">
 			<p><?= $user->userName ?></p>
 		</div>
 		<div class="grid_2">
+			<p><?= $user->registrationDate ?></p>
+		</div>
+		<div class="grid_1">
+			<p><?= ($user->registrationToken == NULL ? 'yes' : 'no') ?></p>
+		</div>
+		<div class="grid_3">
 			<p><?= $user->email ?></p>
 		</div>
 		<div class="grid_2">
 			<p><?= $user->communityName ?></p>
 		</div>
-		<div class="grid_1">
+		<div class="grid_2">
 			<p><?= $user->language ?></p>
 		</div>
 		<div class="grid_1">
 			<p><?= ($user->canStreamMP3 ? 'yes' : 'no') ?></p>
-		</div>
-		<div class="grid_1">
-			<p><?= ($user->autoplay ? 'yes' : 'no') ?></p>
 		</div>
 		<div class="grid_1">
 			<p><?= ($user->isAdmin ? 'yes' : 'no') ?></p>
