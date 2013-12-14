@@ -4,38 +4,37 @@
 	</div>
 </div>
 
-<?php $b = FALSE; ?>
-<div style="border-bottom: 1px; <?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
-	<div class="grid_2">
-		<p style="font-weight:bold;">Username</p>
+<div style="background-color: #dddddd;" class="container_16">
+	<div class="grid_2 columnheader">
+		<p>Username</p>
 	</div>
-	<div class="grid_2">
-		<p style="font-weight:bold;">Registration date</p>
+	<div class="grid_2 columnheader">
+		<p>Registration date</p>
 	</div>
-	<div class="grid_1">
-		<p style="font-weight:bold;">Confirmed</p>
+	<div class="grid_1 columnheader">
+		<p>Confirmed</p>
 	</div>
-	<div class="grid_3">
-		<p style="font-weight:bold;">Email</p>
+	<div class="grid_3 columnheader">
+		<p>Email</p>
 	</div>
-	<div class="grid_2">
-		<p style="font-weight:bold;">Community</p>
+	<div class="grid_2 columnheader">
+		<p>Community</p>
 	</div>
-	<div class="grid_2">
-		<p style="font-weight:bold;">Language</p>
+	<div class="grid_2 columnheader">
+		<p>Language</p>
 	</div>
-	<div class="grid_1">
-		<p style="font-weight:bold;">Can stream MP3</p>
+	<div class="grid_1 columnheader">
+		<p>Can stream MP3</p>
 	</div>
-	<div class="grid_1">
-		<p style="font-weight:bold;">Admin</p>
+	<div class="grid_1 columnheader">
+		<p>Admin</p>
 	</div>
-	<div class="grid_1">
-		<p style="font-weight:bold;">Enabled</p>
+	<div class="grid_1 columnheader">
+		<p>Enabled</p>
 	</div>
 </div>
 
-<?php foreach($users as $user): ?>
+<?php $b = TRUE; foreach($users as $user): ?>
 	<div style="border-bottom: 1px; <?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
 		<div class="grid_2">
 			<p><?= $user->userName ?></p>
@@ -75,7 +74,7 @@
 			<?php if($user->userName != 'admin'): ?>
 				<?= form_open(base_url() . 'index.php/users_management_dashboard/delete', array('id' => 'delete_' . $user->idUser)) ?>
 					<input type="hidden" name="id" value="<?= $user->idUser ?>" />
-					<a href="#" onclick="if(confirm('Are you sure? This will also delete some if not ALL of that user\'s schtuff!!!'))delete_<?= $user->idUser ?>.submit();">Delete</a>
+					<a href="#" class="btn btn-xs btn-danger" onclick="if(confirm('Are you sure? This will also delete some if not ALL of that user\'s schtuff!!!'))delete_<?= $user->idUser ?>.submit();">Delete</a>
 				</form>
 			<?php else: ?>
 				<p>---</p>
