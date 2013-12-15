@@ -232,7 +232,7 @@ CREATE TABLE `Community` (
   `token` varchar(45) NOT NULL,
   `URL` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`idCommunity`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
