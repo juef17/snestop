@@ -15,10 +15,11 @@ class Community_model extends CI_Model {
 		}
 	}
 
-	public function set_Community($name, $token) {
+	public function set_Community($name, $token, $URL) {
 		$data = array(
 			'name' => $name,
-			'token' => $token
+			'token' => $token,
+			'URL' => $URL
 		);
 		return $this->db->insert('Community', $data);
 	}
@@ -27,8 +28,8 @@ class Community_model extends CI_Model {
 		return $this->db->delete('Community', array('idCommunity' => $idCommunity));
 	}
 	
-	public function update_Community($idCommunity, $name, $token) {
+	public function update_Community($idCommunity, $name, $token, $URL) {
 		$this->db->where('Community.idCommunity', $idCommunity);
-		return $this->db->update('Community', array('name' => $name, 'token' => $token));
+		return $this->db->update('Community', array('name' => $name, 'token' => $token, 'URL' => $URL));
 	}
 }

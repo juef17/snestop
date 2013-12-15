@@ -72,9 +72,10 @@
 				<?php if($loggedUserIsAdmin): ?>
 					<li><a href="#">Administration</a>
 						<ul>
+							<li><a href="<?= base_url() ?>index.php/communities_dashboard">Communities dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/news_dashboard">News dashboard</a></li>
-							<li><a href="<?= base_url() ?>index.php/track_request_dashboard">Track requests</a></li>
-							<li><a href="<?= base_url() ?>index.php/users_management_dashboard">Users management</a></li>
+							<li><a href="<?= base_url() ?>index.php/track_request_dashboard">Track requests dashboard</a></li>
+							<li><a href="<?= base_url() ?>index.php/users_management_dashboard">Users dashboard</a></li>
 						</ul>
 					</li>
 				<?php endif; ?>
