@@ -3,6 +3,10 @@ function asset_url() {
   return base_url() . 'assets/';
 }
 
+function assets_dir() {
+  return getcwd() . '/assets/';
+}
+
 function views_dir() {
   return getcwd() . '/application/views/';
 }

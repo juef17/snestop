@@ -31,11 +31,17 @@
 					<input type="text" name="reg_language" maxlength="255" class="form-control" placeholder="Language" value="<?=set_value('reg_language')?>">
 				</label>
 			</div>
+			<div class="form-group">
+				<label>Verification
+					<span class="errors"><?=form_error('reg_captcha')?></span>
+				</label>
+				<span id="captcha" style="display: inline-block;"><?=$captcha?></span>
+				<button type="button" class="btn btn-default btn-xs" style="display: inline-block;" onclick="$('#captcha').load('<?=base_url() . 'index.php/register/reloadc'?>');">Reload</button>
+				<input type="text" name="reg_captcha" maxlength="255" class="form-control" placeholder="Enter what you see in the image above">
+			</div>
 
 			<button type="button" class="btn btn-default" onclick="location.href='<?=base_url()?>';">Return</button>
 			<button type="submit" class="btn btn-default">Submit</button>
 		</div>
 	</div>
 </form>
-
-<?php
