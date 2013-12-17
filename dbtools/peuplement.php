@@ -86,7 +86,7 @@
 	{
 		EchoQuery($mysqli, "
 			INSERT INTO Track(idGame, title, length, fadeLength, composer, turnedOffByAdmin, screenshotURL, isJingle, glicko2RD, glicko2rating, glicko2sigma, eloRating, spcURL, spcEncodedURL)
-			VALUES((SELECT idGame FROM Game WHERE titleEng = '" . addslashes($gameTitle) . "'), '" . addslashes($title) . "', '$length', '$fadeLength', '" . addslashes($composer) . "', '$turnedOffByAdmin', '" . addslashes($screenshotURL) . "', '$isJingle', '$glicko2RD','$glicko2rating','$glicko2sigma','$eloRating', 'spc/" . addslashes($spcURL) . ".spc', '$spcEncodedURL')
+			VALUES((SELECT idGame FROM Game WHERE titleEng = '" . addslashes($gameTitle) . "'), '" . addslashes($title) . "', $length, $fadeLength, '" . addslashes($composer) . "', $turnedOffByAdmin, '" . addslashes($screenshotURL) . "', $isJingle, $glicko2RD, $glicko2rating, $glicko2sigma , $eloRating, 'spc/" . addslashes($spcURL) . ".spc', '$spcEncodedURL')
 		");
 	}
 
