@@ -39,6 +39,7 @@ class Game_model extends CI_Model {
 		$query = $this->db->get('Game');
 		if($query->num_rows() == 1) {
 			$game = $query->row();
+			$this->db->where('Game.idGame', $idGame);
 			return $this->db->update('Game', array('titleJap' => $game->titleEng, 'titleEng' => $game->titleJap));
 		}
 	}
