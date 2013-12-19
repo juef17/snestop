@@ -80,13 +80,14 @@ class User_model extends CI_Model {
 		return $this->db->delete('User', array('idUser' => $id));
 	}
 
-	public function addUser($username, $password, $email, $language, $registerToken) {
+	public function addUser($username, $password, $email, $language, $registerToken, $idCommunity) {
 		$data = array(
 			'userName' => $username,
 			'password' => MD5($password),
 			'email' => $email,
 			'language' => $language,
-			'registrationToken' => $registerToken
+			'registrationToken' => $registerToken,
+			'idCommunity' => $idCommunity
 		);
 		$this->db->set('registrationDate', 'NOW()', FALSE);
 		return $this->db->insert('User', $data);

@@ -32,4 +32,12 @@ class Community_model extends CI_Model {
 		$this->db->where('Community.idCommunity', $idCommunity);
 		return $this->db->update('Community', array('name' => $name, 'token' => $token, 'URL' => $URL));
 	}
+
+	public function get_communities_for_combobox() {
+		$this->db->select('idCommunity, name');
+		$this->db->order_by('name', 'asc');
+		$query = $this->db->get('Community');
+		return $query->result();
+	}
+
 }

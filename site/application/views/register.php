@@ -32,6 +32,17 @@
 				</label>
 			</div>
 			<div class="form-group">
+				<label>Community
+					<span class="errors"><?=form_error('reg_community')?></span>
+					<select name="reg_community" class="form-control">
+						<option value="0">None</option>
+						<?php foreach($communities as $community): ?>
+							<option value="<?=$community->idCommunity?>" <?php if(set_value('reg_community') == $community->idCommunity) echo 'selected';?>><?=$community->name?></option>
+						<?php endforeach; ?>
+					</select>
+				</label>
+			</div>
+			<div class="form-group">
 				<label>Verification
 					<span class="errors"><?=form_error('reg_captcha')?></span>
 				</label>

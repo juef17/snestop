@@ -4,11 +4,13 @@ class Register extends Public_Only_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('captcha');
+		$this->load->model('Community_model','',TRUE);
 	}
 
 	public function index() {
 		$data = $this->getUserViewData();
 		$data['captcha'] = $this->initCaptcha();
+		$data['communities'] = $this->Community_model->get_communities_for_combobox();
 		$data['view'] = 'register.php';
 		$this->load->view('template.php', $data);
 	}
@@ -26,8 +28,11 @@ class Register extends Public_Only_Controller {
 			$email = $this->input->post('reg_email');
 			$language = $this->input->post('reg_language');
 			$registerToken = generate_random_string();
+			$idCommunity = $this->input->post('reg_community');
+			if($idCommunity == 0)
+				$idCommunity = NULL;
 			
-			$this->User_model->addUser($username, $password, $email, $language, $registerToken);
+			$this->User_model->addUser($username, $password, $email, $language, $registerToken, $idCommunity);
 			$this->sendConfirmationEmail($username, $email, $registerToken);
 
 			$data['view'] = 'message.php';
@@ -35,6 +40,7 @@ class Register extends Public_Only_Controller {
 			$data['message'] = 'Thank you for registering! Please confirm your email address using the message you will receive shortly.';
 		} else {
 			$data['captcha'] = $this->initCaptcha();
+			$data['communities'] = $this->Community_model->get_communities_for_combobox();
 			$data['view'] = 'register.php';
 		}
 		
@@ -52,6 +58,7 @@ class Register extends Public_Only_Controller {
 		$this->form_validation->set_rules('reg_email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[User.email]');
 		$this->form_validation->set_rules('reg_language', 'Language', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('reg_captcha', 'Captcha', 'trim|required|xss_clean|callback_validateCaptcha');
+		$this->form_validation->set_rules('reg_community', 'Community', 'trim|required|xss_clean');
 		//community?
 	}
 
