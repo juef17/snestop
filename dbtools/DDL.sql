@@ -125,10 +125,12 @@ DROP TABLE IF EXISTS `CommunityRequest`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `CommunityRequest` (
   `idCommunityRequest` int(11) NOT NULL AUTO_INCREMENT,
+  `idUserRequester` int(11) NOT NULL,
   `URL` varchar(255) NOT NULL,
   `name` varchar(45) NOT NULL,
-  `emailRequester` varchar(90) NOT NULL,
-  PRIMARY KEY (`idCommunityRequest`)
+  PRIMARY KEY (`idCommunityRequest`),
+  KEY `fk_CommunityRequest_User_idx` (`idUserRequester`),
+  CONSTRAINT `fk_CommunityRequest_User` FOREIGN KEY (`idUserRequester`) REFERENCES `User` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
