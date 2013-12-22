@@ -37,7 +37,7 @@ class Edit_User_Profile extends Secure_Controller {
 				$idCommunity = NULL;
 			
 			$data['view'] = 'message.php';
-			if($this->User_model->updateUser($_SESSION['loggedUser']->userName, $username, $password, $email, $language, $idCommunity)) {
+			if($this->User_model->updateUser($_SESSION['loggedUser']->idUser, $username, $password, $email, $language, $idCommunity)) {
 				redirect('/account/logout');
 				return;
 			} else {

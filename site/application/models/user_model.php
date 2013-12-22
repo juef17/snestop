@@ -103,7 +103,7 @@ class User_model extends CI_Model {
 		return $this->db->insert('User', $data);
 	}
 
-	public function updateUser($oldUsername, $username, $password, $email, $language, $idCommunity) {
+	public function updateUser($idUser, $username, $password, $email, $language, $idCommunity) {
 		$data = array(
 			'userName' => $username,
 			'email' => $email,
@@ -113,7 +113,7 @@ class User_model extends CI_Model {
 		if($password != '')
 			$data['password'] = MD5($password);
 
-		$this->db->where('username', $oldUsername);
+		$this->db->where('idUser', $idUser);
 		return $this->db->update('User', $data);
 		//TODO: si user change de community, faut faire... d'zaffaires!!! ajouter un trigger dans BD si trop lourd.
 	}
