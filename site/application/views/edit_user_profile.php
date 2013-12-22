@@ -44,6 +44,11 @@
 				</label>
 			</div>
 			<div class="form-group">
+				<label>Community token
+					<span class="errors"><?=form_error('edit_community_token')?></span>
+					<input type="text" name="edit_community_token" maxlength="45" class="form-control" placeholder="Community token" value="<?=set_value('edit_community_token')?>">
+				</label>
+			<div class="form-group">
 				<h2>Password</h2>
 				<p>Leave blank unless you want to change it.</p>
 			</div>

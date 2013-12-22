@@ -50,6 +50,10 @@
 						<?php endforeach; ?>
 					</select>
 				</label>
+				<label>Community token
+					<span class="errors"><?=form_error('reg_community_token')?></span>
+					<input type="text" name="reg_community_token" maxlength="45" class="form-control" placeholder="Community token" value="<?=set_value('reg_community_token')?>">
+				</label>
 			</div>
 			<div class="form-group">
 				<label>Verification

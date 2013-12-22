@@ -66,13 +66,21 @@ class Edit_User_Profile extends Secure_Controller {
 		if($this->input->post('edit_email') != $_SESSION['loggedUser']->email)
 			$this->form_validation->set_rules('edit_email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[User.email]');
 		$this->form_validation->set_rules('edit_language', 'Language', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('edit_community', 'Community', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('edit_community', 'Community', 'trim|required|xss_clean|callback_validateCommunity');
+		$this->form_validation->set_rules('edit_community_token', 'Community token', 'trim|xss_clean');
 		//community?
 	}
 
 	public function verifyPassword($password) {
 		$this->form_validation->set_message('verifyPassword', 'Passwords fields don\'t match');
 		return $password == $this->input->post('edit_password_verif');
+	}
+
+	public function validateCommunity($idCommunity) {
+		$this->form_validation->set_message('validateCommunity', 'Wrong token');
+		$communityToken = $this->input->post('edit_community_token');
+		$community = $this->Community_model->get_Community($idCommunity);
+		return $communityToken == $community->token;
 	}
 }
 ?>

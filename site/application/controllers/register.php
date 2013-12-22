@@ -62,7 +62,8 @@ class Register extends Public_Only_Controller {
 		$this->form_validation->set_rules('reg_email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[User.email]');
 		$this->form_validation->set_rules('reg_language', 'Language', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('reg_captcha', 'Captcha', 'trim|required|xss_clean|callback_validateCaptcha');
-		$this->form_validation->set_rules('reg_community', 'Community', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('reg_community', 'Community', 'trim|required|xss_clean|callback_validateCommunity');
+		$this->form_validation->set_rules('reg_community_token', 'Community token', 'trim|xss_clean');
 		//community?
 	}
 
@@ -98,6 +99,13 @@ class Register extends Public_Only_Controller {
 			$_SESSION['nbcaptcharetry']--;
 		
 		return $retval;
+	}
+
+	public function validateCommunity($idCommunity) {
+		$this->form_validation->set_message('validateCommunity', 'Wrong token');
+		$communityToken = $this->input->post('reg_community_token');
+		$community = $this->Community_model->get_Community($idCommunity);
+		return $communityToken == $community->token;
 	}
 
 	private function initCaptcha() {
