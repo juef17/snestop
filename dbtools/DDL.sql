@@ -165,6 +165,7 @@ CREATE TABLE `RatingCommunity` (
   `glicko2RD` float NOT NULL,
   `glicko2sigma` float NOT NULL,
   `eloRating` float NOT NULL,
+  `eloReached2400` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`idCommunity`,`idTrack`),
   KEY `fk_RatingCommunity_Community` (`idCommunity`),
   KEY `fk_RatingCommunity_Track` (`idTrack`),
@@ -196,6 +197,7 @@ CREATE TABLE `Track` (
   `eloRating` float NOT NULL,
   `spcURL` varchar(255) NOT NULL,
   `spcEncodedURL` varchar(255) NOT NULL,
+  `eloReached2400` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`idTrack`),
   KEY `fk_Track_Game` (`idGame`),
   CONSTRAINT `fk_Track_Game` FOREIGN KEY (`idGame`) REFERENCES `Game` (`idGame`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -249,6 +251,7 @@ CREATE TABLE `RatingPersonal` (
   `glicko2RD` float NOT NULL,
   `glicko2sigma` float NOT NULL,
   `eloRating` float NOT NULL,
+  `eloReached2400` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`idUser`,`idTrack`),
   KEY `fk_RatingPersonal_User` (`idUser`),
   KEY `fk_RatingPersonal_Track` (`idTrack`),
