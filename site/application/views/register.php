@@ -20,6 +20,11 @@
 				</label>
 			</div>
 			<div class="form-group">
+				<label>Retype password
+					<input type="password" name="reg_password_verif" maxlength="45" class="form-control" placeholder="Password" value="<?=set_value('reg_password_verif')?>">
+				</label>
+			</div>
+			<div class="form-group">
 				<label>Email
 					<span class="errors"><?=form_error('reg_email')?></span>
 					<input type="text" name="reg_email" maxlength="255" class="form-control" placeholder="your@email.com" value="<?=set_value('reg_email')?>">

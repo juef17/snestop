@@ -47,6 +47,7 @@
 				<?php if($isUserLogged): ?>
 					<li><a href="#">Requests</a>
 						<ul>
+							<li><a href="<?= base_url() ?>index.php/request_community">Request a community</a></li>
 							<li><a href="<?= base_url() ?>index.php/request_track">Request a track</a></li>
 						</ul>
 					</li>

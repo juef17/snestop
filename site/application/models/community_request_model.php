@@ -15,11 +15,11 @@ class Community_Request_model extends CI_Model {
 		}
 	}
 
-	public function set_Community_request($URL, $name, $emailRequester) {
+	public function set_Community_request($idUser, $URL, $name) {
 		$data = array(
 			'URL' => $URL,
 			'name' => $name,
-			'emailRequester' => $emailRequester
+			'idUserRequester' => $idUser
 		);
 
 		return $this->db->insert('CommunityRequest', $data);
