@@ -4,12 +4,14 @@ class Edit_User_Profile extends Secure_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('Community_model','',TRUE);
+		$this->load->model('Language_model','',TRUE);
 	}
 
 	public function index() {
 		$data = $this->getUserViewData();
 		$this->setEditUserData($data);
 		$data['communities'] = $this->Community_model->get_communities_for_combobox();
+		$data['languages'] = $this->Language_model->get_languages();
 		$data['view'] = 'edit_user_profile.php';
 		$this->load->view('template.php', $data);
 	}
@@ -46,6 +48,7 @@ class Edit_User_Profile extends Secure_Controller {
 			}
 		} else {
 			$data['communities'] = $this->Community_model->get_communities_for_combobox();
+			$data['languages'] = $this->Language_model->get_languages();
 			$data['view'] = 'edit_user_profile.php';
 		}
 		
@@ -57,7 +60,7 @@ class Edit_User_Profile extends Secure_Controller {
 		if($this->input->post('edit_username') != $_SESSION['loggedUser']->userName)
 			$this->form_validation->set_rules('edit_username', 'Username', 'trim|required|xss_clean|is_unique[User.userName]');
 
-		if($this->input->post('edit_password') != '')
+		if($this->input->post('edit_password') != '' || $this->input->post('edit_password_verif') != '')
 			$this->form_validation->set_rules('edit_password', 'Password', 'trim|xss_clean|callback_verifyPassword');
 
 		if($this->input->post('edit_email') != $_SESSION['loggedUser']->email)

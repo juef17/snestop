@@ -5,12 +5,14 @@ class Register extends Public_Only_Controller {
 		parent::__construct();
 		$this->load->helper('captcha');
 		$this->load->model('Community_model','',TRUE);
+		$this->load->model('Language_model','',TRUE);
 	}
 
 	public function index() {
 		$data = $this->getUserViewData();
 		$data['captcha'] = $this->initCaptcha();
 		$data['communities'] = $this->Community_model->get_communities_for_combobox();
+		$data['languages'] = $this->Language_model->get_languages();
 		$data['view'] = 'register.php';
 		$this->load->view('template.php', $data);
 	}
@@ -41,6 +43,7 @@ class Register extends Public_Only_Controller {
 		} else {
 			$data['captcha'] = $this->initCaptcha();
 			$data['communities'] = $this->Community_model->get_communities_for_combobox();
+			$data['languages'] = $this->Language_model->get_languages();
 			$data['view'] = 'register.php';
 		}
 		

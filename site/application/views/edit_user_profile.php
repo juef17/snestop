@@ -25,7 +25,11 @@
 			<div class="form-group">
 				<label>Language
 					<span class="errors"><?=form_error('edit_language')?></span>
-					<input type="text" name="edit_language" maxlength="255" class="form-control" placeholder="Language" value="<?=set_value('edit_language', $edit_language)?>">
+					<select name="edit_language" class="form-control">
+						<?php foreach($languages as $language): ?>
+							<option value="<?=$language?>" <?php if(set_value('edit_language', $edit_language) == $language) echo 'selected';?>><?=$language?></option>
+						<?php endforeach; ?>
+					</select>
 				</label>
 			</div>
 			<div class="form-group">

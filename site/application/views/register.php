@@ -33,7 +33,11 @@
 			<div class="form-group">
 				<label>Language
 					<span class="errors"><?=form_error('reg_language')?></span>
-					<input type="text" name="reg_language" maxlength="255" class="form-control" placeholder="Language" value="<?=set_value('reg_language')?>">
+					<select name="reg_language" class="form-control">
+						<?php foreach($languages as $language): ?>
+							<option value="<?=$language?>" <?php if(set_value('reg_language', 'English') == $language) echo 'selected';?>><?=$language?></option>
+						<?php endforeach; ?>
+					</select>
 				</label>
 			</div>
 			<div class="form-group">
