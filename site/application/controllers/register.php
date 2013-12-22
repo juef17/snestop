@@ -47,6 +47,7 @@ class Register extends Public_Only_Controller {
 		$this->load->view('template.php', $data);
 	}
 
+	//AJAX
 	public function reloadc() {
 		echo $this->initCaptcha();
 	}

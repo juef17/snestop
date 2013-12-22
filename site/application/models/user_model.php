@@ -55,6 +55,16 @@ class User_model extends CI_Model {
 		}
 	}
 
+	public function get_user_profile($username) {
+		$this->db->select('userName, language, Community.name as communityName, Community.URL as communityURL, registrationDate');
+		$this->db->where('userName', $username);
+		$this->db->where('registrationToken', NULL);
+		$this->db->join('Community', 'User.idCommunity = Community.idCommunity', 'left');
+		$this->db->limit(1);
+		$query = $this->db->get('User');
+		return $query->row();
+	}
+
 	public function get_users_list() {
 		$this->db->select('idUser, userName, email, language, canStreamMP3, registrationToken, isAdmin, enabled, registrationDate, Community.name as communityName');
 		$this->db->from('User');
@@ -91,6 +101,21 @@ class User_model extends CI_Model {
 		);
 		$this->db->set('registrationDate', 'NOW()', FALSE);
 		return $this->db->insert('User', $data);
+	}
+
+	public function updateUser($oldUsername, $username, $password, $email, $language, $idCommunity) {
+		$data = array(
+			'userName' => $username,
+			'email' => $email,
+			'language' => $language,
+			'idCommunity' => $idCommunity
+		);
+		if($password != '')
+			$data['password'] = MD5($password);
+
+		$this->db->where('username', $oldUsername);
+		return $this->db->update('User', $data);
+		//TODO: si user change de community, faut faire... d'zaffaires!!! ajouter un trigger dans BD si trop lourd.
 	}
 
 	public function removeRegistrationToken($token) {
