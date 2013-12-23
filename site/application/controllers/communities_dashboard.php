@@ -5,12 +5,14 @@ class Communities_Dashboard extends Admin_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('Community_model','',TRUE);
+		$this->load->model('Community_Request_model','',TRUE);
 	}
 
 	public function index()
 	{
 		$data = $this->getUserViewData();
 		$data['communities'] = $this->Community_model->get_Community();
+		$data['requests'] = $this->Community_Request_model->get_Community_requests_for_dashboard();
 		$data['view'] = 'communities_dashboard.php';
 		$this->load->view('template.php', $data);
 	}
@@ -18,6 +20,13 @@ class Communities_Dashboard extends Admin_Controller {
 	public function delete() {
 		if($id = $this->input->post('id', TRUE))
 			$this->Community_model->delete_Community($id);
+
+		redirect('/communities_dashboard');
+	}
+
+	public function deleteRequest() {
+		if($id = $this->input->post('id', TRUE))
+			$this->Community_Request_model->delete_Community_request($id);
 
 		redirect('/communities_dashboard');
 	}

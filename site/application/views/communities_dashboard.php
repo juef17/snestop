@@ -4,6 +4,61 @@
 	</div>
 </div>
 
+<div class="container_12">
+	<div class="grid_12">
+		<h2>Requests</h1>
+	</div>
+</div>
+
+<div style="background-color: #dddddd;" class="container_12">
+	<div class="grid_2 columnheader">
+		<p>Name</p>
+	</div>
+	<div class="grid_1 columnheader">
+		<p>Requester</p>
+	</div>
+	<div class="grid_5 columnheader">
+		<p>URL</p>
+	</div>
+	<div class="grid_1 columnheader">
+		<!--delete -->
+	</div>
+</div>
+
+<?php if(count($requests) == 0): ?>
+<div class="container_12">
+	<div class="grid_12">
+		<p>No request.</p>
+	</div>
+</div>
+<?php endif; ?>
+
+<?php $b = TRUE; foreach($requests as $request): ?>
+	<div style="<?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_12">
+		<div class="grid_2">
+			<p><?=$request->name?></p>
+		</div>
+		<div class="grid_1">
+			<a href="<?=base_url()?>index.php/user_profile/index/<?=$request->userName?>"><?=$request->userName?></a>
+		</div>
+		<div class="grid_5">
+			<a href="<?=$request->URL?>"><?=$request->URL?></a>
+		</div>
+		<div class="grid_1">
+			<?= form_open(base_url() . 'index.php/communities_dashboard/deleteRequest', array('id' => 'deleteRequest_' . $request->idCommunityRequest)) ?>
+				<input type="hidden" name="id" value="<?= $request->idCommunityRequest ?>" />
+				<a href="#" class="btn btn-xs btn-danger" onclick="deleteRequest_<?= $request->idCommunityRequest ?>.submit();">Delete</a>
+			</form>
+		</div>
+	</div>
+<?php endforeach; ?>
+
+<div class="container_12">
+	<div class="grid_12">
+		<h2>Communities</h1>
+	</div>
+</div>
+
 <div style="background-color: #dddddd;" class="container_12">
 	<div class="grid_2 columnheader">
 		<p>Name</p>
