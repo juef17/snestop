@@ -57,8 +57,8 @@ class Register extends Public_Only_Controller {
 
 	private function setValidationRules() {
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('reg_username', 'Username', 'trim|required|xss_clean|is_unique[User.userName]');
-		$this->form_validation->set_rules('reg_password', 'Password', 'trim|required|xss_clean|callback_verifyPassword');
+		$this->form_validation->set_rules('reg_username', 'Username', 'trim|required|xss_clean|alpha_dash|is_unique[User.userName]');
+		$this->form_validation->set_rules('reg_password', 'Password', 'trim|required|xss_clean|alpha_dash|callback_verifyPassword');
 		$this->form_validation->set_rules('reg_email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[User.email]');
 		$this->form_validation->set_rules('reg_language', 'Language', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('reg_captcha', 'Captcha', 'trim|required|xss_clean|callback_validateCaptcha');

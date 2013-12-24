@@ -58,10 +58,10 @@ class Edit_User_Profile extends Secure_Controller {
 	private function setValidationRules() {
 		$this->load->library('form_validation');
 		if($this->input->post('edit_username') != $_SESSION['loggedUser']->userName)
-			$this->form_validation->set_rules('edit_username', 'Username', 'trim|required|xss_clean|is_unique[User.userName]');
+			$this->form_validation->set_rules('edit_username', 'Username', 'trim|required|xss_clean|alpha_dash|is_unique[User.userName]');
 
 		if($this->input->post('edit_password') != '' || $this->input->post('edit_password_verif') != '')
-			$this->form_validation->set_rules('edit_password', 'Password', 'trim|xss_clean|callback_verifyPassword');
+			$this->form_validation->set_rules('edit_password', 'Password', 'trim|xss_clean|alpha_dash|callback_verifyPassword');
 
 		if($this->input->post('edit_email') != $_SESSION['loggedUser']->email)
 			$this->form_validation->set_rules('edit_email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[User.email]');
