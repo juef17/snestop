@@ -27,7 +27,7 @@
 <?php $b = TRUE; foreach($mistakes as $mistake): ?>
 	<div style="<?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_12">
 		<div class="grid_2">
-			<p><?= $mistake->userName ?></p>
+			<a href="<?=base_url()?>index.php/user_profile/index/<?=$mistake->userName?>"><?=$mistake->userName?></a>
 		</div>
 		<div class="grid_9">
 			<p><?= $mistake->text ?></p>
