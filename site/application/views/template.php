@@ -61,13 +61,12 @@
 						</li>
 					</ul>
 				</li>
-				<li><a href="#">Mowe's shtuff</a>
+				<li><a href="#">The Project</a>
 					<ul>
-						<li><a>Category 1.2</a>
-							<li><a>Category 1.3</a></li>
-							<li><a>Category 1.3</a></li>
-							<li><a>Category 1.3</a></li>
-						</li>
+						<li><a href="#">About us</a></li>
+						<?php if($isUserLogged): ?>
+							<li><a href="<?= base_url() ?>index.php/request_mistake">Report a mistake</a></li>
+						<?php endif; ?>
 					</ul>
 				</li>
 				<?php if($loggedUserIsAdmin): ?>
@@ -75,6 +74,7 @@
 						<ul>
 							<li><a href="<?= base_url() ?>index.php/communities_dashboard">Communities dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/news_dashboard">News dashboard</a></li>
+							<li><a href="<?= base_url() ?>index.php/mistake_requests_dashboard">Mistake reports dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/track_request_dashboard">Track requests dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/users_management_dashboard">Users dashboard</a></li>
 						</ul>

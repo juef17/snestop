@@ -6,9 +6,10 @@ class Mistake_Request_model extends CI_Model {
 	}
 
 	public function get_Mistake_request($idMistakeRequest = FALSE) {
+		$this->db->join('User', 'MistakeRequest.idUserRequester = User.idUser', 'inner');
 		if ($idMistakeRequest === FALSE) {
 			$query = $this->db->get('MistakeRequest');
-			return $query->result_array();
+			return $query->result();
 		} else {
 			$query = $this->db->get_where('MistakeRequest', array('idMistakeRequest' => $idMistakeRequest));
 			return $query->row();
