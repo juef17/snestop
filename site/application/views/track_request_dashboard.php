@@ -22,7 +22,7 @@
 		<p>Title</p>
 	</div>
 	<div class="grid_5 columnheader">
-		<p">Track URL</a></p>
+		<p>Track URL</a></p>
 	</div>
 	<div class="grid_1 columnheader">
 		<!--delete -->

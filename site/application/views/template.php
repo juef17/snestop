@@ -73,6 +73,7 @@
 					<li><a href="#">Administration</a>
 						<ul>
 							<li><a href="<?= base_url() ?>index.php/communities_dashboard">Communities dashboard</a></li>
+							<li><a href="<?= base_url() ?>index.php/games_dashboard/index/1">Games dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/news_dashboard">News dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/mistake_requests_dashboard">Mistake reports dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/track_request_dashboard">Track requests dashboard</a></li>
