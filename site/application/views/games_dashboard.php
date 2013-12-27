@@ -14,17 +14,17 @@
 
 <p style="margin: 5px 0;"><?=$menu?></p>
 
-<div style="background-color: #dddddd;" class="container_12">
+<div style="background-color: #dddddd;" class="container_16">
 	<div class="grid_2 columnheader">
 		<p>Title (Eng)</p>
 	</div>
 	<div class="grid_2 columnheader">
 		<p>Title (Jap)</p>
 	</div>
-	<div class="grid_3 columnheader">
+	<div class="grid_4 columnheader">
 		<p>Screenshot</p>
 	</div>
-	<div class="grid_3 columnheader">
+	<div class="grid_4 columnheader">
 		<p>RSN</p>
 	</div>
 	<div class="grid_1 columnheader">
@@ -32,6 +32,9 @@
 	</div>
 	<div class="grid_1 columnheader">
 		<!--delete -->
+	</div>
+	<div class="grid_1 columnheader">
+		<!--tracks -->
 	</div>
 </div>
 
@@ -42,15 +45,15 @@
 	<div class="grid_2">
 		<span class="errors"><?=form_error('game_titlejap')?>&nbsp;</span>
 	</div>
-	<div class="grid_3">
+	<div class="grid_4">
 		<span class="errors"><?=form_error('game_screenshot')?>&nbsp;</span>
 	</div>
-	<div class="grid_3">
+	<div class="grid_4">
 		<span class="errors"><?=form_error('game_rsn')?>&nbsp;</span>
 	</div>
 </div>
 
-<div class="container_12">
+<div class="container_16">
 	<?= form_open(base_url() . 'index.php/games_dashboard/add', array('id' => 'addGame')) ?>
 		<div class="grid_2 columnheader">
 			<input type="text" name="game_titleeng" placeholder="English title" maxlength="45" class="form-control" value="<?=set_value('game_titleeng')?>"/>
@@ -58,17 +61,14 @@
 		<div class="grid_2 columnheader">
 			<input type="text" name="game_titlejap" placeholder="Japanese title" maxlength="45" class="form-control" value="<?=set_value('game_titlejap')?>"/>
 		</div>
-		<div class="grid_3 columnheader">
+		<div class="grid_4 columnheader">
 			<input type="text" name="game_screenshot" placeholder="http://" maxlength="255" class="form-control" value="<?=set_value('game_screenshot')?>"/>
 		</div>
-		<div class="grid_3 columnheader">
+		<div class="grid_4 columnheader">
 			<input type="text" name="game_rsn" placeholder="http://" maxlength="255" class="form-control" value="<?=set_value('game_rsn')?>"/>
 		</div>
 		<div class="grid_1 columnheader">
 			<div class="btn btn-xs btn-default" onclick="addGame.submit();">Add</div>
-		</div>
-		<div class="grid_1 columnheader">
-			<!--empty, no need for delete here! Oh well... What a basteurde! -->
 		</div>
 	</form>
 </div>
@@ -82,21 +82,21 @@
 <?php endif; ?>
 
 <?php $b = FALSE; foreach($games as $game): ?>
-	<div style="<?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_12">
+	<div style="<?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
 		<div class="grid_2">
 			<span class="errors"><?=form_error("game_{$game->idGame}_titleeng")?>&nbsp;</span>
 		</div>
 		<div class="grid_2">
 			<span class="errors"><?=form_error("game_{$game->idGame}_titlejap")?>&nbsp;</span>
 		</div>
-		<div class="grid_3">
+		<div class="grid_4">
 			<span class="errors"><?=form_error("game_{$game->idGame}_screenshot")?>&nbsp;</span>
 		</div>
-		<div class="grid_3">
+		<div class="grid_4">
 			<span class="errors"><?=form_error("game_{$game->idGame}_rsn")?>&nbsp;</span>
 		</div>
 	</div>
-	<div style="<?php if($b): ?> background-color: #dddddd;<?php endif; ?>" class="container_12">
+	<div style="<?php if($b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
 		<?= form_open(base_url() . "index.php/games_dashboard/update/$currentPage", array('id' => 'update_' . $game->idGame)) ?>
 			<input type="hidden" name="id" value="<?=$game->idGame?>" />
 			<div class="grid_2">
@@ -105,10 +105,10 @@
 			<div class="grid_2">
 				<input type="text" name="game_<?=$game->idGame?>_titlejap" maxlength="45" class="form-control" value="<?=set_value("game_{$game->idGame}_titlejap", $game->titleJap)?>" />
 			</div>
-			<div class="grid_3">
+			<div class="grid_4">
 				<input type="text" name="game_<?=$game->idGame?>_screenshot" maxlength="255" class="form-control" value="<?=set_value("game_{$game->idGame}_screenshot", $game->screenshotURL)?>" />
 			</div>
-			<div class="grid_3">
+			<div class="grid_4">
 				<input type="text" name="game_<?=$game->idGame?>_rsn" maxlength="255" class="form-control" value="<?=set_value("game_{$game->idGame}_rsn", $game->rsnFileURL)?>" />
 			</div>
 			<div class="grid_1">
@@ -120,6 +120,9 @@
 				<input type="hidden" name="id" value="<?=$game->idGame?>" />
 				<div class="btn btn-xs btn-danger" onclick="confirmDelete(<?=$game->idGame?>);">Delete</div>
 			</form>
+		</div>
+		<div class="grid_1">
+			<a href="<?=base_url()?>index.php/tracks_dashboard/index/<?=$game->idGame?>">Tracks</a>
 		</div>
 	</div>
 <?php endforeach; ?>

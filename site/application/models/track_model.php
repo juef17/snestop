@@ -5,24 +5,45 @@ class Track_model extends CI_Model {
 		$this->load->database();
 	}
 
-	public function get_Track($idTrack = FALSE) {
-		if ($idTrack === FALSE) {
-			$query = $this->db->get('Track');
-			return $query->result_array();
-		} else {
-			$query = $this->db->get_where('Track', array('idTrack' => $idTrack));
-			return $query->row();
-		}
+	public function get_Track($idTrack) {
+		$query = $this->db->get_where('Track', array('idTrack' => $idTrack));
+		return $this->getTrackFromRow($query->row());
 	}
 
-	public function get_Track_for_Game($idGame = FALSE) {
-		if ($idGame === FALSE) { // devrait pas arriver...
-			$query = $this->db->get('Track');
-			return $query->result_array();
-		} else {
-			$query = $this->db->get_where('Track', array('idGame' => $idGame));
-			return $query->result_array();
+	public function get_Tracks_for_Game($idGame) {
+		$query = $this->db->get_where('Track', array('idGame' => $idGame));
+
+		$retval = array();
+		foreach($query->result() as $row) {
+			$retval[] = $this->getTrackFromRow($row);
 		}
+		return $retval;
+	}
+
+	public function get_new_Track($idGame) {
+		$data = array(
+			'idTrack' => 0,
+			'idGame' => $idGame,
+			'title' => '',
+			'length' => 0,
+			'fadeLength' => 0,
+			'composer' => '',
+			'turnedOffByAdmin' => FALSE,
+			'screenshotURL' => '',
+			'isJingle' => FALSE,
+			'glicko2RD' => 350,
+			'glicko2rating' => 1500,
+			'glicko2sigma' => 0.06,
+			'eloRating' => 1600,
+			'eloReached2400' => FALSE,
+			'spcURL' => '',
+			'spcEncodedURL' => ''
+		);
+
+		$object = new stdClass();
+		foreach ($data as $key => $value)
+			$object->$key = $value;
+		return $object;
 	}
 
 	public function set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL) {
@@ -60,10 +81,9 @@ class Track_model extends CI_Model {
 		return $this->db->update('Track', array('turnedOffByAdmin' => TRUE));
 	}
 	
-	public function update_Track($idTrack, $idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL) {
+	public function update_Track($idTrack, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL) {
 		$this->db->where('Track.idTrack', $idTrack);
 		$data = array(
-			'idGame' => $idGame,
 			'title' => $title,
 			'length' => $length,
 			'fadeLength' => $fadeLength,
@@ -106,6 +126,13 @@ class Track_model extends CI_Model {
 			$this->db->update('Track', $dataWinner, array('idTrack' => $idTrackWinner));
 			return $this->db->update('Track', $dataLoser, array('idTrack' => $idTrackLoser));
 		}
+	}
+
+	private function getTrackFromRow($row) {
+		$row->turnedOffByAdmin = ord($row->turnedOffByAdmin) == 1 || $row->turnedOffByAdmin == 1;
+		$row->isJingle = ord($row->isJingle) == 1 || $row->isJingle == 1;
+		$row->eloReached2400 = ord($row->eloReached2400) == 1 || $row->eloReached2400 == 1;
+		return $row;
 	}
 	
 	private function elo_probability($elo1, $elo2) {
