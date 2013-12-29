@@ -155,11 +155,9 @@ class Track_model extends CI_Model {
 	
 	public function get_number_of_duels_Track($idTrack) {
 		$this->db->where('idTrackWon', $idTrack);
+		$this->db->or_where('idTrackLost =', $idTrack); 
 		$this->db->from('DuelResult');
-		$n = $this->db->count_all_results();
-		$this->db->where('idTrackLost', $idTrack);
-		$this->db->from('DuelResult');
-		return ($n + $this->db->count_all_results());
+		return $this->db->count_all_results();
 	}
 	
 	private $glicko2_tau = 0.3;
