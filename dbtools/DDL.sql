@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `Playlist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Playlist` (
-  `idPlaylist` int(11) NOT NULL,
+  `idPlaylist` int(11) NOT NULL AUTO_INCREMENT,
   `idUser` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
   `nbPlays` int(11) NOT NULL,
