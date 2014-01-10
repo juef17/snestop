@@ -36,6 +36,7 @@
 		PopulateTracks();
 		PopulateReviews();
 		PopulateCommunities();
+		PopulateDuels(10);
 		//additional populations here!
 	}
 
@@ -125,6 +126,21 @@
 			VALUES('$name', '$token', '$url')
 		");
 	}
+
+	function PopulateDuels($n) // doesn't update ratings
+	{
+		$mysqli = CreateConnection();
+		while($n-- > 0) InsertDuel($mysqli, '', '', '');
+		EchoCount($mysqli, 'DuelResult');
+	}
+	
+	function InsertDuel($mysqli, $idUser, $idTrackWon, $idTrackLost)
+	{
+		EchoQuery($mysqli,"
+			INSERT INTO DuelResult(idUser, idTrackWon, idTrackLost)
+			VALUES((SELECT idUser FROM User ORDER BY RAND() LIMIT 1), (SELECT idTrack FROM Track ORDER BY RAND() LIMIT 1), (SELECT idTrack FROM Track ORDER BY RAND() LIMIT 1))
+		");
+	}
 ?>
 
 
@@ -138,6 +154,7 @@
 		<p><a href="peuplement.php?action=tracks">Peupler les tracks</a></p>
 		<p><a href="peuplement.php?action=reviews">Peupler les reviews</a></p>
 		<p><a href="peuplement.php?action=communities">Peupler les communities</a></p>
+		<p><a href="peuplement.php?action=duels">Peupler les duels (n'update pas les ratings)</a></p>
 		<p><a href="peuplement.php?action=full">Peuplement entier</a></p>
 		<p><a href="index.php">Retour à l'outil principal</a></p>
 		<?php
@@ -155,6 +172,8 @@
 					PopulateReviews();
 				else if($_GET['action'] == 'communities')
 					PopulateCommunities();
+				else if($_GET['action'] == 'duels')
+					PopulateDuels(10);
 				else if($_GET['action'] == 'full')
 					PopulateFull();
 			}
