@@ -75,4 +75,17 @@ class Review_model extends CI_Model {
 		return $this->db->update('Review', array('text' => $text));
 	}
 	
+	public function get_Review_score($idReviewUser, $idReviewTrack) {
+		$this->db->where('idReviewUser', $idReviewUser);
+		$this->db->where('idReviewTrack', $idReviewTrack);
+		$this->db->where('voteType', 1);
+		$this->db->from('ReviewVote');
+		$upVotes = $this->db->count_all_results();
+		$this->db->where('idReviewUser', $idReviewUser);
+		$this->db->where('idReviewTrack', $idReviewTrack);
+		$this->db->where('voteType', -1);
+		$this->db->from('ReviewVote');
+		$downVotes = $this->db->count_all_results();
+		return ($upVotes - $downVotes);
+	}
 }

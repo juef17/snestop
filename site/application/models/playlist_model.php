@@ -43,6 +43,18 @@ class Playlist_model extends CI_Model {
 		$this->db->set('nbPlays', 'nbPlays+1', FALSE);
 		$this->db->update('Playlist');
 	}
+	
+	public function get_Playlist_score($idPlaylist) {
+		$this->db->where('idPlaylist', $idPlaylist);
+		$this->db->where('voteType', 1);
+		$this->db->from('PlaylistVote');
+		$upVotes = $this->db->count_all_results();
+		$this->db->where('idPlaylist', $idPlaylist);
+		$this->db->where('voteType', -1);
+		$this->db->from('PlaylistVote');
+		$downVotes = $this->db->count_all_results();
+		return ($upVotes - $downVotes);
+	}
 
 	public function delete_Playlist($idPlaylist) {
 		return $this->db->delete('Playlist', array('idPlaylist' => $idPlaylist));
