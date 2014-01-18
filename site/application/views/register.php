@@ -43,14 +43,14 @@
 			<div class="form-group">
 				<label>Community
 					<span class="errors"><?=form_error('reg_community')?></span>
-					<select name="reg_community" class="form-control">
+					<select id="reg_community" name="reg_community" class="form-control">
 						<option value="0">None</option>
 						<?php foreach($communities as $community): ?>
 							<option value="<?=$community->idCommunity?>" <?php if(set_value('reg_community') == $community->idCommunity) echo 'selected';?>><?=$community->name?></option>
 						<?php endforeach; ?>
 					</select>
 				</label>
-				<label>Community token
+				<label id="communityToken" style="display: none;">Community token
 					<span class="errors"><?=form_error('reg_community_token')?></span>
 					<input type="text" name="reg_community_token" maxlength="45" class="form-control" placeholder="Community token" value="<?=set_value('reg_community_token')?>">
 				</label>
@@ -69,3 +69,14 @@
 		</div>
 	</div>
 </form>
+
+<script>
+	$(function() {
+		$('#reg_community').change( function() {
+			if($(this).val() == '0')
+				$('#communityToken').hide(400);
+			else
+				$('#communityToken').show(400);
+		});
+	});
+</script>
