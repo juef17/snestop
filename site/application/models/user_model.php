@@ -97,7 +97,8 @@ class User_model extends CI_Model {
 			'email' => $email,
 			'language' => $language,
 			'registrationToken' => $registerToken,
-			'idCommunity' => $idCommunity
+			'idCommunity' => $idCommunity,
+			'passwordSalt' => 'GRAH' //Placeholder for NOT NULLABLE field.
 		);
 		$this->db->set('registrationDate', 'NOW()', FALSE);
 		return $this->db->insert('User', $data);

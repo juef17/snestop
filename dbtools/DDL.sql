@@ -313,6 +313,7 @@ CREATE TABLE `User` (
   `idCommunity` int(11) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(32) NOT NULL,
+  `passwordSalt` varchar(32) NOT NULL,
   `language` varchar(25) NOT NULL,
   `canStreamMP3` bit(1) NOT NULL DEFAULT b'0',
   `autoplay` bit(1) NOT NULL DEFAULT b'0',
@@ -325,7 +326,7 @@ CREATE TABLE `User` (
   PRIMARY KEY (`idUser`),
   KEY `fk_User_Community` (`idCommunity`),
   CONSTRAINT `fk_User_Community` FOREIGN KEY (`idCommunity`) REFERENCES `Community` (`idCommunity`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
