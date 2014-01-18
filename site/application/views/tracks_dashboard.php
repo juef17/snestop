@@ -22,19 +22,10 @@
 		<p>Active</p>
 	</div>
 	<div class="grid_1 columnheader">
-		<p>G2RD</p>
-	</div>
-	<div class="grid_1 columnheader">
 		<p>G2rating</p>
 	</div>
 	<div class="grid_1 columnheader">
-		<p>G2sigma</p>
-	</div>
-	<div class="grid_1 columnheader">
 		<p>ERating</p>
-	</div>
-	<div class="grid_1 columnheader">
-		<p>EReached2400</p>
 	</div>
 	<div class="grid_1 columnheader">
 		<!--play -->
@@ -77,19 +68,10 @@
 			<p><?=$track->turnedOffByAdmin ? 'no' : 'yes'?></p>
 		</div>
 		<div class="grid_1">
-			<p><?=$track->glicko2RD?></p>
-		</div>
-		<div class="grid_1">
 			<p><?=$track->glicko2rating?></p>
 		</div>
 		<div class="grid_1">
-			<p><?=$track->glicko2sigma?></p>
-		</div>
-		<div class="grid_1">
 			<p><?=$track->eloRating?></p>
-		</div>
-		<div class="grid_1">
-			<p><?=$track->eloReached2400 ? 'yes' : 'no'?></p>
 		</div>
 		<div class="grid_1">
 			<div class="btn btn-xs btn-primary" onclick="alert('Not yeTTT!');">Play</div>
@@ -118,6 +100,12 @@
 		<p><?=$track->spcURL?></p>
 		<label>Encoded SPC</label>
 		<p><?=$track->spcEncodedURL?></p>
+		<label>Glicko2RD</label>
+		<p><?=$track->glicko2RD?></p>
+		<label>Glicko2sigma</label>
+		<p><?=$track->glicko2sigma?></p>
+		<label>Elo reached 2400</label>
+		<p><?=$track->eloReached2400 ? 'yes' : 'no'?></p>
 	</div>
 <?php endforeach; ?>
 
@@ -147,7 +135,7 @@
 <script>
 	function detailsDialog(idTrack) {
 		$('#dialog-details_' + idTrack).dialog({
-			height: 400,
+			height: 500,
 			width: 700,
 			modal: true,
 			buttons: {
