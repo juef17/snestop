@@ -102,6 +102,7 @@ class Register extends Public_Only_Controller {
 	}
 
 	public function validateCommunity($idCommunity) {
+		if($idCommunity == 0) return true;
 		$this->form_validation->set_message('validateCommunity', 'Wrong token');
 		$communityToken = $this->input->post('reg_community_token');
 		$community = $this->Community_model->get_Community($idCommunity);

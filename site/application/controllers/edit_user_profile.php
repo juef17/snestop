@@ -77,6 +77,7 @@ class Edit_User_Profile extends Secure_Controller {
 	}
 
 	public function validateCommunity($idCommunity) {
+		if($idCommunity == 0) return true;
 		$this->form_validation->set_message('validateCommunity', 'Wrong token');
 		$communityToken = $this->input->post('edit_community_token');
 		$community = $this->Community_model->get_Community($idCommunity);
