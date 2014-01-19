@@ -28,6 +28,7 @@
 		EchoQuery($mysqli, 'DELETE FROM Track;');
 		EchoQuery($mysqli, 'DELETE FROM Review;');
 		EchoQuery($mysqli, 'DELETE FROM Community;');
+		EchoQuery($mysqli, 'DELETE FROM DuelResult;');
 	}
 
 	function PopulateFull()
