@@ -7,14 +7,17 @@ class User_model extends CI_Model {
 
 	public function login($username, $password) {
 		$this->pruneUnconfirmedUsers(); //ca me prenait un trigger quelconque, 1 fois par jour...
-		
-		$this->db->where('userName', $username);
-		$this->db->where('password', MD5($password));
-		$this->db->limit(1);
 
+		$this->db->where('userName', $username);
+		$this->db->limit(1);
 		$query = $this->db->get('User');
 		if($query->num_rows() == 1)
-			return $this->getUserFromRow($query->row());
+			$user = $this->getUserFromRow($query->row());
+		else
+			return false;
+		
+		if($this->validate_password($password, $user->passwordSalt, $user->password))
+			return $user;
 		else
 			return false;
 	}
@@ -91,14 +94,15 @@ class User_model extends CI_Model {
 	}
 
 	public function addUser($username, $password, $email, $language, $registerToken, $idCommunity) {
+		$passwordEncoding = create_hash($password);
 		$data = array(
 			'userName' => $username,
-			'password' => MD5($password),
+			'password' => $passwordEncoding['hash'],
+			'passwordSalt' => $passwordEncoding['salt'],
 			'email' => $email,
 			'language' => $language,
 			'registrationToken' => $registerToken,
-			'idCommunity' => $idCommunity,
-			'passwordSalt' => 'GRAH' //Placeholder for NOT NULLABLE field.
+			'idCommunity' => $idCommunity
 		);
 		$this->db->set('registrationDate', 'NOW()', FALSE);
 		return $this->db->insert('User', $data);
@@ -111,8 +115,11 @@ class User_model extends CI_Model {
 			'language' => $language,
 			'idCommunity' => $idCommunity
 		);
-		if($password != '')
-			$data['password'] = MD5($password);
+		if($password != '') {
+			$passwordEncoding = create_hash($password);
+			$data['password'] = $passwordEncoding['hash'];
+			$data['passwordSalt'] = $passwordEncoding['salt'];
+		}
 
 		$this->db->where('idUser', $idUser);
 		return $this->db->update('User', $data);
@@ -140,5 +147,59 @@ class User_model extends CI_Model {
 		$this->db->where('isAdmin', 0);
 		$this->db->delete('User');
 		return $this->db->last_query();
+	}
+	
+	private function validate_password($password, $salt, $correct_hash)
+	{
+		$correct_hash_decoded = base64_decode($correct_hash);
+		$current_password_hashed = $this->pbkdf2(
+				"sha256",
+				$password,
+				$salt,
+				1000,
+				24,
+				true
+			);
+		return $this->slow_equals($correct_hash_decoded, $current_password_hashed);
+	}
+	
+	private function slow_equals($a, $b)
+	{
+		$diff = strlen($a) ^ strlen($b);
+		for($i = 0; $i < strlen($a) && $i < strlen($b); $i++)
+		{
+			$diff |= ord($a[$i]) ^ ord($b[$i]);
+		}
+		return $diff === 0; 
+	}
+	
+	private function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output = false)
+	{
+		$algorithm = strtolower($algorithm);
+		if(!in_array($algorithm, hash_algos(), true))
+			trigger_error('PBKDF2 ERROR: Invalid hash algorithm.', E_USER_ERROR);
+		if($count <= 0 || $key_length <= 0)
+			trigger_error('PBKDF2 ERROR: Invalid parameters.', E_USER_ERROR);
+		if (function_exists("hash_pbkdf2")) {
+			if (!$raw_output) {
+				$key_length = $key_length * 2;
+			}
+			return hash_pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output);
+		}
+		$hash_length = strlen(hash($algorithm, "", true));
+		$block_count = ceil($key_length / $hash_length);
+		$output = "";
+		for($i = 1; $i <= $block_count; $i++) {
+			$last = $salt . pack("N", $i);
+			$last = $xorsum = hash_hmac($algorithm, $last, $password, true);
+			for ($j = 1; $j < $count; $j++) {
+				$xorsum ^= ($last = hash_hmac($algorithm, $last, $password, true));
+			}
+			$output .= $xorsum;
+		}
+		if($raw_output)
+			return substr($output, 0, $key_length);
+		else
+			return bin2hex(substr($output, 0, $key_length));
 	}
 }

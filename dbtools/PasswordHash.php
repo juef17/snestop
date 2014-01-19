@@ -54,23 +54,18 @@ function create_hash($password)
     return array("salt" => $salt, "hash" => $hash);
 }
 
-function validate_password($password, $correct_hash)
+function validate_password($password, $salt, $correct_hash)
 {
-    $params = explode(":", $correct_hash);
-    if(count($params) < HASH_SECTIONS)
-       return false; 
-    $pbkdf2 = base64_decode($params[HASH_PBKDF2_INDEX]);
-    return slow_equals(
-        $pbkdf2,
-        pbkdf2(
-            $params[HASH_ALGORITHM_INDEX],
+    $correct_hash_decoded = base64_decode($correct_hash);
+	$current_password_hashed = pbkdf2(
+            PBKDF2_HASH_ALGORITHM,
             $password,
-            $params[HASH_SALT_INDEX],
-            (int)$params[HASH_ITERATION_INDEX],
-            strlen($pbkdf2),
+            $salt,
+            PBKDF2_ITERATIONS,
+            PBKDF2_HASH_BYTE_SIZE,
             true
-        )
-    );
+        );
+    return slow_equals($correct_hash_decoded, $current_password_hashed);
 }
 
 // Compares two strings $a and $b in length-constant time.
