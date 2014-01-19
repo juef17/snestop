@@ -1,5 +1,6 @@
 <?php 
 	require_once("base.php");
+	require_once("PasswordHash.php");
 
 	function EchoQuery($mysqli, $query)
 	{
@@ -55,9 +56,10 @@
 	
 	function InsertUser($mysqli, $idCommunity, $email, $password, $language, $canStreamMP3, $autoPlay, $userName, $isAdmin)
 	{
+		$passwordEncoding = create_hash($password);
 		EchoQuery($mysqli,"
-			INSERT INTO User(idCommunity, email, password, language, canStreamMP3, autoPlay, userName, isAdmin)
-			VALUES($idCommunity, '$email', '" . MD5($password) . "', '$language', $canStreamMP3, $autoPlay, '$userName', $isAdmin)
+			INSERT INTO User(idCommunity, email, password, passwordSalt, language, canStreamMP3, autoPlay, userName, isAdmin)
+			VALUES($idCommunity, '$email', '" . $passwordEncoding['hash'] . "', '" . $passwordEncoding['salt'] . "', '$language', $canStreamMP3, $autoPlay, '$userName', $isAdmin)
 		");
 	}
 	
