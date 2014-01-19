@@ -94,7 +94,7 @@ class User_model extends CI_Model {
 	}
 
 	public function addUser($username, $password, $email, $language, $registerToken, $idCommunity) {
-		$passwordEncoding = create_hash($password);
+		$passwordEncoding = $this->create_hash($password);
 		$data = array(
 			'userName' => $username,
 			'password' => $passwordEncoding['hash'],
@@ -116,7 +116,7 @@ class User_model extends CI_Model {
 			'idCommunity' => $idCommunity
 		);
 		if($password != '') {
-			$passwordEncoding = create_hash($password);
+			$passwordEncoding = $this->create_hash($password);
 			$data['password'] = $passwordEncoding['hash'];
 			$data['passwordSalt'] = $passwordEncoding['salt'];
 		}
@@ -147,6 +147,19 @@ class User_model extends CI_Model {
 		$this->db->where('isAdmin', 0);
 		$this->db->delete('User');
 		return $this->db->last_query();
+	}
+	
+	private function create_hash($password) {
+		$salt = base64_encode(mcrypt_create_iv(24, MCRYPT_DEV_URANDOM));
+		$hash = base64_encode($this->pbkdf2(
+				"sha256",
+				$password,
+				$salt,
+				1000,
+				24,
+				true
+			));
+		return array("salt" => $salt, "hash" => $hash);
 	}
 	
 	private function validate_password($password, $salt, $correct_hash)
