@@ -49,6 +49,8 @@
 					<span class="errors"><?=form_error('edit_community_token')?></span>
 					<input type="text" name="edit_community_token" maxlength="45" class="form-control" placeholder="Community token" value="<?=set_value('edit_community_token')?>">
 				</label>
+				<p>Please note that if you change your community, all duels you have already done will still count for the previous community you were a member of.</p>
+			</div>
 			<div class="form-group">
 				<h2>Password</h2>
 				<p>Leave blank unless you want to change it.</p>
@@ -68,7 +70,7 @@
 			
 			<button type="button" class="btn btn-default" onclick="location.href='<?=base_url()?>';">Return</button>
 			<button type="submit" class="btn btn-default">Submit</button>
-			<p>Uppon submitting, you will be logged out so your changes can take effect when you log back in.</p>
+			<p>Upon submitting, you will be logged out so your changes can take effect when you log back in.</p>
 		</div>
 	</div>
 </form>
