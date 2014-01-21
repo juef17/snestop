@@ -35,16 +35,17 @@
 			<div class="form-group">
 				<label>Community
 					<span class="errors"><?=form_error('edit_community')?></span>
-					<select name="edit_community" class="form-control">
+					<select id="edit_community" name="edit_community" class="form-control">
 						<option value="0">None</option>
+						<?php $selectedCommunity = 0; ?> <!-- pour voir si on doit cacher tout de suite le champ du token -->
 						<?php foreach($communities as $community): ?>
-							<option value="<?=$community->idCommunity?>" <?php if(set_value('edit_community', $edit_community) == $community->idCommunity) echo 'selected';?>><?=$community->name?></option>
+							<option value="<?=$community->idCommunity?>" <?php if(set_value('edit_community', $edit_community) == $community->idCommunity) {echo 'selected'; $selectedCommunity = $community->idCommunity;}?>><?=$community->name?></option>
 						<?php endforeach; ?>
 					</select>
 				</label>
 			</div>
 			<div class="form-group">
-				<label>Community token
+				<label id="communityToken"<?php if($selectedCommunity == 0): ?> style="display: none;"<?php endif; ?>>Community token
 					<span class="errors"><?=form_error('edit_community_token')?></span>
 					<input type="text" name="edit_community_token" maxlength="45" class="form-control" placeholder="Community token" value="<?=set_value('edit_community_token')?>">
 				</label>
@@ -71,3 +72,13 @@
 		</div>
 	</div>
 </form>
+<script> 
+	$(function() { 
+		$('#edit_community').change( function() { 
+			if($(this).val() == '0') 
+				$('#communityToken').hide(400); 
+			else 
+				$('#communityToken').show(400); 
+		}); 
+	}); 
+</script> 
