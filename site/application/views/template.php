@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 	<?php require_once('application/views/includes/head.php'); ?>
-	<title>SnesTop. Title var goes here.</title>
+	<title>The Top SNES tracks project</title>
+	<?php $this->load->helper('url'); ?>
+	<link rel="icon" href="<?=base_url()?>favicon.png" type="image/png">
 </head>
 
 <body>
