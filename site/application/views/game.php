@@ -75,7 +75,7 @@
 		<?php $b = TRUE; foreach($tracks as $track): ?>
 			<div <?php if($b = !$b): ?> style="background-color: #dddddd;" <?php endif; ?> class="container_16">
 				<div class="grid_1">
-					<img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="btnPlayOnClick('<?=asset_url() . 'spc/' . $track->spcURL?>', <?=$track->length?>, <?=$track->fadeLength?>, '<?=$track->title?>');" />
+					<img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="startPlayer('<?=asset_url() . 'spc/' . $track->spcURL?>', <?=$track->length?>, <?=$track->fadeLength?>, '<?=$track->title?>');" />
 				</div>
 				<div class="grid_3">
 					<p><?=$track->title?></p>
@@ -145,15 +145,6 @@
 <?php endif; ?>
 
 <script>
-	function btnPlayOnClick(spcUrl, length, fade, title) {
-		if($('#player-dialog').is(':visible')) {
-			setTitle(title);
-			playFile(spcUrl, length, fade);
-		} else {
-			playerDialog(spcUrl, length, fade, title);
-		}
-	}
-	
 	function detailsDialog(idTrack) {
 		$('#dialog-details_' + idTrack).dialog({
 			height: 500,

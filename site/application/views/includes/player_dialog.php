@@ -9,6 +9,15 @@
 </div>
 
 <script>
+	function startPlayer(spcUrl, length, fade, title) {
+		if($('#player-dialog').is(':visible')) {
+			setTitle(title);
+			playFile(spcUrl, length, fade);
+		} else {
+			playerDialog(spcUrl, length, fade, title);
+		}
+	}
+	
 	function playerDialog(spcUrl, length, fade, title) {
 		$('#player-dialog #fileUrl').val(spcUrl);
 		$('#player-dialog #length').val(length);

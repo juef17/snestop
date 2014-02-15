@@ -74,7 +74,7 @@
 			<p><?=$track->eloRating?></p>
 		</div>
 		<div class="grid_1">
-			<div class="btn btn-xs btn-primary" onclick="alert('Not yeTTT!');">Play</div>
+			<img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="startPlayer('<?=asset_url() . 'spc/' . $track->spcURL?>', <?=$track->length?>, <?=$track->fadeLength?>, '<?=$track->title?>');" />
 		</div>
 		<div class="grid_1">
 			<div class="btn btn-xs btn-default" onclick="detailsDialog(<?=$track->idTrack?>)">Details</div>
@@ -164,3 +164,6 @@
 		});
 	}
 </script>
+
+
+<?php require_once(views_dir() . 'includes/player_dialog.php'); ?>
