@@ -97,6 +97,18 @@ class Track_model extends CI_Model {
 		return $this->db->update('Track', $data);
 	}
 
+	public function get_game_composers($idGame) {
+		$this->db->select('composer');
+		$this->db->distinct();
+		$query = $this->db->get_where('Track', array('idGame' => $idGame));
+
+		$retval = array();
+		foreach($query->result_array() as $result)
+			$retval[] = $result['composer'];
+
+		return $retval;
+	}
+
 	public function update_ratings_Track($idTrackWinner, $idTrackLoser) {
 		$queryWinner = $this->db->get_where('Track', array('idTrack' => $idTrackWinner));
 		$queryLoser = $this->db->get_where('Track', array('idTrack' => $idTrackLoser));
