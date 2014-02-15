@@ -39,6 +39,11 @@
 	<div class="container_12">
 		<div class="grid_12">
 			<h2>Tracks</h2>
+			<?php if($loggedUserIsAdmin): ?>
+				<div>
+					<a href="<?=base_url()?>index.php/tracks_dashboard/index/<?=$game->idGame?>">Open tracks dashboard</a>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 
