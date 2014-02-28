@@ -23,7 +23,7 @@ class Language_model extends CI_Model {
 		$retval['bn'] = "Bengali";
 		$retval['bh'] = "Bihari";
 		$retval['bi'] = "Bislama";
-		$retval['nb'] = "Bokmål";
+		$retval['nb'] = "BokmÃ¥l";
 		$retval['bs'] = "Bosnian";
 		$retval['br'] = "Breton";
 		$retval['bg'] = "Bulgarian";
@@ -178,7 +178,7 @@ class Language_model extends CI_Model {
 		$retval['uz'] = "Uzbek";
 		$retval['ve'] = "Venda";
 		$retval['vi'] = "Vietnamese";
-		$retval['vo'] = "Volapük";
+		$retval['vo'] = "VolapÃ¼k";
 		$retval['wa'] = "Walloon";
 		$retval['cy'] = "Welsh";
 		$retval['wo'] = "Wolof";
