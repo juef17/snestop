@@ -46,7 +46,7 @@ class Track_model extends CI_Model {
 		return $object;
 	}
 
-	public function set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL) {
+	public function set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400) {
 		$data = array(
 			'idGame' => $idGame,
 			'title' => $title,
@@ -56,11 +56,11 @@ class Track_model extends CI_Model {
 			'turnedOffByAdmin' => $turnedOffByAdmin,
 			'screenshotURL' => $screenshotURL,
 			'isJingle' => $isJingle,
-			'glicko2RD' => 350,
-			'glicko2rating' => 1500,
-			'glicko2sigma' => 0.06,
-			'eloRating' => 1600,
-			'eloReached2400' => FALSE,
+			'glicko2RD' => $glicko2RD,
+			'glicko2rating' => $glicko2rating,
+			'glicko2sigma' => $glicko2sigma,
+			'eloRating' => $eloRating,
+			'eloReached2400' => $eloReached2400,
 			'spcURL' => $spcURL,
 			'spcEncodedURL' => $spcEncodedURL
 		);
@@ -81,7 +81,7 @@ class Track_model extends CI_Model {
 		return $this->db->update('Track', array('turnedOffByAdmin' => TRUE));
 	}
 	
-	public function update_Track($idTrack, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL) {
+	public function update_Track($idTrack, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400) {
 		$this->db->where('Track.idTrack', $idTrack);
 		$data = array(
 			'title' => $title,
@@ -92,6 +92,11 @@ class Track_model extends CI_Model {
 			'screenshotURL' => $screenshotURL,
 			'isJingle' => $isJingle,
 			'spcURL' => $spcURL,
+			'glicko2RD' => $glicko2RD,
+			'glicko2rating' => $glicko2rating,
+			'glicko2sigma' => $glicko2sigma,
+			'eloRating' => $eloRating,
+			'eloReached2400' => $eloReached2400,
 			'spcEncodedURL' => $spcEncodedURL
 		);
 		return $this->db->update('Track', $data);

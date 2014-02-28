@@ -46,9 +46,9 @@ class Edit_Track extends Admin_Controller {
 			$eloReached2400 = $this->input->post('eloReached2400');
 			
 			if($id == 0)
-				$this->Track_model->set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL);
+				$this->Track_model->set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400);
 			else
-				$this->Track_model->update_Track($id, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL);
+				$this->Track_model->update_Track($id, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400);
 				
 			redirect("/tracks_dashboard/index/{$idGame}");
 		} else {
