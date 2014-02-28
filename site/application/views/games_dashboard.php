@@ -12,7 +12,9 @@
 			$menu .= '<a href="' . base_url() . 'index.php/games_dashboard/index/' . $p . '">' . $p . '</a>&nbsp;&nbsp;';
 ?>
 
-<p style="margin: 5px 0;"><?=$menu?></p>
+<div class="container_12">
+	<p style="margin: 5px 0;"><?=$menu?></p>
+</div>
 
 <div style="background-color: #dddddd;" class="container_16">
 	<div class="grid_2 columnheader">
