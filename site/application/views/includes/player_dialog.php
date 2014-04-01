@@ -23,6 +23,17 @@
 			playerDialog(spcUrl, length, fade, title, screenshotUrl);
 		}
 	}
+
+	function showPlayer() {
+		if(! $('#player-dialog').is(':visible')) {
+			$('#player-dialog').dialog({
+				modal: false,
+				resizable: false,
+				dialogClass: 'player',
+				title: 'Music player'
+			});
+		}
+	}
 	
 	function playerDialog(spcUrl, length, fade, title, screenshotUrl) {
 		$('#player-dialog #fileUrl').val(spcUrl);
@@ -59,7 +70,6 @@
 			screenshotUrl = '<?=asset_url()?>images/en/no_track_ss.png';
 		
 		$('#playerScreenshot').css('background-image', 'url(' + screenshotUrl + ')');
-		//<div class="tv" style="display: inline-block; vertical-align: top; background-image: url('<?=$track->screenshotURL != NULL ? $track->screenshotURL : asset_url() . 'images/en/no_track_ss.png'?>');"></div>
 	}
 
 	function playFile(fileUrl, length, fade, screenshotUrl) {

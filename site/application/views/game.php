@@ -164,5 +164,3 @@
 		});
 	}
 </script>
-
-<?php require_once(views_dir() . 'includes/player_dialog.php'); ?>

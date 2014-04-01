@@ -54,16 +54,7 @@
 						</ul>
 					</li>
 				<?php endif; ?>
-				<li><a href="#">Playlists</a>
-					<ul>
-						<li><a>Category 1.2</a>
-							<li><a>Category 1.3</a></li>
-							<li><a>Category 1.3</a></li>
-							<li><a>Category 1.3</a></li>
-						</li>
-					</ul>
-				</li>
-				<li><a href="#">The Project</a>
+				<li><a href="#">The project</a>
 					<ul>
 						<li><a href="#">About us</a></li>
 						<?php if($isUserLogged): ?>
@@ -81,6 +72,11 @@
 							<li><a href="<?= base_url() ?>index.php/track_request_dashboard">Track requests dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/users_management_dashboard">Users dashboard</a></li>
 						</ul>
+					</li>
+				<?php endif; ?>
+				<?php if($isUserLogged): ?>
+					<li><a href="#!" onclick="showPlayer();"><img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" /></a>
+						
 					</li>
 				<?php endif; ?>
 			</ul>
@@ -107,5 +103,6 @@
 		</div>
 	</div>
 	<?php require_once(views_dir() . $view); ?>
+	<?php require_once(views_dir() . 'includes/player_dialog.php'); ?>
 </body>
 </html>
