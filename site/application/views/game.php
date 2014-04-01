@@ -80,7 +80,7 @@
 		<?php $b = TRUE; foreach($tracks as $track): ?>
 			<div <?php if($b = !$b): ?> style="background-color: #dddddd;" <?php endif; ?> class="container_16">
 				<div class="grid_1">
-					<img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="startPlayer('<?=asset_url() . 'spc/' . $track->spcURL?>', <?=$track->length?>, <?=$track->fadeLength?>, '<?=$track->title?>');" />
+					<img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="startPlayer('<?=asset_url() . 'spc/' . $track->spcURL?>', <?=$track->length?>, <?=$track->fadeLength?>, '<?=$track->title?>', '<?=$track->screenshotURL?>');" />
 				</div>
 				<div class="grid_3">
 					<p><?=$track->title?></p>
@@ -104,7 +104,7 @@
 
 			<!-- details dialog -->
 			<div style="display: none; padding-top: 15px;" id="dialog-details_<?=$track->idTrack?>" title="<?=$game->titleEng . ' - ' . $track->title?>">
-				<div class="tv" style="display: inline-block; vertical-align: top; background-image: url('<?=$track->screenshotURL != NULL ? $track->screenshotURL : asset_url() . 'images/en/no_track_ss.png'?>');"></div>
+				<div class="tv" style="background-image: url('<?=$track->screenshotURL != NULL ? $track->screenshotURL : asset_url() . 'images/en/no_track_ss.png'?>');"></div>
 				<div style="display: inline-block; margin: 15px 0 0 15px;">
 					<h4>Ratings*</h4>
 					<table class="datatable">

@@ -90,15 +90,20 @@ p.footer{
   position: relative;
   width: 236px;
   height: 224px;
-  margin: 20px 0;
 /* background-image: url('http://i.imgur.com/ORWts4q.png'); */
   background-color:#000000;
   background-repeat:no-repeat;
   background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   border-radius: 50% / 10%;
   color: white;
   text-align: center;
   text-indent: .1em;
+  vertical-align: top;
+  display: inline-block;
 }
 .tv:before {
   content: '';
@@ -109,6 +114,10 @@ p.footer{
   left: -4%;
   background: inherit;
   border-radius: 5% / 50%;
+}
+.tv-small {
+  width: 75px;
+  height: 71px;
 }
 
 .player {
