@@ -131,3 +131,71 @@ p.footer{
   background: linear-gradient(135deg,  rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
+
+.modal {
+  display:    none;
+  position:   fixed;
+  z-index:    1000;
+  top:        0;
+  left:       0;
+  height:     100%;
+  width:      100%;
+  background: rgba( 255, 255, 255, .8 ) 
+              url('../images/wait.gif') 
+              50% 50% 
+              no-repeat;
+}
+
+body.loading {
+  overflow: hidden;   
+}
+
+body.loading .modal {
+  display: block;
+}
+
+.playlist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.playlist li {
+  margin: 0 0 3px 0;
+  font-size: 0.8em;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.playlist li img {
+  position: absolute;
+  right: 0px;
+  width: 16px;
+  height: 16px;
+  display: none;
+}
+
+.playlist li .fa-unsorted {
+  cursor: move;
+}
+
+.playlist li span {
+  margin-right: 3px;
+}
+
+.playlist .ui-selecting
+{
+  background: #5e97d9;
+}
+.playlist .ui-selected {
+  background: -moz-linear-gradient(-45deg,  rgba(30,87,153,1) 0%, rgba(30,87,153,0) 69%);
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(69%,rgba(30,87,153,0)));
+  background: -webkit-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0) 69%);
+  background: -o-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0) 69%);
+  background: -ms-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0) 69%);
+  background: linear-gradient(135deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0) 69%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#001e5799',GradientType=1 );
+  color: white;
+ }

@@ -19,31 +19,33 @@ class Playlist_Item_model extends CI_Model {
 		} // si on a juste 1 des deux, voir les méthodes ci-bas
 	}
 	
-	public function get_PlaylistItem_for_Track($idTrack = FALSE) {
+	public function get_PlaylistItems_for_Track($idTrack) {
 		$this->db->join('Track', 'PlaylistItem.idTrack = Track.idTrack', 'inner');
-		if($idTrack === FALSE) { //devrait pas arriver...?
-			$query = $this->db->get('PlaylistItem');
-			return $query->result_array();
-		} else {
-			$this->db->where('PlaylistItem.idTrack', $idTrack); 
-			$query = $this->db->get('PlaylistItem');
-			return $query->result_array();
-		}
+		$this->db->where('PlaylistItem.idTrack', $idTrack); 
+		$query = $this->db->get('PlaylistItem');
+		return $query->result_array();
 	}
 	
-	public function get_PlaylistItem_for_Playlist($idPlaylist = FALSE) {
-		$this->db->join('Playlist', 'PlaylistItem.idPlaylist = Playlist.idPlaylist', 'inner');
-		if($idPlaylist === FALSE) { //devrait pas arriver...?
-			$query = $this->db->get('PlaylistItem');
-			return $query->result_array();
-		} else {
-			$this->db->where('PlaylistItem.idPlaylist', $idPlaylist); 
-			$query = $this->db->get('PlaylistItem');
-			return $query->result_array();
-		}
+	public function get_PlaylistItems_for_Playlist($idPlaylist) {
+		$this->db->select('Track.idTrack, Track.title, Track.length, Track.screenshotURL, Game.titleEng AS gameTitleEng, PlaylistItem.position as position');
+		$this->db->join('Track', 'PlaylistItem.idTrack = Track.idTrack', 'INNER');
+		$this->db->join('Game', 'Track.idGame = Game.idGame', 'INNER');
+		$this->db->where('PlaylistItem.idPlaylist', $idPlaylist);
+		$this->db->order_by('position', 'asc');
+		$query = $this->db->get('PlaylistItem');
+		return $query->result();  //no bool in result so no need for conversion
 	}
 
-	public function set_Playlist_item($idPlaylist, $idTrack, $position) {
+	public function set_Playlist_item($idPlaylist, $idTrack) {
+		$this->db->select_max('position', 'position');
+		$this->db->where('idPlaylist', $idPlaylist);
+		$query = $this->db->get('PlaylistItem');
+		$position = $query->row()->position;
+		if($position == NULL)
+			$position = 0;
+		else
+			$position++;
+		
 		$data = array(
 			'idPlaylist' => $idPlaylist,
 			'idTrack' => $idTrack,
@@ -51,6 +53,21 @@ class Playlist_Item_model extends CI_Model {
 		);
 
 		return $this->db->insert('PlaylistItem', $data);
+	}
+
+	public function updatePosition($idPlaylist, $idTrack, $newPosition) {
+		$this->db->where('idPlaylist', $idPlaylist);
+		$this->db->where('idTrack', $idTrack);
+		return $this->db->update('PlaylistItem', array('position' => $newPosition));
+	}
+
+	public function playlistItemExists($idPlaylist, $idTrack) {
+		$this->db->select('idPlaylist');
+		$this->db->where('idPlaylist', $idPlaylist);
+		$this->db->where('idTrack', $idTrack);
+		$this->db->from('PlaylistItem');
+		$this->db->limit(1);
+		return $this->db->count_all_results() > 0;
 	}
 
 	public function delete_Playlist_item($idPlaylist, $idTrack) {

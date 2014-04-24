@@ -70,9 +70,11 @@
 			<div class="grid_1 columnheader">
 				<p>SPC</p>
 			</div>
-			<div class="grid_3 columnheader">
-				<p>My playlists</p>
-			</div>
+			<?php if($isUserLogged): ?>
+				<div class="grid_3 columnheader">
+					<p>My playlists</p>
+				</div>
+			<?php endif; ?>
 			<div class="grid_1 columnheader">
 				<!-- details -->
 			</div>
@@ -94,9 +96,11 @@
 				<div class="grid_1">
 					<a href="<?=asset_url() . 'spc/' . $track->spcURL?>"><img src="<?=asset_url() . 'images/download.png'?>" /></a>
 				</div>
-				<div class="grid_3">
-					<div class="btn btn-xs btn-default" onclick="alert('Popup goes here');">Add</div>
-				</div>
+				<?php if($isUserLogged): ?>
+					<div class="grid_2">
+						<div class="btn btn-xs btn-default" onclick="addToPlaylistDialog(<?=$track->idTrack?>);">Add to playlist...</div>
+					</div>
+				<?php endif; ?>
 				<div class="grid_1">
 					<div class="btn btn-xs btn-default" onclick="detailsDialog(<?=$track->idTrack?>)">Details</div>
 				</div>
@@ -146,6 +150,10 @@
 				<a href="#">Write a review</a>
 			</div>
 		<?php endforeach; ?>
+		<!-- add to playlist dialog -->
+		<div id="dialog-addToPlaylist" style="display: none;" title="Select a playlist">
+			<select id="game-playlistcombo" style="display: inline-block;"><!--ajax loaded content--></select>
+		</div>
 	<?php endif; ?>
 <?php endif; ?>
 
@@ -156,11 +164,43 @@
 			width: 700,
 			modal: true,
 			resizable: false,
+			show: { effect: 'puff', duration: 200 },
+			hide: { effect: 'puff', duration: 200 },
 			buttons: {
 				Ok: function() {
 					$(this).dialog('close');
 				}
 			}
 		});
+	}
+
+	function addToPlaylistDialog(idTrack) {
+		$('#game-playlistcombo').load('<?=base_url()?>index.php/playlist/playlists/0');
+		$('#dialog-addToPlaylist').dialog({
+			modal: true,
+			resizable: false,
+			show: { effect: 'puff', duration: 200 },
+			hide: { effect: 'puff', duration: 200 },
+			buttons: {
+				Ok: function() {
+					addToPlaylist(idTrack, $('#game-playlistcombo').val());
+				}
+			}
+		});
+	}
+
+	function addToPlaylist(idTrack, idPlaylist) {
+		$.post('<?=base_url()?>index.php/playlist/addPlaylistItem',
+			{
+				idPlaylist: idPlaylist,
+				idTrack: idTrack
+			},
+			function(data) {
+				var json = $.parseJSON(data);
+				if(json.success)
+					$('#dialog-addToPlaylist').dialog('close');
+				else
+					showMessageDialog('D\'oh!', json.message);
+			});
 	}
 </script>

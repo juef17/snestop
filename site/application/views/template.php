@@ -104,5 +104,8 @@
 	</div>
 	<?php require_once(views_dir() . $view); ?>
 	<?php require_once(views_dir() . 'includes/player_dialog.php'); ?>
+	<?php require_once(views_dir() . 'includes/message_dialog.php'); ?>
+
+	<div class="modal"></div>
 </body>
 </html>

@@ -6,24 +6,30 @@ class Playlist_model extends CI_Model {
 	}
 
 	public function get_Playlist($idPlaylist = FALSE) {
-		$this->db->join('User', 'Playlist.idUser = User.idUser', 'inner');
 		if ($idPlaylist === FALSE) {
 			$query = $this->db->get('Playlist');
-			return $query->result();
+			$retval = array();
+			foreach($query->result() as $row)
+				$retval[] = $this->getPlaylistFromRow($row);
+				
+			return $retval;
 		} else {
 			$query = $this->db->get_where('Playlist', array('idPlaylist' => $idPlaylist));
-			return $query->row();
+			if($this->db->count_all_results() > 0)
+				return $this->getPlaylistFromRow($query->row());
+			else
+				return NULL;
 		}
 	}
 
-	public function get_Playlist_from_User($idUser = FALSE) {
-		if ($idUser === FALSE) {
-			$query = $this->db->get('Playlist');
-			return $query->result();
-		} else {
-			$query = $this->db->get_where('Playlist', array('idUser' => $idUser));
-			return $query->row();
-		}
+	public function get_Playlists_from_User($idUser) {
+		$query = $this->db->get_where('Playlist', array('idUser' => $idUser));
+
+		$retval = array();
+		foreach($query->result() as $row)
+			$retval[] = $this->getPlaylistFromRow($row);
+			
+		return $retval;
 	}
 
 	public function set_Playlist($idUser, $name, $nbPlays, $public, $randomize, $loop) {
@@ -35,7 +41,19 @@ class Playlist_model extends CI_Model {
 			'randomize' => $randomize,
 			'loop' => $loop
 		);
-		return $this->db->insert('Playlist', $data);
+		if($this->db->insert('Playlist', $data))
+			return $this->db->insert_id();
+		else
+			return FALSE;
+	}
+
+	public function setPublic($idPlaylist, $public) {
+		$this->db->where('idPlaylist', $idPlaylist);
+		$this->db->set('public', $public);
+		if($this->db->update('Playlist'))
+			return TRUE;
+		else
+			return FALSE;
 	}
 
 	public function increment_nbPlays($idPlaylist) {
@@ -58,5 +76,17 @@ class Playlist_model extends CI_Model {
 
 	public function delete_Playlist($idPlaylist) {
 		return $this->db->delete('Playlist', array('idPlaylist' => $idPlaylist));
+	}
+
+	public function userHasPlaylistWithName($idUser, $playlistName) {
+		$this->db->where('idUser', $idUser);
+		$this->db->where('name', $playlistName);
+		$this->db->from('Playlist');
+		return $this->db->count_all_results() > 0;
+	}
+
+	private function getPlaylistFromRow($row) {
+		$row->public = ord($row->public) == 1 || $row->public == 1;
+		return $row;
 	}
 }
