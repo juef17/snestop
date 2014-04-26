@@ -82,7 +82,7 @@
 		<?php $b = TRUE; foreach($tracks as $track): ?>
 			<div <?php if($b = !$b): ?> style="background-color: #dddddd;" <?php endif; ?> class="container_16">
 				<div class="grid_1">
-					<img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="startPlayer('<?=asset_url() . 'spc/' . $track->spcURL?>', <?=$track->length?>, <?=$track->fadeLength?>, '<?=$track->title?>', '<?=$track->screenshotURL?>');" />
+					<img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="startPlayer('<?=asset_url() . 'spc/' . str_replace('&', '%26', $track->spcURL)?>', <?=$track->length?>, <?=$track->fadeLength?>, '<?=$track->title?>', '<?=$track->screenshotURL?>');" />
 				</div>
 				<div class="grid_3">
 					<p><?=$track->title?></p>
@@ -94,7 +94,7 @@
 					<p><?=$track->composer?></p>
 				</div>
 				<div class="grid_1">
-					<a href="<?=asset_url() . 'spc/' . $track->spcURL?>"><img src="<?=asset_url() . 'images/download.png'?>" /></a>
+					<a href="<?=asset_url() . 'spc/' . str_replace('&', '%26', $track->spcURL)?>"><img src="<?=asset_url() . 'images/download.png'?>" /></a>
 				</div>
 				<?php if($isUserLogged): ?>
 					<div class="grid_2">
@@ -154,6 +154,10 @@
 		<div id="dialog-addToPlaylist" style="display: none;" title="Select a playlist">
 			<select id="game-playlistcombo" style="display: inline-block;"><!--ajax loaded content--></select>
 		</div>
+		<!-- no playlist available dialog -->
+		<div id="dialog-noPlaylist" style="display: none;" title="No playlist">
+			<p>No playlist available. Use the player on the main menu to manage playlists!</p>
+		</div>
 	<?php endif; ?>
 <?php endif; ?>
 
@@ -175,18 +179,35 @@
 	}
 
 	function addToPlaylistDialog(idTrack) {
-		$('#game-playlistcombo').load('<?=base_url()?>index.php/playlist/playlists/0');
-		$('#dialog-addToPlaylist').dialog({
-			modal: true,
-			resizable: false,
-			show: { effect: 'puff', duration: 200 },
-			hide: { effect: 'puff', duration: 200 },
-			buttons: {
-				Ok: function() {
-					addToPlaylist(idTrack, $('#game-playlistcombo').val());
+		$('#game-playlistcombo').load('<?=base_url()?>index.php/playlist/playlists/0',
+			function() {
+				if($('#game-playlistcombo option').length > 0) {
+					$('#dialog-addToPlaylist').dialog({
+						modal: true,
+						resizable: false,
+						show: { effect: 'puff', duration: 200 },
+						hide: { effect: 'puff', duration: 200 },
+						buttons: {
+							Ok: function() {
+								addToPlaylist(idTrack, $('#game-playlistcombo').val());
+							}
+						}
+					});
+				} else {
+					$('#dialog-noPlaylist').dialog({
+						modal: true,
+						resizable: false,
+						show: { effect: 'puff', duration: 200 },
+						hide: { effect: 'puff', duration: 200 },
+						buttons: {
+							Ok: function() {
+								$(this).dialog('close');
+							}
+						}
+					});
 				}
 			}
-		});
+		);
 	}
 
 	function addToPlaylist(idTrack, idPlaylist) {
