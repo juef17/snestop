@@ -154,10 +154,6 @@
 		<div id="dialog-addToPlaylist" style="display: none;" title="Select a playlist">
 			<select id="game-playlistcombo" style="display: inline-block;"><!--ajax loaded content--></select>
 		</div>
-		<!-- no playlist available dialog -->
-		<div id="dialog-noPlaylist" style="display: none;" title="No playlist">
-			<p>No playlist available. Use the player on the main menu to manage playlists!</p>
-		</div>
 	<?php endif; ?>
 <?php endif; ?>
 
@@ -194,17 +190,7 @@
 						}
 					});
 				} else {
-					$('#dialog-noPlaylist').dialog({
-						modal: true,
-						resizable: false,
-						show: { effect: 'puff', duration: 200 },
-						hide: { effect: 'puff', duration: 200 },
-						buttons: {
-							Ok: function() {
-								$(this).dialog('close');
-							}
-						}
-					});
+					showMessageDialog('No playlist', 'No playlist available. Use the player on the main menu to manage playlists!');
 				}
 			}
 		);
