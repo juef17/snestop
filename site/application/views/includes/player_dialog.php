@@ -152,18 +152,20 @@
 	function attachAjaxSubmitCallback() {
 		$('#createPlaylist-form').submit(function() {
 			$.post('<?=base_url()?>index.php/playlist/create',
-			 $(this).serialize(),
-			 function(data, textStatus) {
-				$('#createPlaylist-dialog').html(data);
-				if($('#createPlaylist-dialog #hasErrors').val() == '0') {
-					refreshPlaylistsList(function() {
-						selectPlaylist($('#createPlaylist-dialog #idPlaylist').val());
-						$('#createPlaylist-dialog').dialog('close');
-					});
-				} else {
-					attachAjaxSubmitCallback();
+				$(this).serialize(),
+				function(data, textStatus) {
+					$('#createPlaylist-dialog').html(data);
+					if($('#createPlaylist-dialog #hasErrors').val() == '0') {
+						refreshPlaylistsList(function() {
+							selectPlaylist($('#createPlaylist-dialog #idPlaylist').val());
+							$('#createPlaylist-dialog').dialog('close');
+							$('#createPlaylist-form #name').val('');
+						});
+					} else {
+						attachAjaxSubmitCallback();
+					}
 				}
-			});
+			);
 			return false;
 		});
 	}
