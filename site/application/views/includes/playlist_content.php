@@ -89,12 +89,14 @@
 			},
 			function(data) {
 				var json = $.parseJSON(data);
-				if(!json.success)
+				if(!json.success) {
 					showMessageDialog('', json.message);
-					
-				refreshPlaylistsList(function() {
-					$('#playlist-deleteConfirmation').dialog('close');
-				});
+				} else {
+					togglePlaylistVisibility();
+					refreshPlaylistsList(function() {
+						$('#playlist-deleteConfirmation').dialog('close');
+					});
+				}
 			});
 	}
 
