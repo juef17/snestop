@@ -71,6 +71,16 @@ class Playlist_Item_model extends CI_Model {
 	}
 
 	public function delete_Playlist_item($idPlaylist, $idTrack) {
-		return $this->db->delete('PlaylistItem', array('idPlaylist' => $idPlaylist, 'idTrack' => $idTrack));
+		if($deletedItem = $this->get_Playlist_item($idPlaylist, $idTrack)) {
+			$retval = $this->db->delete('PlaylistItem', array('idPlaylist' => $idPlaylist, 'idTrack' => $idTrack));
+			$items = $this->get_PlaylistItems_for_Playlist($idPlaylist);
+			foreach($items as $item)
+				if($item->position > $deletedItem->position)
+					$retval &= $this->updatePosition($idPlaylist, $item->idTrack, $item->position - 1);
+					
+			return $retval;
+		} else {
+			return FALSE;
+		}
 	}
 }
