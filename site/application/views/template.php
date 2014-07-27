@@ -22,7 +22,7 @@
 			</div>
 			<?php if($loggedUserUserName == NULL):
 					$attributes = array('class' => 'form-inline', 'role' => 'form', 'style' => 'float: right; padding: 5px 0;');
-					echo form_open('account/login', $attributes);
+					echo form_open('account/login?returnUrl=' . rawurlencode("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"), $attributes);
 				?>
 					<div class="form-group">
 						<label class="sr-only" for="exampleInputEmail2">Username</label>

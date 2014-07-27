@@ -17,9 +17,12 @@ class Account extends Public_Controller {
 		} else {
 			session_unset();
 		}
-		
+
 		$_SESSION['loginError'] = validation_errors();
-		redirect('/home');
+		if(isset($_GET['returnUrl']))
+			redirect('http://' . $_GET['returnUrl']);
+		else
+			redirect('/home');
 	}
 
 	private function setCookie($token) {
