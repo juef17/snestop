@@ -12,7 +12,7 @@
 		<input type="hidden" id="fadeLength" />
 		<input type="hidden" id="screenshotUrl" />
 	</div>
-	<div>
+	<div <?php if(!$isUserLogged): ?>style="display: none"<?php endif; ?> >
 		<select id="player-playlistcombo" style="display: inline-block; width: 90%"><!--ajax loaded content--></select>
 		<button id="player-expandPlaylist" class="btn btn-xs"><span class="fa fa-angle-double-down"></span></button>
 	</div>
@@ -29,41 +29,44 @@
 </div>
 
 <script>
+	var playerDialog;
+	var isUserLogged = <?=$isUserLogged ? 'true' : 'false'?>;
+	
 	function startPlayer(spcUrl, length, fade, title, screenshotUrl) {
-		if($('#player-dialog').is(':visible')) {
+		if(playerDialog != null && playerDialog.is(':visible')) {
 			setTitle(title);
 			playFile(spcUrl, length, fade, screenshotUrl);
 		} else {
-			playerDialog(spcUrl, length, fade, title, screenshotUrl);
+			setFileInfos(spcUrl, length, fade, title, screenshotUrl);
 		}
 	}
 
 	function showPlayer() {
-		var dialog = $('#player-dialog');
-		
-		if(! dialog.is(':visible')) {
-			if(dialog.hasClass('ui-dialog-content'))
-				dialog.dialog('open');
-			else
-				constructPlayerDialog();
+		if(playerDialog == null)
+			constructPlayerDialog();
+		else if(! playerDialog.is(':visible')) {
+			playerDialog.dialog('open');
 		}
 	}
 
 	function constructPlayerDialog() {
-		$('#player-dialog').dialog({
+		playerDialog = $('#player-dialog').dialog({
 			modal: false,
 			resizable: false,
 			dialogClass: 'player'
 		});
+		
 		$('#player-playlistcombo').menu();
 		$('#player-playlistcombo').change(function(){
 			playlistSelectionChanged($(this).val());
 		});
-
+		
 		$('#player-expandPlaylist').click(function() {
 			togglePlaylistVisibility();
 		});
-		refreshPlaylistsList();
+
+		if(isUserLogged)
+			refreshPlaylistsList();
 	}
 
 	function togglePlaylistVisibility() {
@@ -78,7 +81,7 @@
 		}
 	}
 	
-	function playerDialog(spcUrl, length, fade, title, screenshotUrl) {
+	function setFileInfos(spcUrl, length, fade, title, screenshotUrl) {
 		$('#player-dialog #fileUrl').val(spcUrl);
 		$('#player-dialog #length').val(length);
 		$('#player-dialog #fadeLength').val(fade);
@@ -89,7 +92,7 @@
 	}
 
 	function setTitle(title) {
-		$('#player-dialog').dialog('option', 'title', title);
+		playerDialog.dialog('option', 'title', title);
 	}
 	
 	function songEnded() {

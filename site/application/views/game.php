@@ -150,10 +150,6 @@
 				<a href="#">Write a review</a>
 			</div>
 		<?php endforeach; ?>
-		<!-- add to playlist dialog -->
-		<div id="dialog-addToPlaylist" style="display: none;" title="Select a playlist">
-			<select id="game-playlistcombo" style="display: inline-block;"><!--ajax loaded content--></select>
-		</div>
 	<?php endif; ?>
 <?php endif; ?>
 
@@ -172,42 +168,5 @@
 				}
 			}
 		});
-	}
-
-	function addToPlaylistDialog(idTrack) {
-		$('#game-playlistcombo').load('<?=base_url()?>index.php/playlist/playlists/0',
-			function() {
-				if($('#game-playlistcombo option').length > 0) {
-					$('#dialog-addToPlaylist').dialog({
-						modal: true,
-						resizable: false,
-						show: { effect: 'puff', duration: 200 },
-						hide: { effect: 'puff', duration: 200 },
-						buttons: {
-							Ok: function() {
-								addToPlaylist(idTrack, $('#game-playlistcombo').val());
-							}
-						}
-					});
-				} else {
-					showMessageDialog('No playlist', 'No playlist available. Use the player on the main menu to manage playlists!');
-				}
-			}
-		);
-	}
-
-	function addToPlaylist(idTrack, idPlaylist) {
-		$.post('<?=base_url()?>index.php/playlist/addPlaylistItem',
-			{
-				idPlaylist: idPlaylist,
-				idTrack: idTrack
-			},
-			function(data) {
-				var json = $.parseJSON(data);
-				if(json.success)
-					$('#dialog-addToPlaylist').dialog('close');
-				else
-					showMessageDialog('D\'oh!', json.message);
-			});
 	}
 </script>
