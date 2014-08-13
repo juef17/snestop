@@ -43,6 +43,7 @@
 			playFile(spcUrl, length, fade, screenshotUrl);
 		} else {
 			setFileInfos(spcUrl, length, fade, title, screenshotUrl);
+			showPlayer();
 		}
 	}
 
@@ -60,7 +61,8 @@
 			resizable: false,
 			show: { effect: 'clip', duration: 200 },
 			hide: { effect: 'fold', duration: 200 },
-			dialogClass: 'player'
+			dialogClass: 'player',
+			close: function(event, ui) { resetFileInfos(); }
 		});
 		
 		$('#player-playlistcombo').menu();
@@ -93,9 +95,11 @@
 		$('#player-dialog #length').val(length);
 		$('#player-dialog #fadeLength').val(fade);
 		$('#player-dialog #screenshotUrl').val(screenshotUrl);
-		
-		showPlayer();
 		setTitle(title);
+	}
+
+	function resetFileInfos() {
+		setFileInfos('', 0, 0, 'SPC Player', '');
 	}
 
 	function setTitle(title) {
