@@ -11,11 +11,6 @@
 </ul>
 <button class="btn btn-xs btn-danger" id="playlist-delete">Delete playlist</button>
 
-<!-- add to playlist dialog -->
-<div id="dialog-addToPlaylist" style="display: none;" title="Select a playlist">
-	<select id="playlistcombo" style="display: inline-block;"><!--ajax loaded content--></select>
-</div>
-
 <script>
 	function bindPlaylistDetailsFunctions() {
 		$('#playlist-playlist-public').change(function() {
@@ -120,50 +115,5 @@
 				else
 					showMessageDialog('', json.message);
 			});
-	}
-
-		function addToPlaylistDialog(idTrack) {
-		$('#dialog-addToPlaylist #playlistcombo').load('<?=base_url()?>index.php/playlist/playlists/0',
-			function() {
-				if($('#dialog-addToPlaylist #playlistcombo option').length > 0) {
-					$('#dialog-addToPlaylist').dialog({
-						modal: true,
-						resizable: false,
-						show: { effect: 'puff', duration: 200 },
-						hide: { effect: 'puff', duration: 200 },
-						buttons: {
-							Ok: function() {
-								addToPlaylist(idTrack, $('#dialog-addToPlaylist #playlistcombo').val());
-							}
-						}
-					});
-				} else {
-					showMessageDialog('No playlist', 'No playlist available. Use the player on the main menu to manage playlists!');
-				}
-			}
-		);
-	}
-
-	function addToPlaylist(idTrack, idPlaylist) {
-		$.post('<?=base_url()?>index.php/playlist/addPlaylistItem',
-			{
-				idPlaylist: idPlaylist,
-				idTrack: idTrack
-			},
-			function(data) {
-				var json = $.parseJSON(data);
-				if(json.success) {
-					$('#dialog-addToPlaylist').dialog('close');
-					if(idPlaylist == <?=$playlist->idPlaylist?>)
-						addTrackToDisplayedPlaylist(idTrack);
-				} else {
-					showMessageDialog('D\'oh!', json.message);
-				}
-			});
-	}
-
-	function addTrackToDisplayedPlaylist(idTrack) {
-		//fade in a placeholder with a spinner
-		//load its content with ajax
 	}
 </script>

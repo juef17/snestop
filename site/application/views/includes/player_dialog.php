@@ -24,6 +24,11 @@
 	<?php require_once(views_dir() . 'includes/player_create_playlist_dialog_content.php')?>
 </div>
 
+<!-- add to playlist dialog -->
+<div id="dialog-addToPlaylist" style="display: none;" title="Select a playlist">
+	<select id="playlistcombo" style="display: inline-block;"><!--ajax loaded content--></select>
+</div>
+
 <div id="playlist-deleteConfirmation" style="display: none;">
 	<span>Are you sure you want to delete this playlist?</span>
 </div>
@@ -53,6 +58,8 @@
 		playerDialog = $('#player-dialog').dialog({
 			modal: false,
 			resizable: false,
+			show: { effect: 'clip', duration: 200 },
+			hide: { effect: 'fold', duration: 200 },
 			dialogClass: 'player'
 		});
 		
@@ -200,5 +207,51 @@
 				$('#player-expandPlaylist').prop('disabled', false);
 			});
 		}
+	}
+
+			function addToPlaylistDialog(idTrack) {
+		$('#dialog-addToPlaylist #playlistcombo').load('<?=base_url()?>index.php/playlist/playlists/0',
+			function() {
+				if($('#dialog-addToPlaylist #playlistcombo option').length > 0) {
+					$('#dialog-addToPlaylist').dialog({
+						modal: true,
+						resizable: false,
+						show: { effect: 'puff', duration: 200 },
+						hide: { effect: 'puff', duration: 200 },
+						buttons: {
+							Ok: function() {
+								addToPlaylist(idTrack, $('#dialog-addToPlaylist #playlistcombo').val());
+							}
+						}
+					});
+				} else {
+					showMessageDialog('No playlist', 'No playlist available. Use the player on the main menu to manage playlists!');
+				}
+			}
+		);
+	}
+
+	function addToPlaylist(idTrack, idPlaylist) {
+		$.post('<?=base_url()?>index.php/playlist/addPlaylistItem',
+			{
+				idPlaylist: idPlaylist,
+				idTrack: idTrack
+			},
+			function(data) {
+				var json = $.parseJSON(data);
+				if(json.success) {
+					$('#dialog-addToPlaylist').dialog('close');
+					if(idPlaylist == $('#player-playlistcombo').val())
+						addTrackToPlayingPlaylist(idTrack);
+				} else {
+					showMessageDialog('D\'oh!', json.message);
+				}
+			});
+	}
+
+	function addTrackToPlayingPlaylist(idTrack) {
+		//fade in a placeholder with a spinner
+		//load its content with ajax
+		alert('Please reload your playlist for the added song to be available in the currently playing playlist.');
 	}
 </script>
