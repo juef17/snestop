@@ -103,7 +103,10 @@
 	}
 
 	function setTitle(title) {
-		playerDialog.dialog('option', 'title', title);
+		if(playerDialog == null)
+			$('#player-dialog').prop('title', title);
+		else
+			playerDialog.dialog('option', 'title', title);
 	}
 	
 	function songEnded() {

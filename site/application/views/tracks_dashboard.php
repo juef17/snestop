@@ -2,6 +2,7 @@
 	<div class="grid_12">
 		<h1>Tracks dashboard for <?=$gameTitle?></h1>
 		<p><a href="<?= base_url() . "index.php/edit_track/create/{$idGame}" ?>" class="btn btn-default">Create</a></p>
+		<p><a href="<?= base_url() . "index.php/game/index/{$idGame}" ?>">Go to game page</a></p>
 	</div>
 </div>
 
@@ -164,6 +165,3 @@
 		});
 	}
 </script>
-
-
-<?php require_once(views_dir() . 'includes/player_dialog.php'); ?>
