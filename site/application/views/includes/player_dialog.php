@@ -139,6 +139,7 @@
 	//Playlist management
 
 	function createPlayList() {
+		
 		$('#createPlaylist-dialog').dialog({
 			title: 'New playlist',
 			modal: true,
@@ -149,6 +150,7 @@
 				}
 			}
 		});
+		clearNewPlaylistForm();
 		attachAjaxSubmitCallback();
 	}
 

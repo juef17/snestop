@@ -10,7 +10,17 @@
 	<div class="form-group">
 		<label>Public
 			<span class="errors"><?=form_error('public')?></span>
-			<input type="checkbox" id="public" name="public" value="public" />
+			<input type="checkbox" id="public" name="public" value="public" <?=set_value('public') == 'public' ? 'checked' : '' ?>/>
 		</label>
 	</div>
 </form>
+
+<script>
+	function clearNewPlaylistForm() {
+		$('#createPlaylist-form #hasErrors').val('');
+		$('#createPlaylist-form #idPlaylist').val('-1');
+		$('#createPlaylist-form .errors').html('');
+		$('#createPlaylist-form #name').val('');
+		$('#createPlaylist-form #public').prop('checked', false);
+	}
+</script>
