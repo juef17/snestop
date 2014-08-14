@@ -1,15 +1,15 @@
 <input id="playlist-playlist-public" type="checkbox" <?=$playlist->public ? 'checked' : ''?>>Public
-<ul id="playlist-tracks" class="playlist">
+<ul style="max-height: 150px; overflow-y: auto;" id="playlist-tracks" class="playlist">
 	<?php foreach($playlistItems as $item):
 		$text = $item->gameTitleEng . ' - ' . $item->title; ?>
 		<li class="ui-state-default" title="<?=$text?>" id="<?=$item->idTrack?>">
 		<span class="fa fa-unsorted fa-lg"></span>
 		<span><?=$text?></span>
-		<img src="<?=asset_url()?>images/delete.png" onclick="deleteItem(<?=$item->idTrack?>);"/>
+		<img id="deleteItemButton" src="<?=asset_url()?>images/delete.png" onclick="deleteItem(<?=$item->idTrack?>);"/>
 		</li>
   <?php endforeach; ?>
 </ul>
-<button class="btn btn-xs btn-danger" id="playlist-delete">Delete playlist</button>
+<button class="btn btn-xs btn-danger" id="playlist-delete" onclick="confirmDeletePlaylist();">Delete playlist</button>
 
 <script>
 	function bindPlaylistDetailsFunctions() {
@@ -26,8 +26,6 @@
 			});
 		});
 
-		$('#playlist-delete').click(function() { confirmDeletePlaylist(); });
-
 		$('#playlist-tracks').sortable({
 			handle: '.fa-unsorted',
 			update: function(event, ui) {
@@ -39,8 +37,9 @@
 				$(e.target).find('.ui-selectee.ui-selecting').not(ui.selecting).removeClass('ui-selecting');
 				$(e.target).find('.ui-selectee.ui-selected').not(ui.selecting).removeClass('ui-selected');
 			},
-			selected: function( event, ui ) {
-				playTrack(ui.selected.id);
+			selected: function(e, ui) {
+				if (!$("#deleteItemButton").is(":hover"))
+					playTrack(ui.selected.id);
 			}
 		});
 

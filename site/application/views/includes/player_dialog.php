@@ -144,6 +144,7 @@
 					showMessageDialog(data['message']);
 				} else {
 					var track = data['success'];
+					setTitle(track.title);
 					playFile('<?=asset_url()?>spc/' + track.spcURL, track.length, track.fade, track.screenshotURL);
 				}
 			}
