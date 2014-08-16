@@ -13,10 +13,14 @@
 		<input type="hidden" id="screenshotUrl" />
 	</div>
 	<div <?php if(!$isUserLogged): ?>style="display: none"<?php endif; ?> >
-		<select id="player-playlistcombo" style="display: inline-block; width: 90%"><!--ajax loaded content--></select>
+		<select id="player-playlistcombo" style="display: inline-block; width: 90%">
+			<!--ajax loaded content-->
+		</select>
 		<button id="player-expandPlaylist" class="btn btn-xs"><span class="fa fa-angle-double-down"></span></button>
 	</div>
-	<div style="display: none; max-height: 200px;" id="player-playlist"><!--ajax loaded content--></div>
+	<div style="display: none; max-height: 200px;" id="player-playlist">
+		<!--ajax loaded content-->
+	</div>
 </div>
 
 <!-- Dialogs. Create them only once. -->
@@ -26,7 +30,9 @@
 
 <!-- add to playlist dialog -->
 <div id="dialog-addToPlaylist" style="display: none;" title="Select a playlist">
-	<select id="playlistcombo" style="display: inline-block;"><!--ajax loaded content--></select>
+	<select id="playlistcombo" style="display: inline-block;">
+		<!--ajax loaded content-->
+	</select>
 </div>
 
 <div id="playlist-deleteConfirmation" style="display: none;">
@@ -201,23 +207,30 @@
 	}
 
 	function playlistSelectionChanged(idPlaylist) {
-		if(idPlaylist == -1) {
+		if(idPlaylist == -1) { //select a playlist
 			$('#player-playlist').hide(200);
 			$('#player-expandPlaylist').prop('disabled', true);
-		} else if(idPlaylist == 0) {
+		} else if(idPlaylist == 0) { //create a playlist
 			$('#player-playlist').hide(200);
 			$('#player-expandPlaylist').prop('disabled', true);
 			createPlayList();
 			$('#player-playlistcombo option[value=-1]').attr('selected', 'selected'); 
-		} else {
-			$('#player-playlist').load('<?=base_url()?>index.php/playlist/playlistDetails/' + idPlaylist, function() {
-				bindPlaylistDetailsFunctions();
-				$('#player-expandPlaylist').prop('disabled', false);
-			});
+		} else { //playlist
+			loadPlaylist(idPlaylist);
 		}
 	}
 
-			function addToPlaylistDialog(idTrack) {
+	function loadPlaylist(idPlaylist) {
+		$('#player-playlist').hide('400', function() {
+			$(this).load('<?=base_url()?>index.php/playlist/playlistDetails/' + idPlaylist, function() {
+				bindPlaylistDetailsFunctions();
+				$('#player-expandPlaylist').prop('disabled', false);
+				$(this).show('400');
+			})
+		});
+	}
+
+	function addToPlaylistDialog(idTrack) {
 		$('#dialog-addToPlaylist #playlistcombo').load('<?=base_url()?>index.php/playlist/playlists/0',
 			function() {
 				if($('#dialog-addToPlaylist #playlistcombo option').length > 0) {
@@ -250,16 +263,10 @@
 				if(json.success) {
 					$('#dialog-addToPlaylist').dialog('close');
 					if(idPlaylist == $('#player-playlistcombo').val())
-						addTrackToPlayingPlaylist(idTrack);
+						loadPlaylist(idPlaylist);
 				} else {
 					showMessageDialog('D\'oh!', json.message);
 				}
 			});
-	}
-
-	function addTrackToPlayingPlaylist(idTrack) {
-		//fade in a placeholder with a spinner
-		//load its content with ajax
-		alert('Please reload your playlist for the added song to be available in the currently playing playlist.');
 	}
 </script>
