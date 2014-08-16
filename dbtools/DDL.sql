@@ -30,8 +30,6 @@ CREATE TABLE `Playlist` (
   `name` varchar(45) NOT NULL,
   `nbPlays` int(11) NOT NULL,
   `public` bit(1) NOT NULL,
-  `randomize` bit(1) NOT NULL,
-  `loop` bit(1) NOT NULL,
   PRIMARY KEY (`idPlaylist`),
   KEY `fk_Playlist_User` (`idUser`),
   CONSTRAINT `fk_Playlist_User` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -323,6 +321,8 @@ CREATE TABLE `User` (
   `rememberMeSnestopToken` varchar(50) DEFAULT NULL,
   `registrationDate` datetime NOT NULL,
   `registrationToken` varchar(50) DEFAULT NULL,
+  `randomize` bit(1) NOT NULL DEFAULT b'0',
+  `loop` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`idUser`),
   KEY `fk_User_Community` (`idCommunity`),
   CONSTRAINT `fk_User_Community` FOREIGN KEY (`idCommunity`) REFERENCES `Community` (`idCommunity`) ON DELETE SET NULL ON UPDATE CASCADE
