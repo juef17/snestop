@@ -31,7 +31,7 @@ class Playlist extends Secure_Controller {
 	}
 
 	public function playlists($mode) {
-		$data['playlists'] = $this->Playlist_model->get_Playlist();
+		$data['playlists'] = $this->Playlist_model->get_Playlists_from_User($_SESSION['loggedUser']->idUser);
 		$data['mode'] = $mode;
 		$this->load->view('includes/playlists_dropdown_content.php', $data);
 	}
