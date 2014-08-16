@@ -32,14 +32,12 @@ class Playlist_model extends CI_Model {
 		return $retval;
 	}
 
-	public function set_Playlist($idUser, $name, $nbPlays, $public, $randomize, $loop) {
+	public function set_Playlist($idUser, $name, $nbPlays, $public) {
 		$data = array(
 			'idUser' => $idUser,
 			'name' => $name,
 			'nbPlays' => $nbPlays,
-			'public' => $public,
-			'randomize' => $randomize,
-			'loop' => $loop
+			'public' => $public
 		);
 		if($this->db->insert('Playlist', $data))
 			return $this->db->insert_id();
