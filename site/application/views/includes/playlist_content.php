@@ -1,5 +1,4 @@
-<input id="playlist-playlist-public" type="checkbox" <?=$playlist->public ? 'checked' : ''?>>Public
-<ul style="max-height: 150px; overflow-y: auto;" id="playlist-tracks" class="playlist">
+<ul style="margin-top: 5px; max-height: 150px; overflow-y: auto;" id="playlist-tracks" class="playlist">
 	<?php foreach($playlistItems as $item):
 		$text = $item->gameTitleEng . ' - ' . $item->title; ?>
 		<li class="ui-state-default" title="<?=$text?>" id="<?=$item->idTrack?>">
@@ -10,6 +9,8 @@
   <?php endforeach; ?>
 </ul>
 <button class="btn btn-xs btn-danger" id="playlist-delete" onclick="confirmDeletePlaylist();">Delete playlist</button>
+<input id="playlist-playlist-public" type="checkbox" <?=$playlist->public ? 'checked' : ''?>>
+<label for="playlist-playlist-public" class="label-checkbox" style="color: #dddddd;">Public</label>
 
 <script>
 	function bindPlaylistDetailsFunctions() {

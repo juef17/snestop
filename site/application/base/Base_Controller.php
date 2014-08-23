@@ -29,6 +29,8 @@ class Base_Controller extends CI_Controller {
 			$loggedUser = $_SESSION['loggedUser'];
 			$data['loggedUserUserName'] = $loggedUser->userName;
 			$data['loggedUserIsAdmin'] = $loggedUser->isAdmin == 1;
+			$data['playerModeLoop'] = $loggedUser->loop;
+			$data['playerModeRandomize'] = $loggedUser->randomize;
 			$data['isUserLogged'] = true;
 		} else {
 			$data['loggedUserUserName'] = NULL;

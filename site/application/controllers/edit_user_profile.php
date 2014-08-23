@@ -55,6 +55,21 @@ class Edit_User_Profile extends Secure_Controller {
 		$this->load->view('template.php', $data);
 	}
 
+	//AJAX POST
+	public function setPlayerModes() {
+		$loop = $this->input->post('loop') == 'true';
+		$randomize = $this->input->post('randomize') == 'true';
+		
+		if($data['success'] = $this->User_model->setPlayerModes($_SESSION['loggedUser']->idUser, $loop, $randomize))
+		{
+			$_SESSION['loggedUser']->loop = $loop;
+			$_SESSION['loggedUser']->randomize = $randomize;
+		}
+		$data['message'] = 'An unexpected error occured, sorry :(';
+		
+		echo json_encode($data);
+	}
+
 	private function setValidationRules() {
 		$this->load->library('form_validation');
 		if($this->input->post('edit_username') != $_SESSION['loggedUser']->userName)

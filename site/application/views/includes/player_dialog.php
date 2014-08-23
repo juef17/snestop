@@ -12,15 +12,17 @@
 		<input type="hidden" id="fadeLength" />
 		<input type="hidden" id="screenshotUrl" />
 	</div>
-	<div <?php if(!$isUserLogged): ?>style="display: none"<?php endif; ?> >
+	<?php if($isUserLogged): ?>
+		<input type="checkbox" id="player-loop" <?=$playerModeLoop ? 'checked' : ''?>><label for="player-loop" class="label-checkbox"><span class="fa fa-repeat"></span></label>
+		<input type="checkbox" id="player-randomize" <?=$playerModeRandomize ? 'checked' : ''?>><label for="player-randomize" class="label-checkbox"><span class="fa fa-random"></span></label>
 		<select id="player-playlistcombo" style="display: inline-block; width: 90%">
 			<!--ajax loaded content-->
 		</select>
 		<button id="player-expandPlaylist" class="btn btn-xs"><span class="fa fa-angle-double-down"></span></button>
-	</div>
-	<div style="display: none; max-height: 200px;" id="player-playlist">
-		<!--ajax loaded content-->
-	</div>
+		<div style="display: none; max-height: 200px;" id="player-playlist">
+			<!--ajax loaded content-->
+		</div>
+	<?php endif; ?>
 </div>
 
 <!-- Dialogs. Create them only once. -->
@@ -42,6 +44,7 @@
 <script>
 	var playerDialog;
 	var isUserLogged = <?=$isUserLogged ? 'true' : 'false'?>;
+	var playingIdTrack = null;
 	
 	function startPlayer(spcUrl, length, fade, title, screenshotUrl) {
 		if(playerDialog != null && playerDialog.is(':visible')) {
@@ -51,6 +54,24 @@
 			setFileInfos(spcUrl, length, fade, title, screenshotUrl);
 			showPlayer();
 		}
+	}
+
+	function bindPlayerModesFunctions() {
+		var ajaxPost = function() {
+			$.post('<?=base_url()?>index.php/edit_user_profile/setPlayerModes',
+			{
+				loop: $('#player-loop').is(':checked'),
+				randomize: $('#player-randomize').is(':checked')
+			},
+			function(data) {
+				var json = $.parseJSON(data);
+				if(!json.success)
+					alert(json.message);
+			});
+		};
+		
+		$('#player-loop').change(ajaxPost);
+		$('#player-randomize').change(ajaxPost);
 	}
 
 	function showPlayer() {
@@ -71,29 +92,41 @@
 			close: function(event, ui) { resetFileInfos(); }
 		});
 		
-		$('#player-playlistcombo').menu();
-		$('#player-playlistcombo').change(function(){
-			playlistSelectionChanged($(this).val());
-		});
-		
-		$('#player-expandPlaylist').click(function() {
-			togglePlaylistVisibility();
-		});
-
-		if(isUserLogged)
+		if(isUserLogged) {
+			$('#player-playlistcombo').menu();
+			$('#player-playlistcombo').change(function(){
+				playlistSelectionChanged($(this).val());
+			});
+			
+			$('#player-expandPlaylist').click(function() {
+				togglePlaylistVisibility();
+			});
+			$('#player-loop').button();
+			$('#player-randomize').button();
+			bindPlayerModesFunctions();
+			
 			refreshPlaylistsList();
+		}
 	}
 
-	function togglePlaylistVisibility() {
+	function togglePlaylistVisibility(callback) {
 		if($('#player-playlist').is(':visible')) {
-			$('#player-playlist').hide(200);
-			$('#player-expandPlaylist span').removeClass('fa-angle-double-up');
-			$('#player-expandPlaylist span').addClass('fa-angle-double-down');
+			hidePlaylist(callback);
 		} else {
-			$('#player-playlist').show(200);
-			$('#player-expandPlaylist span').removeClass('fa-angle-double-down');
-			$('#player-expandPlaylist span').addClass('fa-angle-double-up');
+			showPlaylist(callback);
 		}
+	}
+
+	function hidePlaylist(callback) {
+		$('#player-playlist').hide(200, callback);
+		$('#player-expandPlaylist span').removeClass('fa-angle-double-up');
+		$('#player-expandPlaylist span').addClass('fa-angle-double-down');
+	}
+
+	function showPlaylist(callback) {
+		$('#player-playlist').show(200, callback);
+		$('#player-expandPlaylist span').removeClass('fa-angle-double-down');
+		$('#player-expandPlaylist span').addClass('fa-angle-double-up');
 	}
 	
 	function setFileInfos(spcUrl, length, fade, title, screenshotUrl) {
@@ -116,7 +149,25 @@
 	}
 	
 	function songEnded() {
-		//alert('NAMOUNNE, LA TOUNE EST FINIE!');
+		if($('#player-loop').is(':checked')) {
+			playTrack(playingIdTrack); //à remplacer par ci dessous, plus efficace.
+			//$('#spcplayer')[0].rewind();
+			//$('#spcplayer')[0].play();
+		} else {
+			var sortedIdTracks = $('#playlist-tracks').sortable('toArray');
+			var trackPosition = sortedIdTracks.indexOf(playingIdTrack);
+			if($('#player-randomize').is(':checked')) {
+				var nextIdTrack = 0;
+				do { //joue pas la meme!
+					nextIdTrack = sortedIdTracks[Math.floor(Math.random()*sortedIdTracks.length)];
+				} while(nextIdTrack == playingIdTrack)
+				
+				var nextTrackPosition = sortedIdTracks.indexOf(nextIdTrack) + 1;
+				selectSelectableElement($('#playlist-tracks'), $('#playlist-tracks li:nth-child(' + nextTrackPosition + ')'));
+			} else if(trackPosition < sortedIdTracks.length - 1) {
+				selectSelectableElement($('#playlist-tracks'), $('#playlist-tracks li:nth-child(' + (trackPosition + 2) + ')'));
+			}
+		}
 	}
 
 	function playerInitialized() {
@@ -146,12 +197,13 @@
 		$.getJSON(
 			'<?=base_url()?>index.php/playlist/getTrack/' + idTrack,
 			function(data) {
-				if(!data['success']) {
-					showMessageDialog(data['message']);
-				} else {
+				if(data['success']) {
 					var track = data['success'];
 					setTitle(track.title);
 					playFile('<?=asset_url()?>spc/' + track.spcURL, track.length, track.fade, track.screenshotURL);
+					playingIdTrack = idTrack;
+				} else {
+					showMessageDialog(data['message']);
 				}
 			}
 		);
@@ -208,10 +260,10 @@
 
 	function playlistSelectionChanged(idPlaylist) {
 		if(idPlaylist == -1) { //select a playlist
-			$('#player-playlist').hide(200);
+			hidePlaylist();
 			$('#player-expandPlaylist').prop('disabled', true);
 		} else if(idPlaylist == 0) { //create a playlist
-			$('#player-playlist').hide(200);
+			hidePlaylist();
 			$('#player-expandPlaylist').prop('disabled', true);
 			createPlayList();
 			$('#player-playlistcombo option[value=-1]').attr('selected', 'selected'); 
@@ -221,11 +273,11 @@
 	}
 
 	function loadPlaylist(idPlaylist) {
-		$('#player-playlist').hide('400', function() {
+		hidePlaylist(function() {
 			$(this).load('<?=base_url()?>index.php/playlist/playlistDetails/' + idPlaylist, function() {
 				bindPlaylistDetailsFunctions();
 				$('#player-expandPlaylist').prop('disabled', false);
-				$(this).show('400');
+				showPlaylist();
 			})
 		});
 	}

@@ -91,6 +91,10 @@ class User_model extends CI_Model {
 		}
 	}
 
+	public function setPlayerModes($id, $loop, $randomize) {
+		return $this->db->update('User', array('loop' => $loop, 'randomize' => $randomize), "idUser = $id");
+	}
+
 	public function deleteUser($id) {
 		return $this->db->delete('User', array('idUser' => $id));
 	}
