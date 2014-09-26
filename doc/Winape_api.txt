@@ -1,0 +1,16 @@
+Flash load parameters:
+	spc				str		URL du fichier à loader
+	fade			int		nb de secondes de fade du SPC
+	length			int		nb de secondes du SPC (excluant le fade)
+	showSeekBar		bool
+	showLogo		bool
+	showVolumeBar	bool
+	showPanBar		bool
+	showPosition	bool
+			
+JS --> Flash:
+	playUrl(str URL)	(quand on veut loader une nouvelle track)
+
+Flash --> JS:
+	songEnded			(envoyé automatiquement quand une track a fini de jouer)
+	playerInitialized	(envoyé quand le player est prêt à jouer)
