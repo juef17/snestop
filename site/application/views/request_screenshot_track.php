@@ -1,20 +1,20 @@
 <div class="container_12">
 	<div class="grid_12">
-		<h1>Submit a game screenshot</h1>
+		<h1>Submit a track screenshot</h1>
 	</div>
 </div>
 
-<?php if($game == null): ?>
-	<h3>Game not found!</h3>
+<?php if($track == null): ?>
+	<h3>Track not found!</h3>
 <?php else: ?>
 
-	<?= form_open(base_url() . 'index.php/request_screenshot_game/submit') ?>
+	<?= form_open(base_url() . 'index.php/request_screenshot_track/submit') ?>
 		<div class="container_12">
 			<div class="grid_12 prefix_4 suffix_4 ">
 				<div class="form-group">
-					<label>Game
-						<input type="hidden" name="idgame" value="<?=$game->idGame?>" />
-						<p><?=$game->titleEng?> <i>(<?=$game->titleJap?>)</i></p>
+					<label>Track
+						<input type="hidden" name="idtrack" value="<?=$track->idTrack?>" />
+						<p><?=$track->title?></p>
 					</label>
 				</div>
 				<div class="form-group">
@@ -28,5 +28,5 @@
 			</div>
 		</div>
 	</form>
-
+	
 <?php endif; ?>

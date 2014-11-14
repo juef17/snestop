@@ -110,7 +110,9 @@
 
 			<!-- details dialog -->
 			<div style="display: none; padding-top: 15px;" id="dialog-details_<?=$track->idTrack?>" title="<?=$game->titleEng . ' - ' . $track->title?>">
-				<div class="tv" style="background-image: url('<?=$track->screenshotURL != NULL ? $track->screenshotURL : asset_url() . 'images/en/no_track_ss.png'?>');"></div>
+				<?php if($isUserLogged && $track->screenshotURL == NULL):?><a href="<?=base_url()?>index.php/request_screenshot_track/index/<?=$track->idTrack?>"><?php endif;?>
+					<div class="tv" style="background-image: url('<?=$track->screenshotURL != NULL ? $track->screenshotURL : asset_url() . 'images/en/no_track_ss.png'?>');"></div>
+				<?php if($isUserLogged && $track->screenshotURL == NULL):?></a><?php endif;?>
 				<div style="display: inline-block; margin: 15px 0 0 15px;">
 					<h4>Ratings*</h4>
 					<table class="datatable">

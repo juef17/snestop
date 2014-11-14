@@ -7,7 +7,10 @@ class Track_model extends CI_Model {
 
 	public function get_Track($idTrack) {
 		$query = $this->db->get_where('Track', array('idTrack' => $idTrack));
-		return $this->getTrackFromRow($query->row());
+		if($trackrow = $query->row())
+			return $this->getTrackFromRow($trackrow);
+		else
+			return null;
 	}
 
 	public function get_Tracks_for_Game($idGame) {
