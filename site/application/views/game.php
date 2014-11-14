@@ -13,7 +13,9 @@
 
 	<div class="container_12">
 		<div class="grid_4">
-			<div class="tv" style="background-image: url('<?=$game->screenshotURL != NULL ? $game->screenshotURL : asset_url() . 'images/en/no_title_ss.png'?>');"></div>
+			<?php if($isUserLogged && $game->screenshotURL == NULL):?><a href="<?=base_url()?>index.php/request_screenshot_game/index/<?=$game->idGame?>"><?php endif;?>
+				<div class="tv" style="background-image: url('<?=$game->screenshotURL != NULL ? $game->screenshotURL : asset_url() . 'images/en/no_title_ss.png'?>');"></div>
+			<?php if($isUserLogged && $game->screenshotURL == NULL):?></a><?php endif;?>
 		</div>
 		<div class="grid_8">
 			<div>
