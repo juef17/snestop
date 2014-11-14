@@ -82,7 +82,7 @@
 		<?php $b = TRUE; foreach($tracks as $track): ?>
 			<div <?php if($b = !$b): ?> style="background-color: #dddddd;" <?php endif; ?> class="container_16">
 				<div class="grid_1">
-					<img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="startPlayer('<?=asset_url() . 'spc/' . str_replace('&', '%26', $track->spcURL)?>', <?=$track->length?>, <?=$track->fadeLength?>, '<?=$track->title?>', '<?=$track->screenshotURL?>');" />
+					<img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="playTrack(<?=$track->idTrack?>);" />
 				</div>
 				<div class="grid_3">
 					<p><?=$track->title?></p>

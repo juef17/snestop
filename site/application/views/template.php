@@ -9,6 +9,13 @@
 
 <body>
 	<?php if(! isset($view)) die('Bad request, view not set.'); ?>
+
+	<script>
+		//some basic global variables
+		var isUserLogged = <?=$isUserLogged ? 'true' : 'false'?>;
+		var assetUrl = '<?=asset_url()?>';
+		var baseUrl = '<?=base_url()?>';
+	</script>
 	
 	<div class="container_12">
 		<div class="grid_2">
@@ -75,7 +82,7 @@
 					</li>
 				<?php endif; ?>
 				<?php if($isUserLogged): ?>
-					<li><a href="#!" onclick="showPlayer();"><img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" /></a>
+					<li><a href="#!" onclick="playerDialog.dialog('open');"><img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" /></a>
 						
 					</li>
 				<?php endif; ?>
