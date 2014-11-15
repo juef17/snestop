@@ -6,11 +6,13 @@ class Track_Screenshot_Request_model extends CI_Model {
 	}
 
 	public function get_Track_Screenshot_request($idTrack = FALSE, $idUserRequester = FALSE) {
+		$this->db->select('*, TrackScreenshotRequest.screenshotUrl AS requestSreenshotUrl');
 		$this->db->join('User', 'TrackScreenshotRequest.idUserRequester = User.idUser', 'inner');
 		$this->db->join('Track', 'TrackScreenshotRequest.idTrack = Track.idTrack', 'inner');
+		$this->db->join('Game', 'Track.idGame = Game.idGame', 'inner');
 		if ($idTrack === FALSE && $idUserRequester === FALSE) { // on n'a rien
 			$query = $this->db->get('TrackScreenshotRequest');
-			return $query->result_array();
+			return $query->result();
 		} else { // on a les deux, yay!
 			$this->db->where('TrackScreenshotRequest.idTrack', $idTrack);
 			$this->db->where('TrackScreenshotRequest.idUserRequester', $idUserRequester);
@@ -19,28 +21,18 @@ class Track_Screenshot_Request_model extends CI_Model {
 		} // si on a juste 1 des deux, voir les méthodes ci-bas
 	}
 	
-	public function get_TrackScreenshotRequest_for_user($idUser = FALSE) {
+	public function get_TrackScreenshotRequest_for_user($idUser) {
 		$this->db->join('User', 'TrackScreenshotRequest.idUserRequester = User.idUser', 'inner');
-		if($idUser === FALSE) { //devrait pas arriver...?
-			$query = $this->db->get('TrackScreenshotRequest');
-			return $query->result_array();
-		} else {
-			$this->db->where('TrackScreenshotRequest.idUserRequester', $idUser); 
-			$query = $this->db->get('TrackScreenshotRequest');
-			return $query->result_array();
-		}
+		$this->db->where('TrackScreenshotRequest.idUserRequester', $idUser); 
+		$query = $this->db->get('TrackScreenshotRequest');
+		return $query->result();
 	}
 	
-	public function get_TrackScreenshotRequest_for_track($idTrack = FALSE) {
+	public function get_TrackScreenshotRequest_for_track($idTrack) {
 		$this->db->join('Track', 'TrackScreenshotRequest.idTrack = Track.idTrack', 'inner');
-		if($idTrack === FALSE) { //devrait pas arriver...?
-			$query = $this->db->get('TrackScreenshotRequest');
-			return $query->result_array();
-		} else {
-			$this->db->where('TrackScreenshotRequest.idTrack', $idTrack); 
-			$query = $this->db->get('TrackScreenshotRequest');
-			return $query->result_array();
-		}
+		$this->db->where('TrackScreenshotRequest.idTrack', $idTrack); 
+		$query = $this->db->get('TrackScreenshotRequest');
+		return $query->result();
 	}
 
 	public function set_Track_Screenshot_request($idTrack, $idUserRequester, $screenshotURL) {

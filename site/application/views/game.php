@@ -13,7 +13,8 @@
 
 	<div class="container_12">
 		<div class="grid_4">
-			<?php if($isUserLogged && $game->screenshotURL == NULL):?><a href="<?=base_url()?>index.php/request_screenshot_game/index/<?=$game->idGame?>"><?php endif;?>
+			<?php if($loggedUserIsAdmin && $game->screenshotURL == NULL):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$game->idGame?>); return false;"><?php endif;?>
+			<?php else if($isUserLogged && $game->screenshotURL == NULL):?><a href="<?=base_url()?>index.php/request_screenshot_game/index/<?=$game->idGame?>"><?php endif;?>
 				<div class="tv" style="background-image: url('<?=$game->screenshotURL != NULL ? $game->screenshotURL : asset_url() . 'images/en/no_title_ss.png'?>');"></div>
 			<?php if($isUserLogged && $game->screenshotURL == NULL):?></a><?php endif;?>
 		</div>
@@ -157,6 +158,13 @@
 	<?php endif; ?>
 <?php endif; ?>
 
+<div id="dialog-upload">
+	<form id="upload-form" action="<?=base_url()?>index.php/screenshot_request_dashboard/uploadGameScreenshot" enctype="multipart/form-data" method="post">
+		<input type="hidden" name="idgame" />
+		<input type="file" name="screenshot" />
+	</form>
+</div>
+
 <script>
 	function detailsDialog(idTrack) {
 		$('#dialog-details_' + idTrack).dialog({
@@ -173,4 +181,24 @@
 			}
 		});
 	}
+
+	<?php if($loggedUserIsAdmin):	?> //prevent hacking
+		function showUploadScreenshotDialog(idGame) {
+
+			$('#dialog-details_' + idTrack).dialog({
+				modal: true,
+				resizable: false,
+				show: { effect: 'puff', duration: 200 },
+				hide: { effect: 'puff', duration: 200 },
+				buttons: {
+					Ok: function() {
+						$('#upload-form').submit();
+					},
+					Cancel: function() {
+						$(this).dialog('close');
+					}
+				}
+			});
+		}
+	<?php endif; ?>
 </script>
