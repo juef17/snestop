@@ -71,11 +71,11 @@
 		EchoCount($mysqli, 'Game');
 	}
 	
-	function InsertGame($mysqli, $titleJap, $titleEng, $screenshotURL, $rsnFileURL)
+	function InsertGame($mysqli, $titleJap, $titleEng, $isScreenshotSet, $rsnFileURL)
 	{
 		EchoQuery($mysqli,"
-			INSERT INTO Game(titleJap, titleEng, screenshotURL, rsnFileURL)
-			VALUES('" . addslashes($titleJap) . "', '" . addslashes($titleEng) . "', '" . addslashes($screenshotURL) . "', 'rsn/" . addslashes($titleEng) . ".rsn')
+			INSERT INTO Game(titleJap, titleEng, isScreenshotSet, rsnFileURL)
+			VALUES('" . addslashes($titleJap) . "', '" . addslashes($titleEng) . "', $isScreenshotSet, 'rsn/" . addslashes($titleEng) . ".rsn')
 		");
 	}
 	
@@ -86,11 +86,11 @@
 		EchoCount($mysqli, 'Track');
 	}
 	
-	function InsertTrack($mysqli, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $spcURL, $spcEncodedURL, $gameTitle)
+	function InsertTrack($mysqli, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isScreenshotSet, $isJingle, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $spcURL, $spcEncodedURL, $gameTitle)
 	{
 		EchoQuery($mysqli, "
-			INSERT INTO Track(idGame, title, length, fadeLength, composer, turnedOffByAdmin, screenshotURL, isJingle, glicko2RD, glicko2rating, glicko2sigma, eloRating, spcURL, spcEncodedURL)
-			VALUES((SELECT idGame FROM Game WHERE titleEng = '" . addslashes($gameTitle) . "'), '" . addslashes($title) . "', $length, $fadeLength, '" . addslashes($composer) . "', $turnedOffByAdmin, '" . addslashes($screenshotURL) . "', $isJingle, $glicko2RD, $glicko2rating, $glicko2sigma , $eloRating, '" . addslashes($spcURL) . "', '$spcEncodedURL')
+			INSERT INTO Track(idGame, title, length, fadeLength, composer, turnedOffByAdmin, isScreenshotSet, isJingle, glicko2RD, glicko2rating, glicko2sigma, eloRating, spcURL, spcEncodedURL)
+			VALUES((SELECT idGame FROM Game WHERE titleEng = '" . addslashes($gameTitle) . "'), '" . addslashes($title) . "', $length, $fadeLength, '" . addslashes($composer) . "', $turnedOffByAdmin, $isScreenshotSet, $isJingle, $glicko2RD, $glicko2rating, $glicko2sigma , $eloRating, '" . addslashes($spcURL) . "', '$spcEncodedURL')
 		");
 	}
 
