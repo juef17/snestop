@@ -34,9 +34,12 @@
 				</label>
 			</div>
 			<div class="form-group">
-				<label>Screenshot URL
-					<span class="errors"><?=form_error('screenshotURL')?></span>
-					<input type="text" name="screenshotURL" maxlength="255" class="form-control" placeholder="http://" value="<?=set_value('screenshotURL', $track->screenshotURL)?>">
+				<label>Screenshot
+					<?php if($track->isScreenshotSet): ?>
+						<p><a href="<?=asset_url() . "images/screenshots/track/{$track->idTrack}.png"?>">Yes</a></p>
+					<?php else: ?>
+						<p>No</p>
+					<?php endif; ?>
 				</label>
 			</div>
 			<div class="form-group">

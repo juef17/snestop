@@ -32,7 +32,7 @@ class Track_model extends CI_Model {
 			'fadeLength' => 0,
 			'composer' => '',
 			'turnedOffByAdmin' => FALSE,
-			'screenshotURL' => '',
+			'isScreenshotSet' => 0,
 			'isJingle' => FALSE,
 			'glicko2RD' => 350,
 			'glicko2rating' => 1500,
@@ -49,7 +49,7 @@ class Track_model extends CI_Model {
 		return $object;
 	}
 
-	public function set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400) {
+	public function set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400) {
 		$data = array(
 			'idGame' => $idGame,
 			'title' => $title,
@@ -57,7 +57,6 @@ class Track_model extends CI_Model {
 			'fadeLength' => $fadeLength,
 			'composer' => $composer,
 			'turnedOffByAdmin' => $turnedOffByAdmin,
-			'screenshotURL' => $screenshotURL,
 			'isJingle' => $isJingle,
 			'glicko2RD' => $glicko2RD,
 			'glicko2rating' => $glicko2rating,
@@ -84,7 +83,7 @@ class Track_model extends CI_Model {
 		return $this->db->update('Track', array('turnedOffByAdmin' => TRUE));
 	}
 	
-	public function update_Track($idTrack, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400) {
+	public function update_Track($idTrack, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400) {
 		$this->db->where('Track.idTrack', $idTrack);
 		$data = array(
 			'title' => $title,
@@ -92,7 +91,6 @@ class Track_model extends CI_Model {
 			'fadeLength' => $fadeLength,
 			'composer' => $composer,
 			'turnedOffByAdmin' => $turnedOffByAdmin,
-			'screenshotURL' => $screenshotURL,
 			'isJingle' => $isJingle,
 			'spcURL' => $spcURL,
 			'glicko2RD' => $glicko2RD,
@@ -152,6 +150,7 @@ class Track_model extends CI_Model {
 		$row->turnedOffByAdmin = ord($row->turnedOffByAdmin) == 1 || $row->turnedOffByAdmin == 1;
 		$row->isJingle = ord($row->isJingle) == 1 || $row->isJingle == 1;
 		$row->eloReached2400 = ord($row->eloReached2400) == 1 || $row->eloReached2400 == 1;
+		$row->isScreenshotSet = ord($row->isScreenshotSet) == 1 || $row->isScreenshotSet == 1;
 		return $row;
 	}
 	

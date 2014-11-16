@@ -10,12 +10,19 @@ class Playlist_Item_model extends CI_Model {
 		$this->db->join('Playlist', 'PlaylistItem.idPlaylist = Playlist.idPlaylist', 'inner');
 		if ($idPlaylist === FALSE && $idTrack === FALSE) { // on n'a rien
 			$query = $this->db->get('PlaylistItem');
-			return $query->result_array();
+			$retval = array();
+			foreach($query->result() as $row) {
+				$retval[] = $this->getTrackFromRow($row);
+			}
+			return $retval;
 		} else { // on a les deux, yay!
 			$this->db->where('PlaylistItem.idPlaylist', $idPlaylist);
 			$this->db->where('PlaylistItem.idTrack', $idTrack);
 			$query = $this->db->get('PlaylistItem');
-			return $query->row();
+			if($row = $query->row())
+				return $this->getTrackFromRow($row);
+			else
+				return null;
 		} // si on a juste 1 des deux, voir les méthodes ci-bas
 	}
 	
@@ -23,17 +30,25 @@ class Playlist_Item_model extends CI_Model {
 		$this->db->join('Track', 'PlaylistItem.idTrack = Track.idTrack', 'inner');
 		$this->db->where('PlaylistItem.idTrack', $idTrack); 
 		$query = $this->db->get('PlaylistItem');
-		return $query->result_array();
+		$retval = array();
+		foreach($query->result() as $row) {
+			$retval[] = $this->getTrackFromRow($row);
+		}
+		return $retval;
 	}
 	
 	public function get_PlaylistItems_for_Playlist($idPlaylist) {
-		$this->db->select('Track.idTrack, Track.title, Track.length, Track.screenshotURL, Game.titleEng AS gameTitleEng, PlaylistItem.position as position');
+		$this->db->select('Track.idTrack, Track.title, Track.length, Track.isScreenshotSet, Game.titleEng AS gameTitleEng, PlaylistItem.position as position');
 		$this->db->join('Track', 'PlaylistItem.idTrack = Track.idTrack', 'INNER');
 		$this->db->join('Game', 'Track.idGame = Game.idGame', 'INNER');
 		$this->db->where('PlaylistItem.idPlaylist', $idPlaylist);
 		$this->db->order_by('position', 'asc');
 		$query = $this->db->get('PlaylistItem');
-		return $query->result();  //no bool in result so no need for conversion
+		$retval = array();
+		foreach($query->result() as $row) {
+			$retval[] = $this->getTrackFromRow($row);
+		}
+		return $retval;
 	}
 
 	public function set_Playlist_item($idPlaylist, $idTrack) {
@@ -53,6 +68,11 @@ class Playlist_Item_model extends CI_Model {
 		);
 
 		return $this->db->insert('PlaylistItem', $data);
+	}
+
+	private function getTrackFromRow($row) {
+		$row->isScreenshotSet = ord($row->isScreenshotSet) == 1 || $row->isScreenshotSet == 1;
+		return $row;
 	}
 
 	public function updatePosition($idPlaylist, $idTrack, $newPosition) {

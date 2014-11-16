@@ -52,9 +52,10 @@ function constructPlayerDialog() {
 	}
 }
 
-function setScreenshot(screenshotUrl) {
-	if(screenshotUrl == null || screenshotUrl == '')
-		screenshotUrl = assetUrl + 'images/en/no_track_ss.png';
+function setScreenshot(track) {
+	var screenshotUrl = track.isScreenshotSet
+		? assetUrl + 'images/screenshots/track/' + track.idTrack + '.png'
+		: assetUrl + 'images/en/no_track_ss.png';
 	
 	$('#playerScreenshot').css('background-image', 'url(' + screenshotUrl + ')');
 }
@@ -68,7 +69,7 @@ function playTrack(idTrack) {
 				if(data['success']) {
 					var track = data['success'];
 					var url = assetUrl + 'spc/' + track.spcURL + '?' + track.length + '?' + track.fade;
-					setScreenshot(track.screenshotURL);
+					setScreenshot(track);
 					playerDialog.dialog('option', 'title', track.title);
 					$('#spcplayer')[0].playUrl(url);
 					playingIdTrack = idTrack;

@@ -48,7 +48,7 @@
 		<span class="errors"><?=form_error('game_titlejap')?>&nbsp;</span>
 	</div>
 	<div class="grid_4">
-		<span class="errors"><?=form_error('game_screenshot')?>&nbsp;</span>
+		<span class="errors">&nbsp;</span>
 	</div>
 	<div class="grid_4">
 		<span class="errors"><?=form_error('game_rsn')?>&nbsp;</span>
@@ -64,7 +64,7 @@
 			<input type="text" name="game_titlejap" placeholder="Japanese title" maxlength="45" class="form-control" value="<?=set_value('game_titlejap')?>"/>
 		</div>
 		<div class="grid_4 columnheader">
-			<input type="text" name="game_screenshot" placeholder="http://" maxlength="255" class="form-control" value="<?=set_value('game_screenshot')?>"/>
+			&nbsp;
 		</div>
 		<div class="grid_4 columnheader">
 			<input type="text" name="game_rsn" placeholder="http://" maxlength="255" class="form-control" value="<?=set_value('game_rsn')?>"/>
@@ -92,7 +92,7 @@
 			<span class="errors"><?=form_error("game_{$game->idGame}_titlejap")?>&nbsp;</span>
 		</div>
 		<div class="grid_4">
-			<span class="errors"><?=form_error("game_{$game->idGame}_screenshot")?>&nbsp;</span>
+			<span class="errors">&nbsp;</span>
 		</div>
 		<div class="grid_4">
 			<span class="errors"><?=form_error("game_{$game->idGame}_rsn")?>&nbsp;</span>
@@ -108,7 +108,11 @@
 				<input type="text" name="game_<?=$game->idGame?>_titlejap" maxlength="45" class="form-control" value="<?=set_value("game_{$game->idGame}_titlejap", $game->titleJap)?>" />
 			</div>
 			<div class="grid_4">
-				<input type="text" name="game_<?=$game->idGame?>_screenshot" maxlength="255" class="form-control" value="<?=set_value("game_{$game->idGame}_screenshot", $game->screenshotURL)?>" />
+				<?php if($game->isScreenshotSet): ?>
+					<a href="<?=asset_url()?>images/screenshots/game/<?=$game->idGame?>.png"></a>
+				<?php else: ?>
+					No
+				<?php endif; ?>
 			</div>
 			<div class="grid_4">
 				<input type="text" name="game_<?=$game->idGame?>_rsn" maxlength="255" class="form-control" value="<?=set_value("game_{$game->idGame}_rsn", $game->rsnFileURL)?>" />

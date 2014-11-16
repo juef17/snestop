@@ -189,7 +189,7 @@ CREATE TABLE `Track` (
   `fadeLength` int(11) NOT NULL,
   `composer` varchar(45) NOT NULL,
   `turnedOffByAdmin` bit(1) NOT NULL,
-  `screenshotURL` varchar(255) NULL,
+  `isScreenshotSet` bit(1) NOT NULL DEFAULT b'0',
   `isJingle` bit(1) NOT NULL,
   `glicko2RD` float NOT NULL,
   `glicko2rating` float NOT NULL,
@@ -215,7 +215,7 @@ CREATE TABLE `Game` (
   `idGame` int(11) NOT NULL AUTO_INCREMENT,
   `titleJap` varchar(255) NOT NULL,
   `titleEng` varchar(255) NOT NULL,
-  `screenshotURL` varchar(255) NULL,
+  `isScreenshotSet` bit(1) NOT NULL DEFAULT b'0',
   `rsnFileURL` varchar(255) NOT NULL,
   PRIMARY KEY (`idGame`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

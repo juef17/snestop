@@ -96,7 +96,7 @@
 		<label>Composer</label>
 		<p><?=$track->composer?></p>
 		<label>Screenshot</label>
-		<p><a target="_blank" href="<?=$track->screenshotURL?>"><?=$track->screenshotURL?></a></p>
+		<p><a target="_blank" href="<?=$track->isScreenshotSet ? asset_url() . "images/screenshots/track/{$track->idTrack}.png" : '#!'?>"><?=$track->isScreenshotSet ? 'Yes' : 'No' ?></a></p>
 		<label>SPC</label>
 		<p><?=$track->spcURL?></p>
 		<label>Encoded SPC</label>

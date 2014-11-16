@@ -24,8 +24,6 @@ class Edit_Track extends Admin_Controller {
 	}
 
 	public function submit() {
-		//$this->setEditUserData($data);
-
 		$id = intval($this->input->post('id'));
 		$idGame = $this->input->post('idGame');
 		$this->setValidationRules();
@@ -35,7 +33,6 @@ class Edit_Track extends Admin_Controller {
 			$fadeLength = $this->input->post('fadeLength');
 			$composer = $this->input->post('composer');
 			$turnedOffByAdmin = ! $this->input->post('active');
-			$screenshotURL = $this->input->post('screenshotURL');
 			$isJingle = $this->input->post('isJingle');
 			$glicko2RD = $this->input->post('glicko2RD');
 			$glicko2rating = $this->input->post('glicko2rating');
@@ -46,9 +43,9 @@ class Edit_Track extends Admin_Controller {
 			$eloReached2400 = $this->input->post('eloReached2400');
 			
 			if($id == 0)
-				$this->Track_model->set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400);
+				$this->Track_model->set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400);
 			else
-				$this->Track_model->update_Track($id, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $screenshotURL, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400);
+				$this->Track_model->update_Track($id, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400);
 				
 			redirect("/tracks_dashboard/index/{$idGame}");
 		} else {
@@ -70,7 +67,6 @@ class Edit_Track extends Admin_Controller {
 		$this->form_validation->set_rules('length', 'Length', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('fadeLength', 'Fade length', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('composer', 'Composer', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('screenshotURL', 'Screenshot URL', 'trim|xss_clean');
 		$this->form_validation->set_rules('spcURL', 'SPC URL', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('spcEncodedURL', 'SPC encoded URL', 'trim|required|xss_clean');
 	}

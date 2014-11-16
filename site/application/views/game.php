@@ -13,10 +13,10 @@
 
 	<div class="container_12">
 		<div class="grid_4">
-			<?php if($loggedUserIsAdmin && $game->screenshotURL == NULL):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$game->idGame?>); return false;"><?php endif;?>
-			<?php else if($isUserLogged && $game->screenshotURL == NULL):?><a href="<?=base_url()?>index.php/request_screenshot_game/index/<?=$game->idGame?>"><?php endif;?>
-				<div class="tv" style="background-image: url('<?=$game->screenshotURL != NULL ? $game->screenshotURL : asset_url() . 'images/en/no_title_ss.png'?>');"></div>
-			<?php if($isUserLogged && $game->screenshotURL == NULL):?></a><?php endif;?>
+			<?php if($loggedUserIsAdmin && !$game->isScreenshotSet):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$game->idGame?>); return false;">
+			<?php elseif($isUserLogged && !$game->isScreenshotSet):?><a href="<?=base_url()?>index.php/request_screenshot_game/index/<?=$game->idGame?>"><?php endif;?>
+			<div class="tv" style="background-image: url('<?=$game->isScreenshotSet ? asset_url() . "images/screenshots/game/{$game->idGame}.png" : asset_url() . 'images/en/no_title_ss.png'?>');"></div>
+			<?php if($isUserLogged && !$game->isScreenshotSet):?></a><?php endif;?>
 		</div>
 		<div class="grid_8">
 			<div>
@@ -111,9 +111,9 @@
 
 			<!-- details dialog -->
 			<div style="display: none; padding-top: 15px;" id="dialog-details_<?=$track->idTrack?>" title="<?=$game->titleEng . ' - ' . $track->title?>">
-				<?php if($isUserLogged && $track->screenshotURL == NULL):?><a href="<?=base_url()?>index.php/request_screenshot_track/index/<?=$track->idTrack?>"><?php endif;?>
-					<div class="tv" style="background-image: url('<?=$track->screenshotURL != NULL ? $track->screenshotURL : asset_url() . 'images/en/no_track_ss.png'?>');"></div>
-				<?php if($isUserLogged && $track->screenshotURL == NULL):?></a><?php endif;?>
+				<?php if($isUserLogged && !$track->isScreenshotSet):?><a href="<?=base_url()?>index.php/request_screenshot_track/index/<?=$track->idTrack?>"><?php endif;?>
+					<div class="tv" style="background-image: url('<?=$track->isScreenshotSet ? asset_url() . "images/screenshots/track/{$track->idTrack}.png" : asset_url() . 'images/en/no_track_ss.png'?>');"></div>
+				<?php if($isUserLogged && !$track->isScreenshotSet):?></a><?php endif;?>
 				<div style="display: inline-block; margin: 15px 0 0 15px;">
 					<h4>Ratings*</h4>
 					<table class="datatable">

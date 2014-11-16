@@ -63,7 +63,6 @@ class Games_Dashboard extends Admin_Controller {
 		$this->form_validation->set_error_delimiters('', '');
 		$this->form_validation->set_rules('game_titleeng', 'English title', 'trim|required|xss_clean|is_unique[Game.titleEng]');
 		$this->form_validation->set_rules('game_titlejap', 'Japanese title', 'trim|xss_clean|is_unique[Game.titleJap]');
-		$this->form_validation->set_rules('game_screenshot', 'Screenshot', 'trim|xss_clean');
 		$this->form_validation->set_rules('game_rsn', 'RSN File', 'trim|required|xss_clean');
 	}
 
@@ -78,23 +77,20 @@ class Games_Dashboard extends Admin_Controller {
 		if($this->input->post("game_{$id}_titlejap") != $game->titleJap)
 			$this->form_validation->set_rules("game_{$id}_titlejap", 'Japanese title', 'trim|xss_clean|is_unique[Game.titleJap]');
 
-		$this->form_validation->set_rules("game_{$id}_screenshot", 'Screenshot', 'trim|xss_clean');
 		$this->form_validation->set_rules("game_{$id}_rsn", 'RSN File', 'trim|required|xss_clean');
 	}
 
 	private function saveGame() {
 		$titleEng = $this->input->post('game_titleeng', TRUE);
 		$titleJap = $this->input->post('game_titlejap', TRUE);
-		$screenshot = $this->input->post('game_screenshot', TRUE);
 		$rsn = $this->input->post('game_rsn', TRUE);
-		$this->Game_model->set_Game($titleJap, $titleEng, $screenshot, $rsn);
+		$this->Game_model->set_Game($titleJap, $titleEng, $rsn);
 	}
 
 	private function updateGame($id) {
 		$titleeng = $this->input->post("game_{$id}_titleeng", TRUE);
 		$titlejap = $this->input->post("game_{$id}_titlejap", TRUE);
-		$screenshot = $this->input->post("game_{$id}_screenshot", TRUE);
 		$rsn = $this->input->post("game_{$id}_rsn", TRUE);
-		$this->Game_model->update_Game($id, $titlejap, $titleeng, $screenshot, $rsn);
+		$this->Game_model->update_Game($id, $titlejap, $titleeng, $rsn);
 	}
 }
