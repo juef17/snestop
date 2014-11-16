@@ -76,7 +76,7 @@ class Edit_User_Profile extends Secure_Controller {
 			$this->form_validation->set_rules('edit_username', 'Username', 'trim|required|xss_clean|alpha_dash|is_unique[User.userName]');
 
 		if($this->input->post('edit_password') != '' || $this->input->post('edit_password_verif') != '')
-			$this->form_validation->set_rules('edit_password', 'Password', 'trim|xss_clean|alpha_dash|callback_verifyPassword');
+			$this->form_validation->set_rules('edit_password', 'Password', 'trim|xss_clean|alpha_dash|matches[edit_password_verif]');
 
 		if($this->input->post('edit_email') != $_SESSION['loggedUser']->email)
 			$this->form_validation->set_rules('edit_email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[User.email]');
@@ -84,11 +84,6 @@ class Edit_User_Profile extends Secure_Controller {
 		$this->form_validation->set_rules('edit_community', 'Community', 'trim|required|xss_clean|callback_validateCommunity');
 		$this->form_validation->set_rules('edit_community_token', 'Community token', 'trim|xss_clean');
 		//community?
-	}
-
-	public function verifyPassword($password) {
-		$this->form_validation->set_message('verifyPassword', 'Passwords fields don\'t match');
-		return $password == $this->input->post('edit_password_verif');
 	}
 
 	public function validateCommunity($idCommunity) {

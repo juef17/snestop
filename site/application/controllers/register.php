@@ -58,18 +58,19 @@ class Register extends Public_Only_Controller {
 	private function setValidationRules() {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('reg_username', 'Username', 'trim|required|xss_clean|alpha_dash|is_unique[User.userName]');
-		$this->form_validation->set_rules('reg_password', 'Password', 'trim|required|xss_clean|alpha_dash|callback_verifyPassword');
+		$this->form_validation->set_rules('reg_password', 'Password', 'trim|required|xss_clean|alpha_dash|matches[reg_password_verif]');
 		$this->form_validation->set_rules('reg_email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[User.email]');
 		$this->form_validation->set_rules('reg_language', 'Language', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('reg_captcha', 'Captcha', 'trim|required|xss_clean|callback_validateCaptcha');
+		$this->form_validation->set_rules('reg_calc', 'Math question', 'trim|required|xss_clean|integer|callback_validateMathQuestion');
 		$this->form_validation->set_rules('reg_community', 'Community', 'trim|required|xss_clean|callback_validateCommunity');
 		$this->form_validation->set_rules('reg_community_token', 'Community token', 'trim|xss_clean');
 		//community?
 	}
 
-	public function verifyPassword($password) {
-		$this->form_validation->set_message('verifyPassword', 'Passwords fields don\'t match');
-		return $password == $this->input->post('reg_password_verif');
+	public function validateMathQuestion($calc) {
+		$this->form_validation->set_message('validateMathQuestion', 'Wrong answer to the math question.');
+		return intval($calc) === 3600;
 	}
 
 	private function sendConfirmationEmail($username, $email, $token) {
