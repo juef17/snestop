@@ -10,6 +10,10 @@ Flash load parameters:
 			
 JS --> Flash:
 	playUrl(str URL)	(quand on veut loader une nouvelle track)
+	play()				- Le lecteur joue déjà: fait rien
+						- Le lecteur est sur pause: dépause.
+	rewind()			- le lecteur joue déjà: rembobiner et continuer à jouer
+						- le lecteur est sur pause: rembobiner seulement
 
 Flash --> JS:
 	songEnded			(envoyé automatiquement quand une track a fini de jouer)
