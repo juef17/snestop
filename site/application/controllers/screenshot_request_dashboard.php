@@ -8,6 +8,11 @@ class Screenshot_Request_Dashboard extends Admin_Controller {
 		$this->load->model('Game_Screenshot_Request_model','',TRUE);
 		$this->load->model('Game_model','',TRUE);
 		$this->load->model('Track_model','',TRUE);
+
+		$config['upload_path'] = assets_dir() . 'upload';
+		$config['allowed_types'] = 'gif|jpg|png|bmp';
+		$config['overwrite']  = true;
+		$this->load->library('upload', $config);
 	}
 
 	public function index()
@@ -33,37 +38,60 @@ class Screenshot_Request_Dashboard extends Admin_Controller {
 		redirect('/screenshot_request_dashboard');
 	}
 
-	public function uploadGameScreenshot() {
-		if(($idGame = $this->input->post('idGame', TRUE)) && ($game = $this->Game_model->get_Game($idGame))) {
-			//if($game->isScreenshotSet) {
-				//delete old screenshot
-			//}
+	//Ajax POST
+	public function uploadScreenshot() {
+		$id = $this->input->post('id', TRUE);
+		$type = intval($this->input->post('type', TRUE));
+		$target = $type === 0
+			? $this->Game_model->get_Game($id)
+			: $this->Track_model->get_Track($id);
 
-			//convert uploaded file
-			//rename and move it proper.
-			redirect("/game/$idGame");
-		} else {
-			$data = $this->getUserViewData();
-			$data['view'] = 'message.php';
-			$data['message'] = 'Game not found!';
-			$this->load->view('template.php', $data);
+		if(!$target) {
+			echo json_encode(array('success' => false, 'message' => "Game or track not found! ({$id})"));
+			return;
 		}
+		
+		if(!$this->upload->do_upload()) {
+			echo json_encode(array('success' => false, 'message' => $this->upload->display_errors('', '')));
+			return;
+		}
+		
+		$inputFile = $this->upload->data()['full_path'];
+		$folder = $type === 0 ? 'game' : 'track';
+		$outputFile = assets_dir() . "images/screenshots/{$folder}/{$id}.png";
+		$conversionResult = imagepng(imagecreatefromstring(file_get_contents($inputFile)), $outputFile);
+		unlink($inputFile);
+		
+		if(!$conversionResult) {
+			echo json_encode(array('success' => false, 'message' => 'Image conversion to PNG failed.'));
+			return;
+		}
+
+		if($type === 0)
+			$this->Game_model->setGameIsScreenshotSetFlag($id, true);
+		else
+			$this->Track_model->setTrackIsScreenshotSetFlag($id, true);
+		
+		echo json_encode(array('success' => true, 'message' => ''));
 	}
 
-	public function uploadTrackScreenshot() {
-		if(($idTrack = $this->input->post('idTrack', TRUE)) && ($track = $this->Track_model->get_Track($idTrack))) {
-			//if($game->isScreenshotSet) {
-				//delete old screenshot
-			//}
-
-			//convert uploaded file
-			//rename and move it proper.
-			redirect("/game/$track->idGame");
-		} else {
-			$data = $this->getUserViewData();
-			$data['view'] = 'message.php';
-			$data['message'] = 'Track not found!';
-			$this->load->view('template.php', $data);
+	public function unsetScreenshot() {
+		$id = $this->input->post('id', TRUE);
+		$type = intval($this->input->post('type', TRUE));
+		$result = $type === 0
+			? $this->Game_model->setGameIsScreenshotSetFlag($id, false)
+			: $this->Track_model->setTrackIsScreenshotSetFlag($id, false);
+		
+		if(!$result) {
+			echo json_encode(array('success' => false, 'message' => 'Failed.'));
+			return;
 		}
+
+		$folder = $type === 0 ? 'game' : 'track';
+		$file = assets_dir() . "images/screenshots/{$folder}/{$id}.png";
+		if(!@unlink($file))
+			echo json_encode(array('success' => false, 'message' => 'File deletion failed but screenshot has still been unset.' . $folder));
+		else
+			echo json_encode(array('success' => true, 'message' => ''));
 	}
 }

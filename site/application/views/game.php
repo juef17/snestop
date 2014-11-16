@@ -13,10 +13,12 @@
 
 	<div class="container_12">
 		<div class="grid_4">
-			<?php if($loggedUserIsAdmin && !$game->isScreenshotSet):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$game->idGame?>); return false;">
+			<?php if($loggedUserIsAdmin):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$game->idGame?>, 0); return false;">
 			<?php elseif($isUserLogged && !$game->isScreenshotSet):?><a href="<?=base_url()?>index.php/request_screenshot_game/index/<?=$game->idGame?>"><?php endif;?>
-			<div class="tv" style="background-image: url('<?=$game->isScreenshotSet ? asset_url() . "images/screenshots/game/{$game->idGame}.png" : asset_url() . 'images/en/no_title_ss.png'?>');"></div>
-			<?php if($isUserLogged && !$game->isScreenshotSet):?></a><?php endif;?>
+			<div class="tv" style="position: relative; background-image: url('<?=$game->isScreenshotSet ? asset_url() . "images/screenshots/game/{$game->idGame}.png" : asset_url() . 'images/en/no_title_ss.png'?>');">
+				<?php if($loggedUserIsAdmin && $game->isScreenshotSet):?><img id="unset-screenshot" style="position: absolute; top: 24px; right: 24px; width: 24px; height: 24px;" src="<?=asset_url()?>images/delete.png" onclick="unsetScreenshot(<?=$game->idGame?>, 0);"/><?php endif;?>
+			</div>
+			<?php if($isUserLogged && !$game->isScreenshotSet || $loggedUserIsAdmin):?></a><?php endif;?>
 		</div>
 		<div class="grid_8">
 			<div>
@@ -111,9 +113,12 @@
 
 			<!-- details dialog -->
 			<div style="display: none; padding-top: 15px;" id="dialog-details_<?=$track->idTrack?>" title="<?=$game->titleEng . ' - ' . $track->title?>">
-				<?php if($isUserLogged && !$track->isScreenshotSet):?><a href="<?=base_url()?>index.php/request_screenshot_track/index/<?=$track->idTrack?>"><?php endif;?>
-					<div class="tv" style="background-image: url('<?=$track->isScreenshotSet ? asset_url() . "images/screenshots/track/{$track->idTrack}.png" : asset_url() . 'images/en/no_track_ss.png'?>');"></div>
-				<?php if($isUserLogged && !$track->isScreenshotSet):?></a><?php endif;?>
+				<?php if($loggedUserIsAdmin):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$track->idTrack?>, 1); return false;">
+				<?php elseif($isUserLogged && !$track->isScreenshotSet):?><a href="<?=base_url()?>index.php/request_screenshot_track/index/<?=$track->idTrack?>"><?php endif;?>
+					<div class="tv" style="position: relative; background-image: url('<?=$track->isScreenshotSet ? asset_url() . "images/screenshots/track/{$track->idTrack}.png" : asset_url() . 'images/en/no_track_ss.png'?>');">
+						<?php if($loggedUserIsAdmin && $track->isScreenshotSet):?><img id="unset-screenshot" style="position: absolute; top: 24px; right: 24px; width: 24px; height: 24px;" src="<?=asset_url()?>images/delete.png" onclick="unsetScreenshot(<?=$track->idTrack?>, 1);"/><?php endif;?>
+					</div>
+				<?php if($isUserLogged && !$track->isScreenshotSet || $loggedUserIsAdmin):?></a><?php endif;?>
 				<div style="display: inline-block; margin: 15px 0 0 15px;">
 					<h4>Ratings*</h4>
 					<table class="datatable">
@@ -155,50 +160,88 @@
 				<a href="#">Write a review</a>
 			</div>
 		<?php endforeach; ?>
-	<?php endif; ?>
-<?php endif; ?>
 
-<div id="dialog-upload">
-	<form id="upload-form" action="<?=base_url()?>index.php/screenshot_request_dashboard/uploadGameScreenshot" enctype="multipart/form-data" method="post">
-		<input type="hidden" name="idgame" />
-		<input type="file" name="screenshot" />
-	</form>
-</div>
-
-<script>
-	function detailsDialog(idTrack) {
-		$('#dialog-details_' + idTrack).dialog({
-			height: 500,
-			width: 700,
-			modal: true,
-			resizable: false,
-			show: { effect: 'puff', duration: 200 },
-			hide: { effect: 'puff', duration: 200 },
-			buttons: {
-				Ok: function() {
-					$(this).dialog('close');
-				}
+		<script>
+			function detailsDialog(idTrack) {
+				$('#dialog-details_' + idTrack).dialog({
+					height: 500,
+					width: 700,
+					modal: true,
+					resizable: false,
+					show: { effect: 'puff', duration: 200 },
+					hide: { effect: 'puff', duration: 200 },
+					buttons: {
+						Ok: function() {
+							$(this).dialog('close');
+						}
+					}
+				});
+				$('#dialog-details_' + idTrack + ' #unset-screenshot').click(function(event) { event.stopPropagation(); });
 			}
-		});
-	}
+		</script>
 
-	<?php if($loggedUserIsAdmin):	?> //prevent hacking
-		function showUploadScreenshotDialog(idGame) {
+		<?php if($loggedUserIsAdmin): ?>
+			<div style="display: none;" id="dialog-upload">
+				<?= form_open_multipart(base_url() . 'index.php/screenshot_request_dashboard/uploadScreenshot') ?>
+					<input type="hidden" id="id" name="id" />
+					<input type="hidden" id="type" name="type" />
+					<input type="file" id="file" name="userfile" />
+					<div id="progress"></div>
+					<div class="errors"></div>
+				</form>
+			</div>
 
-			$('#dialog-details_' + idTrack).dialog({
-				modal: true,
-				resizable: false,
-				show: { effect: 'puff', duration: 200 },
-				hide: { effect: 'puff', duration: 200 },
-				buttons: {
-					Ok: function() {
-						$('#upload-form').submit();
-					},
-					Cancel: function() {
-						$(this).dialog('close');
+			<script src="<?=asset_url()?>js/jquery.fileupload.js"></script>
+			<script>
+				$(function() {
+					$('#unset-screenshot').click(function(event) { event.stopPropagation(); });
+				});
+				
+				function showUploadScreenshotDialog(id, type) {
+					$('#dialog-upload #id').val(id);
+					$('#dialog-upload #type').val(type);
+					$('#dialog-upload #progress').progressbar({ value: 0 });
+					$('#dialog-upload #file').fileupload({
+						dataType: 'json',
+						progressall: function (e, data) {
+							$('#dialog-upload .errors').text('');
+							var progress = parseInt(data.loaded / data.total * 100, 10);
+							$('#dialog-upload #progress').progressbar('option', { value: progress < 100 ? progress : false });
+						},
+						done: function (e, data) {
+							if(data.result.success) {
+								location.reload();
+							} else {
+								$('#dialog-upload .errors').text(data.result.message);
+							}
+						}
+					});
+					
+					$('#dialog-upload').dialog({
+						width: 400,
+						modal: true,
+						resizable: false,
+						title: 'Upload screenshot',
+						show: { effect: 'puff', duration: 200 },
+						hide: { effect: 'puff', duration: 200 }
+					});
+				}
+
+				function unsetScreenshot(id, type) {
+					if(confirm('Are you sure to unset this screenshot?')) {
+						$.post('<?=base_url()?>index.php/screenshot_request_dashboard/unsetScreenshot',
+							{type: type, id: id },
+							function(data) {
+								if(data.success)
+									location.reload();
+								else
+									alert(data.message);
+							},
+							'json'
+						);
 					}
 				}
-			});
-		}
+			</script>
+		<?php endif; ?>
 	<?php endif; ?>
-</script>
+<?php endif; ?>

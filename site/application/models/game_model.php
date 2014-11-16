@@ -33,6 +33,11 @@ class Game_model extends CI_Model {
 		return $this->db->insert('Game', $data);
 	}
 
+	public function setGameIsScreenshotSetFlag($idGame, $isScreenshotSet) {
+		$this->db->where('Game.idGame', $idGame);
+		return $this->db->update('Game', array('isScreenshotSet' => $isScreenshotSet));
+	}
+
 	public function delete_Game($idGame) {
 		return $this->db->delete('Game', array('idGame' => $idGame));
 	}

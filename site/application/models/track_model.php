@@ -69,6 +69,11 @@ class Track_model extends CI_Model {
 		return $this->db->insert('Track', $data);
 	}
 
+	public function setTrackIsScreenshotSetFlag($idTrack, $isScreenshotSet) {
+		$this->db->where('Track.idTrack', $idTrack);
+		return $this->db->update('Track', array('isScreenshotSet' => $isScreenshotSet));
+	}
+
 	public function delete_Track($idTrack) {
 		return $this->db->delete('Track', array('idTrack' => $idTrack));
 	}
