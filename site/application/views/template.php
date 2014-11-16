@@ -63,7 +63,7 @@
 				<?php endif; ?>
 				<li><a href="#">The project</a>
 					<ul>
-						<li><a href="#">About us</a></li>
+						<li><a href="<?= base_url() ?>index.php/about">About us</a></li>
 						<?php if($isUserLogged): ?>
 							<li><a href="<?= base_url() ?>index.php/request_mistake">Report a mistake</a></li>
 						<?php endif; ?>
