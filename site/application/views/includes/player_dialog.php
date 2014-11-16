@@ -10,8 +10,8 @@
 		<input type="hidden" id="deferred-idTrack" />
 	</div>
 	<?php if($isUserLogged): ?>
-		<input type="checkbox" id="player-loop" <?=$playerModeLoop ? 'checked' : ''?>><label for="player-loop" class="label-checkbox"><span class="fa fa-repeat"></span></label>
-		<input type="checkbox" id="player-randomize" <?=$playerModeRandomize ? 'checked' : ''?>><label for="player-randomize" class="label-checkbox"><span class="fa fa-random"></span></label>
+		<input type="checkbox" id="player-loop" <?=$playerModeLoop ? 'checked' : ''?>><label title="Loop track" for="player-loop" class="label-checkbox"><span class="fa fa-repeat"></span></label>
+		<input type="checkbox" id="player-randomize" <?=$playerModeRandomize ? 'checked' : ''?>><label title="Randomize playlist" for="player-randomize" class="label-checkbox"><span class="fa fa-random"></span></label>
 		<select id="player-playlistcombo" style="display: inline-block; width: 90%">
 			<!--ajax loaded content-->
 		</select>

@@ -35,8 +35,10 @@
 		}).selectable({
 			selecting: function (e, ui) {
 				// force single selection
-				$(e.target).find('.ui-selectee.ui-selecting').not(ui.selecting).removeClass('ui-selecting');
-				$(e.target).find('.ui-selectee.ui-selected').not(ui.selecting).removeClass('ui-selected');
+				if($(ui.selecting).is('li')) {
+					$(e.target).find('.ui-selectee.ui-selecting').not(ui.selecting).removeClass('ui-selecting');
+					$(e.target).find('.ui-selectee.ui-selected').not(ui.selecting).removeClass('ui-selected');
+				}
 			},
 			selected: function(e, ui) {
 				if (!$("#deleteItemButton").is(":hover"))
