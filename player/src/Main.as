@@ -79,6 +79,7 @@
 			ExternalInterface.addCallback("playUrl", playUrl);
 			ExternalInterface.addCallback("play", playSansUrl);
 			ExternalInterface.addCallback("rewind", rewind);
+			ExternalInterface.addCallback("debug", debug);
 			
 			filename = LoaderInfo(this.root.loaderInfo).parameters.spc;
 			fade = int(LoaderInfo(this.root.loaderInfo).parameters.fade)*1000;
@@ -335,6 +336,17 @@
 					mp3Channel = mp3.play(mp3Position);
 				}
 			}
+		}
+		
+		private function debug():void
+		{
+			var debugInfo:String = "";
+			
+			debugInfo += "filename: " + filename + "\n";
+			debugInfo += "fade: " + fade + "\n";
+			debugInfo += "length: " + length;
+			
+			ExternalInterface.call("alert", debugInfo);
 		}
 		
 		public static function toTimeCode(milliseconds:int) : String

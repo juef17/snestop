@@ -9,12 +9,13 @@ Flash load parameters:
 	showPosition	bool
 			
 JS --> Flash:
-	playUrl(str URL)	(quand on veut loader une nouvelle track)
-	play()				- Le lecteur joue déjà: fait rien
-						- Le lecteur est sur pause: dépause.
+	playUrl(str URL)	Load une nouvelle track
+	play()				- le lecteur joue déjà: fait rien
+						- le lecteur est sur pause: dépause.
 	rewind()			- le lecteur joue déjà: rembobiner et continuer à jouer
 						- le lecteur est sur pause: rembobiner seulement
+	debug()				Envoie des infos sur certaines variables dans un alert de JS
 
 Flash --> JS:
-	songEnded			(envoyé automatiquement quand une track a fini de jouer)
-	playerInitialized	(envoyé quand le player est prêt à jouer)
+	songEnded			Envoyé quand une track a fini de jouer
+	playerInitialized	Envoyé quand le player est prêt à jouer
