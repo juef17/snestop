@@ -25,11 +25,19 @@
 
 	<div class="container_12">
 		<div class="grid_12">
+			<p>Note: uploaded images are hosted on imgur.</p>
 			<div class="form-group">
-					<textarea name="text" class="form-control" placeholder="News text" maxlength="4000" rows="10"><?= $newsitem['text'] ?></textarea>
+					<textarea id="text" name="text" class="form-control" placeholder="News text" maxlength="4000" rows="10"><?= $newsitem['text'] ?></textarea>
 			</div>
 			<button type="button" class="btn btn-default" onclick="location.href='<?=base_url() . 'index.php/news_dashboard'?>';">Return</button>
 			<button type="submit" class="btn btn-default">Submit</button>
 		</div>
 	</div>
 </form>
+
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script>
+	$(function() {
+		new nicEditor({fullPanel : true}).panelInstance('text');
+	});
+</script>

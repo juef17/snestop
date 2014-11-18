@@ -6,6 +6,7 @@
 
 <?= form_open(base_url() . 'index.php/request_community/submit') ?>
 	<div class="container_12">
+		<div class="grid_12">We will send an email to your registered address with the token once the community has been approved.</div>
 		<div class="grid_12 prefix_4 suffix_4 ">
 			<div class="form-group">
 				<label>Name
