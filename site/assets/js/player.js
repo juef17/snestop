@@ -68,7 +68,7 @@ function playTrack(idTrack) {
 			function(data) {
 				if(data['success']) {
 					var track = data['success'];
-					var url = assetUrl + 'spc/' + track.spcURL + '?' + track.length + '?' + track.fade;
+					var url = assetUrl + 'spc/' + track.spcURL + '?' + track.length + '?' + track.fadeLength;
 					setScreenshot(track);
 					playerDialog.dialog('option', 'title', track.title);
 					$('#spcplayer')[0].playUrl(url);
