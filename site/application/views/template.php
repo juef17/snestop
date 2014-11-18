@@ -48,7 +48,7 @@
 					<a href="<?= base_url() ?>index.php/register" class="btn btn-success">Register!</a>
 				</form>
 			<?php else: ?>
-				<p style="float: right; padding: 5px 0;">Hi <a href="<?=base_url() . 'index.php/edit_user_profile'?>"><?= $loggedUserUserName ?>!</a> <a class="btn btn-xs btn-default" href="<?= base_url() ?>index.php/account/logout">Logout</a></p>
+				<p style="float: right; padding: 5px 0;">Hi <a href="<?=base_url() . "index.php/user_profile/index/{$loggedUserUserName}"?>"><?= $loggedUserUserName ?>!</a> | <a href="<?=base_url()?>index.php/edit_user_profile">Edit your profile</a> | <a href="<?= base_url() ?>index.php/account/logout">Logout</a></p>
 			<?php endif; ?>
 			
 			<ul id="menuprincipal" style="width: 100%; margin: 5px 0;" class="jdropdown-menu dropdown-menu-skin">

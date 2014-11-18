@@ -26,5 +26,9 @@
 				<p><?=$user->registrationDate?></p>
 			</div>
 		</div>
+		<div class="grid_12 prefix_4 suffix_4 ">
+			<h3>Shared playlists</h3>
+			<p>Zizi!</p>
+		</div>
 	</div>
 <?php endif; ?>

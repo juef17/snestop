@@ -9,8 +9,10 @@
   <?php endforeach; ?>
 </ul>
 <button class="btn btn-xs btn-danger" id="playlist-delete" onclick="confirmDeletePlaylist();">Delete playlist</button>
-<input id="playlist-playlist-public" type="checkbox" <?=$playlist->public ? 'checked' : ''?>>
-<label for="playlist-playlist-public" class="label-checkbox" style="color: #dddddd;">Public</label>
+<label title="Shares this playlist on your profile for other members to play!" class="label-checkbox" style="color: #dddddd;">
+	<input id="playlist-playlist-public" type="checkbox" <?=$playlist->public ? 'checked' : ''?> />
+	Public
+</label>
 
 <script>
 	function bindPlaylistDetailsFunctions() {

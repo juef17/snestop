@@ -46,6 +46,10 @@ label {
 
 .label-checkbox {
   width: auto;
+  cursor: pointer;
+}
+.label-checkbox input {
+  cursor: pointer;
 }
 .label-checkbox.ui-state-active {
   background: linear-gradient(to bottom, hsla(212,67%,36%,1) 0%,hsla(207,69%,51%,1) 50%,hsla(208,73%,46%,1) 51%,hsla(206,70%,70%,1) 100%);

@@ -61,7 +61,7 @@ class User_model extends CI_Model {
 	}
 
 	public function get_user_profile($username) {
-		$this->db->select('userName, language, Community.name as communityName, Community.URL as communityURL, registrationDate');
+		$this->db->select('*, Community.name as communityName, Community.URL as communityURL, registrationDate');
 		$this->db->where('userName', $username);
 		$this->db->where('registrationToken', NULL);
 		$this->db->join('Community', 'User.idCommunity = Community.idCommunity', 'left');
@@ -71,7 +71,7 @@ class User_model extends CI_Model {
 	}
 
 	public function get_users_list() {
-		$this->db->select('idUser, userName, email, language, canStreamMP3, registrationToken, isAdmin, enabled, registrationDate, Community.name as communityName');
+		$this->db->select('*, Community.name as communityName');
 		$this->db->from('User');
 		$this->db->join('Community', 'User.idCommunity = Community.idCommunity', 'left');
 		$query = $this->db->get();
