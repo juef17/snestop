@@ -22,9 +22,11 @@ class Playlist_model extends CI_Model {
 		}
 	}
 
-	public function get_Playlists_from_User($idUser) {
-		$query = $this->db->get_where('Playlist', array('idUser' => $idUser));
-
+	public function get_Playlists_from_User($idUser, $publicOnly = false) {
+		$this->db->where('idUser', $idUser);
+		if($publicOnly)
+			$this->db->where('public', 1);
+		$query = $this->db->get('Playlist');
 		$retval = array();
 		foreach($query->result() as $row)
 			$retval[] = $this->getPlaylistFromRow($row);

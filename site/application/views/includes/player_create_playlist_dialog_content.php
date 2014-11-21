@@ -1,6 +1,7 @@
 <form method="post" accept-charset="utf-8" id="createPlaylist-form">
 	<input type="hidden" id="hasErrors" value="<?=validation_errors() != '' ? 1 : 0?>" />
 	<input type="hidden" id="idPlaylist" value="<?=isset($idPlaylist) ? $idPlaylist : -1?>" />
+	<input type="hidden" id="source" name="source" value="<?=set_value('source')?>" />
 	<div class="form-group">
 		<label>Name
 			<span class="errors"><?=validation_errors()?></span>
@@ -19,6 +20,7 @@
 	function clearNewPlaylistForm() {
 		$('#createPlaylist-form #hasErrors').val('');
 		$('#createPlaylist-form #idPlaylist').val('-1');
+		$('#createPlaylist-form #source').val('');
 		$('#createPlaylist-form .errors').html('');
 		$('#createPlaylist-form #name').val('');
 		$('#createPlaylist-form #public').prop('checked', false);

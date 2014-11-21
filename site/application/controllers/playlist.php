@@ -8,6 +8,7 @@ class Playlist extends Secure_Controller {
 		$this->load->model('Playlist_Item_model','',TRUE);
 	}
 
+	//Ajax POST
 	public function create() {
 		$data = array();
 		$this->setValidationRules();
@@ -15,6 +16,10 @@ class Playlist extends Secure_Controller {
 			$name = $this->input->post('name');
 			$public = $this->input->post('public');
 			$data['idPlaylist'] = $this->Playlist_model->set_Playlist($_SESSION['loggedUser']->idUser, $name, 0, $public, FALSE, FALSE);
+
+			if($idPlaylistSource = $this->input->post('source'))
+				foreach($this->Playlist_Item_model->get_PlaylistItems_for_Playlist($idPlaylistSource) as $track)
+					$this->Playlist_Item_model->set_Playlist_item($data['idPlaylist'], $track->idTrack);
 		}
 		$this->load->view('includes/player_create_playlist_dialog_content.php', $data);
 	}
@@ -22,6 +27,7 @@ class Playlist extends Secure_Controller {
 	private function setValidationRules() {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean|callback_verifyPlaylistName');
+		$this->form_validation->set_rules('source', 'Source', 'trim|xss_clean|callback_verifySourcePlaylist');
 		$this->form_validation->set_rules('public', 'Public', 'xss_clean');
 	}
 
@@ -30,22 +36,42 @@ class Playlist extends Secure_Controller {
 		return !$this->Playlist_model->userHasPlaylistWithName($_SESSION['loggedUser']->idUser, $name);
 	}
 
+	public function verifySourcePlaylist($idPlaylist) {
+		$this->form_validation->set_message('verifySourcePlaylist', 'Something\'s wrong with the source playlist: it\'s either not yours and not public, or it does not exist.');
+
+		if($idPlaylist == null)
+			return true;
+		else {
+			$originalPlaylist = $this->Playlist_model->get_Playlist($idPlaylist);
+
+			return $originalPlaylist
+				&& ($originalPlaylist->idUser == $_SESSION['loggedUser']->idUser || $originalPlaylist->public);
+		}
+	}
+
 	public function playlists($mode) {
 		$data['playlists'] = $this->Playlist_model->get_Playlists_from_User($_SESSION['loggedUser']->idUser);
 		$data['mode'] = $mode;
 		$this->load->view('includes/playlists_dropdown_content.php', $data);
 	}
 
-	public function playlistDetails($idPlaylist) {
+	//Maybe Ajax GET
+	public function playlistDetails($idPlaylist, $ajax = false) {
 		//check if playlist belongs to logged user, else check if public.
-		$data['playlist'] = $this->Playlist_model->get_Playlist($idPlaylist);
+		$playlist = $this->Playlist_model->get_Playlist($idPlaylist);
 
-		if($data['playlist']
-			&& ($data['playlist']->idUser == $_SESSION['loggedUser']->idUser
-					|| $data['playlist']->public))
+		if($playlist
+			&& ($playlist->idUser == $_SESSION['loggedUser']->idUser
+					|| $playlist->public))
 		{
-			$data['playlistItems'] = $data['tracks'] = $this->Playlist_Item_model->get_PlaylistItems_for_Playlist($idPlaylist);
-			$this->load->view('includes/playlist_content.php', $data);
+			$tracks = $this->Playlist_Item_model->get_PlaylistItems_for_Playlist($idPlaylist);
+			if($ajax) {
+				echo json_encode($tracks);
+			} else {
+				$data['playlist'] = $playlist;
+				$data['playlistItems'] = $data['tracks'] = $tracks;
+				$this->load->view('includes/playlist_content.php', $data);
+			}
 		} else {
 			//faudrait faire dequoi, mais anyways on se
 			//rend pas ici normalement. c'est juste un hack proof ;)
@@ -155,6 +181,27 @@ class Playlist extends Secure_Controller {
 		}
 		
 		echo json_encode($data);
+	}
+
+	//Ajax POST
+	public function copyPlaylist() {
+		$idPlaylist = $this->input->post('idPlaylist');
+		//check if playlist belongs to logged user and check if public.
+		$originalPlaylist = $this->Playlist_model->get_Playlist($idPlaylist);
+
+		if($originalPlaylist
+			&& ($originalPlaylist->idUser != $_SESSION['loggedUser']->idUser)
+			&& $originalPlaylist->public)
+		{
+			$this->Playlist_model->set_Playlist($_SESSION['loggedUser']->idUser, $name, 0, false);
+			
+			$idNewPlaylist = $this->db->insert_id();
+			$data['playlistItems'] = $data['tracks'] = $this->Playlist_Item_model->get_PlaylistItems_for_Playlist($idPlaylist);
+			$this->load->view('includes/playlist_content.php', $data);
+		} else {
+			//faudrait faire dequoi, mais anyways on se
+			//rend pas ici normalement. c'est juste un hack proof ;)
+		}
 	}
 }
 ?>

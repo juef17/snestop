@@ -38,7 +38,7 @@ class Playlist_Item_model extends CI_Model {
 	}
 	
 	public function get_PlaylistItems_for_Playlist($idPlaylist) {
-		$this->db->select('Track.idTrack, Track.title, Track.length, Track.isScreenshotSet, Game.titleEng AS gameTitleEng, PlaylistItem.position as position');
+		$this->db->select('Track.idTrack, Track.title, Track.length, Track.isScreenshotSet, Game.idGame, Game.titleEng AS gameTitleEng, PlaylistItem.position as position');
 		$this->db->join('Track', 'PlaylistItem.idTrack = Track.idTrack', 'INNER');
 		$this->db->join('Game', 'Track.idGame = Game.idGame', 'INNER');
 		$this->db->where('PlaylistItem.idPlaylist', $idPlaylist);

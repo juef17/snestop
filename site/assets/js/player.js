@@ -136,8 +136,7 @@ function showPlaylist(callback) {
 	$('#player-expandPlaylist span').addClass('fa-angle-double-up');
 }
 
-function createPlayList() {
-	
+function createPlayList(source) {
 	$('#createPlaylist-dialog').dialog({
 		title: 'New playlist',
 		modal: true,
@@ -149,6 +148,9 @@ function createPlayList() {
 		}
 	});
 	clearNewPlaylistForm();
+	if(source != null) {
+		$('#createPlaylist-form #source').val(source);
+	}
 	attachAjaxSubmitCallback();
 }
 
@@ -198,6 +200,7 @@ function playlistSelectionChanged(idPlaylist) {
 }
 
 function loadPlaylist(idPlaylist) {
+	playerDialog.dialog('open');
 	hidePlaylist(function() {
 		$(this).load(baseUrl + 'index.php/playlist/playlistDetails/' + idPlaylist, function() {
 			bindPlaylistDetailsFunctions();

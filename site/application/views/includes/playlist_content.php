@@ -29,6 +29,8 @@
 			});
 		});
 
+		$('#player-playlistcombo').val(<?=$playlist->idPlaylist?>);
+
 		$('#playlist-tracks').sortable({
 			handle: '.fa-unsorted',
 			update: function(event, ui) {
