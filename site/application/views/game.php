@@ -60,55 +60,29 @@
 		</div>
 	<?php else: ?>
 		<div style="background-color: #dddddd;" class="container_16">
-			<div class="grid_1 columnheader">
-				<p>&nbsp;</p><!-- play -->
-			</div>
-			<div class="grid_3 columnheader">
-				<p>Title</p>
-			</div>
-			<div class="grid_1 columnheader">
-				<p>Length</p>
-			</div>
-			<div class="grid_2 columnheader">
-				<p>Composer(s)</p>
-			</div>
-			<div class="grid_1 columnheader">
-				<p>SPC</p>
-			</div>
+			<p class="grid_1 columnheader">&nbsp;</p><!-- play -->
+			<p class="grid_3 columnheader">Title</p>
+			<p class="grid_1 columnheader">Length</p>
+			<p class="grid_2 columnheader">Composer(s)</p>
+			<p class="grid_1 columnheader">SPC</p>
 			<?php if($isUserLogged): ?>
-				<div class="grid_3 columnheader">
-					<p>My playlists</p>
-				</div>
+				<p class="grid_3 columnheader">My playlists</p>
 			<?php endif; ?>
-			<div class="grid_1 columnheader">
-				<!-- details -->
-			</div>
+			<div class="grid_2 columnheader"><!-- details --></div>
 		</div>
 		<?php $b = TRUE; foreach($tracks as $track): ?>
 			<div <?php if($b = !$b): ?> style="background-color: #dddddd;" <?php endif; ?> class="container_16">
-				<div class="grid_1">
-					<img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="playTrack(<?=$track->idTrack?>);" />
-				</div>
-				<div class="grid_3">
-					<p><?=$track->title?></p>
-				</div>
-				<div class="grid_1">
-					<p><?=$track->length?></p>
-				</div>
-				<div class="grid_2">
-					<p><?=$track->composer?></p>
-				</div>
+				<img class="grid_1" style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="playTrack(<?=$track->idTrack?>);" />
+				<p class="grid_3"><?=$track->title?></p>
+				<p class="grid_1"><?=$track->length?></p>
+				<p class="grid_2"><?=$track->composer?></p>
 				<div class="grid_1">
 					<a href="<?=asset_url() . 'spc/' . str_replace('&', '%26', $track->spcURL)?>"><img src="<?=asset_url() . 'images/download.png'?>" /></a>
 				</div>
 				<?php if($isUserLogged): ?>
-					<div class="grid_2">
-						<div class="btn btn-xs btn-default" onclick="addToPlaylistDialog(<?=$track->idTrack?>);">Add to playlist...</div>
-					</div>
+					<div class="grid_2 btn btn-xs btn-default" onclick="addToPlaylistDialog(<?=$track->idTrack?>);">Add to playlist...</div>
 				<?php endif; ?>
-				<div class="grid_1">
-					<div class="btn btn-xs btn-default" onclick="detailsDialog(<?=$track->idTrack?>)">Details</div>
-				</div>
+				<div class="grid_2 btn btn-xs btn-default" onclick="detailsDialog(<?=$track->idTrack?>)">Details</div>
 			</div>
 
 			<!-- details dialog -->
@@ -157,7 +131,11 @@
 				</div>
 				<h4>Reviews</h4>
 				<p>None yet! Be the first to write one!</p>
-				<a href="#">Write a review</a>
+				<?php if($isUserLogged):?>
+					<a href="<?=base_url()?>index.php/request_review/index/<?=$track->idTrack?>">Write a review</a>
+				<?php else:?>
+					<p>Log in to write a review!</p>
+				<?php endif; ?>
 			</div>
 		<?php endforeach; ?>
 
