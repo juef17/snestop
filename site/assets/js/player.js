@@ -53,11 +53,25 @@ function constructPlayerDialog() {
 }
 
 function setScreenshot(track) {
-	var screenshotUrl = track.isScreenshotSet
-		? assetUrl + 'images/screenshots/track/' + track.idTrack + '.png'
-		: assetUrl + 'images/en/no_track_ss.png';
+	$('#playerScreenshot').off('click');
 	
-	$('#playerScreenshot').css('background-image', 'url(' + screenshotUrl + ')');
+	if(track.isScreenshotSet) {
+		$('#playerScreenshot').css({
+			'background-image': 'url(' + assetUrl + 'images/screenshots/track/' + track.idTrack + '.png)',
+			'cursor': 'auto'
+		});
+		
+	} else {
+		$('#playerScreenshot')
+			.css({
+				'background-image': 'url(' + assetUrl + 'images/en/no_track_ss.png)',
+				'cursor': 'pointer'
+			})
+			.click(function () {
+				window.location.href = baseUrl + 'index.php/request_screenshot_track/index/' + track.idTrack
+			}
+		);
+	}
 }
 
 //main entry function
@@ -70,7 +84,7 @@ function playTrack(idTrack) {
 					var track = data['success'];
 					var url = assetUrl + 'spc/' + track.spcURL + '?' + track.length + '?' + track.fadeLength;
 					setScreenshot(track);
-					playerDialog.dialog('option', 'title', track.title);
+					setTitle(track);
 					$('#spcplayer')[0].playUrl(url);
 					playingIdTrack = idTrack;
 				} else {
@@ -84,9 +98,18 @@ function playTrack(idTrack) {
 	}
 }
 
+function setTitle(track) {
+	var title = track.gameTitleEng + ' - ' + track.title;
+	$('#title-current')
+		.prop('title', title);
+	$('#title-current a')
+		.text(title)
+		.prop('href', baseUrl + 'index.php/game/index/' + track.idGame);
+}
+
 //Flash events
 function playerInitialized() {
-	if(playerDialog.is(':visible')) { //seems to trigger when the dialog closes.
+	if(playerDialog.is(':visible')) { //seems to also trigger when the dialog closes.
 		var idTrack = $('#player-dialog #deferred-idTrack').val();
 		playTrack(idTrack);
 	}

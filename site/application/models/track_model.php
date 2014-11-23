@@ -6,6 +6,8 @@ class Track_model extends CI_Model {
 	}
 
 	public function get_Track($idTrack) {
+		$this->db->select('Game.titleEng AS gameTitleEng, Track.*');
+		$this->db->join('Game', 'Track.idGame = Game.idGame', 'inner');
 		$query = $this->db->get_where('Track', array('idTrack' => $idTrack));
 		if($trackrow = $query->row())
 			return $this->getTrackFromRow($trackrow);

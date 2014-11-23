@@ -154,6 +154,24 @@ class User_model extends CI_Model {
 		$this->db->delete('User');
 		return $this->db->last_query();
 	}
+
+	public function search($searchString) {
+		$regex = implode('.+', explode(' ', $searchString));
+		$regex = $this->db->escape_str($regex);
+		
+		$this->db->select('*, Community.name as communityName, Community.URL as communityUrl');
+		$this->db->from('User');
+		$this->db->join('Community', 'User.idCommunity = Community.idCommunity', 'left');
+		$this->db->where('userName RLIKE', "{$regex}");
+		$this->db->limit(50);
+		
+		$query = $this->db->get();
+		$retval = array();
+		foreach($query->result() as $row)
+			$retval[] = $this->getUserFromRow($row);
+
+		return $retval;
+	}
 	
 	private function create_hash($password) {
 		$salt = base64_encode(mcrypt_create_iv(24, MCRYPT_DEV_URANDOM));

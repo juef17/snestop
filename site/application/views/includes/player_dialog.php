@@ -1,4 +1,23 @@
+<style>
+	#player-dialog #title-current {
+		margin: 0 0 5px 0;
+		overflow: hidden;
+		background: #111111;
+		white-space: nowrap;
+		border-radius: 3px;
+		padding: 0 4px;
+	}
+
+	#player-dialog #title-current a {
+		text-decoration: none;
+		outline: 0;
+		font-size: 0.6em;
+		color: #dddddd; !important
+	}
+</style>
+
 <div style="display: none; overflow: visible" id="player-dialog" title="SPC Player">
+	<div id="title-current" title="No track loaded"><a href="#!">No track loaded</a></div>
 	<div style="display: inline">
 		<div class="tv tv-small" id="playerScreenshot"></div>
 	</div>

@@ -83,11 +83,19 @@
 					</li>
 				<?php endif; ?>
 				<?php if($isUserLogged): ?>
-					<li><a href="#!" onclick="playerDialog.dialog('open');"><img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" /></a>
-						
+					<li>
+						<a href="#!" onclick="playerDialog.dialog('open');"><img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" /></a>
 					</li>
 				<?php endif; ?>
+				<?php require_once(views_dir() . 'includes/search_box.php'); ?>
 			</ul>
+			
+			<ul id="search-menu">
+				<li id="search-games"><a href="#!" onclick="setSearchTarget(0);"><span class="fa fa-fw fa-gamepad"></span>Games</a></li>
+				<li id="search-tracks"><a href="#!" onclick="setSearchTarget(1);"><span class="fa fa-fw fa-music"></span>Tracks</a></li>
+				<li id="search-users"><a href="#!" onclick="setSearchTarget(2);"><span class="fa fa-fw fa-user"></span>Users</a></li>
+			</ul>
+
 			<script type="text/javascript">
 				$(function() {
 					$('#menuprincipal').dropdown_menu({
@@ -106,7 +114,8 @@
 							vertical             : false,                           // Whether the root menu is vertically aligned
 							viewport_overflow    : 'auto',                          // Handle submenu opening offscreen: "auto", "move", "scroll", or false
 							init                 : function() {}                    // Callback function applied on init
-					});});
+					});
+				});
 			</script>
 		</div>
 	</div>
