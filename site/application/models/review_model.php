@@ -5,42 +5,51 @@ class Review_model extends CI_Model {
 		$this->load->database();
 	}
 
-	public function get_Review($idUser = FALSE, $idTrack = FALSE) {
+	public function get_Review($unapprovedOnly = FALSE, $idUser = FALSE, $idTrack = FALSE) {
 		$this->db->join('User', 'Review.idUser = User.idUser', 'inner');
 		$this->db->join('Track', 'Review.idTrack = Track.idTrack', 'inner');
+		$this->db->join('Game', 'Track.idGame = Game.idGame', 'inner');
 		if ($idUser === FALSE && $idTrack === FALSE) { // on n'a rien
+			if($unapprovedOnly)
+				$this->db->where('approved', 0);
+				
 			$query = $this->db->get('Review');
-			return $query->result_array();
+
+			$retval = array();
+			foreach($query->result() as $row)
+				$retval[] = $this->getReviewFromRow($row);
+			return $retval;
 		} else { // on a les deux, yay!
 			$this->db->where('Review.idUser', $idUser);
 			$this->db->where('Review.idTrack', $idTrack);
 			$query = $this->db->get('Review');
-			return $query->row();
+			return $this->getReviewFromRow($query->row());
 		} // si on a juste 1 des deux, voir les méthodes ci-bas
 	}
 	
-	public function get_Review_for_user($idUser = FALSE) {
+	public function get_Review_for_user($idUse) {
 		$this->db->join('User', 'Review.idUser = User.idUser', 'inner');
-		if($idUser === FALSE) { //devrait pas arriver...?
-			$query = $this->db->get('Review');
-			return $query->result_array();
-		} else {
-			$this->db->where('Review.idUser', $idUser); 
-			$query = $this->db->get('Review');
-			return $query->result_array();
-		}
+		$this->db->where('Review.idUser', $idUser); 
+		$query = $this->db->get('Review');
+		$retval = array();
+		foreach($query->result() as $row)
+			$retval[] = $this->getReviewFromRow($row);
+		return $retval;
 	}
 	
-	public function get_Review_for_track($idTrack = FALSE) {
+	public function get_Review_for_track($idTrack) {
 		$this->db->join('Track', 'Review.idTrack = Track.idTrack', 'inner');
-		if($idTrack === FALSE) { //devrait pas arriver...?
-			$query = $this->db->get('Review');
-			return $query->result_array();
-		} else {
-			$this->db->where('Review.idTrack', $idTrack); 
-			$query = $this->db->get('Review');
-			return $query->result_array();
-		}
+		$this->db->where('Review.idTrack', $idTrack); 
+		$query = $this->db->get('Review');
+		$retval = array();
+		foreach($query->result() as $row)
+			$retval[] = $this->getReviewFromRow($row);
+		return $retval;
+	}
+
+	private function getReviewFromRow($row) {
+		$row->approved = ord($row->approved) == 1 || $row->approved == 1;
+		return $row;
 	}
 
 	public function set_Review($idUser, $idTrack, $text) {

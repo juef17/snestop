@@ -76,6 +76,7 @@
 							<li><a href="<?= base_url() ?>index.php/games_dashboard/index/1">Games dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/news_dashboard">News dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/mistake_requests_dashboard">Mistake reports dashboard</a></li>
+							<li><a href="<?= base_url() ?>index.php/reviews_dashboard">Reviews dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/screenshot_request_dashboard">Screenshot requests dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/track_request_dashboard">Track requests dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/users_management_dashboard">Users dashboard</a></li>
