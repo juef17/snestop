@@ -27,9 +27,13 @@ class Review_model extends CI_Model {
 		} // si on a juste 1 des deux, voir les méthodes ci-bas
 	}
 	
-	public function get_Review_for_user($idUse) {
-		$this->db->join('User', 'Review.idUser = User.idUser', 'inner');
-		$this->db->where('Review.idUser', $idUser); 
+	public function get_Review_for_user($idUser, $approvedOnly = TRUE) {
+		$this->db->select('Review.*, Track.title, Game.idGame, Game.titleEng');
+		$this->db->join('Track', 'Review.idTrack = Track.idTrack', 'inner');
+		$this->db->join('Game', 'Track.idGame = Game.idGame', 'inner');
+		$this->db->where('Review.idUser', $idUser);
+		if($approvedOnly)
+			$this->db->where('Review.approved', 1);
 		$query = $this->db->get('Review');
 		$retval = array();
 		foreach($query->result() as $row)
@@ -37,9 +41,13 @@ class Review_model extends CI_Model {
 		return $retval;
 	}
 	
-	public function get_Review_for_track($idTrack) {
+	public function get_Review_for_track($idTrack, $approvedOnly = TRUE) {
+		$this->db->select('Review.*, Track.idTrack, User.userName');
 		$this->db->join('Track', 'Review.idTrack = Track.idTrack', 'inner');
-		$this->db->where('Review.idTrack', $idTrack); 
+		$this->db->join('User', 'Review.idUser = User.idUser', 'inner');
+		$this->db->where('Review.idTrack', $idTrack);
+		if($approvedOnly)
+			$this->db->where('Review.approved', 1);
 		$query = $this->db->get('Review');
 		$retval = array();
 		foreach($query->result() as $row)

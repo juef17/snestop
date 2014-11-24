@@ -129,13 +129,13 @@
 					</table>
 					<p style="font-size: 0.6em;">*Ratings will be updated as soon as we have enough data! Come back soon!</p>
 				</div>
-				<h4>Reviews</h4>
-				<p>None yet! Be the first to write one!</p>
+				<h3>Reviews</h3>
 				<?php if($isUserLogged):?>
 					<a href="<?=base_url()?>index.php/request_review/index/<?=$track->idTrack?>">Write a review</a>
 				<?php else:?>
 					<p>Log in to write a review!</p>
 				<?php endif; ?>
+				<div id="reviews-container"><!-- Ajax loaded content --></div>
 			</div>
 		<?php endforeach; ?>
 
@@ -155,6 +155,20 @@
 					}
 				});
 				$('#dialog-details_' + idTrack + ' #unset-screenshot').click(function(event) { event.stopPropagation(); });
+				$.getJSON(
+					'<?=base_url()?>index.php/game/getReviewsForTrack/' + idTrack,
+					function(data) {
+						var reviews = '';
+						$.each(data, function (index, review) {
+							reviews += '<div style="background-color: #dddddd; padding: 0 5px; margin: 2px 0">';
+							reviews += '<h4>Review by <a href="<?=base_url()?>index.php/user_profile/index/' + review.userName + '">' + review.userName + '</a></h4>';
+							reviews += '<p>' + review.text + '</p>';
+							reviews += '</div>';
+						});
+						console.debug(data);
+						$('#dialog-details_' + idTrack + ' #reviews-container').html(reviews);
+					}
+				);
 			}
 		</script>
 

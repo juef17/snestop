@@ -54,14 +54,14 @@
 			<ul id="menuprincipal" style="width: 100%; margin: 5px 0;" class="jdropdown-menu dropdown-menu-skin">
 				<li><a href="<?=base_url()?>">Home</a></li>
 				<?php if($isUserLogged): ?>
-					<li><a href="#">Requests</a>
+					<li><a href="#!">Requests</a>
 						<ul>
 							<li><a href="<?= base_url() ?>index.php/request_community">Request a community</a></li>
 							<li><a href="<?= base_url() ?>index.php/request_track">Request a track</a></li>
 						</ul>
 					</li>
 				<?php endif; ?>
-				<li><a href="#">The project</a>
+				<li><a href="#!">The project</a>
 					<ul>
 						<li><a href="<?= base_url() ?>index.php/about">About us</a></li>
 						<?php if($isUserLogged): ?>
@@ -70,7 +70,7 @@
 					</ul>
 				</li>
 				<?php if($loggedUserIsAdmin): ?>
-					<li><a href="#">Administration</a>
+					<li><a href="#!">Administration</a>
 						<ul>
 							<li><a href="<?= base_url() ?>index.php/communities_dashboard">Communities dashboard</a></li>
 							<li><a href="<?= base_url() ?>index.php/games_dashboard/index/1">Games dashboard</a></li>

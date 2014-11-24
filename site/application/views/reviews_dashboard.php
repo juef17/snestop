@@ -27,8 +27,8 @@
 	<?php $b = TRUE; foreach($reviews as $review): ?>
 		<div style="<?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_12">
 			<button class="grid_1 btn btn-xs btn-default" onclick="showReviewDialog(<?=$review->idUser?>, <?=$review->idTrack?>)">View</button>
-			<p class="grid_2"><?= $review->userName ?></p>
-			<p class="grid_3"><?= $review->titleEng ?></p>
+			<p class="grid_2"><a href="<?=base_url()?>index.php/user_profile/index/<?=$review->userName?>"><?= $review->userName ?></a></p>
+			<p class="grid_3"><a href="<?=base_url()?>index.php/game/index/<?=$review->idGame?>"><?= $review->titleEng ?></a></p>
 			<p class="grid_3"><?= $review->title ?></p>
 			<div class="grid_1">
 				<?php if($review->approved):?>

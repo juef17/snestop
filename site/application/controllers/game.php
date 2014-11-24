@@ -5,6 +5,7 @@ class Game extends Public_Controller {
 		parent::__construct();
 		$this->load->model('Game_model','',TRUE);
 		$this->load->model('Track_model','',TRUE);
+		$this->load->model('Review_model','',TRUE);
 	}
 
 	public function index($id) {
@@ -14,6 +15,12 @@ class Game extends Public_Controller {
 		$data['tracks'] = $this->Track_model->get_Tracks_for_Game($id);
 		$data['view'] = 'game.php';
 		$this->load->view('template.php', $data);
+	}
+
+	//Ajax GET
+	public function getReviewsForTrack($idTrack) {
+		$reviews = $this->Review_model->get_Review_for_track($idTrack);
+		echo json_encode($reviews);
 	}
 }
 ?>
