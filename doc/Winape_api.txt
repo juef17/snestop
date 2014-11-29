@@ -19,3 +19,5 @@ JS --> Flash:
 Flash --> JS:
 	songEnded			Envoyé quand une track a fini de jouer
 	playerInitialized	Envoyé quand le player est prêt à jouer
+	seekStart			Envoyé quand le player commence un seek
+	seekEnd				Envoyé quand le player a fini un seek

@@ -208,6 +208,7 @@
 				sliderSeeking = false;
 				if (gameMusicEmu.isPlaying == false && !mp3IsPlaying) return;
 				textePosition.text = toTimeCode(sliderPosition.value) + " / " + toTimeCode(length + fade);
+				ExternalInterface.call("seekStart");
 				if (loadedType() == "spc")
 				{
 					gameMusicEmu.pause();
@@ -219,6 +220,7 @@
 					mp3Channel.stop();
 					mp3Channel = mp3.play(sliderPosition.value);
 				}
+				ExternalInterface.call("seekEnd");
 			});
 			sliderPosition.width = 170;
 			sliderPosition.visible = showSeekBar;
