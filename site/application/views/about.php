@@ -1,18 +1,35 @@
 <div class="container_12">
 	<div class="grid_12">
 		<h1>About the Top SNES tracks project</h1>
-		<p>Bacon ipsum dolor amet picanha alcatra bacon shank, pastrami shoulder venison leberkas cow ham hock porchetta jowl tri-tip fatback beef ribs. Sirloin pastrami biltong boudin, tongue turducken bacon tail kevin beef pork belly ham hock meatball. Meatloaf salami jowl, turkey flank strip steak frankfurter shoulder kevin. Pork chop rump chicken ham bresaola jerky. Andouille ham capicola, flank ball tip chicken doner. Biltong sirloin tail shank. Corned beef beef spare ribs kielbasa.</p>
-		<p>Sirloin salami ground round, fatback strip steak picanha pancetta beef. Pastrami ham shankle boudin beef ribs porchetta meatloaf pork loin tail swine corned beef filet mignon short loin. Doner ham pork loin landjaeger t-bone, tongue bacon shank andouille tail cow chuck. Tri-tip beef sirloin doner ham shank ground round venison frankfurter sausage capicola biltong t-bone. Pork chop pork loin pig frankfurter. Shankle sirloin tail kevin, filet mignon swine pancetta bresaola.</p>
-		<p>Kielbasa pork cow brisket. Pork corned beef pork loin, ham hock meatloaf boudin bresaola bacon fatback frankfurter shoulder tail prosciutto. T-bone shankle ham hock swine. Swine short loin pancetta, leberkas porchetta spare ribs kevin meatball beef frankfurter shoulder shankle fatback alcatra.</p>
-		<p>The project is:</p>
-		<ul>
-			<li>Juef: the gr8 lord of SMOCKING and godlike of UT coolness</li>
-			<li>Jerther: incredible niamounne with peanutz on de la mama</li>
-		</ul>
-		<p>Special thanks to:</p>
-		<ul>
-			<li>Ramoutz Panus: for having big ballz of steel</li>
-			<li>Limoutz Panus: he's flying for us</li>
-		</ul>
+		<p><b>More than 20 years after its release, the SNES offers music that is rightfully more appreciated than ever. We're truly passionate about it, and yet, we know so little of it! This project is our attempt to correct this while providing great audio entertainment and obtaining great statistical data about the tracks' appreciation.</b></p>
+
+		<h2>Who are we?</h2>
+			<ul>
+				<li>Jerther: an incredible guy who pretty much single-handedly made this awesome website. And he's tall... too tall!
+				<li>juef: he ran the <a href="http://bestnestracks.captaintortilla.com/results/" target="_blank">Top NES tracks project</a> and felt he could do better for an even better system!
+			</ul>
+			<p>If you need to contact us, please see if one of the forms here fits your needs first. Otherwise, comme and say hello on <a href="http://theshizz.org/forum/index.php?/forum/8-minibosses-message-board/" target="_blank">The Shizz forums</a>!</p>
+			
+		<h2>Tools we used:</h2>
+			<ul>
+				<li><a href="https://code.google.com/p/game-music-emu-flash/" target="_blank">game-music-emu-flash</a>
+				<li><a href="http://www.flashdevelop.org/" target="_blank">FlashDevelop</a>
+				<li><a href="http://www.codeigniter.com/" target="_blank">CodeIgniter</a>
+				<li><a href="http://snesmusic.org/" target="_blank">SNESmusic.org</a>
+			</ul>
+
+		<h2>Special thanks to:</h2>
+			<ul>
+				<li><a href="http://www.slack.net/~ant/" target="_blank">Blargg</a>
+				<li>SNES composers (most of them, anyway!)
+				<li>All our geeky friends
+			</ul>
 	</div>
 </div>
+<!--
+	There's no way I'm deleting this:
+	Juef: the gr8 lord of SMOCKING and godlike of UT coolness
+    Jerther: incredible niamounne with peanutz on de la mama
+    Ramoutz Panus: for having big ballz of steel
+    Limoutz Panus: he's flying for us
+-->
