@@ -85,7 +85,7 @@
 				<h3>Reviews</h3>
 			</div>
 	</div>
-	<?if (count($reviews) == 0): ?>
+	<?php if (count($reviews) == 0): ?>
 		<div class="container_12">
 			<p class="grid_12">None</p>
 		</div>
