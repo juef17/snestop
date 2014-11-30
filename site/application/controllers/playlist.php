@@ -55,8 +55,8 @@ class Playlist extends Secure_Controller {
 		$this->load->view('includes/playlists_dropdown_content.php', $data);
 	}
 
-	//Maybe Ajax GET
-	public function playlistDetails($idPlaylist, $ajax = false) {
+	//Ajax GET partial view
+	public function playlistDetails($idPlaylist) {
 		//check if playlist belongs to logged user, else check if public.
 		$playlist = $this->Playlist_model->get_Playlist($idPlaylist);
 
@@ -65,13 +65,9 @@ class Playlist extends Secure_Controller {
 					|| $playlist->public))
 		{
 			$tracks = $this->Playlist_Item_model->get_PlaylistItems_for_Playlist($idPlaylist);
-			if($ajax) {
-				echo json_encode($tracks);
-			} else {
-				$data['playlist'] = $playlist;
-				$data['playlistItems'] = $data['tracks'] = $tracks;
-				$this->load->view('includes/playlist_content.php', $data);
-			}
+			$data['playlist'] = $playlist;
+			$data['playlistItems'] = $tracks;
+			$this->load->view('includes/playlist_content.php', $data);
 		} else {
 			//faudrait faire dequoi, mais anyways on se
 			//rend pas ici normalement. c'est juste un hack proof ;)
@@ -165,19 +161,6 @@ class Playlist extends Secure_Controller {
 		} else {
 			$data['success'] = FALSE;
 			$data['message'] = 'You can\'t modify someone else\'s playlist.';
-		}
-		
-		echo json_encode($data);
-	}
-
-	//Ajax GET
-	public function getTrack($idTrack) {
-		if($track = $this->Track_model->get_Track($idTrack)) {
-			$data['success'] = $track;
-			$data['message'] = '';
-		} else {
-			$data['success'] = FALSE;
-			$data['message'] = 'Can\t find track, sorry :(';
 		}
 		
 		echo json_encode($data);

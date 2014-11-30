@@ -22,5 +22,18 @@ class Game extends Public_Controller {
 		$reviews = $this->Review_model->get_Review_for_track($idTrack);
 		echo json_encode($reviews);
 	}
+
+	//Ajax GET
+	public function getTrack($idTrack) {
+		if($track = $this->Track_model->get_Track($idTrack)) {
+			$data['success'] = $track;
+			$data['message'] = '';
+		} else {
+			$data['success'] = FALSE;
+			$data['message'] = 'Can\t find track, sorry :(';
+		}
+		
+		echo json_encode($data);
+	}
 }
 ?>

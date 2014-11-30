@@ -5,6 +5,7 @@ class User_Profile extends Public_Controller {
 		parent::__construct();
 		$this->load->model('Playlist_model','',TRUE);
 		$this->load->model('Review_model','',TRUE);
+		$this->load->model('Playlist_Item_model','',TRUE);
 	}
 
 	public function index($username) {
@@ -14,6 +15,18 @@ class User_Profile extends Public_Controller {
 		$data['reviews'] = $this->Review_model->get_Review_for_user($data['user']->idUser);
 		$data['view'] = 'user_profile.php';
 		$this->load->view('template.php', $data);
+	}
+
+	//Ajax GET partial view
+	public function playlistDetails($idPlaylist) {
+		$playlist = $this->Playlist_model->get_Playlist($idPlaylist);
+
+		if($playlist && $playlist->public)
+		{
+			$data['tracks'] = $this->Playlist_Item_model->get_PlaylistItems_for_Playlist($idPlaylist);
+			$data['playlist'] = $playlist;
+			$this->load->view('user_profile_playlist_dialog.php', $data);
+		}
 	}
 }
 ?>

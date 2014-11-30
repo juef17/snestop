@@ -2,7 +2,7 @@ var playerDialog;
 var playingIdTrack = null;
 
 $(function() {
-	if(isUserLogged)
+	//if(isUserLogged)
 		constructPlayerDialog();
 });
 
@@ -60,17 +60,17 @@ function setScreenshot(track) {
 			'background-image': 'url(' + assetUrl + 'images/screenshots/track/' + track.idTrack + '.png)',
 			'cursor': 'auto'
 		});
-		
 	} else {
-		$('#playerScreenshot')
-			.css({
-				'background-image': 'url(' + assetUrl + 'images/en/no_track_ss.png)',
-				'cursor': 'pointer'
-			})
+		$('#playerScreenshot').css({
+			'background-image': 'url(' + assetUrl + 'images/en/no_track_ss.png)',
+			'cursor': 'auto'
+		});
+		if(isUserLogged) {
+			$('#playerScreenshot').css({'cursor': 'pointer'})
 			.click(function () {
 				window.location.href = baseUrl + 'index.php/request_screenshot_track/index/' + track.idTrack
-			}
-		);
+			});
+		}
 	}
 }
 
@@ -78,7 +78,7 @@ function setScreenshot(track) {
 function playTrack(idTrack) {
 	if(playerDialog.is(':visible')) {
 		$.getJSON(
-			baseUrl + 'index.php/playlist/getTrack/' + idTrack,
+			baseUrl + 'index.php/game/getTrack/' + idTrack,
 			function(data) {
 				if(data['success']) {
 					var track = data['success'];
@@ -109,6 +109,7 @@ function setTitle(track) {
 
 //Flash events
 function playerInitialized() {
+	console.debug('Player init');
 	if(playerDialog.is(':visible')) { //seems to also trigger when the dialog closes.
 		var idTrack = $('#player-dialog #deferred-idTrack').val();
 		playTrack(idTrack);

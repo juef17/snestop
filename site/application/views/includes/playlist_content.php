@@ -45,7 +45,7 @@
 				}
 			},
 			selected: function(e, ui) {
-				if (!$("#deleteItemButton").is(":hover"))
+				if ($("#deleteItemButton:hover").length == 0)
 					playTrack(ui.selected.id);
 			}
 		});
