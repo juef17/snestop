@@ -6,6 +6,13 @@
 
 <?= form_open(base_url() . 'index.php/request_track/submit') ?>
 	<div class="container_12">
+		<div class="grid_12">
+			<p>
+				Your favorite Super Famicom or Super Nintendo Entertainment System track doesn't seem to be listed in our database? Please make sure it isn't listed under another title (see <a href="http://www.wikipedia.org" target="_blank">Wikipedia</a> or <a href="http://www.gamefaqs.com" target="_blank">GameFAQS</a> for alternate titles), and then please fill the following form, after which we'll do our best to add it promptly. Thank you!
+			</p>
+		</div>
+	</div>
+	<div class="container_12">
 		<div class="grid_12 prefix_4 suffix_4 ">
 			<div class="form-group">
 				<label>Game
