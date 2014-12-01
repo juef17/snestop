@@ -14,6 +14,14 @@
 		font-size: 0.6em;
 		color: #dddddd; !important
 	}
+
+	#player-dialog #wait {
+		display: none;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: 40px;
+	}
 </style>
 
 <div style="display: none; overflow: visible" id="player-dialog" title="SPC Player">
@@ -21,12 +29,13 @@
 	<div style="display: inline">
 		<div class="tv tv-small" id="playerScreenshot"></div>
 	</div>
-	<div style="display: inline-block;">
+	<div style="display: inline-block; position: relative;">
 		<object type="application/x-shockwave-flash" data="<?=asset_url()?>swf/GameMusicEmu.swf" style="width:180px; height:80px;" id="spcplayer">
 			<param name="flashvars" value="showPosition=1&showSeekBar=1&showVolumeBar=1"/>
 			<param name="wmode" value="transparent" />
 		</object>
 		<input type="hidden" id="deferred-idTrack" />
+		<img id="wait" src="<?=asset_url()?>images/wait.gif" />
 	</div>
 	<?php if($isUserLogged): ?>
 		<input type="checkbox" id="player-loop" <?=$playerModeLoop ? 'checked' : ''?>><label title="Loop track" for="player-loop" class="label-checkbox"><span class="fa fa-repeat"></span></label>

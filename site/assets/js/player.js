@@ -138,6 +138,14 @@ function songEnded() {
 	}
 }
 
+function seekStart() {
+	$('#player-dialog #wait').show('slide', { direction: 'up'});
+}
+
+function seekEnd() {
+	$('#player-dialog #wait').hide('slide', { direction: 'up'});
+}
+
 //Playlist management
 
 function togglePlaylistVisibility(callback) {
