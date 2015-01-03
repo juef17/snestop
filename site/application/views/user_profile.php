@@ -32,7 +32,7 @@
 				<h3>Shared playlists</h3>
 			</div>
 	</div>
-	<?if (count($playlists) == 0): ?>
+	<?php if (count($playlists) == 0): ?>
 		<div class="container_12">
 			<p class="grid_12">None</p>
 		</div>
@@ -42,7 +42,7 @@
 			<?php if($isUserLogged):?>
 				<p class="grid_1">&nbsp;</p><!-- play -->
 				<p class="grid_2 ">&nbsp;</p><!-- copy -->
-			<?endif;?>
+			<?php endif; ?>
 		</div>
 		<?php $b = TRUE; foreach($playlists as $playlist): ?>
 			<div <?php if($b = !$b): ?> style="background-color: #dddddd;" <?php endif; ?> class="container_16">
@@ -52,7 +52,7 @@
 				<?php if($isUserLogged):?>
 					<img class="grid_1" style="width: 24px; height: 24px; cursor: pointer;" title="Play the playlist" src="<?=asset_url() . 'images/play.png'?>" onclick="loadPlaylist(<?=$playlist->idPlaylist?>);" />
 					<div class="grid_2 btn btn-xs btn-default" title="Take a copy of this playlist as your own" onclick="createPlayList(<?=$playlist->idPlaylist?>);">Copy...</div>
-				<?endif;?>
+				<?php endif; ?>
 			</div>
 		<?php endforeach; ?>
 
