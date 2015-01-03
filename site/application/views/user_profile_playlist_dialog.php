@@ -28,4 +28,4 @@
 			</tr>
 		<?php endforeach;?>
 	</table>
-<?endif;?>
+<?php endif; ?>
