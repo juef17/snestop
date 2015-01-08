@@ -68,9 +68,9 @@
 				stage.scaleMode = StageScaleMode.NO_SCALE;
 				stage.align =  StageAlign.TOP_LEFT;
 				init();
+				ExternalInterface.call("playerInitialized");
 			}
 			else addEventListener(Event.ADDED_TO_STAGE, init);
-			ExternalInterface.call("playerInitialized");
 		}
 		
 		private function init(e:Event = null):void 
