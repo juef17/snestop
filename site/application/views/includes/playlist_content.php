@@ -24,8 +24,10 @@
 			},
 			function(data) {
 				var json = $.parseJSON(data);
-				if(!json.success)
+				if(!json.success) {
+					$('#playlist-playlist-public').prop('checked', !$('#playlist-playlist-public').is(':checked'));
 					alert(json.message);
+				}
 			});
 		});
 
@@ -97,6 +99,7 @@
 				var json = $.parseJSON(data);
 				if(!json.success) {
 					showMessageDialog('', json.message);
+					$('#playlist-deleteConfirmation').dialog('close');
 				} else {
 					togglePlaylistVisibility();
 					refreshPlaylistsList(function() {
