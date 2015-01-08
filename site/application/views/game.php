@@ -73,8 +73,8 @@
 		<?php $b = TRUE; foreach($tracks as $track): ?>
 			<div <?php if($b = !$b): ?> style="background-color: #dddddd;" <?php endif; ?> class="container_16">
 				<img class="grid_1" style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="playTrack(<?=$track->idTrack?>);" />
-				<p class="grid_3"><?=$track->title?></p>
-				<p class="grid_1"><?=$track->length?></p>
+				<p class="grid_3"><a href="#!" onclick="detailsDialog(<?=$track->idTrack?>)"><?=$track->title?></a></p>
+				<p class="grid_1"><?=intval(date("i", $track->length)) . ":" . date("s", $track->length)?></p>
 				<p class="grid_2"><?=$track->composer?></p>
 				<div class="grid_1">
 					<a href="<?=asset_url() . 'spc/' . str_replace('&', '%26', $track->spcURL)?>"><img src="<?=asset_url() . 'images/download.png'?>" /></a>
@@ -82,7 +82,6 @@
 				<?php if($isUserLogged): ?>
 					<div class="grid_2 btn btn-xs btn-default" onclick="addToPlaylistDialog(<?=$track->idTrack?>);">Add to playlist...</div>
 				<?php endif; ?>
-				<div class="grid_2 btn btn-xs btn-default" onclick="detailsDialog(<?=$track->idTrack?>)">Details</div>
 			</div>
 
 			<!-- details dialog -->
