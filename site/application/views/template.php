@@ -52,6 +52,7 @@
 			<?php endif; ?>
 			
 			<ul id="menuprincipal" style="width: 100%; margin: 5px 0;" class="jdropdown-menu dropdown-menu-skin">
+				<?php require_once(views_dir() . 'includes/search_box.php'); ?>
 				<li><a href="<?=base_url()?>">Home</a></li>
 				<?php if($isUserLogged): ?>
 					<li><a href="#!">Requests</a>
@@ -88,7 +89,6 @@
 						<a href="#!" onclick="playerDialog.dialog('open');"><img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" /></a>
 					</li>
 				<?php endif; ?>
-				<?php require_once(views_dir() . 'includes/search_box.php'); ?>
 			</ul>
 			
 			<ul id="search-menu">
