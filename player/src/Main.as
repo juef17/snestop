@@ -60,6 +60,7 @@
 		private var mp3Channel:SoundChannel;
 		private var mp3Position:int = 0;
 		private var mp3IsPlaying:Boolean = false;
+		private var ramoutzEnTrainDeRouler:Boolean = false;
 		
 		public function Main():void 
 		{
@@ -212,15 +213,34 @@
 				if (loadedType() == "spc")
 				{
 					gameMusicEmu.pause();
-					gameMusicEmu.seek(sliderPosition.value);
-					gameMusicEmu.play();
+					if (gameMusicEmu.tell() - sliderPosition.value > 0) gameMusicEmu.seek(0);
+					var coefficient:Number = 100.0;
+					var diff:Number;
+					var ramoutz:Timer = new Timer(1);
+					ramoutz.addEventListener(TimerEvent.TIMER, faireRoulerRamoutz);
+					function faireRoulerRamoutz(e:TimerEvent):void
+					{
+						diff = gameMusicEmu.tell() - sliderPosition.value;
+						if (Math.abs(diff) < coefficient) gameMusicEmu.seek(sliderPosition.value);
+						else gameMusicEmu.seek(gameMusicEmu.tell() + coefficient);
+						if (Math.abs(gameMusicEmu.tell() - sliderPosition.value) < coefficient)
+						{
+							ramoutz.stop();
+							ramoutz = null;
+							gameMusicEmu.play();
+							ramoutzEnTrainDeRouler = false;
+							ExternalInterface.call("seekEnd");
+						}
+					}
+					ramoutzEnTrainDeRouler = true;
+					ramoutz.start();
 				}
 				else if (loadedType() == "mp3")
 				{
 					mp3Channel.stop();
 					mp3Channel = mp3.play(sliderPosition.value);
-				}
 				ExternalInterface.call("seekEnd");
+				}
 			});
 			sliderPosition.width = 170;
 			sliderPosition.visible = showSeekBar;
@@ -244,7 +264,7 @@
 			timer = new Timer(100, 0);
 			timer.addEventListener(TimerEvent.TIMER, function ():void 
 			{
-				if (sliderSeeking) return;
+				if (sliderSeeking || ramoutzEnTrainDeRouler) return;
 				var position:uint = (loadedType() == "spc") ? gameMusicEmu.tell() : mp3Channel.position;
 				textePosition.text = toTimeCode(position) + " / " + toTimeCode(length + fade);
 				sliderPosition.value = position;
@@ -340,15 +360,18 @@
 			}
 		}
 		
-		private function debug():void
+		private function debug(msg:String = ""):void
 		{
-			var debugInfo:String = "";
+			if (msg != "") { ExternalInterface.call("alert", msg); return;}
 			
-			debugInfo += "filename: " + filename + "\n";
-			debugInfo += "fade: " + fade + "\n";
-			debugInfo += "length: " + length;
+			msg += "filename: " + filename + "\n";
+			msg += "fade: " + fade + "\n";
+			msg += "length: " + length + "\n";
+			msg += "tell: " + gameMusicEmu.tell() + "\n";
+			msg += "sliderPosition: " + sliderPosition.value + "\n";
+			msg += "check: " + Math.abs(gameMusicEmu.tell() - sliderPosition.value) + "\n";
 			
-			ExternalInterface.call("alert", debugInfo);
+			ExternalInterface.call("alert", msg);
 		}
 		
 		public static function toTimeCode(milliseconds:int) : String
