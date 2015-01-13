@@ -25,18 +25,9 @@ class Base_Controller extends CI_Controller {
 	protected function getUserViewData() {
 		$data = array();
 		
-		if(isset($_SESSION['loggedUser'])) {
-			$loggedUser = $_SESSION['loggedUser'];
-			$data['loggedUserUserName'] = $loggedUser->userName;
-			$data['loggedUserIsAdmin'] = $loggedUser->isAdmin == 1;
-			$data['playerModeLoop'] = $loggedUser->loop;
-			$data['playerModeRandomize'] = $loggedUser->randomize;
-			$data['isUserLogged'] = true;
-		} else {
-			$data['loggedUserUserName'] = NULL;
-			$data['loggedUserIsAdmin'] = FALSE;
-			$data['isUserLogged'] = FALSE;
-		}
+		$data['loggedUser'] = isset($_SESSION['loggedUser'])
+			? $_SESSION['loggedUser']
+			: null;
 
 		if(isset($_SESSION['loginError'])) {
 			$data['loginError'] = $_SESSION['loginError'];

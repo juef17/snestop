@@ -65,6 +65,7 @@ class Playlist extends Secure_Controller {
 					|| $playlist->public))
 		{
 			$tracks = $this->Playlist_Item_model->get_PlaylistItems_for_Playlist($idPlaylist);
+			$data = $this->getUserViewData();
 			$data['playlist'] = $playlist;
 			$data['playlistItems'] = $tracks;
 			$this->load->view('includes/playlist_content.php', $data);

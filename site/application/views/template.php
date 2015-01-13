@@ -12,7 +12,7 @@
 
 	<script>
 		//some basic global variables
-		var isUserLogged = <?=$isUserLogged ? 'true' : 'false'?>;
+		var isUserLogged = <?=$loggedUser ? 'true' : 'false'?>;
 		var assetUrl = '<?=asset_url()?>';
 		var baseUrl = '<?=base_url()?>';
 	</script>
@@ -27,7 +27,7 @@
 			<div class="errors" style="display: inline-block;">
 				<?= $loginError ?>
 			</div>
-			<?php if($loggedUserUserName == NULL):
+			<?php if(!$loggedUser):
 					$attributes = array('class' => 'form-inline', 'role' => 'form', 'style' => 'float: right; padding: 5px 0;');
 					echo form_open('account/login?returnUrl=' . rawurlencode("$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"), $attributes);
 				?>
@@ -48,13 +48,13 @@
 					<a href="<?= base_url() ?>index.php/register" class="btn btn-success">Register!</a>
 				</form>
 			<?php else: ?>
-				<p style="float: right; padding: 5px 0;">Hi <a href="<?=base_url() . "index.php/user_profile/index/{$loggedUserUserName}"?>"><?= $loggedUserUserName ?>!</a> | <a href="<?=base_url()?>index.php/edit_user_profile">Edit your profile</a> | <a href="<?= base_url() ?>index.php/account/logout">Logout</a></p>
+				<p style="float: right; padding: 5px 0;">Hi <a href="<?=base_url() . "index.php/user_profile/index/{$loggedUser->userName}"?>"><?= $loggedUser->userName ?>!</a> | <a href="<?=base_url()?>index.php/edit_user_profile">Edit your profile</a> | <a href="<?= base_url() ?>index.php/account/logout">Logout</a></p>
 			<?php endif; ?>
 			
 			<ul id="menuprincipal" style="width: 100%; margin: 5px 0;" class="jdropdown-menu dropdown-menu-skin">
 				<?php require_once(views_dir() . 'includes/search_box.php'); ?>
 				<li><a href="<?=base_url()?>">Home</a></li>
-				<?php if($isUserLogged): ?>
+				<?php if($loggedUser): ?>
 					<li><a href="#!">Requests</a>
 						<ul>
 							<li><a href="<?= base_url() ?>index.php/request_community">Request a community</a></li>
@@ -65,12 +65,12 @@
 				<li><a href="#!">The project</a>
 					<ul>
 						<li><a href="<?= base_url() ?>index.php/about">About us</a></li>
-						<?php if($isUserLogged): ?>
+						<?php if($loggedUser): ?>
 							<li><a href="<?= base_url() ?>index.php/request_mistake">Report a mistake</a></li>
 						<?php endif; ?>
 					</ul>
 				</li>
-				<?php if($loggedUserIsAdmin): ?>
+				<?php if($loggedUser && $loggedUser->isAdmin): ?>
 					<li><a href="#!">Administration</a>
 						<ul>
 							<li><a href="<?= base_url() ?>index.php/communities_dashboard">Communities dashboard</a></li>
@@ -84,7 +84,7 @@
 						</ul>
 					</li>
 				<?php endif; ?>
-				<?php if($isUserLogged): ?>
+				<?php if($loggedUser): ?>
 					<li>
 						<a href="#!" onclick="playerDialog.dialog('open');"><img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" /></a>
 					</li>

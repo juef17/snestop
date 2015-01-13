@@ -39,7 +39,7 @@
 	<?php else: ?>
 		<div class="container_16" style="background-color: #dddddd;">
 			<p class="grid_4 columnheader">Title</p>
-			<?php if($isUserLogged):?>
+			<?php if($loggedUser):?>
 				<p class="grid_1">&nbsp;</p><!-- play -->
 				<p class="grid_2 ">&nbsp;</p><!-- copy -->
 			<?php endif; ?>
@@ -49,7 +49,7 @@
 				<a href="#!" onclick="playlistDialog(<?=$playlist->idPlaylist?>)">
 					<p class="grid_4"><?=$playlist->name?></p>
 				</a>
-				<?php if($isUserLogged):?>
+				<?php if($loggedUser):?>
 					<img class="grid_1" style="width: 24px; height: 24px; cursor: pointer;" title="Play the playlist" src="<?=asset_url() . 'images/play.png'?>" onclick="loadPlaylist(<?=$playlist->idPlaylist?>);" />
 					<div class="grid_2 btn btn-xs btn-default" title="Take a copy of this playlist as your own" onclick="createPlayList(<?=$playlist->idPlaylist?>);">Copy...</div>
 				<?php endif; ?>

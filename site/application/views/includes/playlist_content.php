@@ -1,18 +1,27 @@
+<?php $playlistEditable = $loggedUser && $playlist->idUser == $loggedUser->idUser; ?>
+
 <ul style="margin-top: 5px; max-height: 150px; overflow-y: auto;" id="playlist-tracks" class="playlist">
 	<?php foreach($playlistItems as $item):
 		$text = $item->gameTitleEng . ' - ' . $item->title; ?>
 		<li class="ui-state-default" title="<?=$text?>" id="<?=$item->idTrack?>">
-		<span class="fa fa-unsorted fa-lg"></span>
+		<?php if($playlistEditable): ?>
+			<span class="fa fa-unsorted fa-lg"></span>
+		<?php endif; ?>
 		<span><?=$text?></span>
-		<img id="deleteItemButton" src="<?=asset_url()?>images/delete.png" onclick="deleteItem(<?=$item->idTrack?>);"/>
+		<?php if($playlistEditable): ?>
+			<img id="deleteItemButton" src="<?=asset_url()?>images/delete.png" onclick="deleteItem(<?=$item->idTrack?>);"/>
+		<?php endif; ?>
 		</li>
   <?php endforeach; ?>
 </ul>
-<button class="btn btn-xs btn-danger" id="playlist-delete" onclick="confirmDeletePlaylist();">Delete playlist</button>
-<label title="Shares this playlist on your profile for other members to play!" class="label-checkbox" style="color: #dddddd;">
-	<input id="playlist-playlist-public" type="checkbox" <?=$playlist->public ? 'checked' : ''?> />
-	Public
-</label>
+
+<div style="<?= $playlistEditable ? '' : 'display: none;' ?>">
+	<button class="btn btn-xs btn-danger" id="playlist-delete" onclick="confirmDeletePlaylist();">Delete playlist</button>
+	<label title="Shares this playlist on your profile for other members to play!" class="label-checkbox" style="color: #dddddd;">
+		<input id="playlist-playlist-public" type="checkbox" <?=$playlist->public ? 'checked' : ''?> />
+		Public
+	</label>
+</div>
 
 <script>
 	function bindPlaylistDetailsFunctions() {
@@ -34,6 +43,7 @@
 		$('#player-playlistcombo').val(<?=$playlist->idPlaylist?>);
 
 		$('#playlist-tracks').sortable({
+			disabled: <?= $playlistEditable ? 'false' : 'true' ?>,
 			handle: '.fa-unsorted',
 			update: function(event, ui) {
 				savePositions();
