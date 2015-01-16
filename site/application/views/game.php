@@ -13,12 +13,12 @@
 
 	<div class="container_12">
 		<div class="grid_4">
-			<?php if($loggedUserIsAdmin):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$game->idGame?>, 0); return false;">
-			<?php elseif($isUserLogged && !$game->isScreenshotSet):?><a href="<?=base_url()?>index.php/request_screenshot_game/index/<?=$game->idGame?>"><?php endif;?>
+			<?php if($loggedUser->isAdmin):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$game->idGame?>, 0); return false;">
+			<?php elseif($loggedUser && !$game->isScreenshotSet):?><a href="<?=base_url()?>index.php/request_screenshot_game/index/<?=$game->idGame?>"><?php endif;?>
 			<div class="tv" style="position: relative; background-image: url('<?=$game->isScreenshotSet ? asset_url() . "images/screenshots/game/{$game->idGame}.png" : asset_url() . 'images/en/no_title_ss.png'?>');">
-				<?php if($loggedUserIsAdmin && $game->isScreenshotSet):?><img id="unset-screenshot" style="position: absolute; top: 24px; right: 24px; width: 24px; height: 24px;" src="<?=asset_url()?>images/delete.png" onclick="unsetScreenshot(<?=$game->idGame?>, 0);"/><?php endif;?>
+				<?php if($loggedUser->isAdmin && $game->isScreenshotSet):?><img id="unset-screenshot" style="position: absolute; top: 24px; right: 24px; width: 24px; height: 24px;" src="<?=asset_url()?>images/delete.png" onclick="unsetScreenshot(<?=$game->idGame?>, 0);"/><?php endif;?>
 			</div>
-			<?php if($isUserLogged && !$game->isScreenshotSet || $loggedUserIsAdmin):?></a><?php endif;?>
+			<?php if($loggedUser && !$game->isScreenshotSet || $loggedUser->isAdmin):?></a><?php endif;?>
 		</div>
 		<div class="grid_8">
 			<div>
@@ -44,7 +44,7 @@
 	<div class="container_12">
 		<div class="grid_12">
 			<h2>Tracks</h2>
-			<?php if($loggedUserIsAdmin): ?>
+			<?php if($loggedUser->isAdmin): ?>
 				<div>
 					<a href="<?=base_url()?>index.php/tracks_dashboard/index/<?=$game->idGame?>">Open tracks dashboard</a>
 				</div>
@@ -65,7 +65,7 @@
 			<p class="grid_1 columnheader">Length</p>
 			<p class="grid_2 columnheader">Composer(s)</p>
 			<p class="grid_1 columnheader">SPC</p>
-			<?php if($isUserLogged): ?>
+			<?php if($loggedUser): ?>
 				<p class="grid_3 columnheader">My playlists</p>
 			<?php endif; ?>
 			<div class="grid_2 columnheader"><!-- details --></div>
@@ -79,19 +79,19 @@
 				<div class="grid_1">
 					<a href="<?=asset_url() . 'spc/' . str_replace('&', '%26', $track->spcURL)?>"><img src="<?=asset_url() . 'images/download.png'?>" /></a>
 				</div>
-				<?php if($isUserLogged): ?>
+				<?php if($loggedUser): ?>
 					<div class="grid_2 btn btn-xs btn-default" onclick="addToPlaylistDialog(<?=$track->idTrack?>);">Add to playlist...</div>
 				<?php endif; ?>
 			</div>
 
 			<!-- details dialog -->
 			<div style="display: none; padding-top: 15px;" id="dialog-details_<?=$track->idTrack?>" title="<?=$game->titleEng . ' - ' . $track->title?>">
-				<?php if($loggedUserIsAdmin):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$track->idTrack?>, 1); return false;">
-				<?php elseif($isUserLogged && !$track->isScreenshotSet):?><a href="<?=base_url()?>index.php/request_screenshot_track/index/<?=$track->idTrack?>"><?php endif;?>
+				<?php if($loggedUser->isAdmin):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$track->idTrack?>, 1); return false;">
+				<?php elseif($loggedUser && !$track->isScreenshotSet):?><a href="<?=base_url()?>index.php/request_screenshot_track/index/<?=$track->idTrack?>"><?php endif;?>
 					<div class="tv" style="position: relative; background-image: url('<?=$track->isScreenshotSet ? asset_url() . "images/screenshots/track/{$track->idTrack}.png" : asset_url() . 'images/en/no_track_ss.png'?>');">
-						<?php if($loggedUserIsAdmin && $track->isScreenshotSet):?><img id="unset-screenshot" style="position: absolute; top: 24px; right: 24px; width: 24px; height: 24px;" src="<?=asset_url()?>images/delete.png" onclick="unsetScreenshot(<?=$track->idTrack?>, 1);"/><?php endif;?>
+						<?php if($loggedUser->isAdmin && $track->isScreenshotSet):?><img id="unset-screenshot" style="position: absolute; top: 24px; right: 24px; width: 24px; height: 24px;" src="<?=asset_url()?>images/delete.png" onclick="unsetScreenshot(<?=$track->idTrack?>, 1);"/><?php endif;?>
 					</div>
-				<?php if($isUserLogged && !$track->isScreenshotSet || $loggedUserIsAdmin):?></a><?php endif;?>
+				<?php if($loggedUser && !$track->isScreenshotSet || $loggedUser->isAdmin):?></a><?php endif;?>
 				<div style="display: inline-block; margin: 15px 0 0 15px;">
 					<h4>Ratings*</h4>
 					<table class="datatable">
@@ -129,7 +129,7 @@
 					<p style="font-size: 0.6em;">*Ratings will be updated as soon as we have enough data! Come back soon!</p>
 				</div>
 				<h3>Reviews</h3>
-				<?php if($isUserLogged):?>
+				<?php if($loggedUser):?>
 					<a href="<?=base_url()?>index.php/request_review/index/<?=$track->idTrack?>">Write a review</a>
 				<?php else:?>
 					<p>Log in to write a review!</p>
@@ -172,7 +172,7 @@
 		</script>
 	<?php endif; //tracks count > 0 ?>
 	
-	<?php if($loggedUserIsAdmin): ?>
+	<?php if($loggedUser->isAdmin): ?>
 		<div style="display: none;" id="dialog-upload">
 			<?= form_open_multipart(base_url() . 'index.php/screenshot_request_dashboard/uploadScreenshot') ?>
 				<input type="hidden" id="id" name="id" />
