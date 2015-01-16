@@ -37,42 +37,49 @@
 			<p class="grid_12">None</p>
 		</div>
 	<?php else: ?>
-		<div class="container_16" style="background-color: #dddddd;">
-			<p class="grid_4 columnheader">Title</p>
-			<?php if($loggedUser):?>
-				<p class="grid_1">&nbsp;</p><!-- play -->
-				<p class="grid_2 ">&nbsp;</p><!-- copy -->
-			<?php endif; ?>
-		</div>
-		<?php $b = TRUE; foreach($playlists as $playlist): ?>
-			<div <?php if($b = !$b): ?> style="background-color: #dddddd;" <?php endif; ?> class="container_16">
-				<a href="#!" onclick="playlistDialog(<?=$playlist->idPlaylist?>)">
-					<p class="grid_4"><?=$playlist->name?></p>
-				</a>
-				<?php if($loggedUser):?>
-					<img class="grid_1" style="width: 24px; height: 24px; cursor: pointer;" title="Play the playlist" src="<?=asset_url() . 'images/play.png'?>" onclick="loadPlaylist(<?=$playlist->idPlaylist?>);" />
-					<div class="grid_2 btn btn-xs btn-default" title="Take a copy of this playlist as your own" onclick="createPlayList(<?=$playlist->idPlaylist?>);">Copy...</div>
-				<?php endif; ?>
+		<div class="container_16">
+			<div id="accordion-shared-playlists" class="grid_16">
+				<?php foreach($playlists as $playlist): ?>
+					<h3><?=$playlist->name?></h3>
+					<div>
+						<input type="hidden" value="<?=$playlist->idPlaylist?>" />
+						<div id="user-playlist"><!-- AJAX loaded content -->allo</div>
+					</div>
+				<?php endforeach; ?>
 			</div>
-		<?php endforeach; ?>
-
+		</div>
 
 		<div id="dialog-playlist"><!--Ajax loaded content--></div>
 		<script>
-			function playlistDialog(idPlaylist) {
-				$.get(
-					'<?=base_url()?>index.php/user_profile/playlistDetails/' + idPlaylist,
-					function(data) {
-						$('#dialog-playlist').html(data);
-						$('#dialog-playlist').dialog({
-							title: 'Playlist tracks',
-							modal: false,
-							resizable: true,
-							width: 600
-						});
+			$(function() {
+				$('#accordion-shared-playlists').accordion({
+					heightStyle: 'content',
+					collapsible: true,
+					active: false,
+					beforeActivate: function(e, ui) {
+						if(ui.newPanel) {
+							var idPlaylist = ui.newPanel.find('input').val();
+							var contentPanel = ui.newPanel.find('#user-playlist');
+							contentPanel.html('<img style="height: 64px; width: 64px; margin: 0 auto; display: block;" src="<?=asset_url()?>images/wait.gif" />');
+							$.get( '<?=base_url()?>index.php/user_profile/playlistDetails/' + idPlaylist, function(data) {
+								contentPanel.fadeOut(function() {
+									contentPanel.html(data);
+									contentPanel.fadeIn();
+								});
+							});
+						}
+						if(ui.oldPanel) {
+							ui.oldPanel.find('#user-playlist').fadeOut();
+						}
+					},
+					activate: function (e, ui) {
+						if(ui.oldPanel) {
+							ui.oldPanel.find('#user-playlist').empty();
+							ui.oldPanel.find('#user-playlist').show();
+						}
 					}
-				);
-			}
+				});
+			});
 		</script>
 	<?php endif; ?>
 

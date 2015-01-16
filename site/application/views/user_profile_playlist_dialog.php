@@ -1,18 +1,16 @@
-<style>
-	.dialog-tracks tr {
-		padding: 3px 0;
-	}
-
-	.dialog-tracks td {
-		padding: 0 5px;
-	}
-</style>
-
-<h2><?=$playlist->name?></h2>
+<?php if($loggedUser && count($tracks) > 0):?>
+	<div style="margin-bottom: 15px;">
+		<a class="btn btn-primary" title="Load the playlist in the player" onclick="loadPlaylist(<?=$playlist->idPlaylist?>);">Play playlist</a>
+		<div class="btn btn-default" title="Take a copy of this playlist as your own" onclick="createPlayList(<?=$playlist->idPlaylist?>);">Copy...</div>
+	</div>
+<?php elseif(count($tracks) > 0): ?>
+	<p>Login for more player controls!</p>
+<?php endif; ?>
+						
 <?php if(count($tracks) == 0): ?>
 	Empty
 <?php else: ?>
-	<table class="dialog-tracks">
+	<table style="width:100%;">
 		<tr style="background-color: #dddddd">
 			<th>&nbsp;</th>
 			<th>#</th>

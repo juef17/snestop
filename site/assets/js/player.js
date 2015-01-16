@@ -109,7 +109,6 @@ function setTitle(track) {
 
 //Flash events
 function playerInitialized() {
-	console.debug('Player init');
 	if(playerDialog.is(':visible')) { //seems to also trigger when the dialog closes.
 		var idTrack = $('#player-dialog #deferred-idTrack').val();
 		playTrack(idTrack);
@@ -118,9 +117,8 @@ function playerInitialized() {
 
 function songEnded() {
 	if($('#player-loop').is(':checked')) {
-		playTrack(playingIdTrack); //à remplacer par ci dessous, plus efficace.
-		//$('#spcplayer')[0].rewind();
-		//$('#spcplayer')[0].play();
+		$('#spcplayer')[0].rewind();
+		$('#spcplayer')[0].play();
 	} else {
 		var sortedIdTracks = $('#playlist-tracks').sortable('toArray');
 		var trackPosition = sortedIdTracks.indexOf(playingIdTrack);

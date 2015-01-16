@@ -20,8 +20,9 @@ class User_Profile extends Public_Controller {
 
 	//Ajax GET partial view
 	public function playlistDetails($idPlaylist) {
+		$data = $this->getUserViewData();
+		
 		$playlist = $this->Playlist_model->get_Playlist($idPlaylist);
-
 		if($playlist && $playlist->public)
 		{
 			$data['tracks'] = $this->Playlist_Item_model->get_PlaylistItems_for_Playlist($idPlaylist);
