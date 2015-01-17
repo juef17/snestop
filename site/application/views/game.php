@@ -13,12 +13,12 @@
 
 	<div class="container_12">
 		<div class="grid_4">
-			<?php if($loggedUser->isAdmin):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$game->idGame?>, 0); return false;">
+			<?php if($loggedUser && $loggedUser->isAdmin):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$game->idGame?>, 0); return false;">
 			<?php elseif($loggedUser && !$game->isScreenshotSet):?><a href="<?=base_url()?>index.php/request_screenshot_game/index/<?=$game->idGame?>"><?php endif;?>
 			<div class="tv" style="position: relative; background-image: url('<?=$game->isScreenshotSet ? asset_url() . "images/screenshots/game/{$game->idGame}.png" : asset_url() . 'images/en/no_title_ss.png'?>');">
-				<?php if($loggedUser->isAdmin && $game->isScreenshotSet):?><img id="unset-screenshot" style="position: absolute; top: 24px; right: 24px; width: 24px; height: 24px;" src="<?=asset_url()?>images/delete.png" onclick="unsetScreenshot(<?=$game->idGame?>, 0);"/><?php endif;?>
+				<?php if($loggedUser && $loggedUser->isAdmin && $game->isScreenshotSet):?><img id="unset-screenshot" style="position: absolute; top: 24px; right: 24px; width: 24px; height: 24px;" src="<?=asset_url()?>images/delete.png" onclick="unsetScreenshot(<?=$game->idGame?>, 0);"/><?php endif;?>
 			</div>
-			<?php if($loggedUser && !$game->isScreenshotSet || $loggedUser->isAdmin):?></a><?php endif;?>
+			<?php if($loggedUser && (!$game->isScreenshotSet || $loggedUser->isAdmin)):?></a><?php endif;?>
 		</div>
 		<div class="grid_8">
 			<div>
@@ -44,7 +44,7 @@
 	<div class="container_12">
 		<div class="grid_12">
 			<h2>Tracks</h2>
-			<?php if($loggedUser->isAdmin): ?>
+			<?php if($loggedUser && $loggedUser->isAdmin): ?>
 				<div>
 					<a href="<?=base_url()?>index.php/tracks_dashboard/index/<?=$game->idGame?>">Open tracks dashboard</a>
 				</div>
@@ -172,7 +172,7 @@
 		</script>
 	<?php endif; //tracks count > 0 ?>
 	
-	<?php if($loggedUser->isAdmin): ?>
+	<?php if($loggedUser && $loggedUser->isAdmin): ?>
 		<div style="display: none;" id="dialog-upload">
 			<?= form_open_multipart(base_url() . 'index.php/screenshot_request_dashboard/uploadScreenshot') ?>
 				<input type="hidden" id="id" name="id" />
