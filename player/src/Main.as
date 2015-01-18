@@ -61,6 +61,7 @@
 		private var mp3Position:int = 0;
 		private var mp3IsPlaying:Boolean = false;
 		private var ramoutzEnTrainDeRouler:Boolean = false;
+		private var url:String = "";
 		
 		public function Main():void 
 		{
@@ -281,6 +282,7 @@
 		
 		private function playUrl(message:String):void
 		{
+			url = message;
 			var tmp:Array = message.split("?");
 			filename = tmp[0];
 			length = tmp[1] * 1000;
@@ -316,7 +318,8 @@
 		{
 			if (loadedType() == "spc")
 			{
-				if (gameMusicEmu.isPaused)
+				if (gameMusicEmu.tell() == 0) playUrl(url);
+				else if (gameMusicEmu.isPaused)
 				{
 					gameMusicEmu.play();
 					pauseButton.label = "Pause";
@@ -338,16 +341,13 @@
 			textePosition.text = toTimeCode(0) + " / " + toTimeCode(length + fade);
 			if (loadedType() == "spc")
 			{
-				if (gameMusicEmu.isPaused)
-				{
-					gameMusicEmu.seek(0);
-				}
-				else if (gameMusicEmu.isPlaying)
+				if (gameMusicEmu.isPlaying)
 				{
 					gameMusicEmu.pause();
 					gameMusicEmu.seek(0);
 					gameMusicEmu.play();
 				}
+				else gameMusicEmu.seek(0);
 			}
 			else if (loadedType() == "mp3")
 			{
