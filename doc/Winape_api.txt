@@ -15,6 +15,10 @@ JS --> Flash:
 	rewind()			- le lecteur joue déjà: rembobiner et continuer à jouer
 						- le lecteur est sur pause: rembobiner seulement
 	debug()				Envoie des infos sur certaines variables dans un alert de JS
+	loopMode(int mode)	Indique au player un changement dans la façon de looper
+						0: none!
+						1: song
+						2: playlist
 
 Flash --> JS:
 	songEnded			Envoyé quand une track a fini de jouer
