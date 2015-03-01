@@ -65,4 +65,21 @@ class Game_model extends CI_Model {
 			return $this->db->update('Game', array('titleJap' => $game->titleEng, 'titleEng' => $game->titleJap));
 		}
 	}
+
+	public function search($searchString) {
+		foreach(explode(' ', $searchString) as $word) {
+			$regex = "({$word})+";
+			$regex = $this->db->escape_str($regex);
+			$this->db->where("(titleEng RLIKE '{$regex}' OR titleJap RLIKE '{$regex}')");
+		}
+
+		$this->db->limit(150);
+		$query = $this->db->get('Game');
+
+		$retval = array();
+		foreach($query->result() as $row) {
+			$retval[] = $this->getGameFromRow($row);
+		}
+		return $retval;
+	}
 }

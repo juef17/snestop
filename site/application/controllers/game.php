@@ -8,9 +8,10 @@ class Game extends Public_Controller {
 		$this->load->model('Review_model','',TRUE);
 	}
 
-	public function index($id) {
+	public function index($id, $idTrack = null) {
 		$data = $this->getUserViewData();
 		$data['game'] = $this->Game_model->get_Game($id);
+		$data['idTrack'] = $idTrack; //open this track dialog
 		$data['composers'] = $this->Track_model->get_game_composers($id);
 		$data['tracks'] = $this->Track_model->get_Tracks_for_Game($id);
 		$data['view'] = 'game.php';

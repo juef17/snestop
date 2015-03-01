@@ -235,4 +235,13 @@
 			}
 		</script>
 	<?php endif; //loggedUserIsAdmin ?>
-<?php endif; ?>
+
+	<script>
+		$(function() {
+			<?php if($idTrack): ?>
+				detailsDialog(<?=$track->idTrack?>);
+			<?php endif; ?>
+		});
+	</script>
+	
+<?php endif; //$game == null ?>

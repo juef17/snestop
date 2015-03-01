@@ -122,6 +122,25 @@ class Track_model extends CI_Model {
 		return $retval;
 	}
 
+	public function search($searchString) {
+		foreach(explode(' ', $searchString) as $word) {
+			$regex = "({$word})+";
+			$regex = $this->db->escape_str($regex);
+			$this->db->where("(title RLIKE '{$regex}')");
+		}
+
+		$this->db->limit(150);
+		$this->db->select('Track.*, Game.TitleEng AS gameTitleEng');
+		$this->db->join('Game', 'Track.idGame = Game.idGame', 'inner');
+		$query = $this->db->get('Track');
+
+		$retval = array();
+		foreach($query->result() as $row) {
+			$retval[] = $this->getTrackFromRow($row);
+		}
+		return $retval;
+	}
+
 	public function update_ratings_Track($idTrackWinner, $idTrackLoser) {
 		$queryWinner = $this->db->get_where('Track', array('idTrack' => $idTrackWinner));
 		$queryLoser = $this->db->get_where('Track', array('idTrack' => $idTrackLoser));
