@@ -65,6 +65,7 @@
 		private var mp3IsPlaying:Boolean = false;
 		private var ramoutzEnTrainDeRouler:Boolean = false;
 		private var url:String = "";
+		private var loopMP3:Boolean = false;
 		private const MAX_VALUE:int = 2147483647;
 		
 		public function Main():void 
@@ -277,9 +278,17 @@
 				sliderPosition.value = position;
 				if (position >= length + fade && !donePlaying)
 				{
-					(loadedType() == "spc") ? gameMusicEmu.stop() : mp3Channel.stop();
-					donePlaying = true;
-					ExternalInterface.call("songEnded");
+					if (loadedType() == "mp3" && loopMP3)
+					{
+						mp3Channel.stop();
+						mp3Channel = mp3.play();
+					}
+					else
+					{
+						(loadedType() == "spc") ? gameMusicEmu.stop() : mp3Channel.stop();
+						donePlaying = true;
+						ExternalInterface.call("songEnded");
+					}
 				}
 				if (loadedType() == "spc") gameMusicEmu.setFade(length);
 			});
@@ -368,23 +377,30 @@
 		
 		private function enableLoop(loop:Boolean):void
 		{
-			var position:uint = (loadedType() == "spc") ? gameMusicEmu.tell() : mp3Channel.position;
-			sliderPosition.visible = !loop;
-			textePosition.visible = !loop;
-			if (loop)
+			if (loadedType() == "spc")
 			{
-				oldLength = length;
-				gameMusicEmu.setFade(MAX_VALUE);
-				length = MAX_VALUE;
-				labelPosition.text = "Natural loop mode is on!";
+				var position:uint = (loadedType() == "spc") ? gameMusicEmu.tell() : mp3Channel.position;
+				sliderPosition.visible = !loop;
+				textePosition.visible = !loop;
+				if (loop)
+				{
+					oldLength = length;
+					gameMusicEmu.setFade(MAX_VALUE);
+					length = MAX_VALUE;
+					labelPosition.text = "Natural loop mode is on!";
+				}
+				else
+				{
+					length = oldLength;
+					if (position > length) length = position;
+					gameMusicEmu.setFade(length);
+					labelPosition.text = "Position:";
+				}
 			}
 			else
 			{
-				length = oldLength;
-				if (position > length) length = position;
-				gameMusicEmu.setFade(length);
-				labelPosition.text = "Position:";
-			}	
+				loopMP3 = loop;
+			}
 		}
 		
 		private function debug(msg:String = ""):void
