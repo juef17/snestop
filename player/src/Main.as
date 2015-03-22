@@ -1,4 +1,4 @@
-﻿package 
+﻿package
 {
 	import flash.display.Graphics;
 	import flash.display.Bitmap;
@@ -25,6 +25,7 @@
 	import gme.GameMusicEmu;
 	import gme.SampleRate;
 	
+	
 	public class Main extends Sprite 
 	{
 		[Embed(source="../assets/snes.ttf", fontName = "SNES", mimeType = "application/x-font", fontWeight="normal", fontStyle="normal", unicodeRange="U+0020-U+007E", advancedAntiAliasing="true", embedAsCFF="false")]
@@ -45,9 +46,11 @@
 		private var filename:String;
 		private var fade:int;
 		private var length:int;
+		private var oldLength:int = 1000;
 		private var pauseButton:PushButton;
 		private var petit:TextFormat;
 		private var textePosition:TextField;
+		private var labelPosition:TextField;
 		private const heightOffset:int = 7;
 		private var logoOffset:int = 0;
 		private var panOffset:int = 0;
@@ -62,6 +65,7 @@
 		private var mp3IsPlaying:Boolean = false;
 		private var ramoutzEnTrainDeRouler:Boolean = false;
 		private var url:String = "";
+		private const MAX_VALUE:int = 2147483647;
 		
 		public function Main():void 
 		{
@@ -82,6 +86,7 @@
 			ExternalInterface.addCallback("play", playSansUrl);
 			ExternalInterface.addCallback("rewind", rewind);
 			ExternalInterface.addCallback("debug", debug);
+			ExternalInterface.addCallback("enableLoop", enableLoop);
 			
 			filename = LoaderInfo(this.root.loaderInfo).parameters.spc;
 			fade = int(LoaderInfo(this.root.loaderInfo).parameters.fade)*1000;
@@ -188,13 +193,14 @@
 			labelPan.visible = showPanBar;
 			sliderPan.visible = showPanBar;
 			
-			var labelPosition:TextField = new TextField;
+			labelPosition = new TextField;
             labelPosition.embedFonts = true;
             labelPosition.defaultTextFormat = petit;
             labelPosition.text = "Position:";
             labelPosition.x = 100 + logoOffset;
 			labelPosition.y = 50 + heightOffset + volumeOffset + panOffset;
 			labelPosition.height = 12;
+			labelPosition.width = 160;
             this.addChild(labelPosition);
 			labelPosition.visible = showPosition;
 			
@@ -358,6 +364,27 @@
 					mp3Channel = mp3.play(mp3Position);
 				}
 			}
+		}
+		
+		private function enableLoop(loop:Boolean):void
+		{
+			var position:uint = (loadedType() == "spc") ? gameMusicEmu.tell() : mp3Channel.position;
+			sliderPosition.visible = !loop;
+			textePosition.visible = !loop;
+			if (loop)
+			{
+				oldLength = length;
+				gameMusicEmu.setFade(MAX_VALUE);
+				length = MAX_VALUE;
+				labelPosition.text = "Natural loop mode is on!";
+			}
+			else
+			{
+				length = oldLength;
+				if (position > length) length = position;
+				gameMusicEmu.setFade(length);
+				labelPosition.text = "Position:";
+			}	
 		}
 		
 		private function debug(msg:String = ""):void
