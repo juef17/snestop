@@ -116,12 +116,12 @@ function playerInitialized() {
 }
 
 function songEnded() {
-	if($('#player-loop').is(':checked')) {
-		$('#spcplayer')[0].rewind();
+	var sortedIdTracks = $('#playlist-tracks').sortable('toArray');
+	var trackPosition = sortedIdTracks.indexOf(playingIdTrack);
+	if($('#player-loop').is(':checked') || sortedIdTracks.length == 1) {	// la 2e condition est pour qu'on n'essaie pas
+		$('#spcplayer')[0].rewind();										// de trouver une autre track si on en a juste 1
 		$('#spcplayer')[0].play();
 	} else {
-		var sortedIdTracks = $('#playlist-tracks').sortable('toArray');
-		var trackPosition = sortedIdTracks.indexOf(playingIdTrack);
 		if($('#player-randomize').is(':checked')) {
 			var nextIdTrack = 0;
 			do { //joue pas la meme!
