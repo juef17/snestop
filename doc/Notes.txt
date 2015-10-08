@@ -8,6 +8,8 @@ SkyPeanutz!
 
 Et doit avoir full access à la base de données "snestop"
 
+Toutes les collations (DB, tables et champs char) doivent être UTF8
+
 -------
 
 Le nom d'utilisateur et mot de passe pour accéder au contenu du dossier dbtools dans un fureteur est:
