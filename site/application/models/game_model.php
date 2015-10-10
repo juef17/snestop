@@ -68,8 +68,8 @@ class Game_model extends CI_Model {
 
 	public function search($searchString) {
 		foreach(explode(' ', $searchString) as $word) {
-			$regex = "({$word})+";
-			$regex = $this->db->escape_str($regex);
+			$word = preg_quote($word);
+			$regex = $this->db->escape_str("({$word})+");
 			$this->db->where("(titleEng RLIKE '{$regex}' OR titleJap RLIKE '{$regex}')");
 		}
 

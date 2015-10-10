@@ -4,9 +4,9 @@
 <div class="container_12">
 	<h4 class="grid_12">
 		<?php if(count($tracks) < 150): ?>
-			<?=count($tracks)?> tracks(s) matching '<?=$searchString?>'
+			<?=count($tracks)?> tracks(s) matching '<?=htmlentities($searchString)?>'
 		<?php else: ?>
-			Over <?=count($tracks)?> tracks(s) matching '<?=$searchString?>'. Please refine your criterias.
+			Over <?=count($tracks)?> tracks(s) matching '<?=htmlentities($searchString)?>'. Please refine your criterias.
 		<?php endif; ?>
 	</h4>
 </div>

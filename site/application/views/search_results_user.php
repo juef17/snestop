@@ -2,7 +2,7 @@
 	<h1 class="grid_12">Search results</h1>
 </div>
 <div class="container_12">
-	<h4 class="grid_12"><?=count($users)?> user(s) matching '<?=$searchString?>'</h4>
+	<h4 class="grid_12"><?=count($users)?> user(s) matching '<?=htmlentities($searchString)?>'</h4>
 </div>
 <?php if(count($users) == 50): ?>
 	<div class="container_12">
