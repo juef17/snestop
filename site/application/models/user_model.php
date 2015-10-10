@@ -156,7 +156,7 @@ class User_model extends CI_Model {
 	}
 
 	public function search($searchString) {
-		$regex = implode('.+', explode(' ', $searchString));
+		$regex = implode('.+', explode(' ', preg_quote($searchString)));
 		$regex = $this->db->escape_str($regex);
 		
 		$this->db->select('*, Community.name as communityName, Community.URL as communityUrl');
