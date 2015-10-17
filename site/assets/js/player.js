@@ -147,22 +147,26 @@ function playerInitialized() {
 
 function songEnded() {
 	var sortedIdTracks = $('#playlist-tracks').sortable('toArray');
-	var trackPosition = sortedIdTracks.indexOf(playingIdTrack);
-	if(playerLoopMode == PlayerLoopModes.All && sortedIdTracks.length == 1) {	// la 2e condition est pour qu'on n'essaie pas
-		$('#spcplayer')[0].rewind();										// de trouver une autre track si on en a juste 1
-		$('#spcplayer')[0].play();
-	} else if($('#player-randomize').is(':checked')) {
-		var nextIdTrack = 0;
-		do { //joue pas la meme!
-			nextIdTrack = sortedIdTracks[Math.floor(Math.random()*sortedIdTracks.length)];
-		} while(nextIdTrack == playingIdTrack)
-		
-		var nextTrackPosition = sortedIdTracks.indexOf(nextIdTrack) + 1;
-		selectSelectableElement($('#playlist-tracks'), $('#playlist-tracks li:nth-child(' + nextTrackPosition + ')'));
-	} else if(trackPosition < sortedIdTracks.length - 1) {
-		selectSelectableElement($('#playlist-tracks'), $('#playlist-tracks li:nth-child(' + (trackPosition + 2) + ')'));
-	} else if(trackPosition == sortedIdTracks.length - 1 && playerLoopMode == PlayerLoopModes.All) {
-		selectSelectableElement($('#playlist-tracks'), $('#playlist-tracks li:nth-child(1)'));
+	if(sortedIdTracks.length == 0) {
+		$('#spcplayer')[0].rewind();
+	} else {
+		var trackPosition = sortedIdTracks.indexOf(playingIdTrack);
+		if(playerLoopMode == PlayerLoopModes.All && sortedIdTracks.length == 1) {	// la 2e condition est pour qu'on n'essaie pas
+			$('#spcplayer')[0].rewind();										// de trouver une autre track si on en a juste 1
+			$('#spcplayer')[0].play();
+		} else if($('#player-randomize').is(':checked')) {
+			var nextIdTrack = 0;
+			do { //joue pas la meme!
+				nextIdTrack = sortedIdTracks[Math.floor(Math.random()*sortedIdTracks.length)];
+			} while(nextIdTrack == playingIdTrack)
+			
+			var nextTrackPosition = sortedIdTracks.indexOf(nextIdTrack) + 1;
+			selectSelectableElement($('#playlist-tracks'), $('#playlist-tracks li:nth-child(' + nextTrackPosition + ')'));
+		} else if(trackPosition < sortedIdTracks.length - 1) {
+			selectSelectableElement($('#playlist-tracks'), $('#playlist-tracks li:nth-child(' + (trackPosition + 2) + ')'));
+		} else if(trackPosition == sortedIdTracks.length - 1 && playerLoopMode == PlayerLoopModes.All) {
+			selectSelectableElement($('#playlist-tracks'), $('#playlist-tracks li:nth-child(1)'));
+		}
 	}
 }
 
