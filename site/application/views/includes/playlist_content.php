@@ -1,19 +1,21 @@
 <?php $playlistEditable = $loggedUser && $playlist->idUser == $loggedUser->idUser; ?>
 
-<ul style="margin-top: 5px; max-height: 150px; overflow-y: auto;" id="playlist-tracks" class="playlist">
-	<?php foreach($playlistItems as $item):
-		$text = $item->gameTitleEng . ' - ' . $item->title; ?>
-		<li class="ui-state-default" title="<?=$text?>" id="<?=$item->idTrack?>">
-		<?php if($playlistEditable): ?>
-			<span class="fa fa-unsorted fa-lg"></span>
-		<?php endif; ?>
-		<span><?=$text?></span>
-		<?php if($playlistEditable): ?>
-			<img id="deleteItemButton" src="<?=asset_url()?>images/delete.png" onclick="deleteItem(<?=$item->idTrack?>);"/>
-		<?php endif; ?>
-		</li>
-  <?php endforeach; ?>
-</ul>
+<div class="playlist-container">
+	<ul id="playlist-tracks" class="playlist">
+		<?php foreach($playlistItems as $item):
+			$text = $item->gameTitleEng . ' - ' . $item->title; ?>
+			<li class="ui-state-default" title="<?=$text?>" id="<?=$item->idTrack?>">
+			<?php if($playlistEditable): ?>
+				<span class="fa fa-unsorted fa-lg"></span>
+			<?php endif; ?>
+			<span><?=$text?></span>
+			<?php if($playlistEditable): ?>
+				<img id="deleteItemButton" src="<?=asset_url()?>images/delete.png" onclick="deleteItem(this, <?=$item->idTrack?>);"/>
+			<?php endif; ?>
+			</li>
+		<?php endforeach; ?>
+	</ul>
+</div>
 
 <div style="<?= $playlistEditable ? '' : 'display: none;' ?>">
 	<button class="btn btn-xs btn-danger" id="playlist-delete" onclick="confirmDeletePlaylist();">Delete playlist</button>
@@ -49,6 +51,7 @@
 				savePositions();
 			}
 		}).selectable({
+			cancel: '#deleteItemButton',
 			selecting: function (e, ui) {
 				// force single selection
 				if($(ui.selecting).is('li')) {
@@ -57,18 +60,17 @@
 				}
 			},
 			selected: function(e, ui) {
-				if ($("#deleteItemButton:hover").length == 0)
-					playTrack(ui.selected.id);
+				playTrack(ui.selected.id);
 			}
 		});
 
-		//delete button
+		//show delete button
 		$('.playlist li').hover(
 			function() {
-				$(this).find('img').show(50);
+				$(this).find('img').fadeTo(50, 1); //hack sur l'opacity pcq hide et show ont arrete de marcher.
 			},
 			function() {
-				$(this).find('img').hide(50);
+				$(this).find('img').fadeTo(50, 0);
 			}
 		);
 	}
@@ -119,7 +121,8 @@
 			});
 	}
 
-	function deleteItem(idTrack) {
+	function deleteItem(sender, idTrack) {
+		$(sender).attr('src', '<?=asset_url()?>images/wait.gif');
 		$.post('<?=base_url()?>index.php/playlist/deleteItem',
 			{
 				idPlaylist: <?=$playlist->idPlaylist?>,
@@ -131,8 +134,11 @@
 					$('.playlist #' + idTrack).hide(200, function() {
 						$('.playlist #' + idTrack).remove();
 					});
-				else
+				else {
 					showMessageDialog('', json.message);
-			});
+					$(sender).attr('src', '<?=asset_url()?>images/delete.png');
+				}
+			}
+		);
 	}
 </script>
