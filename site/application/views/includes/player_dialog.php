@@ -24,7 +24,7 @@
 	}
 </style>
 
-<div style="display: none; overflow: visible" id="player-dialog" title="SPC Player">
+<div style="display: none; overflow: visible" id="player-dialog" class="noselect" title="SPC Player">
 	<div id="title-current" title="No track loaded"><a href="#!">No track loaded</a></div>
 	<div style="display: inline">
 		<div class="tv tv-small" id="playerScreenshot"></div>
@@ -38,8 +38,15 @@
 		<img id="wait" src="<?=asset_url()?>images/wait.gif" />
 	</div>
 	<?php if($loggedUser): ?>
-		<input type="checkbox" id="player-loop" <?=$loggedUser->loop ? 'checked' : ''?>><label title="Loop track" for="player-loop" class="label-checkbox"><span class="fa fa-repeat"></span></label>
-		<input type="checkbox" id="player-randomize" <?=$loggedUser->randomize ? 'checked' : ''?>><label title="Randomize playlist" for="player-randomize" class="label-checkbox"><span class="fa fa-random"></span></label>
+		<input type="checkbox" id="player-randomize" <?=$loggedUser->randomize ? 'checked' : ''?>>
+			<label title="Randomize playlist" for="player-randomize" class="label-checkbox" style="position: relative">
+				<span class="fa fa-random"></span>
+			</label>
+		<input type="checkbox" id="player-loop" readonly <?=$loggedUser->loop ? 'checked' : ''?>>
+			<label title="Loop track" for="player-loop" class="label-checkbox">
+				<span class="fa fa-repeat"></span>
+				<span id="loopSingleBadge" class="badge">1</span>
+			</label>
 		<select id="player-playlistcombo" style="display: inline-block; width: 90%">
 			<!--ajax loaded content-->
 		</select>
@@ -67,3 +74,12 @@
 </div>
 
 <script type="text/javascript" src="<?=asset_url()?>js/player.js"></script>
+<?php if($loggedUser): ?>
+	<script>
+		playerLoopMode = <?= $loggedUser->loop ?>;
+	</script>
+<?php endif; ?>
+
+<?php
+	var_dump($loggedUser);
+?>

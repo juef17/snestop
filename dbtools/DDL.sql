@@ -322,7 +322,7 @@ CREATE TABLE `User` (
   `registrationDate` datetime NOT NULL,
   `registrationToken` varchar(50) DEFAULT NULL,
   `randomize` bit(1) NOT NULL DEFAULT b'0',
-  `loop` bit(1) NOT NULL DEFAULT b'0',
+  `loop` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`idUser`),
   KEY `fk_User_Community` (`idCommunity`),
   CONSTRAINT `fk_User_Community` FOREIGN KEY (`idCommunity`) REFERENCES `Community` (`idCommunity`) ON DELETE SET NULL ON UPDATE CASCADE

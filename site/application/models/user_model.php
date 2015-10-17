@@ -37,7 +37,6 @@ class User_model extends CI_Model {
 		$row->isAdmin = ord($row->isAdmin) == 1 || $row->isAdmin == 1;
 		$row->enabled = ord($row->enabled) == 1 || $row->enabled == 1;
 		$row->canStreamMP3 = ord($row->canStreamMP3) == 1 || $row->canStreamMP3 == 1;
-		$row->loop = ord($row->loop) == 1 || $row->loop == 1;
 		$row->randomize = ord($row->randomize) == 1 || $row->randomize == 1;
 		return $row;
 	}

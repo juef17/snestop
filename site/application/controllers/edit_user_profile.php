@@ -57,7 +57,7 @@ class Edit_User_Profile extends Secure_Controller {
 
 	//AJAX POST
 	public function setPlayerModes() {
-		$loop = $this->input->post('loop') == 'true';
+		$loop = $this->input->post('loop');
 		$randomize = $this->input->post('randomize') == 'true';
 		
 		if($data['success'] = $this->User_model->setPlayerModes($_SESSION['loggedUser']->idUser, $loop, $randomize))
