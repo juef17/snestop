@@ -109,7 +109,7 @@
 			</div>
 			<div class="grid_4">
 				<?php if($game->isScreenshotSet): ?>
-					<a href="<?=asset_url()?>images/screenshots/game/<?=$game->idGame?>.png"></a>
+					<a href="<?=asset_url()?>images/screenshots/game/<?=$game->idGame?>.png" target="_blank">Yes</a>
 				<?php else: ?>
 					No
 				<?php endif; ?>

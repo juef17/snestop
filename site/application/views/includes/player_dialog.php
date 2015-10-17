@@ -79,7 +79,3 @@
 		playerLoopMode = <?= $loggedUser->loop ?>;
 	</script>
 <?php endif; ?>
-
-<?php
-	var_dump($loggedUser);
-?>
