@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<?php require_once('application/views/includes/head.php'); ?>
-	<title>The Top SNES tracks project</title>
+	<?php require_once(views_dir() . 'includes/head.php'); ?>
 	<?php $this->load->helper('url'); ?>
 	<link rel="icon" href="<?=base_url()?>favicon.png" type="image/png">
+	<?php require_once(views_dir() . 'includes/social_meta.php'); ?>
 </head>
 
 <body>

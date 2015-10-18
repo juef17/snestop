@@ -15,7 +15,18 @@ class User_Profile extends Public_Controller {
 			$data['reviews'] = $this->Review_model->get_Review_for_user($data['user']->idUser);
 		}
 		$data['view'] = 'user_profile.php';
+		$this->setSocialMeta($data);
 		$this->load->view('template.php', $data);
+	}
+
+	function setSocialMeta(&$data) {
+		if($user = $data['user']) {
+			$nbReviews = count($data['reviews']);
+			$ndSharedPlaylists = count($data['playlists']);
+			$data['page_description'] = "{$user->userName}'s profile: $nbReviews track reviews and $ndSharedPlaylists shared playlists.";
+		} else {
+			$data['page_description'] = 'User profile not found';
+		}
 	}
 
 	//Ajax GET partial view

@@ -10,12 +10,37 @@ class Game extends Public_Controller {
 
 	public function index($id, $idTrack = null) {
 		$data = $this->getUserViewData();
-		$data['game'] = $this->Game_model->get_Game($id);
+		$game = $this->Game_model->get_Game($id);
+		$data['game'] = $game;
 		$data['idTrack'] = $idTrack; //open this track dialog
 		$data['composers'] = $this->Track_model->get_game_composers($id);
 		$data['tracks'] = $this->Track_model->get_Tracks_for_Game($id);
 		$data['view'] = 'game.php';
+		$this->setSocialMeta($data, $game, $idTrack);
+		
 		$this->load->view('template.php', $data);
+	}
+
+	function setSocialMeta(&$data, $game, $idTrack) {
+		$track = NULL;
+		if($idTrack) {
+			foreach($data['tracks'] as $loadedTrack) {
+				if($loadedTrack->idTrack == $idTrack) {
+					$track = $loadedTrack;
+					break;
+				}
+			}
+		}
+		
+		if($track) {
+			$data['page_description'] = "{$game->titleEng} - {$track->title}";
+			if($track->isScreenshotSet)
+				$data['page_image'] = asset_url() . "images/screenshots/track/{$track->idTrack}.png";
+		} else {
+			$data['page_description'] = $game->titleEng;
+			if($game->isScreenshotSet)
+				$data['page_image'] = asset_url() . "images/screenshots/game/{$game->idGame}.png";
+		}
 	}
 
 	//Ajax GET

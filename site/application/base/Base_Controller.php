@@ -36,6 +36,10 @@ class Base_Controller extends CI_Controller {
 			$data['loginError'] = '';
 		}
 
+		$data['page_title'] = 'Top SNES tracks project';
+		$data['page_description'] = '';
+		$data['page_image'] =  base_url() . 'assets/images/logo.png';
+
 		return $data;
 	}
 
