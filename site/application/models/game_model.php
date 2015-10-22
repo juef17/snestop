@@ -6,6 +6,7 @@ class Game_model extends CI_Model {
 	}
 
 	public function get_Game($idGame) {
+		$idGame = mysql_real_escape_string($idGame);
 		$query = $this->db->get_where('Game', array('idGame' => $idGame));
 		if($row = $query->row())
 			return $this->getGameFromRow($row);

@@ -37,6 +37,7 @@
 						<?php endif; ?>
 					</tr>
 				</table>
+				<a href="<?= base_url()?>index.php/request_mistake?game=<?=$game->idGame?>">Help improve those informations</a>
 			</div>
 		</div>
 	</div>

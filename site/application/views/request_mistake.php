@@ -34,7 +34,7 @@
 			<div class="form-group">
 				<label>Description
 					<span class="errors"><?=form_error('text')?></span>
-					<textarea name="text" class="form-control" placeholder="Description of the mistake" maxlength="255" rows="5"><?=set_value('text')?></textarea>
+					<textarea name="text" class="form-control" placeholder="Description of the mistake" maxlength="255" rows="5"><?=set_value('text') != null ? set_value('text') : $message?></textarea>
 				</label>
 			</div>
 
