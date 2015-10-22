@@ -14,8 +14,14 @@ class Game_model extends CI_Model {
 	}
 
 	public function get_Games($page) {
+		$page = mysql_real_escape_string($page);
 		$this->db->order_by('titleEng', 'asc');
-		$this->db->limit(50, ($page - 1) * 50);
+		if(is_numeric($page)) {
+			$this->db->limit(50, ($page - 1) * 50);
+		} else {
+			$this->db->where("titleEng like '{$page}%'");
+		}
+
 		$query = $this->db->get('Game');
 		$retval = array();
 		foreach($query->result() as $row) {

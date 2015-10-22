@@ -65,6 +65,7 @@
 				<li><a href="#!">The project</a>
 					<ul>
 						<li><a href="<?= base_url() ?>index.php/about">About us</a></li>
+						<li><a href="<?= base_url() ?>index.php/search/browse/0">Browse games</a></li>
 						<?php if($loggedUser): ?>
 							<li><a href="<?= base_url() ?>index.php/request_mistake">Report a mistake</a></li>
 						<?php endif; ?>

@@ -8,6 +8,19 @@ class Search extends Public_Controller {
 		$this->load->model('Track_model','',TRUE);
 	}
 
+	public function browse($target, $page = 'A') {
+		$data = $this->getUserViewData();
+		$target = $this->input->post('target');
+		
+		if($target == '0') {
+			$data['games'] = $this->Game_model->get_Games($page);
+			$data['currentPage'] = $page;
+			$data['view'] = 'search_results_game.php';
+		}
+		
+		$this->load->view('template.php', $data);
+	}
+
 	//POST
 	public function index() {
 		$data = $this->getUserViewData();

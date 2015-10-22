@@ -1,15 +1,36 @@
-<div class="container_12">
-	<h1 class="grid_12">Search results</h1>
-</div>
-<div class="container_12">
-	<h4 class="grid_12">
-		<?php if(count($games) < 150): ?>
-			<?=count($games)?> game(s) matching '<?=htmlentities($searchString)?>'
-		<?php else: ?>
-			Over <?=count($games)?> game(s) matching '<?=htmlentities($searchString)?>'. Please refine your criterias.
-		<?php endif; ?>
-	</h4>
-</div>
+<?php
+	if(isset($currentPage)):
+		$menu = '';
+		if(count($games) > 0) {
+			foreach(range('A', 'Z') as $p) {
+				if($p == $currentPage)
+					$menu .= '<span style="font-weight:bolder; font-size:200%;">' . $p . '</span>&nbsp;&nbsp;';
+				else
+					$menu .= '<a href="' . base_url() . 'index.php/search/browse/0/' . $p . '">' . $p . '</a>&nbsp;&nbsp;';
+			}
+		}
+?>
+	<div class="container_12">
+		<h1 class="grid_12">Browse games</h1>
+	</div>
+	<div class="container_12">
+		<p style="margin: 5px 0;"><?=$menu?></p>
+	</div>
+
+<?php else: //isset($currentPage) ?>
+	<div class="container_12">
+		<h1 class="grid_12">Search results</h1>
+	</div>
+	<div class="container_12">
+		<h4 class="grid_12">
+			<?php if(count($games) < 150): ?>
+				<?=count($games)?> game(s) for letter '<?=htmlentities($searchString)?>'
+			<?php else: ?>
+				Over <?=count($games)?> game(s) matching '<?=htmlentities($searchString)?>'. Please refine your criterias.
+			<?php endif; ?>
+		</h4>
+	</div>
+<?php endif; //isset($currentPage) ?>
 
 <?php if(count($games) == 0): ?>
 	<div class="container_12">
@@ -18,8 +39,8 @@
 <?php else: ?>
 	<div style="background-color: #dddddd;" class="container_16">
 		<p class="grid_2 columnheader"><!-- screenshot --></p>
-		<p class="grid_4 columnheader">Title (Eng)</p>
-		<p class="grid_4 columnheader">Title (Jap)</p>
+		<p class="grid_6 columnheader">Title (Eng)</p>
+		<p class="grid_6 columnheader">Title (Jap)</p>
 	</div>
 	<?php $b = TRUE; foreach($games as $game): ?>
 		<div style="border-bottom: 1px; <?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
@@ -28,8 +49,8 @@
 			<?php else: ?>
 				<p class="grid_2"><img style="width: 64px;" src="<?=asset_url()?>images/en/no_title_ss.png" /></p>
 			<?php endif; ?>
-			<a class="grid_4" href="<?=base_url()?>index.php/game/index/<?=$game->idGame?>"><?=$game->titleEng?></a>
-			<a class="grid_4" href="<?=base_url()?>index.php/game/index/<?=$game->idGame?>"><?=$game->titleJap?></a>
+			<a class="grid_6" href="<?=base_url()?>index.php/game/index/<?=$game->idGame?>"><?=$game->titleEng?></a>
+			<a class="grid_6" href="<?=base_url()?>index.php/game/index/<?=$game->idGame?>"><?=$game->titleJap?></a>
 		</div>
 	<?php endforeach; ?>
 <?php endif; ?>
