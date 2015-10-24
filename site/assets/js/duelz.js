@@ -157,12 +157,12 @@ function startNewDuel() {
 }
 
 function resetTracksInformations() {
-	for(track of ['a', 'b']) {
+	$.each(['a', 'b'], function(i, track) {
 		tracks[track].idTrack = undefined;
 		tracks[track].listened = false;
 		tracks[track].winner = false;
 		tracks[track].shit = false;
-	}
+	});
 	//unload track from player
 	$('#shitA, #shitB').prop('checked', false);
 	$('#player-message').fadeTo(500, 0);
@@ -178,8 +178,7 @@ function targetTimeReached() {
 }
 
 function updatePreviousTracks() {
-	for(track of ['a', 'b'])
-		previousTracks[track].idTrack = tracks[track].idTrack;
+	$.each(['a', 'b'], function(i, track) { previousTracks[track].idTrack = tracks[track].idTrack; });
 		
 	if(previousTracks.a.idTrack) {
 		fetchTrackTitle('a');

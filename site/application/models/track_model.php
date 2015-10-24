@@ -179,10 +179,11 @@ class Track_model extends CI_Model {
 		$idTracksLost = array_map(function($o) { return (int)$o->idTrackLost; }, $query->result());
 
 		$userAlreadyVotedIdTracks = array_merge($idTracksWon, $idTracksLost);
+		if(count($userAlreadyVotedIdTracks) > 0)
+			$this->db->where_not_in('idTrack', $userAlreadyVotedIdTracks);
 
 		$this->db->limit(2);
-		$this->db->order_by('idTrack', 'random'); 
-		$this->db->where_not_in('idTrack', $userAlreadyVotedIdTracks);
+		$this->db->order_by('idTrack', 'random');
 		$this->db->select('idTrack');
 		$query = $this->db->get('Track');
 
