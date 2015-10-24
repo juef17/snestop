@@ -125,7 +125,7 @@
 			{
 				if (loadedType() == "spc")
 				{
-					if (gameMusicEmu.isPaused)
+					if (gameMusicEmu.isPaused || !gameMusicEmu.isPlaying)
 					{
 						gameMusicEmu.play();
 						pauseButton.label = "Pause";
@@ -286,6 +286,8 @@
 					else
 					{
 						(loadedType() == "spc") ? gameMusicEmu.stop() : mp3Channel.stop();
+						rewind();
+						pauseButton.label = "Play";
 						donePlaying = true;
 						ExternalInterface.call("songEnded");
 					}
