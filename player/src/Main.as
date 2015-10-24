@@ -426,14 +426,18 @@
 				isNegative = true;
 				milliseconds = Math.abs(milliseconds);			
 			}
-			var seconds:int = Math.round((milliseconds/1000) % 60);
+			var seconds:int = Math.round(Math.floor((milliseconds/1000)) % 60);
+			var minutes:int = Math.round(Math.floor((milliseconds / 1000) / 60));
+			if (seconds >= 60)
+			{
+				seconds = 0;
+				minutes++;
+			}
 			var strSeconds:String = (seconds < 10) ? ("0" + String(seconds)) : String(seconds);
-			if(seconds == 60) strMinutes = "00";
-			var minutes:int = Math.round(Math.floor((milliseconds/1000)/60));
 			var strMinutes:String = (minutes < 10) ? ("0" + String(minutes)) : String(minutes);
-			if (minutes > 60) {
-				strSeconds = "60";
-				strMinutes = "00";
+			if (minutes > 99) {
+				strSeconds = "59";
+				strMinutes = "99";
 			}
 			var timeCodeAbsolute:String = strMinutes + ":" + strSeconds;
 			var timeCode:String = (isNegative) ? "-" + timeCodeAbsolute : timeCodeAbsolute;
