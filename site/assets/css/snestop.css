@@ -143,7 +143,7 @@ p.footer{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
-.modal {
+.waitmodal {
   display:    none;
   position:   fixed;
   z-index:    1000;
@@ -151,19 +151,21 @@ p.footer{
   left:       0;
   height:     100%;
   width:      100%;
-  background: rgba( 255, 255, 255, .8 ) 
+  background: rgba( 64, 64, 64, .8 ) 
               url('../images/wait.gif') 
               50% 50% 
               no-repeat;
 }
 
+/*
 body.loading {
   overflow: hidden;   
 }
 
-body.loading .modal {
+body.loading .waitmodal {
   display: block;
 }
+*/
 
 .playlist-container {
   margin-top: 5px;
@@ -224,4 +226,8 @@ body.loading .modal {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.no-close .ui-dialog-titlebar-close {
+  display: none;
 }

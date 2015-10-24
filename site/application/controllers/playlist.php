@@ -8,7 +8,7 @@ class Playlist extends Secure_Controller {
 		$this->load->model('Playlist_Item_model','',TRUE);
 	}
 
-	//Ajax POST
+	//Ajax POST partial view
 	public function create() {
 		$data = array();
 		$this->setValidationRules();
@@ -124,6 +124,20 @@ class Playlist extends Secure_Controller {
 		} else {
 			$data['success'] = FALSE;
 			$data['message'] = 'You can\'t modify someone else\'s playlist.';
+		}
+		
+		echo json_encode($data);
+	}
+
+	//Ajax POST
+	public function createSimple() {
+		$playlistName = $this->input->post('playlistName');
+		if(!$this->Playlist_model->userHasPlaylistWithName($_SESSION['loggedUser']->idUser, $playlistName)) {
+			$data['success'] = $this->Playlist_model->set_Playlist($_SESSION['loggedUser']->idUser, $playlistName, 0, FALSE, FALSE, FALSE);
+			$data['message'] = 'An unexpected error occured, sorry :(';
+		} else {
+			$data['success'] = FALSE;
+			$data['message'] = 'You already have a playlist with that name.';
 		}
 		
 		echo json_encode($data);

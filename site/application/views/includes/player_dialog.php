@@ -57,18 +57,6 @@
 	<?php endif; ?>
 </div>
 
-<!-- Dialogs. Create them only once. -->
-<div id="createPlaylist-dialog" style="display:none;">
-	<?php require_once(views_dir() . 'includes/player_create_playlist_dialog_content.php')?>
-</div>
-
-<!-- add to playlist dialog -->
-<div id="dialog-addToPlaylist" style="display: none;" title="Select a playlist">
-	<select id="playlistcombo" style="display: inline-block;">
-		<!--ajax loaded content-->
-	</select>
-</div>
-
 <div id="playlist-deleteConfirmation" style="display: none;">
 	<span>Are you sure you want to delete this playlist?</span>
 </div>

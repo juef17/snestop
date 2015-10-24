@@ -172,6 +172,23 @@ class Track_model extends CI_Model {
 		}
 	}
 
+	public function getIdTracksForDuel($idUser) {
+		$this->db->select('idTrackWon, idTrackLost');
+		$query = $this->db->get_where('DuelResult', array('idUser' => $idUser));
+		$idTracksWon = array_map(function($o) { return (int)$o->idTrackWon; }, $query->result());
+		$idTracksLost = array_map(function($o) { return (int)$o->idTrackLost; }, $query->result());
+
+		$userAlreadyVotedIdTracks = array_merge($idTracksWon, $idTracksLost);
+
+		$this->db->limit(2);
+		$this->db->order_by('idTrack', 'random'); 
+		$this->db->where_not_in('idTrack', $userAlreadyVotedIdTracks);
+		$this->db->select('idTrack');
+		$query = $this->db->get('Track');
+
+		return array_map(function($o) { return (int)$o->idTrack; }, $query->result());
+	}
+
 	private function getTrackFromRow($row) {
 		$row->turnedOffByAdmin = ord($row->turnedOffByAdmin) == 1 || $row->turnedOffByAdmin == 1;
 		$row->isJingle = ord($row->isJingle) == 1 || $row->isJingle == 1;

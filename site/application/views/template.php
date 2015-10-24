@@ -68,6 +68,7 @@
 						<li><a href="<?= base_url() ?>index.php/search/browse/0">Browse games</a></li>
 						<?php if($loggedUser): ?>
 							<li><a href="<?= base_url() ?>index.php/request_mistake">Report a mistake</a></li>
+							<li><a href="<?= base_url() ?>index.php/duelz">TAKE THE DUELZ!</a></li>
 						<?php endif; ?>
 					</ul>
 				</li>
@@ -85,7 +86,7 @@
 						</ul>
 					</li>
 				<?php endif; ?>
-				<?php if($loggedUser): ?>
+				<?php if($loggedUser && $winape_enabled): ?>
 					<li>
 						<a href="#!" onclick="playerDialog.dialog('open');"><img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" /></a>
 					</li>
@@ -122,9 +123,10 @@
 		</div>
 	</div>
 	<?php require_once(views_dir() . $view); ?>
-	<?php require_once(views_dir() . 'includes/player_dialog.php'); ?>
+	<?php if($winape_enabled) require_once(views_dir() . 'includes/player_dialog.php'); ?>
+	<?php require_once(views_dir() . 'includes/playlist_dialogs.php'); ?>
 	<?php require_once(views_dir() . 'includes/message_dialog.php'); ?>
 
-	<div class="modal"></div>
+	<div class="waitmodal"></div>
 </body>
 </html>

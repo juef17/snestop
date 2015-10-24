@@ -240,7 +240,12 @@ function attachAjaxSubmitCallback() {
 }
 
 function refreshPlaylistsList(callback) {
-	selectPlaylist(-1);
+	var currentPlaylist = $('#player-playlistcombo').val();
+	if(callback)
+		selectPlaylist(-1);
+	else if (currentPlaylist)
+		callback = function() { selectPlaylist(currentPlaylist); };
+		
 	$('#player-playlistcombo').load(baseUrl + 'index.php/playlist/playlists/1', callback);
 }
 
@@ -272,44 +277,4 @@ function loadPlaylist(idPlaylist) {
 			showPlaylist();
 		})
 	});
-}
-
-function addToPlaylistDialog(idTrack) {
-	$('#dialog-addToPlaylist #playlistcombo').load(baseUrl + 'index.php/playlist/playlists/0',
-		function() {
-			if($('#dialog-addToPlaylist #playlistcombo option').length > 0) {
-				$('#dialog-addToPlaylist').dialog({
-					modal: true,
-					resizable: false,
-					show: { effect: 'puff', duration: 200 },
-					hide: { effect: 'puff', duration: 200 },
-					buttons: {
-						Ok: function() {
-							addToPlaylist(idTrack, $('#dialog-addToPlaylist #playlistcombo').val());
-						}
-					}
-				});
-			} else {
-				showMessageDialog('No playlist', 'No playlist available. Use the player on the main menu to manage playlists!');
-			}
-		}
-	);
-}
-
-function addToPlaylist(idTrack, idPlaylist) {
-	$.post(baseUrl + 'index.php/playlist/addPlaylistItem',
-		{
-			idPlaylist: idPlaylist,
-			idTrack: idTrack
-		},
-		function(data) {
-			var json = $.parseJSON(data);
-			if(json.success) {
-				$('#dialog-addToPlaylist').dialog('close');
-				if(idPlaylist == $('#player-playlistcombo').val())
-					loadPlaylist(idPlaylist);
-			} else {
-				showMessageDialog('D\'oh!', json.message);
-			}
-		});
 }
