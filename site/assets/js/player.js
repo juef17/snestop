@@ -37,8 +37,7 @@ function bindPlayerModesFunctions() {
 }
 
 function applyPlayerLoopMode() {
-	//$('#spcplayer')[0].enableLoop(playerLoopMode == PlayerLoopModes.Single);
-	console.debug('enableLoop(' + (playerLoopMode == PlayerLoopModes.Single) + ')');
+	$('#spcplayer')[0].enableLoop(playerLoopMode == PlayerLoopModes.Single);
 }
 
 function setLoopButtonVisual() {
