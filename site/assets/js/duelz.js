@@ -222,7 +222,7 @@ function playTrack() {
 				$('#current-track').text(tracks.current.toUpperCase());
 				$('#player-message').fadeTo(500, 1);
 				var track = data['success'];
-				var url = assetUrl + 'spc/' + track.spcURL + '?' + track.length + '?' + track.fadeLength;
+				var url = assetUrl + 'spc/' + track.spcEncodedURL + '?' + track.length + '?' + track.fadeLength;
 				$('#spcplayer')[0].playUrl(url);
 			} else {
 				showMessageDialog(data['message']);
