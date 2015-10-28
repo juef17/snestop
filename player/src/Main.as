@@ -86,6 +86,7 @@
 			ExternalInterface.addCallback("playUrl", playUrl);
 			ExternalInterface.addCallback("play", playSansUrl);
 			ExternalInterface.addCallback("rewind", rewind);
+			ExternalInterface.addCallback("unloadTrack", unloadTrack);
 			ExternalInterface.addCallback("debug", debug);
 			ExternalInterface.addCallback("enableLoop", enableLoop);
 			
@@ -268,6 +269,7 @@
 
 		private function onLoadComplete(e:Event):void 
 		{
+			var timeReached:Boolean = false;
 			if (timer != null) timer.stop();
 			timer = new Timer(100, 0);
 			timer.addEventListener(TimerEvent.TIMER, function ():void 
@@ -293,6 +295,11 @@
 					}
 				}
 				if (loadedType() == "spc") gameMusicEmu.setFade(length);
+				if (!timeReached && position > Math.min(60000, length / 2))
+				{
+					timeReached = true;
+					ExternalInterface.call("timeReached");
+				}
 			});
 			timer.start();
 		}
@@ -353,6 +360,19 @@
 			}
 		}
 		
+		private function unloadTrack():void
+		{
+			if (filename == null || filename == "") return;
+			donePlaying = true;
+			rewind();
+			length = 0;
+			fade = 0;
+			filename = "";
+			gameMusicEmu.stop();
+			mp3Channel.stop();
+			pauseButton.label = "Play";
+		}
+		
 		private function rewind():void
 		{
 			textePosition.text = toTimeCode(0) + " / " + toTimeCode(length + fade);
@@ -397,12 +417,14 @@
 					if (position > length) length = position;
 					gameMusicEmu.setFade(length);
 					labelPosition.text = "Position:";
+					textePosition.text = toTimeCode(sliderPosition.value) + " / " + toTimeCode(length + fade);
 				}
 			}
 			else
 			{
 				loopMP3 = loop;
 			}
+			return;
 		}
 		
 		private function debug(msg:String = ""):void
