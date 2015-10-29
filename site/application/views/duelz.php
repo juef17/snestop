@@ -119,9 +119,7 @@
 </div>
 
 <div id="dialog-nomore" title="What have you done!">
-	<p>There are no more duels! You've already taken all of them, you robot!</p>
+	<p>There are no more duels! You've taken all of them, you robot!</p>
 </div>
 
 <script type="text/javascript" src="<?=asset_url()?>js/duelz.js"></script>
-
-<button onclick="targetTimeReached()">Track is enough</button>

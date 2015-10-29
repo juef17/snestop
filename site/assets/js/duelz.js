@@ -163,12 +163,13 @@ function resetTracksInformations() {
 		tracks[track].winner = false;
 		tracks[track].shit = false;
 	});
-	//unload track from player
+	$('#spcplayer')[0].unloadTrack();
 	$('#shitA, #shitB').prop('checked', false);
 	$('#player-message').fadeTo(500, 0);
 }
 
-function targetTimeReached() {
+//Player --> JS
+function timeReached() {
 	tracks[tracks.current].listened = true;
 	$('#shit-' + tracks.current + '-group').fadeTo(500, 1);
 	$('#enough-' + tracks.current).fadeTo(500, 1);
