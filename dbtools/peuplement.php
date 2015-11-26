@@ -85,9 +85,19 @@
 		include("peuplement_tracks.php");
 		EchoCount($mysqli, 'Track');
 	}
+
+	function PopulateTracksComplete()
+	{
+		$mysqli = CreateConnection();
+		include("peuplement_tracks_complet.php");
+		EchoCount($mysqli, 'Track');
+	}
 	
 	function InsertTrack($mysqli, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isScreenshotSet, $isJingle, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $spcURL, $spcEncodedURL, $gameTitle)
 	{
+		if($isScreenshotSet == '') //patch pour corriger petit oubli dans peuplement_complet
+			$isScreenshotSet = '0';
+		
 		EchoQuery($mysqli, "
 			INSERT INTO Track(idGame, title, length, fadeLength, composer, turnedOffByAdmin, isScreenshotSet, isJingle, glicko2RD, glicko2rating, glicko2sigma, eloRating, spcURL, spcEncodedURL)
 			VALUES((SELECT idGame FROM Game WHERE titleEng = '" . addslashes($gameTitle) . "'), '" . addslashes($title) . "', $length, $fadeLength, '" . addslashes($composer) . "', $turnedOffByAdmin, $isScreenshotSet, $isJingle, $glicko2RD, $glicko2rating, $glicko2sigma , $eloRating, '" . addslashes($spcURL) . "', '$spcEncodedURL')
@@ -155,6 +165,7 @@
 		<p><a href="peuplement.php?action=users">Peupler les utilisateurs</a></p>
 		<p><a href="peuplement.php?action=games">Peupler les games</a></p>
 		<p><a href="peuplement.php?action=tracks">Peupler les tracks</a></p>
+		<p><a href="peuplement.php?action=tracks_complete">Peupler les tracks (Complet) - Nécessite peuplement_tracks_complet.php et prend plusieurs minutes!</a></p>
 		<p><a href="peuplement.php?action=reviews">Peupler les reviews</a></p>
 		<p><a href="peuplement.php?action=communities">Peupler les communities</a></p>
 		<p><a href="peuplement.php?action=duels">Peupler les duels (n'update pas les ratings)</a></p>
@@ -171,6 +182,8 @@
 					PopulateGames();
 				else if($_GET['action'] == 'tracks')
 					PopulateTracks();
+				else if($_GET['action'] == 'tracks_complete')
+					PopulateTracksComplete();
 				else if($_GET['action'] == 'reviews')
 					PopulateReviews();
 				else if($_GET['action'] == 'communities')
