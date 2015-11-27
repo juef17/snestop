@@ -37,7 +37,11 @@
 						<?php endif; ?>
 					</tr>
 				</table>
-				<a href="<?= base_url()?>index.php/request_mistake?game=<?=$game->idGame?>">Help improve those informations</a>
+				<?php if($loggedUser): ?>
+					<a href="<?= base_url()?>index.php/request_mistake?game=<?=$game->idGame?>">Help improve these informations</a>
+				<?php else: ?>
+					Log in to help improve these informations
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
