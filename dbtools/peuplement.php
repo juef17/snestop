@@ -75,7 +75,7 @@
 	{
 		EchoQuery($mysqli,"
 			INSERT INTO Game(titleJap, titleEng, isScreenshotSet, rsnFileURL)
-			VALUES('" . addslashes($titleJap) . "', '" . addslashes($titleEng) . "', $isScreenshotSet, 'rsn/" . addslashes($titleEng) . ".rsn')
+			VALUES('" . addslashes($titleJap) . "', '" . addslashes($titleEng) . "', $isScreenshotSet, '" . addslashes($titleEng) . ".rsn')
 		");
 	}
 	

@@ -23,7 +23,7 @@
 		<div class="grid_8">
 			<div>
 				<?php if(count($tracks) > 0): ?>
-					<a href="<?=$game->rsnFileURL?>"><img src="<?=asset_url() . 'images/download.png'?>" /> Download soundtrack in RSN format</a>
+					<a href="<?=asset_url() . 'rsn/' . rawurlencode($game->rsnFileURL)?>"><img src="<?=asset_url() . 'images/download.png'?>" /> Download soundtrack in RSN format</a>
 				<?php endif; ?>
 			</div>
 			<div>
@@ -78,7 +78,7 @@
 				<p class="grid_1"><?=intval(date("i", $track->length)) . ":" . date("s", $track->length)?></p>
 				<p class="grid_2"><?=$track->composer?></p>
 				<div class="grid_1">
-					<a href="<?=asset_url() . 'spc/' . str_replace('&', '%26', $track->spcURL)?>"><img src="<?=asset_url() . 'images/download.png'?>" /></a>
+					<a href="<?=asset_url() . 'spc/' . rawurlencode($track->spcURL)?>"><img src="<?=asset_url() . 'images/download.png'?>" /></a>
 				</div>
 				<?php if($loggedUser): ?>
 					<div class="grid_2 btn btn-xs btn-default" onclick="addToPlaylistDialog(<?=$track->idTrack?>);">Add to playlist...</div>
