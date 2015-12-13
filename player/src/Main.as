@@ -399,9 +399,10 @@
 		
 		private function enableLoop(loop:Boolean):void
 		{
-			if (loadedType() == "spc")
+			if (loadedType() == "mp3") loopMP3 = loop;
+			else
 			{
-				var position:uint = (loadedType() == "spc") ? gameMusicEmu.tell() : mp3Channel.position;
+				var position:uint = gameMusicEmu.tell();
 				sliderPosition.visible = !loop;
 				textePosition.visible = !loop;
 				if (loop)
@@ -419,10 +420,6 @@
 					labelPosition.text = "Position:";
 					textePosition.text = toTimeCode(sliderPosition.value) + " / " + toTimeCode(length + fade);
 				}
-			}
-			else
-			{
-				loopMP3 = loop;
 			}
 			return;
 		}
