@@ -42,7 +42,8 @@ class Track_model extends CI_Model {
 			'eloRating' => 1600,
 			'eloReached2400' => FALSE,
 			'spcURL' => '',
-			'spcEncodedURL' => ''
+			'spcEncodedURL' => '',
+			'isSoundEffect' => FALSE
 		);
 
 		$object = new stdClass();
@@ -51,7 +52,7 @@ class Track_model extends CI_Model {
 		return $object;
 	}
 
-	public function set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400) {
+	public function set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect) {
 		$data = array(
 			'idGame' => $idGame,
 			'title' => $title,
@@ -66,7 +67,8 @@ class Track_model extends CI_Model {
 			'eloRating' => $eloRating,
 			'eloReached2400' => $eloReached2400,
 			'spcURL' => $spcURL,
-			'spcEncodedURL' => $spcEncodedURL
+			'spcEncodedURL' => $spcEncodedURL,
+			'isSoundEffect' => $isSoundEffect
 		);
 		return $this->db->insert('Track', $data);
 	}
@@ -90,7 +92,7 @@ class Track_model extends CI_Model {
 		return $this->db->update('Track', array('turnedOffByAdmin' => TRUE));
 	}
 	
-	public function update_Track($idTrack, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400) {
+	public function update_Track($idTrack, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect) {
 		$this->db->where('Track.idTrack', $idTrack);
 		$data = array(
 			'title' => $title,
@@ -105,7 +107,8 @@ class Track_model extends CI_Model {
 			'glicko2sigma' => $glicko2sigma,
 			'eloRating' => $eloRating,
 			'eloReached2400' => $eloReached2400,
-			'spcEncodedURL' => $spcEncodedURL
+			'spcEncodedURL' => $spcEncodedURL,
+			'isSoundEffect' => $isSoundEffect
 		);
 		return $this->db->update('Track', $data);
 	}
@@ -195,6 +198,7 @@ class Track_model extends CI_Model {
 		$row->isJingle = ord($row->isJingle) == 1 || $row->isJingle == 1;
 		$row->eloReached2400 = ord($row->eloReached2400) == 1 || $row->eloReached2400 == 1;
 		$row->isScreenshotSet = ord($row->isScreenshotSet) == 1 || $row->isScreenshotSet == 1;
+		$row->isSoundEffect = ord($row->isSoundEffect) == 1 || $row->isSoundEffect == 1;
 		return $row;
 	}
 	
