@@ -29,44 +29,44 @@
 	public class Main extends Sprite 
 	{
 		[Embed(source="../assets/snes.ttf", fontName = "SNES", mimeType = "application/x-font", fontWeight="normal", fontStyle="normal", unicodeRange="U+0020-U+007E", advancedAntiAliasing="true", embedAsCFF="false")]
-        private var myEmbeddedFont:Class;
+        public var myEmbeddedFont:Class;
 		[Embed(source="../assets/logo.png")]
-		private var Logo:Class;
-		private var gameMusicEmu:GameMusicEmu;
-		private var labelLength:Label;
-		private var sliderSeeking:Boolean;
-		private var showSeekBar:Boolean;
-		private var showLogo:Boolean;
-		private var showPanBar:Boolean;
-		private var showPosition:Boolean;
-		private var showVolumeBar:Boolean;
-		private var sliderPosition:HSlider;
-		private var donePlaying:Boolean;
-		private var timer:Timer;
-		private var filename:String;
-		private var fade:int;
-		private var length:int;
-		private var oldLength:int = 1000;
-		private var pauseButton:PushButton;
-		private var petit:TextFormat;
-		private var textePosition:TextField;
-		private var labelPosition:TextField;
-		private const heightOffset:int = 7;
-		private var logoOffset:int = 0;
-		private var panOffset:int = 0;
-		private var seekOffset:int = 0;
-		private var positionOffset:int = 0;
-		private var volumeOffset:int = 0;
-		private var mp3:Sound;
-		private var mp3SoundTransform:SoundTransform;
-		private var mp3Context:SoundLoaderContext;
-		private var mp3Channel:SoundChannel;
-		private var mp3Position:int = 0;
-		private var mp3IsPlaying:Boolean = false;
-		private var ramoutzEnTrainDeRouler:Boolean = false;
-		private var url:String = "";
-		private var loopMP3:Boolean = false;
-		private const MAX_VALUE:int = 2147483647;
+		public var Logo:Class;
+		public var gameMusicEmu:GameMusicEmu;
+		public var labelLength:Label;
+		public var sliderSeeking:Boolean;
+		public var showSeekBar:Boolean;
+		public var showLogo:Boolean;
+		public var showPanBar:Boolean;
+		public var showPosition:Boolean;
+		public var showVolumeBar:Boolean;
+		public var sliderPosition:HSlider;
+		public var donePlaying:Boolean;
+		public var timer:Timer;
+		public var filename:String;
+		public var fade:int;
+		public var length:int;
+		public var oldLength:int = 1000;
+		public var pauseButton:PushButton;
+		public var petit:TextFormat;
+		public var textePosition:TextField;
+		public var labelPosition:TextField;
+		public const heightOffset:int = 7;
+		public var logoOffset:int = 0;
+		public var panOffset:int = 0;
+		public var seekOffset:int = 0;
+		public var positionOffset:int = 0;
+		public var volumeOffset:int = 0;
+		public var mp3:Sound;
+		public var mp3SoundTransform:SoundTransform;
+		public var mp3Context:SoundLoaderContext;
+		public var mp3Channel:SoundChannel;
+		public var mp3Position:int = 0;
+		public var mp3IsPlaying:Boolean = false;
+		public var ramoutzEnTrainDeRouler:Boolean = false;
+		public var url:String = "";
+		public var loopMP3:Boolean = false;
+		public const MAX_VALUE:int = 2147483647;
 		
 		public function Main():void 
 		{
@@ -80,15 +80,9 @@
 			else addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
-		private function init(e:Event = null):void 
+		public function init(e:Event = null):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			ExternalInterface.addCallback("playUrl", playUrl);
-			ExternalInterface.addCallback("play", playSansUrl);
-			ExternalInterface.addCallback("rewind", rewind);
-			ExternalInterface.addCallback("unloadTrack", unloadTrack);
-			ExternalInterface.addCallback("debug", debug);
-			ExternalInterface.addCallback("enableLoop", enableLoop);
 			
 			filename = LoaderInfo(this.root.loaderInfo).parameters.spc;
 			fade = int(LoaderInfo(this.root.loaderInfo).parameters.fade)*1000;
@@ -99,6 +93,12 @@
 			if (LoaderInfo(this.root.loaderInfo).parameters.showVolumeBar == 1) showVolumeBar = true;
 			if (LoaderInfo(this.root.loaderInfo).parameters.showPanBar == 1) showPanBar = true;
 			if (LoaderInfo(this.root.loaderInfo).parameters.showPosition == 1) showPosition = true;
+			ExternalInterface.addCallback("playUrl", playUrl);
+			ExternalInterface.addCallback("play", playSansUrl);
+			ExternalInterface.addCallback("rewind", rewind);
+			ExternalInterface.addCallback("unloadTrack", unloadTrack);
+			ExternalInterface.addCallback("debug", debug);
+			ExternalInterface.addCallback("enableLoop", enableLoop);
 			
 			if (!showLogo) logoOffset = -95;
 			if (!showVolumeBar) volumeOffset = -30;
@@ -267,7 +267,7 @@
 			gameMusicEmu = new GameMusicEmu(SampleRate.HIGH);
 		}
 
-		private function onLoadComplete(e:Event):void 
+		public function onLoadComplete(e:Event):void 
 		{
 			var timeReached:Boolean = false;
 			if (timer != null) timer.stop();
@@ -304,7 +304,7 @@
 			timer.start();
 		}
 		
-		private function playUrl(message:String):void
+		public function playUrl(message:String):void
 		{
 			url = message;
 			var tmp:Array = message.split("?");
@@ -338,7 +338,7 @@
 			}
 		}
 		
-		private function playSansUrl():void
+		public function playSansUrl():void
 		{
 			if (loadedType() == "spc")
 			{
@@ -360,7 +360,7 @@
 			}
 		}
 		
-		private function unloadTrack():void
+		public function unloadTrack():void
 		{
 			if (filename == null || filename == "") return;
 			donePlaying = true;
@@ -373,7 +373,7 @@
 			pauseButton.label = "Play";
 		}
 		
-		private function rewind():void
+		public function rewind():void
 		{
 			textePosition.text = toTimeCode(0) + " / " + toTimeCode(length + fade);
 			if (loadedType() == "spc")
@@ -397,10 +397,13 @@
 			}
 		}
 		
-		private function enableLoop(loop:Boolean):void
+		public function enableLoop(loop:Boolean):void
 		{
-			if (loadedType() == "mp3") loopMP3 = loop;
-			else
+			if (loadedType() == "mp3")
+			{
+				loopMP3 = loop;
+			}
+			else if(loadedType() == "spc")
 			{
 				var position:uint = gameMusicEmu.tell();
 				sliderPosition.visible = !loop;
@@ -424,7 +427,7 @@
 			return;
 		}
 		
-		private function debug(msg:String = ""):void
+		public function debug(msg:String = ""):void
 		{
 			if (msg != "") { ExternalInterface.call("alert", msg); return;}
 			
@@ -463,13 +466,14 @@
 			return timeCode;
 		}
 		
-		private function getExtension($url:String):String
+		public function getExtension($url:String):String
 		{
 			return $url.substring($url.lastIndexOf(".")+1, $url.length);
 		}
 		
-		private function loadedType():String
+		public function loadedType():String
 		{
+			if (filename == null || filename == "") return "";
 			return getExtension(filename).toLowerCase();
 		}
 	}

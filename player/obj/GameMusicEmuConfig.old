@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'2015-11-11'</value>
+      <value>'2015-12-13'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -32,7 +32,6 @@
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>C:\Misc\François\Autres\2014.3 - Automne\Top SNES tracks\SVN\player\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
