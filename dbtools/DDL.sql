@@ -199,6 +199,8 @@ CREATE TABLE `Track` (
   `spcEncodedURL` varchar(255) NOT NULL,
   `eloReached2400` bit(1) NOT NULL DEFAULT b'0',
   `isSoundEffect` bit(1) NOT NULL DEFAULT b'0',
+  `isVoice` bit(1) NOT NULL DEFAULT b'0',
+  `trackNumber` INT(11) NOT NULL,
   PRIMARY KEY (`idTrack`),
   KEY `fk_Track_Game` (`idGame`),
   CONSTRAINT `fk_Track_Game` FOREIGN KEY (`idGame`) REFERENCES `Game` (`idGame`) ON DELETE CASCADE ON UPDATE CASCADE

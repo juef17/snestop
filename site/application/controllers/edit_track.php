@@ -41,11 +41,15 @@ class Edit_Track extends Admin_Controller {
 			$spcURL = $this->input->post('spcURL');
 			$spcEncodedURL = $this->input->post('spcEncodedURL');
 			$eloReached2400 = $this->input->post('eloReached2400');
+			$isJingle = $this->input->post('isJingle');
+			$isVoice = $this->input->post('isVoice');
+			$isSoundEffect = $this->input->post('isSoundEffect');
+			$trackNumber = $this->input->post('trackNumber');
 			
 			if($id == 0)
-				$this->Track_model->set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400);
+				$this->Track_model->set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber);
 			else
-				$this->Track_model->update_Track($id, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400);
+				$this->Track_model->update_Track($id, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber);
 				
 			redirect("/tracks_dashboard/index/{$idGame}");
 		} else {

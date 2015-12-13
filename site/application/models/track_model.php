@@ -52,7 +52,7 @@ class Track_model extends CI_Model {
 		return $object;
 	}
 
-	public function set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect) {
+	public function set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber) {
 		$data = array(
 			'idGame' => $idGame,
 			'title' => $title,
@@ -68,7 +68,9 @@ class Track_model extends CI_Model {
 			'eloReached2400' => $eloReached2400,
 			'spcURL' => $spcURL,
 			'spcEncodedURL' => $spcEncodedURL,
-			'isSoundEffect' => $isSoundEffect
+			'isSoundEffect' => $isSoundEffect,
+			'isVoice' => $isVoice,
+			'trackNumber' => $trackNumber
 		);
 		return $this->db->insert('Track', $data);
 	}
@@ -92,7 +94,7 @@ class Track_model extends CI_Model {
 		return $this->db->update('Track', array('turnedOffByAdmin' => TRUE));
 	}
 	
-	public function update_Track($idTrack, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect) {
+	public function update_Track($idTrack, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber) {
 		$this->db->where('Track.idTrack', $idTrack);
 		$data = array(
 			'title' => $title,
@@ -108,7 +110,9 @@ class Track_model extends CI_Model {
 			'eloRating' => $eloRating,
 			'eloReached2400' => $eloReached2400,
 			'spcEncodedURL' => $spcEncodedURL,
-			'isSoundEffect' => $isSoundEffect
+			'isSoundEffect' => $isSoundEffect,
+			'isVoice' => $isVoice,
+			'trackNumber' => $trackNumber
 		);
 		return $this->db->update('Track', $data);
 	}
@@ -199,6 +203,7 @@ class Track_model extends CI_Model {
 		$row->eloReached2400 = ord($row->eloReached2400) == 1 || $row->eloReached2400 == 1;
 		$row->isScreenshotSet = ord($row->isScreenshotSet) == 1 || $row->isScreenshotSet == 1;
 		$row->isSoundEffect = ord($row->isSoundEffect) == 1 || $row->isSoundEffect == 1;
+		$row->isVoice = ord($row->isVoice) == 1 || $row->isVoice == 1;
 		return $row;
 	}
 	

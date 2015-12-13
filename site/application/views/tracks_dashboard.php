@@ -7,6 +7,9 @@
 </div>
 
 <div style="background-color: #dddddd;" class="container_16">
+	<div class="grid_1 columnheader">
+		<p>#</p>
+	</div>
 	<div class="grid_3 columnheader">
 		<p>Title</p>
 	</div>
@@ -53,6 +56,9 @@
 <?php $b = TRUE; foreach($tracks as $track): ?>
 	<div style="<?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
 		<input type="hidden" name="id" value="<?=$track->idTrack?>" />
+		<div class="grid_1">
+			<p><?=$track->trackNumber?></p>
+		</div>
 		<div class="grid_3">
 			<p><?=$track->title?></p>
 		</div>

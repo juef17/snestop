@@ -10,6 +10,12 @@
 	<div class="container_12">
 		<div class="grid_12 prefix_4 suffix_4 ">
 			<div class="form-group">
+				<label>Track number
+					<span class="errors"><?=form_error('trackNumber')?></span>
+					<input type="number" step="any" min="0" name="trackNumber" maxlength="255" class="form-control" placeholder="Integer value" value="<?=set_value('trackNumber', $track->trackNumber)?>">
+				</label>
+			</div>
+			<div class="form-group">
 				<label>Title
 					<span class="errors"><?=form_error('title')?></span>
 					<input type="text" name="title" maxlength="255" class="form-control" placeholder="Title" value="<?=set_value('title', $track->title)?>">
@@ -88,6 +94,18 @@
 				<span class="errors"><?=form_error('isJingle')?></span>
 				<label>Jingle
 					<input type="checkbox" name="isJingle" class="form-control" <?=set_value('isJingle', $track->isJingle) ? 'checked' : ''?>>
+				</label>
+			</div>
+			<div class="form-group">
+				<span class="errors"><?=form_error('isSoundEffect')?></span>
+				<label>Sound effect
+					<input type="checkbox" name="isSoundEffect" class="form-control" <?=set_value('isSoundEffect', $track->isSoundEffect) ? 'checked' : ''?>>
+				</label>
+			</div>
+			<div class="form-group">
+				<span class="errors"><?=form_error('isVoice')?></span>
+				<label>Voice
+					<input type="checkbox" name="isVoice" class="form-control" <?=set_value('isVoice', $track->isVoice) ? 'checked' : ''?>>
 				</label>
 			</div>
 			<div class="form-group">
