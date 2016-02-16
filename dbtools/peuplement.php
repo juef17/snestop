@@ -44,12 +44,12 @@
 	function PopulateUsers()
 	{
 		$mysqli = CreateConnection();
-		InsertUser($mysqli, 'NULL', 'ramoutz@panus.com', 'encrypted', 'french', 1, 0, 'admin', 1);
-		InsertUser($mysqli, 'NULL', 'limoutz@panus.com', 'encrypted', 'french', 1, 0, 'limoutz', 0);
-		InsertUser($mysqli, 'NULL', 'serge@panus.com', 'encrypted', 'french', 1, 0, 'serge', 0);
-		InsertUser($mysqli, 'NULL', 'robin@panus.com', 'encrypted', 'french', 1, 0, 'robin', 0);
-		InsertUser($mysqli, 'NULL', 'barry@panus.com', 'encrypted', 'french', 1, 0, 'barry', 0);
-		InsertUser($mysqli, 'NULL', 'moe@panus.com', 'encrypted', 'french', 1, 0, 'moe', 0);
+		InsertUser($mysqli, 'NULL', 'ramoutz@panus.com', 'encrypted', 'French', 1, 0, 'admin', 1);
+		InsertUser($mysqli, 'NULL', 'limoutz@panus.com', 'encrypted', 'French', 1, 0, 'limoutz', 0);
+		InsertUser($mysqli, 'NULL', 'serge@panus.com', 'encrypted', 'French', 1, 0, 'serge', 0);
+		InsertUser($mysqli, 'NULL', 'robin@panus.com', 'encrypted', 'French', 1, 0, 'robin', 0);
+		InsertUser($mysqli, 'NULL', 'barry@panus.com', 'encrypted', 'French', 1, 0, 'barry', 0);
+		InsertUser($mysqli, 'NULL', 'moe@panus.com', 'encrypted', 'French', 1, 0, 'moe', 0);
 		EchoCount($mysqli, 'User');
 	}
 	
