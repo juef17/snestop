@@ -27,6 +27,7 @@
 					<span class="errors"><?=form_error('edit_language')?></span>
 					<select name="edit_language" class="form-control">
 						<?php foreach($languages as $language): ?>
+							<?php var_dump($language); ?>
 							<option value="<?=$language?>" <?php if(set_value('edit_language', $edit_language) == $language) echo 'selected';?>><?=$language?></option>
 						<?php endforeach; ?>
 					</select>

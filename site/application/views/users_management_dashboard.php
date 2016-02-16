@@ -24,9 +24,6 @@
 		<p>Language</p>
 	</div>
 	<div class="grid_1 columnheader">
-		<p>Can stream MP3</p>
-	</div>
-	<div class="grid_1 columnheader">
 		<p>Admin</p>
 	</div>
 	<div class="grid_1 columnheader">
@@ -55,9 +52,6 @@
 			<p><?= $user->language ?></p>
 		</div>
 		<div class="grid_1">
-			<p><?= ($user->canStreamMP3 ? 'yes' : 'no') ?></p>
-		</div>
-		<div class="grid_1">
 			<p><?= ($user->isAdmin ? 'yes' : 'no') ?></p>
 		</div>
 		<div class="grid_1">
@@ -68,6 +62,16 @@
 				</form>
 			<?php else: ?>
 				<p><?= ($user->enabled ? 'yes' : 'no') ?></p>
+			<?php endif; ?>
+		</div>
+		<div class="grid_1">
+			<?php if($user->userName != 'admin'): ?>
+				<?= form_open(base_url() . 'index.php/users_management_dashboard/reset_password', array('id' => 'reset_' . $user->idUser)) ?>
+					<input type="hidden" name="id" value="<?= $user->idUser ?>" />
+					<a href="#" class="btn btn-xs btn-danger" onclick="if(confirm('Are you sure you want to reset this users password? It will be set to iwillnotforgetagain'))reset_<?= $user->idUser ?>.submit();">Rst pwd</a>
+				</form>
+			<?php else: ?>
+				<p>---</p>
 			<?php endif; ?>
 		</div>
 		<div class="grid_1">

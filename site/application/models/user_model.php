@@ -131,6 +131,16 @@ class User_model extends CI_Model {
 		//TODO: si user change de community, faut faire... d'zaffaires!!! ajouter un trigger dans BD si trop lourd.
 	}
 
+	public function resetPassword($idUser) {
+		$data = array();
+		$passwordEncoding = $this->create_hash('iwillnotforgetagain');
+		$data['password'] = $passwordEncoding['hash'];
+		$data['passwordSalt'] = $passwordEncoding['salt'];
+
+		$this->db->where('idUser', $idUser);
+		return $this->db->update('User', $data);
+	}
+
 	public function removeRegistrationToken($token) {
 		$this->db->select('idUser');
 		$this->db->from('User');

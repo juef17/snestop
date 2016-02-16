@@ -34,4 +34,11 @@ class Users_Management_Dashboard extends Admin_Controller {
 
 		redirect('/users_management_dashboard');
 	}
+
+	public function reset_password() {
+		if($id = $this->input->post('id', TRUE))
+			$this->User_model->resetPassword($id);
+
+		redirect('/users_management_dashboard');
+	}
 }
