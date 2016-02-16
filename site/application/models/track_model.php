@@ -139,6 +139,7 @@ class Track_model extends CI_Model {
 		$this->db->limit(150);
 		$this->db->select('Track.*, Game.TitleEng AS gameTitleEng');
 		$this->db->join('Game', 'Track.idGame = Game.idGame', 'inner');
+		$this->db->order_by('Track.title');
 		$query = $this->db->get('Track');
 
 		$retval = array();

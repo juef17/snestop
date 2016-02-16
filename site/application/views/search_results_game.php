@@ -24,7 +24,7 @@
 	<div class="container_12">
 		<h4 class="grid_12">
 			<?php if(count($games) < 150): ?>
-				<?=count($games)?> game(s) for letter '<?=htmlentities($searchString)?>'
+				<?=count($games)?> game(s) matching '<?=htmlentities($searchString)?>'
 			<?php else: ?>
 				Over <?=count($games)?> game(s) matching '<?=htmlentities($searchString)?>'. Please refine your criterias.
 			<?php endif; ?>

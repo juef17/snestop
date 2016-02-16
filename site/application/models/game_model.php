@@ -81,6 +81,7 @@ class Game_model extends CI_Model {
 		}
 
 		$this->db->limit(150);
+		$this->db->order_by('titleEng');
 		$query = $this->db->get('Game');
 
 		$retval = array();
