@@ -37,7 +37,7 @@
 					</div>
 					<div class="form-group">
 						<label class="sr-only" for="exampleInputPassword2">Password</label>
-						<input style="width: 100px;" type="password" name="password" maxlength="10" class="form-control" placeholder="Password">
+						<input style="width: 100px;" type="password" name="password" maxlength="45" class="form-control" placeholder="Password">
 					</div>
 					<div class="checkbox">
 						<label>
