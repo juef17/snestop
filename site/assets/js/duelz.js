@@ -1,4 +1,5 @@
 var playerIsInitialized = false;
+var disclaimerAccepted = false;
 
 var tracks = {
 	current: 'a',
@@ -30,10 +31,15 @@ $(function() {
 	configPlayButtons();
 	configVoteButtons();
 	configShitCheckboxes();
-	contructVoteDialog();
-	constructNoMoreDialog();
+	constructDialogs();
 	startNewDuel();
 });
+
+function constructDialogs() {
+	contructVoteDialog();
+	constructNoMoreDialog();
+	constructDisclaimerDialog();
+}
 
 function configShitCheckboxes() {
 	$('#shitA').change(function() { tracks.a.shit = this.checked; });
@@ -101,6 +107,26 @@ function constructNoMoreDialog() {
 	});
 }
 
+function constructDisclaimerDialog() {
+	$('#dialog-disclaimer').dialog({
+		resizable: false,
+		modal: true,
+		closeOnEscape: false,
+		autoOpen: false,
+		width: 600,
+		dialogClass: 'no-close',
+		buttons : {
+			'I don\'t care': function() {
+				window.location.href = baseUrl;
+			},
+			'I understand': function() {
+				disclaimerAccepted = true;
+				$(this).dialog('close');
+			}
+		}
+	});
+}
+
 function confirmVote() {
 	if(tracks.a.shit)
 		$('#dialog-shitA').show();
@@ -163,7 +189,10 @@ function resetTracksInformations() {
 		tracks[track].winner = false;
 		tracks[track].shit = false;
 	});
-	$('#spcplayer')[0].unloadTrack();
+	
+	if(playerIsInitialized)
+		$('#spcplayer')[0].unloadTrack();
+		
 	$('#shitA, #shitB').prop('checked', false);
 	$('#player-message').fadeTo(500, 0);
 }
@@ -206,6 +235,8 @@ function fetchNumberOfDuelsTaken() {
 function hideWaitModal() {
 	if(playerIsInitialized && tracks.a.idTrack) {
 		waitModalVisible({visible: false});
+		if(!disclaimerAccepted)
+			$('#dialog-disclaimer').dialog('open');
 	}
 }
 

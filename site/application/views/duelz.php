@@ -36,8 +36,7 @@
 	</div>
 
 	<div class="grid_16">
-		<p>Duelz taken: <span id="nbDuelzTaken">0</span></p>
-		Here's how it works: grabe those nipples and have them steamin'. Then lick an elbow so to have your neighbour sream in agony while he smoc in your window.
+		<h2>You've taken <span id="nbDuelzTaken">0</span> duelz!</h2>
 	</div>
 
 	<div class="grid_16 blank"></div>
@@ -120,6 +119,17 @@
 
 <div id="dialog-nomore" title="What have you done!">
 	<p>There are no more duels! You've taken all of them, you robot!</p>
+</div>
+
+<div id="dialog-disclaimer" title="HOW IT WORKS">
+	<p>Here's how it works: grabe those nipples and have them steamin'. Then lick an elbow so to have your neighbour sream in agony while he smoc in your window.</p>
+	<p>Please, before you procede, know the following:</p>
+	<ul>
+		<li>Once submitted, votes can <b>NOT</b> be canceled</li>
+		<li>Every single vote counts</li>
+		<li>Take this seriously</li>
+		<li>Have fun</li>
+	</ul>
 </div>
 
 <script type="text/javascript" src="<?=asset_url()?>js/duelz.js"></script>
