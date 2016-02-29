@@ -85,7 +85,8 @@
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
 			filename = LoaderInfo(this.root.loaderInfo).parameters.spc;
-			fade = int(LoaderInfo(this.root.loaderInfo).parameters.fade)*1000;
+			fade = int(LoaderInfo(this.root.loaderInfo).parameters.fade) * 1000;
+			if (fade > 5000) fade = 5000;
 			length = int(LoaderInfo(this.root.loaderInfo).parameters.length)*1000;
 			
 			if (LoaderInfo(this.root.loaderInfo).parameters.showSeekBar == 1) showSeekBar = true;
@@ -311,6 +312,7 @@
 			filename = tmp[0];
 			length = tmp[1] * 1000;
 			fade = tmp[2] * 1000;
+			if (fade > 5000) fade = 5000;
 			donePlaying = false;
 			this.pauseButton.label = "Pause";
 			sliderPosition.maximum = fade + length;
