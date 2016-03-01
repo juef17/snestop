@@ -6,7 +6,7 @@
 		<?php if(count($tracks) < 150): ?>
 			<?=count($tracks)?> tracks(s) matching '<?=htmlentities($searchString)?>'
 		<?php else: ?>
-			Over <?=count($tracks)?> tracks(s) matching '<?=htmlentities($searchString)?>'. Please refine your criterias.
+			Over <?=count($tracks)?> tracks(s) matching '<?=htmlentities($searchString)?>'. Please refine your criteria.
 		<?php endif; ?>
 	</h4>
 </div>

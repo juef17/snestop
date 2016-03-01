@@ -26,7 +26,7 @@
 			<?php if(count($games) < 150): ?>
 				<?=count($games)?> game(s) matching '<?=htmlentities($searchString)?>'
 			<?php else: ?>
-				Over <?=count($games)?> game(s) matching '<?=htmlentities($searchString)?>'. Please refine your criterias.
+				Over <?=count($games)?> game(s) matching '<?=htmlentities($searchString)?>'. Please refine your criteria.
 			<?php endif; ?>
 		</h4>
 	</div>
