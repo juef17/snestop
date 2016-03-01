@@ -61,6 +61,10 @@
 	});
 </script>
 
+<div class="container_12">
+	<p style="margin: 5px 0;"><?=$menu?></p>
+</div>
+
 <?php
 	function thumbnail($id) {
 		$thumb = new Imagick(asset_url() . "images/screenshots/game/{$id}.png");
