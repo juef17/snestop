@@ -41,6 +41,8 @@
 		public var showPosition:Boolean;
 		public var showVolumeBar:Boolean;
 		public var sliderPosition:HSlider;
+		public var sliderPan:HSlider;
+		public var sliderVolume:HSlider;
 		public var donePlaying:Boolean;
 		public var timer:Timer;
 		public var filename:String;
@@ -165,7 +167,7 @@
 			labelVolume.y = -10 + heightOffset;
 			labelVolume.height = 12;
             this.addChild(labelVolume);
-			var sliderVolume:HSlider = new HSlider(this, 100 + logoOffset, 5 + heightOffset, function (e:Event):void 
+			sliderVolume = new HSlider(this, 100 + logoOffset, 5 + heightOffset, function (e:Event):void 
 			{
 				gameMusicEmu.volume = sliderVolume.value;
 				mp3Channel.soundTransform = new SoundTransform(sliderVolume.value, sliderPan.value);
@@ -184,7 +186,7 @@
 			labelPan.y = 20 + heightOffset + volumeOffset;
 			labelPan.height = 12;
             this.addChild(labelPan);
-			var sliderPan:HSlider = new HSlider(this, 100 + logoOffset, 35 + heightOffset + volumeOffset, function (e:Event):void 
+			sliderPan = new HSlider(this, 100 + logoOffset, 35 + heightOffset + volumeOffset, function (e:Event):void 
 			{
 				gameMusicEmu.pan = sliderPan.value;
 				mp3Channel.soundTransform = new SoundTransform(sliderVolume.value, sliderPan.value);
@@ -328,6 +330,7 @@
 				gameMusicEmu.load(filename);
 				gameMusicEmu.play();
 				gameMusicEmu.setFade(length);
+				setVolumeAndPan();
 			}
 			else if (loadedType() == "mp3")
 			{
@@ -477,6 +480,12 @@
 		{
 			if (filename == null || filename == "") return "";
 			return getExtension(filename).toLowerCase();
+		}
+		
+		public function setVolumeAndPan():void
+		{
+			gameMusicEmu.volume = sliderVolume.value;
+			gameMusicEmu.pan = sliderPan.value;
 		}
 	}
 }
