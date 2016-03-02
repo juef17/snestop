@@ -2,11 +2,12 @@
 	if(isset($currentPage)):
 		$menu = '';
 		if(count($games) > 0) {
-			foreach(range('A', 'Z') as $p) {
-				if($p == $currentPage)
+			$menuItems = array_merge(array('#'), range('A', 'Z'));
+			foreach($menuItems as $p) {
+				if($p == $currentPage || $p === '#' && $currentPage === 'numbers')
 					$menu .= '<span style="font-weight:bolder; font-size:200%;">' . $p . '</span>&nbsp;&nbsp;';
 				else
-					$menu .= '<a href="' . base_url() . 'index.php/search/browse/0/' . $p . '">' . $p . '</a>&nbsp;&nbsp;';
+					$menu .= '<a href="' . base_url() . 'index.php/search/browse/0/' . ($p == '#' ? 'numbers' : $p) . '">' . $p . '</a>&nbsp;&nbsp;';
 			}
 		}
 ?>
@@ -55,15 +56,17 @@
 	<?php endforeach; ?>
 <?php endif; ?>
 
+<?php if(isset($currentPage)): ?>
+	<div class="container_12">
+		<p style="margin: 5px 0;"><?=$menu?></p>
+	</div>
+<?php endif; ?>
+
 <script>
 	$(function() {
 		setSearchTarget(0);
 	});
 </script>
-
-<div class="container_12">
-	<p style="margin: 5px 0;"><?=$menu?></p>
-</div>
 
 <?php
 	function thumbnail($id) {

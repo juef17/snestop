@@ -19,6 +19,8 @@ class Game_model extends CI_Model {
 		$this->db->order_by('titleEng', 'asc');
 		if(is_numeric($page)) {
 			$this->db->limit(50, ($page - 1) * 50);
+		} elseif ($page === 'numbers') {
+			$this->db->where("titleEng regexp '^[^A-Za-z]'");
 		} else {
 			$this->db->where("titleEng like '{$page}%'");
 		}
