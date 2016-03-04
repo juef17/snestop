@@ -153,12 +153,16 @@ function confirmVote() {
 
 function castVote() {
 	$.post(baseUrl + 'index.php/duelz/castVote', { tracks: tracks }, function(data) {
-		var json = $.parseJSON(data);
-		if(json.success) {
-			updatePreviousTracks();
-			startNewDuel();
+		if(validateSession(data)) {
+			var json = $.parseJSON(data);
+			if(json.success) {
+				updatePreviousTracks();
+				startNewDuel();
+			} else {
+				alert(json.message);
+			}
 		} else {
-			alert(json.message);
+			hideWaitModal();
 		}
 	});
 }
@@ -166,17 +170,19 @@ function castVote() {
 function startNewDuel() {
 	fetchNumberOfDuelsTaken();
 	resetTracksInformations();
-	$.getJSON(baseUrl + 'index.php/duelz/getNewDuel', function(idTracks) {
-		if(idTracks.length == 2) {
-			tracks.a.idTrack = idTracks[0];
-			tracks.b.idTrack = idTracks[1];
-			$('.voting-tools').fadeTo(500, 0);
-			$('#shit-a-group, #shit-b-group').fadeTo(500, 0);
-			$('#enough-a, #enough-b').fadeTo(500, 0);
-		} else {
-			tracks.a.idTrack = -1;
-			tracks.b.idTrack = -1;
-			$('#dialog-nomore').dialog('open');
+	$.getJSON(baseUrl + 'index.php/duelz/getNewDuel', function(idTracks, status, jqXHR) {
+		if(validateSession(jqXHR.responseText)) {
+			if(idTracks.length == 2) {
+				tracks.a.idTrack = idTracks[0];
+				tracks.b.idTrack = idTracks[1];
+				$('.voting-tools').fadeTo(500, 0);
+				$('#shit-a-group, #shit-b-group').fadeTo(500, 0);
+				$('#enough-a, #enough-b').fadeTo(500, 0);
+			} else {
+				tracks.a.idTrack = -1;
+				tracks.b.idTrack = -1;
+				$('#dialog-nomore').dialog('open');
+			}
 		}
 		hideWaitModal();
 	});
@@ -218,17 +224,20 @@ function updatePreviousTracks() {
 }
 
 function fetchTrackTitle(track) {
-	$.getJSON(baseUrl + 'index.php/game/getTrack/' + previousTracks[track].idTrack, function(result){
-		if(result.success)
-			$('#lastTrack-' + track + '-title').text(result.success.gameTitleEng + ' - ' + result.success.title);
-		else
-			alert(result.message);
+	$.getJSON(baseUrl + 'index.php/game/getTrack/' + previousTracks[track].idTrack, function(result, status, jqXHR){
+		if(validateSession(jqXHR.responseText)) {
+			if(result.success)
+				$('#lastTrack-' + track + '-title').text(result.success.gameTitleEng + ' - ' + result.success.title);
+			else
+				alert(result.message);
+		}
 	});
 }
 
 function fetchNumberOfDuelsTaken() {
-	$.getJSON(baseUrl + 'index.php/duelz/getNbDuelzTaken', function(result){
-		$('#nbDuelzTaken').text(result);
+	$.getJSON(baseUrl + 'index.php/duelz/getNbDuelzTaken', function(result, status, jqXHR){
+		if(validateSession(jqXHR.responseText))
+			$('#nbDuelzTaken').text(result);
 	});
 }
 
@@ -249,15 +258,17 @@ function playTrack() {
 	var idTrack = tracks[tracks.current].idTrack;
 	$.getJSON(
 		baseUrl + 'index.php/game/getTrack/' + idTrack,
-		function(data) {
-			if(data['success']) {
-				$('#current-track').text(tracks.current.toUpperCase());
-				$('#player-message').fadeTo(500, 1);
-				var track = data['success'];
-				var url = assetUrl + 'spc/' + track.spcEncodedURL + '?' + track.length + '?' + track.fadeLength;
-				$('#spcplayer')[0].playUrl(url);
-			} else {
-				showMessageDialog(data['message']);
+		function(data, status, jqXHR) {
+			if(validateSession(jqXHR.responseText)) {
+				if(data['success']) {
+					$('#current-track').text(tracks.current.toUpperCase());
+					$('#player-message').fadeTo(500, 1);
+					var track = data['success'];
+					var url = assetUrl + 'spc/' + track.spcEncodedURL + '?' + track.length + '?' + track.fadeLength;
+					$('#spcplayer')[0].playUrl(url);
+				} else {
+					showMessageDialog(data['message']);
+				}
 			}
 		}
 	);

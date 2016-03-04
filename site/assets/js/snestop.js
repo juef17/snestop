@@ -14,3 +14,12 @@ function waitModalVisible(options) {
 	else
 		$('.waitmodal').fadeOut(options.fade ? 1000 : 0);
 }
+
+function validateSession(data) {
+	if(data.indexOf('<!-- session timeout -->') > -1) {
+		showMessageDialog('Session timed out!', 'Please refresh the page and log back in!');
+		return false;
+	} else {
+		return true;
+	}
+}

@@ -39,27 +39,31 @@ function addToPlaylist(idTrack, idPlaylist) {
 			idTrack: idTrack
 		},
 		function(data) {
-			var json = $.parseJSON(data);
-			if(json.success) {
-				$('#dialog-addToPlaylist').dialog('close');
-				if(idPlaylist == $('#player-playlistcombo').val())
-					loadPlaylist(idPlaylist);
-			} else {
-				showMessageDialog('D\'oh!', json.message);
+			if(validateSession(data)) {
+				var json = $.parseJSON(data);
+				if(json.success) {
+					$('#dialog-addToPlaylist').dialog('close');
+					if(idPlaylist == $('#player-playlistcombo').val())
+						loadPlaylist(idPlaylist);
+				} else {
+					showMessageDialog('D\'oh!', json.message);
+				}
 			}
 		});
 }
 
 function addToNewPlaylist(idTrack, playlistName) {
 	$.post(baseUrl + 'index.php/playlist/createSimple', { playlistName: playlistName }, function(data) {
-		var json = $.parseJSON(data);
-		if(json.success) {
-			addToPlaylist(idTrack, json.success); //success is the new idTrack
-			$('#dialog-addToPlaylist #newplaylistname').val('')
-			if(typeof refreshPlaylistsList !== 'undefined')
-				refreshPlaylistsList();
-		} else {
-			showMessageDialog('D\'oh!', json.message);
+		if(validateSession(data)) {
+			var json = $.parseJSON(data);
+			if(json.success) {
+				addToPlaylist(idTrack, json.success); //success is the new idTrack
+				$('#dialog-addToPlaylist #newplaylistname').val('')
+				if(typeof refreshPlaylistsList !== 'undefined')
+					refreshPlaylistsList();
+			} else {
+				showMessageDialog('D\'oh!', json.message);
+			}
 		}
 	});
 }

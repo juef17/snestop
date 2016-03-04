@@ -20,9 +20,11 @@ function bindPlayerModesFunctions() {
 			randomize: $('#player-randomize').is(':checked')
 		},
 		function(data) {
-			var json = $.parseJSON(data);
-			if(!json.success)
-				alert(json.message);
+			if(validateSession(data)) {
+				var json = $.parseJSON(data);
+				if(!json.success)
+					alert(json.message);
+			}
 		});
 	};
 
@@ -222,15 +224,17 @@ function attachAjaxSubmitCallback() {
 		$.post(baseUrl + 'index.php/playlist/create',
 			$(this).serialize(),
 			function(data, textStatus) {
-				$('#createPlaylist-dialog').html(data);
-				if($('#createPlaylist-dialog #hasErrors').val() == '0') {
-					refreshPlaylistsList(function() {
-						selectPlaylist($('#createPlaylist-dialog #idPlaylist').val());
-						$('#createPlaylist-dialog').dialog('close');
-						$('#createPlaylist-form #name').val('');
-					});
-				} else {
-					attachAjaxSubmitCallback();
+				if(validateSession(data)) {
+					$('#createPlaylist-dialog').html(data);
+					if($('#createPlaylist-dialog #hasErrors').val() == '0') {
+						refreshPlaylistsList(function() {
+							selectPlaylist($('#createPlaylist-dialog #idPlaylist').val());
+							$('#createPlaylist-dialog').dialog('close');
+							$('#createPlaylist-form #name').val('');
+						});
+					} else {
+						attachAjaxSubmitCallback();
+					}
 				}
 			}
 		);
