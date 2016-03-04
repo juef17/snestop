@@ -133,6 +133,7 @@
 					{
 						gameMusicEmu.play();
 						pauseButton.label = "Pause";
+						donePlaying = false;
 					}
 					else if (gameMusicEmu.isPlaying)
 					{
@@ -154,6 +155,7 @@
 						mp3Channel = mp3.play(mp3Position);
 						mp3IsPlaying = true;
 						pauseButton.label = "Pause";
+						donePlaying = false;
 					}
 				}
 			});
@@ -345,6 +347,7 @@
 		
 		public function playSansUrl():void
 		{
+			donePlaying = false;
 			if (loadedType() == "spc")
 			{
 				if (gameMusicEmu.tell() == 0) playUrl(url);
@@ -441,9 +444,10 @@
 			msg += "length: " + length + "\n";
 			msg += "tell: " + gameMusicEmu.tell() + "\n";
 			msg += "sliderPosition: " + sliderPosition.value + "\n";
-			msg += "check: " + Math.abs(gameMusicEmu.tell() - sliderPosition.value) + "\n";
+			msg += "donePlaying: " + (donePlaying ? "true" : "false") + "\n";
+			//msg += "check: " + Math.abs(gameMusicEmu.tell() - sliderPosition.value) + "\n";
 			
-			ExternalInterface.call("alert", msg);
+			ExternalInterface.call("console.log", msg);
 		}
 		
 		public static function toTimeCode(milliseconds:int) : String
