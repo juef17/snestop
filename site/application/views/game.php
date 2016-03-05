@@ -68,7 +68,8 @@
 			<p class="grid_1 columnheader">&nbsp;</p><!-- play -->
 			<p class="grid_3 columnheader">Title</p>
 			<p class="grid_1 columnheader">Length</p>
-			<p class="grid_2 columnheader">Composer(s)</p>
+			<p class="grid_1 columnheader"></p>
+			<p class="grid_3 columnheader">Composer(s)</p>
 			<p class="grid_1 columnheader">SPC</p>
 			<?php if($loggedUser): ?>
 				<p class="grid_3 columnheader">My playlists</p>
@@ -80,7 +81,8 @@
 				<p class="grid_1"><img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="playTrack(<?=$track->idTrack?>);" /></p>
 				<p class="grid_3"><a href="#!" onclick="detailsDialog(<?=$track->idTrack?>)"><?=$track->title?></a></p>
 				<p class="grid_1"><?=intval(date("i", $track->length)) . ":" . date("s", $track->length)?></p>
-				<p class="grid_2"><?=$track->composer?></p>
+				<p class="grid_1"><?= implode(', ', array_filter(array(($track->isJingle ? 'Jingle' : NULL), ($track->isVoice ? 'vfx' : NULL), ($track->isSoundEffect ? 'sfx' : NULL)))) ?></p>
+				<p class="grid_3"><?=$track->composer?></p>
 				<div class="grid_1">
 					<a href="<?=asset_url() . 'spc/' . rawurlencode($track->spcURL)?>"><img src="<?=asset_url() . 'images/download.png'?>" /></a>
 				</div>
