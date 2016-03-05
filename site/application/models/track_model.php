@@ -193,6 +193,9 @@ class Track_model extends CI_Model {
 		$this->db->limit(2);
 		$this->db->order_by('idTrack', 'random');
 		$this->db->select('idTrack');
+		$this->db->where('isSoundEffect', 0);
+		$this->db->where('isJingle', 0);
+		$this->db->where('isVoice', 0);
 		$query = $this->db->get('Track');
 
 		return array_map(function($o) { return (int)$o->idTrack; }, $query->result());
