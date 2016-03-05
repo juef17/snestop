@@ -1,35 +1,51 @@
 function addToPlaylistDialog(idTrack) {
 	$('#dialog-addToPlaylist #playlistcombo').load(baseUrl + 'index.php/playlist/playlists/0',
 		function() {
-			if($('#dialog-addToPlaylist #playlistcombo option').length > 0) {
-				$('#dialog-addToPlaylist').dialog({
-					modal: true,
-					width: 400,
-					resizable: false,
-					show: { effect: 'puff', duration: 200 },
-					hide: { effect: 'puff', duration: 200 },
-					buttons: {
-						Ok: function() {
-							if($('#dialog-addToPlaylist input[type=radio]:checked').val() == 'existing')
-								addToPlaylist(idTrack, $('#dialog-addToPlaylist #playlistcombo').val());
-							else
-								addToNewPlaylist(idTrack, $('#dialog-addToPlaylist #newplaylistname').val());
-						},
-						Cancel: function() {
-							$(this).dialog('close');
-						}
+			$('#dialog-addToPlaylist').dialog({
+				modal: true,
+				width: 400,
+				resizable: false,
+				show: { effect: 'puff', duration: 200 },
+				hide: { effect: 'puff', duration: 200 },
+				buttons: {
+					Ok: function() {
+						if($('#dialog-addToPlaylist input[type=radio]:checked').val() == 'existing')
+							addToPlaylist(idTrack, $('#dialog-addToPlaylist #playlistcombo').val());
+						else
+							addToNewPlaylist(idTrack, $('#dialog-addToPlaylist #newplaylistname').val());
+					},
+					Cancel: function() {
+						$(this).dialog('close');
 					}
-				});
-				//abonner au change du textbox. si pas vide, disable le combo. si vide, enable combo.
-				$('#dialog-addToPlaylist input[type=radio]').change(function() {
-					$('#playlistcombo').attr('disabled', $(this).val() != 'existing');
-					$('#newplaylistname').attr('disabled', $(this).val() != 'new');
-				});
-			} else {
-				showMessageDialog('No playlist', 'No playlist available. Use the player on the main menu to manage playlists!');
-			}
+				}
+			});
+
+			var radioGroupCallback = function(button) {
+				$('#playlistcombo').attr('disabled', button.val() != 'existing');
+				$('#newplaylistname').attr('disabled', button.val() != 'new');
+			};
+
+			checkNeededRadioButton(radioGroupCallback);
+
+			$('#dialog-addToPlaylist input[type=radio]').change(function() { radioGroupCallback($(this)); });
 		}
 	);
+}
+
+function checkNeededRadioButton(radioGroupCallback) {
+	var playlistsExist = $('#dialog-addToPlaylist #playlistcombo option').length > 0;
+	var newButton = $('#dialog-addToPlaylist #optradio-new');
+	var existingButton = $('#dialog-addToPlaylist #optradio-existing');
+
+	newButton.prop('checked', !playlistsExist);
+	existingButton.prop('checked', playlistsExist);
+	
+	radioGroupCallback(playlistsExist ? existingButton : newButton);
+	
+	existingButton.attr('disabled', !playlistsExist);
+
+	if(!playlistsExist)
+		$('#newplaylistname').focus();
 }
 
 function addToPlaylist(idTrack, idPlaylist) {
