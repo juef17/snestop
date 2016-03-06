@@ -79,6 +79,11 @@
 					</label>
 				</div>
 			</div>
+			<?php if($loggedUser): ?>
+				<p>
+					<div class="btn btn-xs btn-default" id="btnAddAllToPlaylist" onclick="addToPlaylistDialog(gameTracks);">Add all tracks to playlist...</div>
+				</p>
+			<?php endif; ?>
 			<?php if($loggedUser && $loggedUser->isAdmin): ?>
 				<div>
 					<a href="<?=base_url()?>index.php/tracks_dashboard/index/<?=$game->idGame?>">Open tracks dashboard</a>
@@ -219,6 +224,9 @@
 				$('#tracks-grid').load(url, function() {
 					<?php if($idTrack): ?>
 						detailsDialog(<?=$idTrack?>);
+					<?php endif; ?>
+					<?php if($loggedUser): ?>
+						$('#btnAddAllToPlaylist').attr('disabled', gameTracks.length == 0);
 					<?php endif; ?>
 					showTracksGrid();
 				});

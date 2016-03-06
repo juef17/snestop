@@ -17,7 +17,7 @@
 				<a href="<?=asset_url() . 'spc/' . rawurlencode($track->spcURL)?>"><img src="<?=asset_url() . 'images/download.png'?>" /></a>
 			</div>
 			<?php if($loggedUser): ?>
-				<div class="grid_2 btn btn-xs btn-default" onclick="addToPlaylistDialog(<?=$track->idTrack?>);">Add to playlist...</div>
+				<div class="grid_2 btn btn-xs btn-default" onclick="addToPlaylistDialog([<?=$track->idTrack?>]);">Add to playlist...</div>
 			<?php endif; ?>
 		</div>
 

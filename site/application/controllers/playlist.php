@@ -109,17 +109,25 @@ class Playlist extends Secure_Controller {
 	}
 
 	//Ajax POST
-	public function addPlaylistItem() {
+	public function addPlaylistItems() {
 		$idPlaylist = $this->input->post('idPlaylist');
-		$idTrack = $this->input->post('idTrack');
+		$idTracks = $this->input->post('idTracks');
 		$playlist = $this->Playlist_model->get_Playlist($idPlaylist);
 		if($playlist && $playlist->idUser == $_SESSION['loggedUser']->idUser) {
-			if($this->Playlist_Item_model->playlistItemExists($idPlaylist, $idTrack)) {
-				$data['success'] = FALSE;
-				$data['message'] = 'This track is already in this playlist';
-			} else {
-				$data['success'] = $this->Playlist_Item_model->set_Playlist_item($idPlaylist, $idTrack);
-				$data['message'] = 'An unexpected error occured, sorry :(';
+			$tracksAreValid = TRUE;
+			foreach($idTracks as $idTrack) {
+				if($this->Playlist_Item_model->playlistItemExists($idPlaylist, $idTrack)) {
+					$data['success'] = FALSE;
+					$data['message'] = 'One or more tracks are already in this playlist';
+					$tracksAreValid = FALSE;
+					break;
+				}
+			}
+			if($tracksAreValid) {
+				foreach($idTracks as $idTrack) {
+					$data['success'] = $this->Playlist_Item_model->set_Playlist_item($idPlaylist, $idTrack);
+					$data['message'] = 'An unexpected error occured, sorry :(';
+				}
 			}
 		} else {
 			$data['success'] = FALSE;

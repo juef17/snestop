@@ -1,4 +1,4 @@
-function addToPlaylistDialog(idTrack) {
+function addToPlaylistDialog(idTracks) {
 	$('#dialog-addToPlaylist #playlistcombo').load(baseUrl + 'index.php/playlist/playlists/0',
 		function() {
 			$('#dialog-addToPlaylist').dialog({
@@ -7,17 +7,26 @@ function addToPlaylistDialog(idTrack) {
 				resizable: false,
 				show: { effect: 'puff', duration: 200 },
 				hide: { effect: 'puff', duration: 200 },
-				buttons: {
-					Ok: function() {
-						if($('#dialog-addToPlaylist input[type=radio]:checked').val() == 'existing')
-							addToPlaylist(idTrack, $('#dialog-addToPlaylist #playlistcombo').val());
-						else
-							addToNewPlaylist(idTrack, $('#dialog-addToPlaylist #newplaylistname').val());
+				buttons: [
+					{
+						id: 'addToPlaylist-btnOk',
+						text: 'Ok',
+						click: function() {
+							$('#addToPlaylist-btnOk span').text('Please wait...');
+							$(this).dialog('widget').find('.ui-button').prop('disabled', true);
+							if($('#dialog-addToPlaylist input[type=radio]:checked').val() == 'existing')
+								addToPlaylist(idTracks, $('#dialog-addToPlaylist #playlistcombo').val());
+							else
+								addToNewPlaylist(idTracks, $('#dialog-addToPlaylist #newplaylistname').val());
+						}
 					},
-					Cancel: function() {
-						$(this).dialog('close');
+					{
+						text: 'Cancel',
+						click: function() {
+							$(this).dialog('close');
+						}
 					}
-				}
+				]
 			});
 
 			var radioGroupCallback = function(button) {
@@ -48,17 +57,17 @@ function checkNeededRadioButton(radioGroupCallback) {
 		$('#newplaylistname').focus();
 }
 
-function addToPlaylist(idTrack, idPlaylist) {
-	$.post(baseUrl + 'index.php/playlist/addPlaylistItem',
+function addToPlaylist(idTracks, idPlaylist) {
+	$.post(baseUrl + 'index.php/playlist/addPlaylistItems',
 		{
 			idPlaylist: idPlaylist,
-			idTrack: idTrack
+			idTracks: idTracks
 		},
 		function(data) {
 			if(validateSession(data)) {
 				var json = $.parseJSON(data);
+				$('#dialog-addToPlaylist').dialog('close');
 				if(json.success) {
-					$('#dialog-addToPlaylist').dialog('close');
 					if(idPlaylist == $('#player-playlistcombo').val())
 						loadPlaylist(idPlaylist);
 				} else {
@@ -68,12 +77,12 @@ function addToPlaylist(idTrack, idPlaylist) {
 		});
 }
 
-function addToNewPlaylist(idTrack, playlistName) {
+function addToNewPlaylist(idTracks, playlistName) {
 	$.post(baseUrl + 'index.php/playlist/createSimple', { playlistName: playlistName }, function(data) {
 		if(validateSession(data)) {
 			var json = $.parseJSON(data);
 			if(json.success) {
-				addToPlaylist(idTrack, json.success); //success is the new idTrack
+				addToPlaylist(idTracks, json.success); //success is the new idTrack
 				$('#dialog-addToPlaylist #newplaylistname').val('')
 				if(typeof refreshPlaylistsList !== 'undefined')
 					refreshPlaylistsList();

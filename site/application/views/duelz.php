@@ -99,10 +99,10 @@
 		</div>
 
 		<div class="grid_7 prefix_3">
-			<div class="btn btn-xs btn-default" onclick="addToPlaylistDialog(previousTracks.a.idTrack);">Add to playlist...</div>
+			<div class="btn btn-xs btn-default" onclick="addToPlaylistDialog([previousTracks.a.idTrack]);">Add to playlist...</div>
 		</div>
 		<div class="grid_9 prefix_2 suffix_3">
-			<div class="btn btn-xs btn-default" onclick="addToPlaylistDialog(previousTracks.b.idTrack);">Add to playlist...</div>
+			<div class="btn btn-xs btn-default" onclick="addToPlaylistDialog([previousTracks.b.idTrack]);">Add to playlist...</div>
 		</div>
 	</div>
 </div>

@@ -21,7 +21,7 @@
 	<button class="btn btn-xs btn-danger" id="playlist-delete" onclick="confirmDeletePlaylist();">Delete playlist</button>
 	<label title="Shares this playlist on your profile for other members to play!" class="label-checkbox" style="color: #dddddd;">
 		<input id="playlist-playlist-public" type="checkbox" <?=$playlist->public ? 'checked' : ''?> />
-		Public
+		Shared
 	</label>
 </div>
 
