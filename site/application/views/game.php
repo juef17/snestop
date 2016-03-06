@@ -1,3 +1,11 @@
+<style>
+	#wait {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+</style>
+
 <?php if($game == NULL): ?>
 	<div class="container_12">
 		<div class="grid_12">
@@ -22,7 +30,7 @@
 		</div>
 		<div class="grid_8">
 			<div>
-				<?php if(count($tracks) > 0): ?>
+				<?php if(isset($game->rsnFileURL)): ?>
 					<a href="<?=asset_url() . 'rsn/' . rawurlencode($game->rsnFileURL)?>"><img src="<?=asset_url() . 'images/download.png'?>" /> Download soundtrack in RSN format</a>
 				<?php endif; ?>
 			</div>
@@ -49,6 +57,28 @@
 	<div class="container_12">
 		<div class="grid_12">
 			<h2>Tracks</h2>
+			<div id="filters">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" id="showNormalTracks" checked> Normal tracks
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" id="showJingles"> Jingles
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" id="showSoundEffects"> Sound effects
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" id="showVoiceEffects"> Voices
+					</label>
+				</div>
+			</div>
 			<?php if($loggedUser && $loggedUser->isAdmin): ?>
 				<div>
 					<a href="<?=base_url()?>index.php/tracks_dashboard/index/<?=$game->idGame?>">Open tracks dashboard</a>
@@ -57,130 +87,55 @@
 		</div>
 	</div>
 
-	<?php if(count($tracks) == 0): ?>
-		<div class="container_12">
-			<div class="grid_1">
-				<p>None</p>
-			</div>
-		</div>
-	<?php else: ?>
-		<div style="background-color: #dddddd;" class="container_16">
-			<p class="grid_1 columnheader">#</p>
-			<p class="grid_1 columnheader">&nbsp;</p><!-- play -->
-			<p class="grid_3 columnheader">Title</p>
-			<p class="grid_1 columnheader">Length</p>
-			<p class="grid_1 columnheader"></p>
-			<p class="grid_3 columnheader">Composer(s)</p>
-			<p class="grid_1 columnheader">SPC</p>
-			<?php if($loggedUser): ?>
-				<p class="grid_2 columnheader">My playlists</p>
-			<?php endif; ?>
-		</div>
-		<?php $b = TRUE; foreach($tracks as $track): ?>
-			<div <?php if($b = !$b): ?> style="background-color: #dddddd;" <?php endif; ?> class="container_16">
-				<p class="grid_1"><?=$track->trackNumber?></p>
-				<p class="grid_1"><img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="playTrack(<?=$track->idTrack?>);" /></p>
-				<p class="grid_3"><a href="#!" onclick="detailsDialog(<?=$track->idTrack?>)"><?=$track->title?></a></p>
-				<p class="grid_1"><?=intval(date("i", $track->length)) . ":" . date("s", $track->length)?></p>
-				<p class="grid_1"><?= implode(', ', array_filter(array(($track->isJingle ? 'Jingle' : NULL), ($track->isVoice ? 'vfx' : NULL), ($track->isSoundEffect ? 'sfx' : NULL)))) ?></p>
-				<p class="grid_3"><?=$track->composer?></p>
-				<div class="grid_1">
-					<a href="<?=asset_url() . 'spc/' . rawurlencode($track->spcURL)?>"><img src="<?=asset_url() . 'images/download.png'?>" /></a>
-				</div>
-				<?php if($loggedUser): ?>
-					<div class="grid_2 btn btn-xs btn-default" onclick="addToPlaylistDialog(<?=$track->idTrack?>);">Add to playlist...</div>
-				<?php endif; ?>
-			</div>
-
-			<!-- details dialog -->
-			<div style="display: none; padding-top: 15px;" id="dialog-details_<?=$track->idTrack?>" title="<?=$game->titleEng . ' - ' . $track->title?>">
-				<?php if($loggedUser && $loggedUser->isAdmin):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$track->idTrack?>, 1); return false;">
-				<?php elseif($loggedUser && !$track->isScreenshotSet):?><a href="<?=base_url()?>index.php/request_screenshot_track/index/<?=$track->idTrack?>"><?php endif;?>
-					<div class="tv" style="position: relative; background-image: url('<?=$track->isScreenshotSet ? asset_url() . "images/screenshots/track/{$track->idTrack}.png" : asset_url() . 'images/en/no_track_ss.png'?>');">
-						<?php if($loggedUser && $loggedUser->isAdmin && $track->isScreenshotSet):?><img id="unset-screenshot" style="position: absolute; top: 24px; right: 24px; width: 24px; height: 24px;" src="<?=asset_url()?>images/delete.png" onclick="unsetScreenshot(<?=$track->idTrack?>, 1);"/><?php endif;?>
-					</div>
-				<?php if($loggedUser && (!$track->isScreenshotSet || $loggedUser->isAdmin)):?></a><?php endif;?>
-				<div style="display: inline-block; margin: 15px 0 0 15px;">
-					<h4>Ratings*</h4>
-					<table class="datatable">
-						<tr class="graybg">
-							<th>&nbsp;</th>
-							<th>Personal</th>
-							<th>Community</th>
-							<th>Global</th>
-						</tr>
-						<tr>
-							<th>Elo</th>
-							<td>?</td>
-							<td>?</td>
-							<td>?</td>
-						</tr>
-						<tr class="graybg">
-							<th>Glicko 2</th>
-							<td>?</td>
-							<td>?</td>
-							<td>?</td>
-						</tr>
-						<tr>
-							<th>RD</th>
-							<td>?</td>
-							<td>?</td>
-							<td>?</td>
-						</tr>
-						<tr class="graybg">
-							<th>Sigma</th>
-							<td>?</td>
-							<td>?</td>
-							<td>?</td>
-						</tr>
-					</table>
-					<p style="font-size: 0.6em;">*Ratings will be updated as soon as we have enough data! Come back soon!</p>
-				</div>
-				<p><a href="#!" onClick="shareTrack(<?=$track->idTrack?>)">Share a link to this track</a></p>
-				<p id="shareTrack_<?=$track->idTrack?>" style="display: none"><input type="text" style="cursor: text" class="form-control" onClick="this.select();" value="<?=base_url()?>index.php/game/index/<?=$game->idGame?>/<?=$track->idTrack?>" readonly /></p>
-				<h3>Reviews</h3>
-				<?php if($loggedUser):?>
-					<a href="<?=base_url()?>index.php/request_review/index/<?=$track->idTrack?>">Write a review</a>
-				<?php else:?>
-					<p>Log in to write a review!</p>
-				<?php endif; ?>
-				<div id="reviews-container"><!-- Ajax loaded content --></div>
-			</div>
-		<?php endforeach; ?>
-
-		<script>
-			function detailsDialog(idTrack) {
-				$('#dialog-details_' + idTrack).dialog({
-					height: 500,
-					width: 700,
-					modal: true,
-					resizable: false,
-					show: { effect: 'puff', duration: 200 },
-					hide: { effect: 'puff', duration: 200 },
-					buttons: {
-						Ok: function() {
-							$(this).dialog('close');
-						}
-					}
-				});
-				$('#dialog-details_' + idTrack + ' #unset-screenshot').click(function(event) { event.stopPropagation(); });
-				$.getJSON(
-					'<?=base_url()?>index.php/game/getReviewsForTrack/' + idTrack,
-					function(data) {
-						var reviews = '';
-						$.each(data, function (index, review) {
-							reviews += '<div style="background-color: #dddddd; padding: 0 5px; margin: 2px 0">';
-							reviews += '<h4>Review by <a href="<?=base_url()?>index.php/user_profile/index/' + review.userName + '">' + review.userName + '</a></h4>';
-							reviews += '<p>' + review.text + '</p>';
-							reviews += '</div>';
-						});
-						$('#dialog-details_' + idTrack + ' #reviews-container').html(reviews);
-					}
-				);
-			}
-		</script>
-	<?php endif; //tracks count > 0 ?>
+	<div style="background-color: #dddddd;" class="container_16">
+		<p class="grid_1 columnheader">#</p>
+		<p class="grid_1 columnheader">&nbsp;</p><!-- play -->
+		<p class="grid_3 columnheader">Title</p>
+		<p class="grid_1 columnheader">Length</p>
+		<p class="grid_1 columnheader"></p>
+		<p class="grid_3 columnheader">Composer(s)</p>
+		<p class="grid_1 columnheader">SPC</p>
+		<?php if($loggedUser): ?>
+			<p class="grid_2 columnheader">My playlists</p>
+		<?php endif; ?>
+	</div>
 	
+	<div id="tracks-grid" style="display:none;"></div>
+	<img id="wait" src="<?=asset_url()?>images/wait.gif" />
+	
+
+	<script>
+		function detailsDialog(idTrack) {
+			$('#dialog-details_' + idTrack).dialog({
+				height: 500,
+				width: 700,
+				modal: true,
+				resizable: false,
+				show: { effect: 'puff', duration: 200 },
+				hide: { effect: 'puff', duration: 200 },
+				buttons: {
+					Ok: function() {
+						$(this).dialog('close');
+					}
+				}
+			});
+			$('#dialog-details_' + idTrack + ' #unset-screenshot').click(function(event) { event.stopPropagation(); });
+			$.getJSON(
+				'<?=base_url()?>index.php/game/getReviewsForTrack/' + idTrack,
+				function(data) {
+					var reviews = '';
+					$.each(data, function (index, review) {
+						reviews += '<div style="background-color: #dddddd; padding: 0 5px; margin: 2px 0">';
+						reviews += '<h4>Review by <a href="<?=base_url()?>index.php/user_profile/index/' + review.userName + '">' + review.userName + '</a></h4>';
+						reviews += '<p>' + review.text + '</p>';
+						reviews += '</div>';
+					});
+					$('#dialog-details_' + idTrack + ' #reviews-container').html(reviews);
+				}
+			);
+		}
+	</script>
+
 	<?php if($loggedUser && $loggedUser->isAdmin): ?>
 		<div style="display: none;" id="dialog-upload">
 			<?= form_open_multipart(base_url() . 'index.php/screenshot_request_dashboard/uploadScreenshot') ?>
@@ -247,15 +202,43 @@
 
 	<script>
 		$(function() {
-			<?php if($idTrack): ?>
-				detailsDialog(<?=$idTrack?>);
-			<?php endif; ?>
+			loadTracksGrid();
+			$('#filters input').change(loadTracksGrid);
 		});
+
+		function loadTracksGrid() {
+			hideTracksGrid(function() {
+				var normalTracks = $('#showNormalTracks').is(':checked') ? 1 : 0;
+				var jingles = $('#showJingles').is(':checked') ? 1 : 0;
+				var sfx = $('#showSoundEffects').is(':checked') ? 1 : 0;
+				var vfx = $('#showVoiceEffects').is(':checked') ? 1 : 0;
+
+				var url = '<?=base_url()?>index.php/game/getTracks/<?=$game->idGame?>/';
+				url += normalTracks + '/' + jingles + '/' + sfx + '/' + vfx;
+				
+				$('#tracks-grid').load(url, function() {
+					<?php if($idTrack): ?>
+						detailsDialog(<?=$idTrack?>);
+					<?php endif; ?>
+					showTracksGrid();
+				});
+			});
+		}
 
 		function shareTrack(idTrack) {
 			$('#shareTrack_' + idTrack).toggle(50);
 			$('#shareTrack_' + idTrack + ' input').focus();
 			$('#shareTrack_' + idTrack + ' input')[0].select();
+		}
+
+		function showTracksGrid() {
+			$('#wait').fadeOut();
+			$('#tracks-grid').slideDown();//.show('slide', { direction: 'up'});
+		}
+
+		function hideTracksGrid(callback) {
+			$('#wait').fadeIn();
+			$('#tracks-grid').slideUp(callback);//.hide('slide', { direction: 'up'});
 		}
 	</script>
 	

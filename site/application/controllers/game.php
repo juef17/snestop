@@ -14,7 +14,6 @@ class Game extends Public_Controller {
 		$data['game'] = $game;
 		$data['idTrack'] = $idTrack; //open this track dialog
 		$data['composers'] = $this->Track_model->get_game_composers($id);
-		$data['tracks'] = $this->Track_model->get_Tracks_for_Game($id);
 		$data['view'] = 'game.php';
 		$this->setSocialMeta($data, $game, $idTrack);
 		
@@ -41,6 +40,14 @@ class Game extends Public_Controller {
 			if($game->isScreenshotSet)
 				$data['page_image'] = asset_url() . "images/screenshots/game/{$game->idGame}.png";
 		}
+	}
+
+	//Ajax GET partial view
+	public function getTracks($idGame, $showNormalTracks, $showJingles, $showSfx, $showVfx) {
+		$data = $this->getUserViewData();
+		$data['game'] = $this->Game_model->get_Game($idGame);
+		$data['tracks'] = $this->Track_model->get_Tracks_for_Game($idGame, $showNormalTracks, $showJingles, $showSfx, $showVfx);
+		$this->load->view('includes/game_tracks.php', $data);
 	}
 
 	//Ajax GET

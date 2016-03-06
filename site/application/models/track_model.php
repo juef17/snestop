@@ -15,7 +15,25 @@ class Track_model extends CI_Model {
 			return null;
 	}
 
-	public function get_Tracks_for_Game($idGame) {
+	public function get_Tracks_for_Game($idGame, $showNormalTracks, $showJingles, $showSfx, $showVfx) {
+		$orClauses = array();
+		
+		if($showNormalTracks)
+			$orClauses[] = '(isJingle = 0 AND isSoundEffect = 0 AND isVoice = 0)';
+			
+		if($showJingles)
+			$orClauses[] = 'isJingle = 1';
+			
+		if($showSfx)
+			$orClauses[] = 'isSoundEffect = 1';
+			
+		if($showVfx)
+			$orClauses[] = 'isVoice = 1';
+
+		if(count($orClauses) == 0)
+			$orClauses[] = '1 = 0'; //retourner rien
+
+		$this->db->or_where('(' . implode(' OR ', $orClauses) . ')');
 		$query = $this->db->get_where('Track', array('idGame' => $idGame));
 
 		$retval = array();
