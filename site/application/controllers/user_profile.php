@@ -6,6 +6,7 @@ class User_Profile extends Public_Controller {
 		$this->load->model('Playlist_model','',TRUE);
 		$this->load->model('Review_model','',TRUE);
 		$this->load->model('Playlist_Item_model','',TRUE);
+		$this->load->model('Duel_Result_model','',TRUE);
 	}
 
 	public function index($username) {
@@ -13,6 +14,7 @@ class User_Profile extends Public_Controller {
 		if($data['user'] = $this->User_model->get_user_profile($username)) {
 			$data['playlists'] = $this->Playlist_model->get_Playlists_from_User($data['user']->idUser, true);
 			$data['reviews'] = $this->Review_model->get_Review_for_user($data['user']->idUser);
+			$data['nbDuelz'] = $this->Duel_Result_model->get_number_of_duels_User($data['user']->idUser);
 		}
 		$data['view'] = 'user_profile.php';
 		$this->setSocialMeta($data);
@@ -23,7 +25,8 @@ class User_Profile extends Public_Controller {
 		if($user = $data['user']) {
 			$nbReviews = count($data['reviews']);
 			$ndSharedPlaylists = count($data['playlists']);
-			$data['page_description'] = "{$user->userName}'s profile: $nbReviews track reviews and $ndSharedPlaylists shared playlists.";
+			$nbDuelz = $data['nbDuelz'];
+			$data['page_description'] = "{$user->userName}'s profile: $nbReviews track reviews, {$nbDuelz} duelz taken and $ndSharedPlaylists shared playlists.";
 		} else {
 			$data['page_description'] = 'User profile not found';
 		}

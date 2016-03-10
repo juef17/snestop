@@ -13,24 +13,26 @@
 
 	<div class="container_12">
 		<div class="grid_12">
-			<div class="form-group">
-				<label>Language</label>
-				<p><?=$user->language?></p>
+			<h3>About</h3>
+		</div>
+	</div><div class="container_12">
+		<div class="grid_12">
+			<div>
+				<b>Language: </b><?=$user->language?>
 			</div>
-			<div class="form-group">
-				<label>Community</label>
-				<p><?= ($user->communityName == NULL) ? 'None' : '<a href="' . $user->communityURL . '">' . $user->communityName . '</a>'?></p>
+			<div>
+				<b>Community: </b><?= ($user->communityName == NULL) ? 'None' : '<a href="' . $user->communityURL . '">' . $user->communityName . '</a>'?>
 			</div>
-			<div class="form-group">
-				<label>Registration date</label>
-				<p><?=$user->registrationDate?></p>
+			<div>
+				<b>Registration date: </b><?=$user->registrationDate?>
 			</div>
 		</div>
 	</div>
+	
 	<div class="container_12">
-			<div class="grid_12">
-				<h3>Shared playlists</h3>
-			</div>
+		<div class="grid_12">
+			<h3>Shared playlists</h3>
+		</div>
 	</div>
 	<?php if (count($playlists) == 0): ?>
 		<div class="container_12">
@@ -84,9 +86,9 @@
 	<?php endif; ?>
 
 	<div class="container_12">
-			<div class="grid_12">
-				<h3>Reviews</h3>
-			</div>
+		<div class="grid_12">
+			<h3>Reviews</h3>
+		</div>
 	</div>
 	<?php if (count($reviews) == 0): ?>
 		<div class="container_12">
@@ -119,5 +121,14 @@
 			}
 		</script>
 	<?php endif; ?>
+
+	<div class="container_12">
+		<div class="grid_12">
+			<h3>Duelz</h3>
+		</div>
+	</div>
+	<div class="container_12">
+		<p class="grid_12"><?= $nbDuelz ?> duelz taken</p>
+	</div>
 <?php endif; ?>
 

@@ -44,7 +44,7 @@
 					}
 				});
 			});
-			$('#player-playlistcombo').val(<?=$playlist->idPlaylist?>); //doit supporter la playlist d<un game
+			$('#player-playlistcombo').val(<?=$playlist->idPlaylist?>);
 		<?php else: ?>
 			$('#player-playlistcombo').val(-1);$('#player-playlistcombo').val(-1);
 		<?php endif; ?>
@@ -135,7 +135,7 @@
 					idPlaylist: <?=$playlist->idPlaylist?>,
 					idTrack: idTrack
 				},
-				function(data) { //on doit sortir ca d'ici pour les playlist de game
+				function(data) {
 					var json = $.parseJSON(data);
 					if(json.success)
 						$('.playlist #' + idTrack).hide(200, function() {
