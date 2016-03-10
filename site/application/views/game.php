@@ -81,6 +81,9 @@
 			</div>
 			<?php if($loggedUser): ?>
 				<p>
+					<div class="btn btn-xs btn-default" id="btnPlayAll" onclick="loadPlaylist(gameTracks);">Play all tracks</div>
+				</p>
+				<p>
 					<div class="btn btn-xs btn-default" id="btnAddAllToPlaylist" onclick="addToPlaylistDialog(gameTracks);">Add all tracks to playlist...</div>
 				</p>
 			<?php endif; ?>

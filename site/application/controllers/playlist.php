@@ -57,6 +57,14 @@ class Playlist extends Secure_Controller {
 
 	//Ajax GET partial view
 	public function playlistDetails($idPlaylist) {
+		$idPlaylist = explode(',', urldecode($idPlaylist));
+		if(count($idPlaylist) == 1)
+			$this->playlistDetailsForIdPlaylist($idPlaylist[0]);
+		else
+			$this->playlistDetailsForIdTracks($idPlaylist);
+	}
+
+	function playlistDetailsForIdPlaylist($idPlaylist) {
 		//check if playlist belongs to logged user, else check if public.
 		$playlist = $this->Playlist_model->get_Playlist($idPlaylist);
 
@@ -73,6 +81,13 @@ class Playlist extends Secure_Controller {
 			//faudrait faire dequoi, mais anyways on se
 			//rend pas ici normalement. c'est juste un hack proof ;)
 		}
+	}
+
+	function playlistDetailsForIdTracks($idTracks) {
+		$data = $this->getUserViewData();
+		$tracks = $this->Track_model->getTracksForPlaylist($idTracks);
+		$data['playlistItems'] = $tracks;
+		$this->load->view('includes/playlist_content.php', $data);
 	}
 
 	//Ajax POST

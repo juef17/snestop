@@ -139,10 +139,11 @@ function setTitle(track) {
 
 //Flash events
 function playerInitialized() {
-	if(playerDialog.is(':visible')) { //seems to also trigger when the dialog closes.
+	if(playerDialog.is(':visible')) {
 		applyPlayerLoopMode();
 		var idTrack = $('#player-dialog #deferred-idTrack').val();
-		playTrack(idTrack);
+		if(idTrack != '')
+			playTrack(idTrack);
 	}
 }
 
@@ -265,16 +266,17 @@ function playlistSelectionChanged(idPlaylist) {
 		hidePlaylist();
 		$('#player-expandPlaylist').prop('disabled', true);
 		createPlayList();
-		$('#player-playlistcombo option[value=-1]').attr('selected', 'selected'); 
+		$('#player-playlistcombo').val(-1);
 	} else { //playlist
 		loadPlaylist(idPlaylist);
 	}
 }
 
 function loadPlaylist(idPlaylist) {
+	//idPlaylist is either idPlaylist or an array of songs.
 	playerDialog.dialog('open');
 	hidePlaylist(function() {
-		$(this).load(baseUrl + 'index.php/playlist/playlistDetails/' + idPlaylist, function() {
+		$(this).load(baseUrl + 'index.php/playlist/playlistDetails/' + encodeURIComponent(idPlaylist), function() {
 			bindPlaylistDetailsFunctions();
 			$('#player-expandPlaylist').prop('disabled', false);
 			showPlaylist();

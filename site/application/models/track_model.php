@@ -15,6 +15,24 @@ class Track_model extends CI_Model {
 			return null;
 	}
 
+	public function getTracksForPlaylist($idTracks) {
+		$this->db->select('Track.idTrack, Track.title, Track.length, Track.isScreenshotSet, Game.idGame, Game.titleEng AS gameTitleEng');
+		$this->db->join('Game', 'Track.idGame = Game.idGame', 'INNER');
+		$this->db->where_in('Track.idTrack', $idTracks);
+		$this->db->order_by('trackNumber', 'asc');
+		$query = $this->db->get('Track');
+		$retval = array();
+
+		$i = 0;
+		foreach($query->result() as $row) {
+			$row->isScreenshotSet = ord($row->isScreenshotSet) == 1 || $row->isScreenshotSet == 1;
+			$row->position = $i++;
+			$retval[] = $row;
+		}
+		
+		return $retval;
+	}
+
 	public function get_Tracks_for_Game($idGame, $showNormalTracks, $showJingles, $showSfx, $showVfx) {
 		$orClauses = array();
 		
