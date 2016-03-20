@@ -48,7 +48,7 @@
 		public var filename:String;
 		public var fade:int;
 		public var length:int;
-		public var oldLength:int = 1000;
+		public var oldLength:int;
 		public var pauseButton:PushButton;
 		public var petit:TextFormat;
 		public var textePosition:TextField;
@@ -68,6 +68,7 @@
 		public var ramoutzEnTrainDeRouler:Boolean = false;
 		public var url:String = "";
 		public var loopMP3:Boolean = false;
+		public var loopSPC:Boolean = false;
 		public const MAX_VALUE:int = 2147483647;
 		
 		public function Main():void 
@@ -89,7 +90,8 @@
 			filename = LoaderInfo(this.root.loaderInfo).parameters.spc;
 			fade = int(LoaderInfo(this.root.loaderInfo).parameters.fade) * 1000;
 			if (fade > 5000) fade = 5000;
-			length = int(LoaderInfo(this.root.loaderInfo).parameters.length)*1000;
+			length = int(LoaderInfo(this.root.loaderInfo).parameters.length) * 1000;
+			oldLength = length;
 			
 			if (LoaderInfo(this.root.loaderInfo).parameters.showSeekBar == 1) showSeekBar = true;
 			if (LoaderInfo(this.root.loaderInfo).parameters.showLogo == 1) showLogo = true;
@@ -255,6 +257,11 @@
 					mp3Channel = mp3.play(sliderPosition.value);
 				ExternalInterface.call("seekEnd");
 				}
+				if (Math.abs(gameMusicEmu.tell() - sliderPosition.value) >= 5000)
+				{
+					ExternalInterface.call("playerFucké");
+					debug();
+				}
 			});
 			sliderPosition.width = 170;
 			sliderPosition.visible = showSeekBar;
@@ -315,6 +322,7 @@
 			var tmp:Array = message.split("?");
 			filename = tmp[0];
 			length = tmp[1] * 1000;
+			oldLength = length;
 			fade = tmp[2] * 1000;
 			if (fade > 5000) fade = 5000;
 			donePlaying = false;
@@ -374,6 +382,7 @@
 			donePlaying = true;
 			rewind();
 			length = 0;
+			oldLength = 0;
 			fade = 0;
 			filename = "";
 			gameMusicEmu.stop();
@@ -416,16 +425,18 @@
 				var position:uint = gameMusicEmu.tell();
 				sliderPosition.visible = !loop;
 				textePosition.visible = !loop;
-				if (loop)
+				if (loop && !loopSPC)
 				{
 					oldLength = length;
+					loopSPC = true;
 					gameMusicEmu.setFade(MAX_VALUE);
 					length = MAX_VALUE;
 					labelPosition.text = "Natural loop mode is on!";
 				}
-				else
+				else if(!loop && loopSPC)
 				{
 					length = oldLength;
+					loopSPC = false;
 					if (position > length) length = position;
 					gameMusicEmu.setFade(length);
 					labelPosition.text = "Position:";
@@ -437,15 +448,19 @@
 		
 		public function debug(msg:String = ""):void
 		{
+			var dateSti:Date = new Date();
+			
 			if (msg != "") { ExternalInterface.call("alert", msg); return;}
 			
+			msg += "datetime: " + dateSti.getFullYear() + "-" + dateSti.getMonth() + "-" + dateSti.getDate() + " " + dateSti.getHours() + ":" + dateSti.getMinutes() + ":" + dateSti.getSeconds() + "\n";
 			msg += "filename: " + filename + "\n";
 			msg += "fade: " + fade + "\n";
 			msg += "length: " + length + "\n";
+			msg += "oldLength: " + oldLength + "\n";
 			msg += "tell: " + gameMusicEmu.tell() + "\n";
 			msg += "sliderPosition: " + sliderPosition.value + "\n";
+			msg += "  difference: " + Math.abs(gameMusicEmu.tell() - sliderPosition.value) + "\n";
 			msg += "donePlaying: " + (donePlaying ? "true" : "false") + "\n";
-			//msg += "check: " + Math.abs(gameMusicEmu.tell() - sliderPosition.value) + "\n";
 			
 			ExternalInterface.call("console.log", msg);
 		}
