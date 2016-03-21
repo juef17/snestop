@@ -22,14 +22,8 @@ class Game extends Public_Controller {
 
 	function setSocialMeta(&$data, $game, $idTrack) {
 		$track = NULL;
-		if($idTrack) {
-			foreach($data['tracks'] as $loadedTrack) {
-				if($loadedTrack->idTrack == $idTrack) {
-					$track = $loadedTrack;
-					break;
-				}
-			}
-		}
+		if($idTrack)
+			$track = $this->Track_model->get_Track($idTrack);
 		
 		if($track) {
 			$data['page_description'] = "{$game->titleEng} - {$track->title}";
