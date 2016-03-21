@@ -5,12 +5,13 @@
 		</div>
 	</div>
 <?php else: ?>
-	<?php $b = TRUE; foreach($tracks as $track): ?>
+	<?php $b = TRUE; foreach($tracks as $track):
+		$trackLength = $track->length + $track->fadeLength; ?>
 		<div <?php if($b = !$b): ?> style="background-color: #dddddd;" <?php endif; ?> class="container_16">
 			<p class="grid_1"><?=$track->trackNumber?></p>
 			<p class="grid_1"><img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="playTrack(<?=$track->idTrack?>);" /></p>
 			<p class="grid_3"><a href="#!" onclick="detailsDialog(<?=$track->idTrack?>)"><?=$track->title?></a></p>
-			<p class="grid_1"><?=intval(date("i", $track->length)) . ":" . date("s", $track->length)?></p>
+			<p class="grid_1"><?=intval(date("i", $trackLength)) . ":" . date("s", $trackLength)?></p>
 			<p class="grid_1"><?= implode(', ', array_filter(array(($track->isJingle ? 'Jingle' : NULL), ($track->isVoice ? 'vfx' : NULL), ($track->isSoundEffect ? 'sfx' : NULL)))) ?></p>
 			<p class="grid_3"><?=$track->composer?></p>
 			<div class="grid_1">
