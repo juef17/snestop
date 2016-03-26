@@ -385,25 +385,26 @@
 			oldLength = 0;
 			fade = 0;
 			filename = "";
-			gameMusicEmu.stop();
-			mp3Channel.stop();
+			if (loadedType() == "spc" && gameMusicEmu._loadOK) gameMusicEmu.stop();
+			else if (loadedType() == "mp3") mp3Channel.stop();
 			pauseButton.label = "Play";
 		}
 		
 		public function rewind():void
 		{
+			if (filename == null || filename == "") return;
 			textePosition.text = toTimeCode(0) + " / " + toTimeCode(length + fade);
 			if (loadedType() == "spc")
 			{
 				if (gameMusicEmu.isPlaying)
 				{
 					gameMusicEmu.pause();
-					gameMusicEmu.seek(0);
+					if (gameMusicEmu._loadOK) gameMusicEmu.seek(0);
 					gameMusicEmu.play();
 				}
 				else gameMusicEmu.seek(0);
 			}
-			else if (loadedType() == "mp3")
+			if (loadedType() == "mp3")
 			{
 				mp3Position = 0;
 				if(mp3IsPlaying)

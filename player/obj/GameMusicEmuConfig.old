@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'2016-03-20'</value>
+      <value>'2016-03-26'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -35,12 +35,12 @@
       <path-element>C:\Program Files\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-      <path-element>F:\lib\MinimalComps_v0.97_ja.swc</path-element>
-      <path-element>F:\lib\libgme.swc</path-element>
+      <path-element>E:\lib\MinimalComps_v0.97_ja.swc</path-element>
+      <path-element>E:\lib\libgme.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>F:\src\Main.as</path-element>
+    <path-element>E:\src\Main.as</path-element>
   </file-specs>
   <default-background-color>#000000</default-background-color>
   <default-frame-rate>60</default-frame-rate>

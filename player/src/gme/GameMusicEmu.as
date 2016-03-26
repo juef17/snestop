@@ -2,6 +2,7 @@
 {
 	import cmodule.libgme.CLibInit;
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.events.EventDispatcher;
 	import flash.events.SampleDataEvent;
 	import flash.media.Sound;
@@ -19,6 +20,8 @@
 	 */
 	public class GameMusicEmu extends EventDispatcher
 	{
+		public var _loadOK:Boolean;
+		
 		/**
 		 * game-music-emu library.
 		 */
@@ -345,6 +348,7 @@
 			_urlLoader = new URLLoader();
 			_urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
 			_urlLoader.addEventListener(Event.COMPLETE, onLoadComplete);
+			_urlLoader.addEventListener(Event.COMPLETE, onLoadFail);
 			_urlLoader.load(new URLRequest(url));
 		}
 		
@@ -419,12 +423,19 @@
 			}
 		}
 		
+		
+		private function onLoadFail(e:IOErrorEvent):void
+		{
+			_loadOK = false;
+		}
+		
 		/**
 		 * load complete event for URL Loader
 		 * @param	e
 		 */
 		private function onLoadComplete(e:Event):void 
 		{
+			_loadOK = true;
 			// sound file's content into ByteArray
 			var data:ByteArray;
 			data = _urlLoader.data as ByteArray;
