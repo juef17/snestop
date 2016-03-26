@@ -20,7 +20,7 @@
 	 */
 	public class GameMusicEmu extends EventDispatcher
 	{
-		public var _loadOK:Boolean;
+		public var _loadOK:Boolean = true;
 		
 		/**
 		 * game-music-emu library.

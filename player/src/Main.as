@@ -384,9 +384,10 @@
 			length = 0;
 			oldLength = 0;
 			fade = 0;
-			filename = "";
 			if (loadedType() == "spc" && gameMusicEmu._loadOK) gameMusicEmu.stop();
 			else if (loadedType() == "mp3") mp3Channel.stop();
+			filename = "";
+			textePosition.text = toTimeCode(0) + " / " + toTimeCode(0);
 			pauseButton.label = "Play";
 		}
 		
