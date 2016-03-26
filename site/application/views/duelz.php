@@ -15,16 +15,10 @@
 	}
 
 	.duel-message {
-		opacity: 0;
 		font-weight: bold;
 	}
 
-	.previous-tracks, .voting-tools, #shit-a-group, #shit-b-group {
-		opacity: 0;
-	}
-
 	#player-message {
-		opacity: 0;
 		text-align: center;
 		width: 100%;
 	}
@@ -34,13 +28,19 @@
 	<div class="grid_16">
 		<h1>The duelz</h1>
 	</div>
+</div>
 
+<div class="container_16">
 	<div class="grid_16">
 		<h2>You've taken <span id="nbDuelzTaken">0</span> duelz!</h2>
 	</div>
+</div>
 
+<div class="container_16">
 	<div class="grid_16 blank"></div>
-	
+</div>
+
+<div class="container_16">
 	<div class="grid_16 prefix_6 suffix_6">
 		<div class="player duelPlayer fullWidth">
 			<object type="application/x-shockwave-flash" data="<?=asset_url()?>swf/GameMusicEmu.swf" style="margin-left: 10px; width:180px; height:70px;" id="spcplayer">
@@ -49,24 +49,32 @@
 			</object>
 		</div>
 	</div>
+</div>
 
+<div class="container_16">
 	<div class="grid_16 blank">
 		<p class="duel-message" id="player-message">Playing: track <span id="current-track"></span></p>
 	</div>
+</div>
 
+<div class="container_16">
 	<div class="grid_7 prefix_3">
 		<button class="btn btn-primary btn-lg fullWidth" id="btnPlayTrackA">Play mistery track A</button>
 	</div>
 	<div class="grid_9 prefix_2 suffix_3">
 		<button class="btn btn-primary btn-lg fullWidth" id="btnPlayTrackB">Play mistery track B</button>
 	</div>
+</div>
+<div class="container_16">
 	<div class="grid_7 prefix_4">
 		<p class="duel-message" id="enough-a">Got enough!</p>
 	</div>
 	<div class="grid_9 prefix_3 suffix_3">
 		<p class="duel-message" id="enough-b">Got enough!</p>
 	</div>
+</div>
 
+<div class="container_16">
 	<div class="grid_7 prefix_3">
 		<div class="checkbox" id="shit-a-group">
 			<label><input type="checkbox" id="shitA"> This track is shit! D:</label>
@@ -77,7 +85,9 @@
 			<label><input type="checkbox" id="shitB"> This track is shit! D:</label>
 		</div>
 	</div>
+</div>
 
+<div class="container_16">
 	<div class="voting-tools">
 		<div class="grid_7 prefix_3">
 			<button class="btn btn-success btn-lg fullWidth" id="btnWinTrackA">A winner is track A!</button>
@@ -86,24 +96,24 @@
 			<button class="btn btn-success btn-lg fullWidth" id="btnWinTrackB">A winner is track B!</button>
 		</div>
 	</div>
+</div>
 
-	<div class="previous-tracks">
-		<div class="grid_16 blank"></div>
-		<div>
-			<div class="grid_7 prefix_3">
-				<p>Previous track A was: <br /><span id="lastTrack-a-title">???</span></p>
-			</div>
-			<div class="grid_9 prefix_2 suffix_3">
-				<p>Previous track B was: <br /><span id="lastTrack-b-title">???</span></p>
-			</div>
-		</div>
-
+<div class="container_16 previous-tracks">
+	<div class="grid_16 blank"></div>
+	<div>
 		<div class="grid_7 prefix_3">
-			<div class="btn btn-xs btn-default" onclick="addToPlaylistDialog([previousTracks.a.idTrack]);">Add to playlist...</div>
+			<p>Previous track A was: <br /><span id="lastTrack-a-title">???</span></p>
 		</div>
 		<div class="grid_9 prefix_2 suffix_3">
-			<div class="btn btn-xs btn-default" onclick="addToPlaylistDialog([previousTracks.b.idTrack]);">Add to playlist...</div>
+			<p>Previous track B was: <br /><span id="lastTrack-b-title">???</span></p>
 		</div>
+	</div>
+
+	<div class="grid_7 prefix_3">
+		<div class="btn btn-xs btn-default" onclick="addToPlaylistDialog([previousTracks.a.idTrack]);">Add to playlist...</div>
+	</div>
+	<div class="grid_9 prefix_2 suffix_3">
+		<div class="btn btn-xs btn-default" onclick="addToPlaylistDialog([previousTracks.b.idTrack]);">Add to playlist...</div>
 	</div>
 </div>
 

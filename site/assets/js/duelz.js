@@ -175,9 +175,10 @@ function startNewDuel() {
 			if(idTracks.length == 2) {
 				tracks.a.idTrack = idTracks[0];
 				tracks.b.idTrack = idTracks[1];
-				$('.voting-tools').fadeTo(500, 0);
-				$('#shit-a-group, #shit-b-group').fadeTo(500, 0);
-				$('#enough-a, #enough-b').fadeTo(500, 0);
+				$('.voting-tools').hide(500);
+				$('#shit-a-group, #shit-b-group').hide(500);
+				$('#enough-a, #enough-b').hide(500);
+				$('.previous-tracks').hide(500);
 			} else {
 				tracks.a.idTrack = -1;
 				tracks.b.idTrack = -1;
@@ -200,17 +201,17 @@ function resetTracksInformations() {
 		$('#spcplayer')[0].unloadTrack();
 		
 	$('#shitA, #shitB').prop('checked', false);
-	$('#player-message').fadeTo(500, 0);
+	$('#player-message').hide(500);
 }
 
 //Player --> JS
 function timeReached() {
 	tracks[tracks.current].listened = true;
-	$('#shit-' + tracks.current + '-group').fadeTo(500, 1);
-	$('#enough-' + tracks.current).fadeTo(500, 1);
+	$('#shit-' + tracks.current + '-group').show(500);
+	$('#enough-' + tracks.current).show(500);
 
 	if(tracks.a.listened && tracks.b.listened)
-		$('.voting-tools').fadeTo(500, 1);
+		$('.voting-tools').show(500);
 }
 
 function updatePreviousTracks() {
@@ -219,7 +220,7 @@ function updatePreviousTracks() {
 	if(previousTracks.a.idTrack) {
 		fetchTrackTitle('a');
 		fetchTrackTitle('b');
-		$('.previous-tracks').fadeTo(500, 1);
+		$('.previous-tracks').show(500);
 	}
 }
 
@@ -262,7 +263,7 @@ function playTrack() {
 			if(validateSession(jqXHR.responseText)) {
 				if(data['success']) {
 					$('#current-track').text(tracks.current.toUpperCase());
-					$('#player-message').fadeTo(500, 1);
+					$('#player-message').show(500);
 					var track = data['success'];
 					var url = assetUrl + 'spc/' + track.spcEncodedURL + '?' + track.length + '?' + track.fadeLength;
 					$('#spcplayer')[0].playUrl(url);
