@@ -7,6 +7,8 @@ class Duelz extends Secure_Controller {
 		$this->load->model('Track_model','',TRUE);
 		$this->load->model('Duel_Result_model','',TRUE);
 		$this->load->model('Shit_Track_model','',TRUE);
+		$this->load->model('Rating_Personal_model','',TRUE);
+		$this->load->model('Rating_Community_model','',TRUE);
 	}
 
 	public function index()
@@ -39,7 +41,10 @@ class Duelz extends Secure_Controller {
 			$idTrackLost = $tracks->a->winner == 'true' ? $tracks->b->idTrack : $tracks->a->idTrack;
 			$data['success'] = $this->Duel_Result_model->new_Duel_Result($idTrackWon, $idTrackLost, $_SESSION['loggedUser']->idUser);
 			$data['success'] = $this->Track_model->update_ratings_Track($idTrackWon, $idTrackLost);
-
+			$data['success'] = $this->Rating_Personal_model->update_ratings($idTrackWon, $idTrackLost, $_SESSION['loggedUser']->idUser);
+			if($_SESSION['loggedUser']->idCommunity)
+				$data['success'] = $this->Rating_Community_model->update_ratings($idTrackWon, $idTrackLost, $_SESSION['loggedUser']->idCommunity);
+						
 			if($tracks->a->shit == 'true')
 				$data['success'] = $data['success'] && $this->Shit_Track_model->new_Shit_Track($_SESSION['loggedUser']->idUser, $tracks->a->idTrack);
 			
