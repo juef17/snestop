@@ -38,6 +38,7 @@ class Duelz extends Secure_Controller {
 			$idTrackWon = $tracks->a->winner == 'true' ? $tracks->a->idTrack : $tracks->b->idTrack;
 			$idTrackLost = $tracks->a->winner == 'true' ? $tracks->b->idTrack : $tracks->a->idTrack;
 			$data['success'] = $this->Duel_Result_model->new_Duel_Result($idTrackWon, $idTrackLost, $_SESSION['loggedUser']->idUser);
+			$data['success'] = $this->Track_model->update_ratings_Track($idTrackWon, $idTrackLost);
 
 			if($tracks->a->shit == 'true')
 				$data['success'] = $data['success'] && $this->Shit_Track_model->new_Shit_Track($_SESSION['loggedUser']->idUser, $tracks->a->idTrack);
