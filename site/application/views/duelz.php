@@ -128,18 +128,19 @@
 </div>
 
 <div id="dialog-nomore" title="What have you done!">
-	<p>There are no more duels! You've taken all of them, you robot!</p>
+	<p>There are no more duels! You've taken all of them, you SNESaholic robot!</p>
 </div>
 
 <div id="dialog-disclaimer" title="HOW IT WORKS">
-	<p>Here's how it works: grabe those nipples and have them steamin'. Then lick an elbow so to have your neighbour sream in agony while he smoc in your window.</p>
-	<p>Please, before you procede, know the following:</p>
+	<p>Here's the idea: each button on this page allows you to listen to one mystery SNES track. Listen to each of them for long enough, and choose your favorite!</p>
+	<p>Please note:</p>
 	<ul>
-		<li>Once submitted, votes can <b>NOT</b> be canceled</li>
-		<li>Every single vote counts</li>
-		<li>Take this seriously</li>
-		<li>Have fun</li>
+		<li>Take this seriously!</li>
+		<li>Every single vote counts towards creating a Top SNES Tracks list.</li>
+		<li>If you think a track has no business in such a list, please check the appropriate checkbox.</li>
+		<li>Once submitted, votes can <b>NOT</b> be canceled or altered.</li>
 	</ul>
+	<p style="text-align: center; margin: 30px 0px 30px 0px;">Have fun!</p>
 </div>
 
 <script type="text/javascript" src="<?=asset_url()?>js/duelz.js"></script>
