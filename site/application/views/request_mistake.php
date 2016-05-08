@@ -23,7 +23,7 @@
 						a screenshot isn't from the right game or moment, or doesn't follow our screenshot submission guidelines;
 					</li>
 					<li>
-						you hold the copyright to something we used without your permission.
+						you hold the copyright to something we used without your permission and wish to see it removed.
 					</li>
 				</ul>
 			</p>
