@@ -279,7 +279,26 @@ function loadPlaylist(idPlaylist) {
 		$(this).load(baseUrl + 'index.php/playlist/playlistDetails/' + encodeURIComponent(idPlaylist), function() {
 			bindPlaylistDetailsFunctions();
 			$('#player-expandPlaylist').prop('disabled', false);
-			showPlaylist();
+			showPlaylist(function() {
+				selectFirstTrack();
+			});
 		})
 	});
+}
+
+function selectFirstTrack() {
+	//http://stackoverflow.com/a/9421157/2498426
+	var elementsToSelect = $('li:first', '#playlist-tracks');
+	$('.ui-selected', '#playlist-tracks')
+		.not(elementsToSelect)
+		.removeClass('ui-selected')
+		.addClass('ui-unselecting');
+
+	$(elementsToSelect)
+		.not('.ui-selected')
+		.addClass('ui-selecting');
+
+	$('#playlist-tracks')
+		.data('ui-selectable')
+		._mouseStop(null);
 }
