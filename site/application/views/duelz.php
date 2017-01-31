@@ -19,7 +19,7 @@
 		opacity: 0;
 	}
 	
-	.shitgroup, shitgroup {
+	.shitgroup {
 		opacity: 0;
 	}
 	
