@@ -176,9 +176,8 @@ function startNewDuel() {
 				tracks.a.idTrack = idTracks[0];
 				tracks.b.idTrack = idTracks[1];
 				$('.voting-tools').hide(500);
-				$('#shit-a-group, #shit-b-group').hide(500);
-				$('#enough-a, #enough-b').hide(500);
-				$('.previous-tracks').hide(500);
+				$('#shit-a-group, #shit-b-group').fadeTo(500, 0);
+				$('#enough-a, #enough-b').fadeTo(500, 0);
 			} else {
 				tracks.a.idTrack = -1;
 				tracks.b.idTrack = -1;
@@ -207,8 +206,8 @@ function resetTracksInformations() {
 //Player --> JS
 function timeReached() {
 	tracks[tracks.current].listened = true;
-	$('#shit-' + tracks.current + '-group').show(500);
-	$('#enough-' + tracks.current).show(500);
+	$('#shit-' + tracks.current + '-group').fadeTo(500, 1);
+	$('#enough-' + tracks.current).fadeTo(500, 1);
 
 	if(tracks.a.listened && tracks.b.listened)
 		$('.voting-tools').show(500);
@@ -227,10 +226,16 @@ function updatePreviousTracks() {
 function fetchTrackTitle(track) {
 	$.getJSON(baseUrl + 'index.php/game/getTrack/' + previousTracks[track].idTrack, function(result, status, jqXHR){
 		if(validateSession(jqXHR.responseText)) {
-			if(result.success)
-				$('#lastTrack-' + track + '-title').text(result.success.gameTitleEng + ' - ' + result.success.title);
-			else
+			if(result.success) {
+				var trackUrl = baseUrl + 'index.php/game/index/' + result.success.idGame + '/' + result.success.idTrack;
+				var tagContent = result.success.gameTitleEng + ' - ' + result.success.title;
+				var trackTag = '<a target="_blank" href="' + trackUrl + '">' + 
+						tagContent + 
+					'</a>'
+				$('#lastTrack-' + track + '-title').html(trackTag);
+			} else {
 				alert(result.message);
+			}
 		}
 	});
 }

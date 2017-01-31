@@ -16,6 +16,15 @@
 
 	.duel-message {
 		font-weight: bold;
+		opacity: 0;
+	}
+	
+	.shitgroup, shitgroup {
+		opacity: 0;
+	}
+	
+	.voting-tools, .previous-tracks {
+		display: none;
 	}
 
 	#player-message {
@@ -76,12 +85,12 @@
 
 <div class="container_16">
 	<div class="grid_7 prefix_3">
-		<div class="checkbox" id="shit-a-group">
+		<div class="checkbox shitgroup" id="shit-a-group">
 			<label><input type="checkbox" id="shitA"> This track is shit! D:</label>
 		</div>
 	</div>
 	<div class="grid_9 prefix_2 suffix_3">
-		<div class="checkbox" id="shit-b-group">
+		<div class="checkbox shitgroup" id="shit-b-group">
 			<label><input type="checkbox" id="shitB"> This track is shit! D:</label>
 		</div>
 	</div>
