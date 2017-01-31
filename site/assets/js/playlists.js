@@ -11,20 +11,11 @@ function addToPlaylistDialog(idTracks) {
 					{
 						id: 'addToPlaylist-btnOk',
 						text: 'Ok',
-						click: function() {
-							$('#addToPlaylist-btnOk span').text('Please wait...');
-							$(this).dialog('widget').find('.ui-button').prop('disabled', true);
-							if($('#dialog-addToPlaylist input[type=radio]:checked').val() == 'existing')
-								addToPlaylist(idTracks, $('#dialog-addToPlaylist #playlistcombo').val());
-							else
-								addToNewPlaylist(idTracks, $('#dialog-addToPlaylist #newplaylistname').val());
-						}
+						click: function() { addTractsToPlaylistDialogOkButton(idTracks); }
 					},
 					{
 						text: 'Cancel',
-						click: function() {
-							$(this).dialog('close');
-						}
+						click: function() { $(this).dialog('close'); }
 					}
 				]
 			});
@@ -39,6 +30,26 @@ function addToPlaylistDialog(idTracks) {
 			$('#dialog-addToPlaylist input[type=radio]').change(function() { radioGroupCallback($(this)); });
 		}
 	);
+}
+
+function addTractsToPlaylistDialogOkButton(idTracks) {
+	var playlistName = $('#dialog-addToPlaylist #newplaylistname').val();
+	var addToExisting = $('#dialog-addToPlaylist input[type=radio]:checked').val() == 'existing';
+	if(addToExisting || playlistName != '') {
+		setAddTracksToPlaylistDialogWaitMode(true);
+		if(addToExisting)
+			addToPlaylist(idTracks, $('#dialog-addToPlaylist #playlistcombo').val(), function() { setAddTracksToPlaylistDialogWaitMode(false);});
+		else if(playlistName != '')
+			addToNewPlaylist(idTracks, playlistName, function() { setAddTracksToPlaylistDialogWaitMode(false);});
+	}
+}
+
+function setAddTracksToPlaylistDialogWaitMode(active) {
+	var okText = active
+		? 'Please wait...'
+		: 'Ok';
+	$('#addToPlaylist-btnOk span').text(okText);
+	$('#dialog-addToPlaylist').dialog('widget').find('.ui-button').prop('disabled', active);
 }
 
 function checkNeededRadioButton(radioGroupCallback) {
@@ -57,7 +68,7 @@ function checkNeededRadioButton(radioGroupCallback) {
 		$('#newplaylistname').focus();
 }
 
-function addToPlaylist(idTracks, idPlaylist) {
+function addToPlaylist(idTracks, idPlaylist, callback) {
 	$.post(baseUrl + 'index.php/playlist/addPlaylistItems',
 		{
 			idPlaylist: idPlaylist,
@@ -73,11 +84,13 @@ function addToPlaylist(idTracks, idPlaylist) {
 				} else {
 					showMessageDialog('D\'oh!', json.message);
 				}
+				if(callback != undefined)
+					callback(json.success);
 			}
 		});
 }
 
-function addToNewPlaylist(idTracks, playlistName) {
+function addToNewPlaylist(idTracks, playlistName, callback) {
 	$.post(baseUrl + 'index.php/playlist/createSimple', { playlistName: playlistName }, function(data) {
 		if(validateSession(data)) {
 			var json = $.parseJSON(data);
@@ -89,6 +102,8 @@ function addToNewPlaylist(idTracks, playlistName) {
 			} else {
 				showMessageDialog('D\'oh!', json.message);
 			}
+			if(callback != undefined)
+				callback(json.success);
 		}
 	});
 }
