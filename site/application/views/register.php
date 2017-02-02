@@ -41,7 +41,7 @@
 				</label>
 			</div>
 			<div class="form-group">
-				<label>Community [<a class="popup-tooltip" href="#!" title="If you're a member of a community and have their token, enter them here. Otherwise, leave this fild to none.">?</a>] [<a class="popup-tooltip" style="font-size: 0.7em;" href="#!" title="Register without it first, then in the main menu you'll find a place to file a request for your community to be added.">Mine's not listed</a>]
+				<label>Community [<a class="popup-tooltip" href="#!" title="If you're a member of a community and have their token, enter them here. Otherwise, leave this field to none.">?</a>] [<a class="popup-tooltip" style="font-size: 0.7em;" href="#!" title="Register without it first, then in the main menu you'll find a place to file a request for your community to be added.">Mine's not listed</a>]
 					<span class="errors"><?=form_error('reg_community')?></span>
 					<select id="reg_community" name="reg_community" class="form-control">
 						<option value="0">None</option>
