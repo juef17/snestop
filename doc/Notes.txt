@@ -11,6 +11,8 @@ Et doit avoir full access à la base de données "snestop"
 Toutes les collations (DB, tables et champs char) doivent être UTF8
 
 le dossier captcha dans assets/images doit être writable pour que le captcha fonctionne.
+
+Éditer le fichier config/email.php et y mettre les informations d'un serveur smtp.
 -------
 
 Le nom d'utilisateur et mot de passe pour accéder au contenu du dossier dbtools dans un fureteur est:
