@@ -68,10 +68,10 @@
 
 <div class="container_16">
 	<div class="grid_7 prefix_3">
-		<button class="btn btn-primary btn-lg fullWidth" id="btnPlayTrackA">Play mistery track A</button>
+		<button class="btn btn-primary btn-lg fullWidth" id="btnPlayTrackA">Play mystery track A</button>
 	</div>
 	<div class="grid_9 prefix_2 suffix_3">
-		<button class="btn btn-primary btn-lg fullWidth" id="btnPlayTrackB">Play mistery track B</button>
+		<button class="btn btn-primary btn-lg fullWidth" id="btnPlayTrackB">Play mystery track B</button>
 	</div>
 </div>
 <div class="container_16">
