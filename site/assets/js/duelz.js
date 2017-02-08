@@ -64,11 +64,15 @@ function configPlayButtons() {
 	$('#btnPlayTrackA').click(function() {
 		tracks.current = 'a';
 		playTrack();
+		$('#btnPlayTrackA').css("border", '2px solid #FF0000');
+		$('#btnPlayTrackB').css("border", '');
 	});
 	
 	$('#btnPlayTrackB').click(function() {
 		tracks.current = 'b';
 		playTrack();
+		$('#btnPlayTrackA').css("border", '');
+		$('#btnPlayTrackB').css("border", '2px solid #FF0000');
 	});
 }
 
