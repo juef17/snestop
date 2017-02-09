@@ -76,10 +76,10 @@
 </div>
 <div class="container_16">
 	<div class="grid_7 prefix_4">
-		<p class="duel-message" id="enough-a">Got enough!</p>
+		<p class="duel-message" id="enough-a">Heard enough!</p>
 	</div>
 	<div class="grid_9 prefix_3 suffix_3">
-		<p class="duel-message" id="enough-b">Got enough!</p>
+		<p class="duel-message" id="enough-b">Heard enough!</p>
 	</div>
 </div>
 
