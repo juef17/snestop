@@ -8,7 +8,7 @@
 				<li>Jerther: an incredible guy who pretty much single-handedly made this awesome website. And he's tall... too tall!
 				<li>juef: he ran the <a href="http://bestnestracks.captaintortilla.com/results/" target="_blank">Top NES tracks project</a> and felt he could do better for an even better system!
 			</ul>
-			<p>If you need to contact us, please see if one of the forms here fits your needs first. Otherwise, comme and say hello on <a href="http://theshizz.org/forum/index.php?/forum/8-minibosses-message-board/" target="_blank">The Shizz forums</a>!</p>
+			<p>If you need to contact us, please see if one of the forms here fits your needs first. Otherwise, come and say hello on <a href="http://theshizz.org/forum/index.php?/forum/8-minibosses-message-board/" target="_blank">The Shizz forums</a>!</p>
 			
 		<h2>Tools we used:</h2>
 			<ul>

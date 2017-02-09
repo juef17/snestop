@@ -1,7 +1,7 @@
 <div class="container_12">
 	<div class="grid_12">
 		<h1>Greetings, and welcome to the Top SNES tracks project!</h1>
-		<p>This project aims to please the Super Nintendo or Super Famicom aficionado and the video game music lovers in two different ways:</p>
+		<p>This project aims to please Super Nintendo or Super Famicom aficionados and video game music lovers in two different ways:</p>
 		<ul>
 			<li>Promote musical gems from obscure and/or mediocre games;</li>
 			<li>Use rating systems to compile a statistically valid list of the best SNES tracks ever.</li>
