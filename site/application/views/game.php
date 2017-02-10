@@ -46,9 +46,9 @@
 					</tr>
 				</table>
 				<?php if($loggedUser): ?>
-					<a href="<?= base_url()?>index.php/request_mistake?game=<?=$game->idGame?>">Help improve these informations</a>
+					<a href="<?= base_url()?>index.php/request_mistake?game=<?=$game->idGame?>">Help improve this information</a>
 				<?php else: ?>
-					Log in to help improve these informations
+					Log in to help improve this information
 				<?php endif; ?>
 			</div>
 		</div>
