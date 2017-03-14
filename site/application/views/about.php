@@ -25,6 +25,7 @@
 			<ul>
 				<li><a href="http://www.slack.net/~ant/" target="_blank">Blargg</a>
 				<li>SNES composers (most of them, anyway!)
+				<li>Eric Dude, Ken Oh and raubhimself for beta testing
 				<li>All our geeky friends
 			</ul>
 	</div>
