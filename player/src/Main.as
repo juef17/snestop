@@ -221,11 +221,16 @@
 			});
 			stage.addEventListener(MouseEvent.MOUSE_UP, function (e:MouseEvent):void 
 			{
+				var onEnvoieLesMessagesDeSeek:Boolean = false;
 				if (sliderSeeking == false) return;
 				sliderSeeking = false;
 				if (gameMusicEmu.isPlaying == false && !mp3IsPlaying) return;
 				textePosition.text = toTimeCode(sliderPosition.value) + " / " + toTimeCode(length + fade);
-				ExternalInterface.call("seekStart");
+				if (sliderPosition.value - gameMusicEmu.tell() > 3000 || (sliderPosition.value < gameMusicEmu.tell() && sliderPosition.value > 3000))
+				{
+					onEnvoieLesMessagesDeSeek = true;
+					ExternalInterface.call("seekStart");
+				}
 				if (loadedType() == "spc")
 				{
 					gameMusicEmu.pause();
@@ -245,7 +250,7 @@
 							ramoutz = null;
 							gameMusicEmu.play();
 							ramoutzEnTrainDeRouler = false;
-							ExternalInterface.call("seekEnd");
+							if(onEnvoieLesMessagesDeSeek) ExternalInterface.call("seekEnd");
 						}
 					}
 					ramoutzEnTrainDeRouler = true;
@@ -255,7 +260,7 @@
 				{
 					mp3Channel.stop();
 					mp3Channel = mp3.play(sliderPosition.value);
-				ExternalInterface.call("seekEnd");
+					if(onEnvoieLesMessagesDeSeek) ExternalInterface.call("seekEnd");
 				}
 				if (Math.abs(gameMusicEmu.tell() - sliderPosition.value) >= 5000)
 				{

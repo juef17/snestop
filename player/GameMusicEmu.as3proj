@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="F:\GameMusicEmu.swf" />
+    <movie path="G:\GameMusicEmu.swf" />
     <movie fps="60" />
     <movie width="280" />
     <movie height="100" />
