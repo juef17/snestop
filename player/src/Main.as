@@ -54,6 +54,7 @@
 		public var textePosition:TextField;
 		public var labelPosition:TextField;
 		public const heightOffset:int = 7;
+		public const ramoutzDelay:int = 20000;
 		public var logoOffset:int = 0;
 		public var panOffset:int = 0;
 		public var seekOffset:int = 0;
@@ -226,7 +227,7 @@
 				sliderSeeking = false;
 				if (gameMusicEmu.isPlaying == false && !mp3IsPlaying) return;
 				textePosition.text = toTimeCode(sliderPosition.value) + " / " + toTimeCode(length + fade);
-				if (sliderPosition.value - gameMusicEmu.tell() > 3000 || (sliderPosition.value < gameMusicEmu.tell() && sliderPosition.value > 3000))
+				if (sliderPosition.value - gameMusicEmu.tell() > ramoutzDelay || (sliderPosition.value < gameMusicEmu.tell() && sliderPosition.value > ramoutzDelay))
 				{
 					onEnvoieLesMessagesDeSeek = true;
 					ExternalInterface.call("seekStart");
