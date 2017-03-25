@@ -205,6 +205,9 @@ function resetTracksInformations() {
 		
 	$('#shitA, #shitB').prop('checked', false);
 	$('#player-message').hide(500);
+
+	$('#btnPlayTrackA').css("border", '');
+	$('#btnPlayTrackB').css("border", '');
 }
 
 //Player --> JS
