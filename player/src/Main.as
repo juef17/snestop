@@ -54,7 +54,7 @@
 		public var textePosition:TextField;
 		public var labelPosition:TextField;
 		public const heightOffset:int = 7;
-		public const ramoutzDelay:int = 20000;
+		public const ramoutzDelay:int = 6000;
 		public var logoOffset:int = 0;
 		public var panOffset:int = 0;
 		public var seekOffset:int = 0;
@@ -263,11 +263,11 @@
 					mp3Channel = mp3.play(sliderPosition.value);
 					if(onEnvoieLesMessagesDeSeek) ExternalInterface.call("seekEnd");
 				}
-				if (Math.abs(gameMusicEmu.tell() - sliderPosition.value) >= 5000)
+				/*if (Math.abs(gameMusicEmu.tell() - sliderPosition.value) >= 5000)
 				{
 					ExternalInterface.call("playerFucké");
 					debug();
-				}
+				}*/
 			});
 			sliderPosition.width = 170;
 			sliderPosition.visible = showSeekBar;
