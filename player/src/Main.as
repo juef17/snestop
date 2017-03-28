@@ -35,6 +35,7 @@
 		public var gameMusicEmu:GameMusicEmu;
 		public var labelLength:Label;
 		public var sliderSeeking:Boolean;
+		public var modeDuel:Boolean = false;
 		public var showSeekBar:Boolean;
 		public var showLogo:Boolean;
 		public var showPanBar:Boolean;
@@ -94,7 +95,7 @@
 			length = int(LoaderInfo(this.root.loaderInfo).parameters.length) * 1000;
 			oldLength = length;
 			
-			if (LoaderInfo(this.root.loaderInfo).parameters.showSeekBar == 1) showSeekBar = true;
+			if (LoaderInfo(this.root.loaderInfo).parameters.showSeekBar == 1) showSeekBar = true; else modeDuel = true;
 			if (LoaderInfo(this.root.loaderInfo).parameters.showLogo == 1) showLogo = true;
 			if (LoaderInfo(this.root.loaderInfo).parameters.showVolumeBar == 1) showVolumeBar = true;
 			if (LoaderInfo(this.root.loaderInfo).parameters.showPanBar == 1) showPanBar = true;
@@ -105,6 +106,7 @@
 			ExternalInterface.addCallback("unloadTrack", unloadTrack);
 			ExternalInterface.addCallback("debug", debug);
 			ExternalInterface.addCallback("enableLoop", enableLoop);
+			ExternalInterface.addCallback("getMinListenTime", getMinListenTime);
 			
 			if (!showLogo) logoOffset = -95;
 			if (!showVolumeBar) volumeOffset = -30;
@@ -206,7 +208,8 @@
 			labelPosition = new TextField;
             labelPosition.embedFonts = true;
             labelPosition.defaultTextFormat = petit;
-            labelPosition.text = "Position:";
+            if (modeDuel) labelPosition.text = "Remaining listen time:";
+			else labelPosition.text = "Position:";
             labelPosition.x = 100 + logoOffset;
 			labelPosition.y = 50 + heightOffset + volumeOffset + panOffset;
 			labelPosition.height = 12;
@@ -218,7 +221,7 @@
 			{
 				if (loadedType() == "spc") if (gameMusicEmu.emulatorType == "") return;
 				sliderSeeking = true;
-				textePosition.text = toTimeCode(sliderPosition.value) + " / " + toTimeCode(length + fade);
+				setTextePosition();
 			});
 			stage.addEventListener(MouseEvent.MOUSE_UP, function (e:MouseEvent):void 
 			{
@@ -226,7 +229,7 @@
 				if (sliderSeeking == false) return;
 				sliderSeeking = false;
 				if (gameMusicEmu.isPlaying == false && !mp3IsPlaying) return;
-				textePosition.text = toTimeCode(sliderPosition.value) + " / " + toTimeCode(length + fade);
+				setTextePosition();
 				if (sliderPosition.value - gameMusicEmu.tell() > ramoutzDelay || (sliderPosition.value < gameMusicEmu.tell() && sliderPosition.value > ramoutzDelay))
 				{
 					onEnvoieLesMessagesDeSeek = true;
@@ -275,8 +278,10 @@
 			textePosition = new TextField;
             textePosition.embedFonts = true;
             textePosition.defaultTextFormat = petit;
-            textePosition.text = "00:00 / 00:00";
+            if (modeDuel) textePosition.text = "00:00";
+			else textePosition.text = "00:00 / 00:00";
             textePosition.x = 160 + logoOffset;
+			if(modeDuel) textePosition.x += 62;
 			textePosition.y = 50 + heightOffset + volumeOffset + panOffset;
 			textePosition.height = 12;
             this.addChild(textePosition);
@@ -294,7 +299,7 @@
 			{
 				if (sliderSeeking || ramoutzEnTrainDeRouler) return;
 				var position:uint = (loadedType() == "spc") ? gameMusicEmu.tell() : mp3Channel.position;
-				textePosition.text = toTimeCode(position) + " / " + toTimeCode(length + fade);
+				setTextePosition();
 				sliderPosition.value = position;
 				if (position >= length + fade && !donePlaying)
 				{
@@ -313,7 +318,7 @@
 					}
 				}
 				if (loadedType() == "spc") gameMusicEmu.setFade(length);
-				if (!timeReached && position > Math.min(60000, length / 2))
+				if (!timeReached && position > getMinListenTime(false))
 				{
 					timeReached = true;
 					ExternalInterface.call("timeReached");
@@ -393,14 +398,16 @@
 			if (loadedType() == "spc" && gameMusicEmu._loadOK) gameMusicEmu.stop();
 			else if (loadedType() == "mp3") mp3Channel.stop();
 			filename = "";
-			textePosition.text = toTimeCode(0) + " / " + toTimeCode(0);
+			if (modeDuel) textePosition.text = toTimeCode(0);
+			else textePosition.text = toTimeCode(0) + " / " + toTimeCode(0);
 			pauseButton.label = "Play";
 		}
 		
 		public function rewind():void
 		{
 			if (filename == null || filename == "") return;
-			textePosition.text = toTimeCode(0) + " / " + toTimeCode(length + fade);
+			if (modeDuel) textePosition.text = toTimeCode(0);
+			else textePosition.text = toTimeCode(0) + " / " + toTimeCode(length + fade);
 			if (loadedType() == "spc")
 			{
 				if (gameMusicEmu.isPlaying)
@@ -447,8 +454,9 @@
 					loopSPC = false;
 					if (position > length) length = position;
 					gameMusicEmu.setFade(length);
-					labelPosition.text = "Position:";
-					textePosition.text = toTimeCode(sliderPosition.value) + " / " + toTimeCode(length + fade);
+					if (modeDuel) labelPosition.text = "Remaining listen time:";
+					else labelPosition.text = "Position:";
+					setTextePosition();
 				}
 			}
 			return;
@@ -469,8 +477,22 @@
 			msg += "sliderPosition: " + sliderPosition.value + "\n";
 			msg += "  difference: " + Math.abs(gameMusicEmu.tell() - sliderPosition.value) + "\n";
 			msg += "donePlaying: " + (donePlaying ? "true" : "false") + "\n";
+			msg += "modeDuel: " + (modeDuel ? "true" : "false") + "\n";
 			
 			ExternalInterface.call("console.log", msg);
+		}
+		
+		public function getMinListenTime(sendToJS:Boolean = true):uint
+		{
+			var time:uint = Math.min(60000, length / 2);
+			if (sendToJS) ExternalInterface.call("minListenTime", time);
+			return time;
+		}
+		
+		public function setTextePosition():void
+		{
+			if (modeDuel) textePosition.text = toTimeCode(Math.max(getMinListenTime(false) - sliderPosition.value + 1000, 0));
+			else textePosition.text = toTimeCode(sliderPosition.value) + " / " + toTimeCode(length + fade);
 		}
 		
 		public static function toTimeCode(milliseconds:int) : String
@@ -481,7 +503,7 @@
 				milliseconds = Math.abs(milliseconds);			
 			}
 			var seconds:int = Math.round(Math.floor((milliseconds/1000)) % 60);
-			var minutes:int = Math.round(Math.floor((milliseconds / 1000) / 60));
+			var minutes:int = Math.round(Math.floor((milliseconds/1000 ) / 60));
 			if (seconds >= 60)
 			{
 				seconds = 0;
