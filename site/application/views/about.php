@@ -12,17 +12,19 @@
 			
 		<h2>Tools we used:</h2>
 			<ul>
+				<li><a href="https://github.com/ExoticMatter/ImoSPC/" target="_blank">ImoSPC</a> by ExoticMatter
+				<li><a href="http://snesmusic.org/" target="_blank">SNESmusic.org</a>
 				<li><a href="https://code.google.com/p/game-music-emu-flash/" target="_blank">game-music-emu-flash</a>
 				<li><a href="http://www.flashdevelop.org/" target="_blank">FlashDevelop</a>
 				<li><a href="http://www.kanbanflow.com/" target="_blank">KanbanFlow</a>
 				<li><a href="http://www.codeigniter.com/" target="_blank">CodeIgniter</a>
 				<li><a href="http://www.geany.org/" target="_blank">Geany</a>
 				<li><a href="http://trac.edgewall.org/" target="_blank">Trac</a>
-				<li><a href="http://snesmusic.org/" target="_blank">SNESmusic.org</a>
 			</ul>
 
 		<h2>Special thanks to:</h2>
 			<ul>
+				<li>The authors of the above tools
 				<li><a href="http://www.slack.net/~ant/" target="_blank">Blargg</a>
 				<li>SNES composers (most of them, anyway!)
 				<li>Eric Dude, Ken Oh and raubhimself for beta testing
