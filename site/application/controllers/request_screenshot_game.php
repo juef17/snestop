@@ -24,7 +24,7 @@ class Request_Screenshot_Game extends Secure_Controller {
 
 			$data['view'] = 'message.php';
 			$data['messageTitle'] = 'Thank you!';
-			$data['message'] = 'Thank you for your submission!';
+			$data['message'] = 'Thank you for your submission! It will be reviewed and added to the site soon.';
 		} else {
 			$data['game'] = $this->Game_model->get_Game($this->input->post('idgame', TRUE));
 			$data['view'] = 'request_screenshot_game.php';

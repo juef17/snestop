@@ -24,7 +24,7 @@ class Request_Screenshot_Track extends Secure_Controller {
 
 			$data['view'] = 'message.php';
 			$data['messageTitle'] = 'Thank you!';
-			$data['message'] = 'Thank you for your submission!';
+			$data['message'] = 'Thank you for your submission! It will be reviewed and added to the site soon.';
 		} else {
 			$data['track'] = $this->Track_model->get_Track($this->input->post('idtrack', TRUE));
 			$data['view'] = 'request_screenshot_track.php';
