@@ -49,7 +49,13 @@
 					<label>Game
 						<input type="hidden" name="idgame" value="<?=$game->idGame?>" />
 					</label>
-					<p><?=$game->titleEng?> <i>(<?=$game->titleJap?>)</i></p>
+					<p><?=$game->titleEng?>
+						<?php
+							if(strcmp($game->titleJap, "") && strcmp($game->titleJap, $game->titleEng)) {
+								?> <i>(<?=$game->titleJap?>)</i> <?php
+							}
+						?>
+					</p>
 				</div>
 				<div class="form-group">
 					<label>Link to screenshot
