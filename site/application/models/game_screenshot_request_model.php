@@ -40,6 +40,9 @@ class Game_Screenshot_Request_model extends CI_Model {
 			'idUserRequester' => $idUserRequester,
 			'screenshotURL' => $screenshotURL
 		);
+		
+		if($this->get_Game_Screenshot_request($idGame, $idUserRequester))
+			$this->db->delete('GameScreenshotRequest', array('idGame' => $idGame, 'idUserRequester' => $idUserRequester));
 
 		return $this->db->insert('GameScreenshotRequest', $data);
 	}

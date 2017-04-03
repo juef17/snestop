@@ -41,6 +41,9 @@ class Track_Screenshot_Request_model extends CI_Model {
 			'idUserRequester' => $idUserRequester,
 			'screenshotURL' => $screenshotURL
 		);
+		
+		if($this->get_Track_Screenshot_request($idTrack, $idUserRequester))
+			$this->db->delete('TrackScreenshotRequest', array('idTrack' => $idTrack, 'idUserRequester' => $idUserRequester));
 
 		return $this->db->insert('TrackScreenshotRequest', $data);
 	}

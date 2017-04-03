@@ -17,14 +17,20 @@ class Request_Screenshot_Game extends Secure_Controller {
 
 	public function submit() {
 		$data = $this->getUserViewData();
+		$idUser = $_SESSION['loggedUser']->idUser;
+		$game = $this->input->post('idgame', TRUE);
 		
 		$this->setValidationRules();
 		if($this->form_validation->run()) {
+			$existaitDeja = !!($this->Game_Screenshot_Request_model->get_Game_Screenshot_request($game, $idUser));
 			$this->saveRequest();
 
 			$data['view'] = 'message.php';
 			$data['messageTitle'] = 'Thank you!';
-			$data['message'] = 'Thank you for your submission! It will be reviewed and added to the site soon.';
+			if($existaitDeja)
+				$data['message'] = 'Thank you for your submission! It appears you had already submitted a screenshot. Your previous submission has been overwritten by the current one; it will be reviewed and added to the site soon.';
+			else
+				$data['message'] = 'Thank you for your submission! It will be reviewed and added to the site soon.';
 		} else {
 			$data['game'] = $this->Game_model->get_Game($this->input->post('idgame', TRUE));
 			$data['view'] = 'request_screenshot_game.php';
