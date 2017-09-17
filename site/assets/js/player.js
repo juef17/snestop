@@ -39,7 +39,7 @@ function bindPlayerModesFunctions() {
 }
 
 function applyPlayerLoopMode() {
-	$('#spcplayer')[0].enableLoop(playerLoopMode == PlayerLoopModes.Single);
+	ImoSPC.setRepeat(playerLoopMode == PlayerLoopModes.Single);
 }
 
 function setLoopButtonVisual() {
@@ -58,10 +58,25 @@ function constructPlayerDialog() {
 		modal: false,
 		resizable: false,
 		autoOpen: false,
+		minHeight: 'auto',
+		height: 'auto',
+		maxHeight: 'auto',
 		show: { effect: 'clip', duration: 200 },
 		hide: { effect: 'fold', duration: 200 },
 		dialogClass: 'player',
 		close: function(event, ui) { $('#player-dialog #deferred-idTrack').val(''); }
+	});
+	
+	$('#player-dialog .pause')
+	.button()
+	.click(playButton);
+	
+	$('#player-dialog .play')
+	.button()
+	.click(function() {
+		var currentTrack = ImoSPC.currentTrack();
+		if(currentTrack)
+			currentTrack.play();
 	});
 	
 	if(isUserLogged) {
@@ -80,6 +95,13 @@ function constructPlayerDialog() {
 		refreshPlaylistsList();
 		setLoopButtonVisual();
 	}
+}
+
+function playButton() {
+	if(_playing)
+		ImoSPC.pause();
+	else
+		ImoSPC.unpause();
 }
 
 function setScreenshot(track) {
@@ -111,11 +133,12 @@ function playTrack(idTrack) {
 			baseUrl + 'index.php/game/getTrack/' + idTrack,
 			function(data) {
 				if(data['success']) {
+					_playing = false;
 					var track = data['success'];
 					var url = assetUrl + 'spc/' + track.spcURL + '?' + track.length + '?' + track.fadeLength;
 					setScreenshot(track);
 					setTitle(track);
-					$('#spcplayer')[0].playUrl(url);
+					ImoSPC.open(url);
 					playingIdTrack = idTrack;
 				} else {
 					showMessageDialog(data['message']);
@@ -137,7 +160,7 @@ function setTitle(track) {
 		.prop('href', baseUrl + 'index.php/game/index/' + track.idGame);
 }
 
-//Flash events
+//imospc events
 function playerInitialized() {
 	if(playerDialog.is(':visible')) {
 		applyPlayerLoopMode();
@@ -149,13 +172,10 @@ function playerInitialized() {
 
 function songEnded() {
 	var sortedIdTracks = $('#playlist-tracks').sortable('toArray');
-	if(sortedIdTracks.length == 0) {
-		$('#spcplayer')[0].rewind();
-	} else {
+	if(sortedIdTracks.length > 0) {
 		var trackPosition = sortedIdTracks.indexOf(playingIdTrack);
 		if(playerLoopMode == PlayerLoopModes.All && sortedIdTracks.length == 1) {	// la 2e condition est pour qu'on n'essaie pas
-			$('#spcplayer')[0].rewind();										// de trouver une autre track si on en a juste 1
-			$('#spcplayer')[0].play();
+			playButton();																	// de trouver une autre track si on en a juste 1
 		} else if($('#player-randomize').is(':checked')) {
 			var nextIdTrack = 0;
 			do { //joue pas la meme!
@@ -168,16 +188,18 @@ function songEnded() {
 			selectSelectableElement($('#playlist-tracks'), $('#playlist-tracks li:nth-child(' + (trackPosition + 2) + ')'));
 		} else if(trackPosition == sortedIdTracks.length - 1 && playerLoopMode == PlayerLoopModes.All) {
 			selectSelectableElement($('#playlist-tracks'), $('#playlist-tracks li:nth-child(1)'));
+		} else {
+			_playing = false;
 		}
 	}
 }
 
 function seekStart() {
-	$('#player-dialog #wait').show('slide', { direction: 'up'});
+	$('#player-dialog #wait').show('slide', { direction: 'down'});
 }
 
 function seekEnd() {
-	$('#player-dialog #wait').hide('slide', { direction: 'up'});
+	$('#player-dialog #wait').hide('slide', { direction: 'down'});
 }
 
 //Playlist management

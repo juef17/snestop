@@ -167,6 +167,11 @@ body.loading .waitmodal {
 }
 */
 
+.play-controls {
+  vertical-align: top;
+  display: inline-block;
+}
+
 .playlist-container {
   margin-top: 5px;
   max-height: 150px;

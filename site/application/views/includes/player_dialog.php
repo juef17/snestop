@@ -15,11 +15,15 @@
 		color: #dddddd; !important
 	}
 
+	.controls {
+		position: relative;
+	}
+
 	#player-dialog #wait {
 		display: none;
 		position: absolute;
-		bottom: 0;
 		right: 0;
+		top: 0;
 		width: 40px;
 	}
 </style>
@@ -30,23 +34,28 @@
 		<div class="tv tv-small" id="playerScreenshot"></div>
 	</div>
 	<div style="display: inline-block; position: relative;">
-		<object type="application/x-shockwave-flash" data="<?=asset_url()?>swf/GameMusicEmu.swf" style="width:180px; height:80px;" id="spcplayer">
-			<param name="flashvars" value="showPosition=1&showSeekBar=1&showVolumeBar=1"/>
-			<param name="wmode" value="transparent" />
-		</object>
+		<?php require_once(views_dir() . 'includes/imospc.php'); ?>
 		<input type="hidden" id="deferred-idTrack" />
+	</div>
+	<div class="controls">
+		<div class="play-controls">
+			<button class="play"><span class="fa fa-play"></span></button>
+			<button class="pause"><span class="fa fa-pause"></span></button>
+		</div>
+		<?php if($loggedUser): ?>
+			<input type="checkbox" id="player-randomize" <?=$loggedUser->randomize ? 'checked' : ''?>>
+				<label title="Randomize playlist" for="player-randomize" class="label-checkbox" style="position: relative">
+					<span class="fa fa-random"></span>
+				</label>
+			<input type="checkbox" id="player-loop" readonly <?=$loggedUser->loop ? 'checked' : ''?>>
+				<label title="Loop track" for="player-loop" class="label-checkbox">
+					<span class="fa fa-repeat"></span>
+					<span id="loopSingleBadge" class="badge">1</span>
+				</label>
+		<?php endif; ?>
 		<img id="wait" src="<?=asset_url()?>images/wait.gif" />
 	</div>
 	<?php if($loggedUser): ?>
-		<input type="checkbox" id="player-randomize" <?=$loggedUser->randomize ? 'checked' : ''?>>
-			<label title="Randomize playlist" for="player-randomize" class="label-checkbox" style="position: relative">
-				<span class="fa fa-random"></span>
-			</label>
-		<input type="checkbox" id="player-loop" readonly <?=$loggedUser->loop ? 'checked' : ''?>>
-			<label title="Loop track" for="player-loop" class="label-checkbox">
-				<span class="fa fa-repeat"></span>
-				<span id="loopSingleBadge" class="badge">1</span>
-			</label>
 		<select id="player-playlistcombo" style="display: inline-block; width: 90%">
 			<!--ajax loaded content-->
 		</select>
@@ -61,6 +70,7 @@
 	<span>Are you sure you want to delete this playlist?</span>
 </div>
 
+<script type="text/javascript" src="<?=asset_url()?>js/imospc.js"></script>
 <script type="text/javascript" src="<?=asset_url()?>js/player.js"></script>
 <?php if($loggedUser): ?>
 	<script>

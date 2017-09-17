@@ -1,0 +1,29 @@
+.imospc {
+	width: 180px;
+	padding: 4px;
+}
+
+.imospc .volume {
+	margin: 12px 12px;
+	vertical-align: middle;
+}
+
+.imospc .seek {
+	height: 22px;
+	margin: 8px 0;
+}
+
+.imospc .seek .curTimeDisplay,.lengthDisplay {
+	text-shadow: 1px 1px 0 #fff;
+	display: none;
+}
+
+.imospc .seek .curTimeDisplay {
+	float: left;
+	margin: 3px 0 0 4px;
+}
+
+.imospc .seek .lengthDisplay {
+	float: right;
+	margin: 3px 4px 0 0;
+}

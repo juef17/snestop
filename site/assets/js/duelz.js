@@ -278,7 +278,7 @@ function playTrack() {
 					$('#player-message').show(500);
 					var track = data['success'];
 					var url = assetUrl + 'spc/' + track.spcEncodedURL + '?' + track.length + '?' + track.fadeLength;
-					$('#spcplayer')[0].playUrl(url);
+					ImoSPC.open(url);
 				} else {
 					showMessageDialog(data['message']);
 				}
