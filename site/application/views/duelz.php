@@ -51,11 +51,9 @@
 
 <div class="container_16">
 	<div class="grid_16 prefix_6 suffix_6">
-		<div class="player duelPlayer fullWidth">
-			<object type="application/x-shockwave-flash" data="<?=asset_url()?>swf/GameMusicEmu.swf" style="margin-left: 10px; width:180px; height:70px;" id="spcplayer">
-				<param name="flashvars" value="showPosition=1&showSeekBar=0&showVolumeBar=1"/>
-				<param name="wmode" value="transparent" />
-			</object>
+		<div class="player duelPlayer">
+			<?php require_once(views_dir() . 'includes/imospc.php'); ?>
+			<button class="pause"><span class="fa fa-pause"></span></button>
 		</div>
 	</div>
 </div>
@@ -152,4 +150,5 @@
 	<p style="text-align: center; margin: 30px 0px 30px 0px;">Have fun!</p>
 </div>
 
+<script type="text/javascript" src="<?=asset_url()?>js/imospc.js"></script>
 <script type="text/javascript" src="<?=asset_url()?>js/duelz.js"></script>

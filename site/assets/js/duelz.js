@@ -32,6 +32,7 @@ $(function() {
 	configVoteButtons();
 	configShitCheckboxes();
 	constructDialogs();
+	initPlayer({seek_enabled: false});
 	startNewDuel();
 });
 
@@ -73,6 +74,15 @@ function configPlayButtons() {
 		playTrack();
 		$('#btnPlayTrackA').css("border", '');
 		$('#btnPlayTrackB').css("border", '2px solid #FF0000');
+	});
+	
+	$('.duelPlayer .pause')
+	.button()
+	.click(function() {
+		if(_playing)
+			ImoSPC.pause();
+		else
+			ImoSPC.unpause();
 	});
 }
 
@@ -201,8 +211,8 @@ function resetTracksInformations() {
 	});
 	
 	if(playerIsInitialized)
-		$('#spcplayer')[0].unloadTrack();
-		
+		ImoSPC.stop();
+	
 	$('#shitA, #shitB').prop('checked', false);
 	$('#player-message').hide(500);
 

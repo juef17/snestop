@@ -1,8 +1,16 @@
-$(function() {
+var seekbar;
+var _timeReached = false;
+
+function initPlayer(options) {
+	options = options || {
+		seek_enabled: true
+	};
 	setupImoSPC();
 	setupSeekBar();
 	setupVolumeSlider();
-});
+	if(options['seek_enabled'])
+		$('.imospc .seek').click(seekBarClick)
+}
 
 function setupImoSPC() {
 	ImoSPC.addEventListener('init', onInitOk);
@@ -21,16 +29,18 @@ function setupSeekBar() {
 		.progressbar({
 			max: 1,
 			value: 0
-		})
-		.click(function(e) {
-			var track = ImoSPC.currentTrack();
-			if (track) {
-				var to = ((e.pageX - $(this).offset().left) / ($(this).width() - 1)) * track.length;
-				track.seek(to);
-				setCurrentTimeDisplay(to);
-			}
 		});
-	seekbar.find('.ui-progressbar-value').css('background', '#ccc');
+	seekbar.find('.ui-progressbar-value')
+		.css('background', '#ccc');
+}
+
+function seekBarClick(e) {
+	var track = ImoSPC.currentTrack();
+	if (track) {
+		var to = ((e.pageX - $(this).offset().left) / ($(this).width() - 1)) * track.length;
+		track.seek(to);
+		setCurrentTimeDisplay(to);
+	}
 }
 
 function setCurrentTimeDisplay(time) {
@@ -62,22 +72,33 @@ function formatTime(t) {
 
 var _timer;
 function timerOn() {
-		if (_timer)
-			return;
-		_timer = setInterval(function() {
-				var time = Math.max(0, ImoSPC.time());
-				seekbar.progressbar('option', 'value', time);
-				setCurrentTimeDisplay(time);
-		}, 100);
+	if (_timer)
+		return;
+	_timer = setInterval(function() {
+		var time = Math.max(0, ImoSPC.time());
+		seekbar.progressbar('option', 'value', time);
+		setCurrentTimeDisplay(time);
+		checkTimeReached();
+	}, 100);
 }
 
-
 function timerOff(isLoading) {
-		if (_timer) {
-				clearInterval(_timer);
-				_timer = null;
-		}
-		seekbar.progressbar('option', 'value', isLoading ? false : 0);
+	if (_timer) {
+		clearInterval(_timer);
+		_timer = null;
+	}
+	seekbar.progressbar('option', 'value', isLoading ? false : 0);
+}
+
+function checkTimeReached() {
+	if (ImoSPC.currentTrack()
+		&& !_timeReached
+		&& ImoSPC.time() > Math.min(60, ImoSPC.currentTrack().length / 2))
+	{
+		_timeReached = true;
+		if(typeof(timeReached) !== 'undefined')
+			timeReached();
+	}
 }
 
 function setupVolumeSlider() {
@@ -116,6 +137,7 @@ function onInitError(evt) {
 
 function onLoadOk(evt) {
 	console.debug('ImoSPC load ok', evt);
+	_timeReached = false;
 }
 
 function onLoadError(evt) {
@@ -134,12 +156,14 @@ function onPlayStateChange(e) {
 		case PS.PLAYING:
 			_playing = true;
 			timerOn();
-			seekEnd();
+			if(typeof(seekEnd) !== 'undefined')
+				seekEnd();
 			break;
 
 		case PS.BUFFERING:
 			timerOff(true);
-			seekStart();
+			if(typeof(seekStart) !== 'undefined')
+				seekStart();
 			break;
 
 		case PS.PAUSED:
@@ -149,7 +173,8 @@ function onPlayStateChange(e) {
 
 		case PS.STOPPED:
 			if(_playing) {
-				songEnded();
+				if(typeof(songEnded) !== 'undefined')
+					songEnded();
 			} else {
 				_playing = false;
 				timerOff();
