@@ -35,7 +35,6 @@
 	</div>
 	<div style="display: inline-block; position: relative;">
 		<?php require_once(views_dir() . 'includes/imospc.php'); ?>
-		<input type="hidden" id="deferred-idTrack" />
 	</div>
 	<div class="controls">
 		<div class="play-controls">

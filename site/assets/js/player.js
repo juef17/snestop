@@ -39,10 +39,6 @@ function bindPlayerModesFunctions() {
 	});
 }
 
-function applyPlayerLoopMode() {
-	ImoSPC.setRepeat(playerLoopMode == PlayerLoopModes.Single);
-}
-
 function setLoopButtonVisual() {
 	$('#player-loop').prop('checked', playerLoopMode > 0);
 	$('#player-loop').button('refresh')
@@ -65,7 +61,7 @@ function constructPlayerDialog() {
 		show: { effect: 'clip', duration: 200 },
 		hide: { effect: 'fold', duration: 200 },
 		dialogClass: 'player',
-		close: function(event, ui) { $('#player-dialog #deferred-idTrack').val(''); }
+		close: function(event, ui) { ImoSPC.pause(); }
 	});
 	
 	$('#player-dialog .pause')
@@ -129,27 +125,25 @@ function setScreenshot(track) {
 
 //main entry function
 function playTrack(idTrack) {
-	if(playerDialog.is(':visible')) {
-		$.getJSON(
-			baseUrl + 'index.php/game/getTrack/' + idTrack,
-			function(data) {
-				if(data['success']) {
-					_playing = false;
-					var track = data['success'];
-					var url = assetUrl + 'spc/' + track.spcURL + '?' + track.length + '?' + track.fadeLength;
-					setScreenshot(track);
-					setTitle(track);
-					ImoSPC.open(url);
-					playingIdTrack = idTrack;
-				} else {
-					showMessageDialog(data['message']);
-				}
-			}
-		);
-	} else {
-		$('#player-dialog #deferred-idTrack').val(idTrack);
+	if(!playerDialog.is(':visible'))
 		playerDialog.dialog('open');
-	}
+	
+	$.getJSON(
+		baseUrl + 'index.php/game/getTrack/' + idTrack,
+		function(data) {
+			if(data['success']) {
+				_playing = false;
+				var track = data['success'];
+				var url = assetUrl + 'spc/' + track.spcURL + '?' + track.length + '?' + track.fadeLength;
+				setScreenshot(track);
+				setTitle(track);
+				ImoSPC.open(url);
+				playingIdTrack = idTrack;
+			} else {
+				showMessageDialog(data['message']);
+			}
+		}
+	);
 }
 
 function setTitle(track) {
@@ -163,12 +157,7 @@ function setTitle(track) {
 
 //imospc events
 function playerInitialized() {
-	if(playerDialog.is(':visible')) {
-		applyPlayerLoopMode();
-		var idTrack = $('#player-dialog #deferred-idTrack').val();
-		if(idTrack != '')
-			playTrack(idTrack);
-	}
+	ImoSPC.setRepeat(playerLoopMode == PlayerLoopModes.Single);
 }
 
 function songEnded() {
