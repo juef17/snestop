@@ -110,7 +110,9 @@ function setupVolumeSlider() {
 		slide: function(event, ui) {
 			ImoSPC.setVolume(tryStore('volume', ui.value) / 100);
 		}
-	});
+	}).find('.ui-slider-handle')
+		.addClass('fa fa-volume-off')
+		.css('padding-left', '4px');
 }
 
 function tryStore(key, value) {
