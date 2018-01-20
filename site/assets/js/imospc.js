@@ -146,42 +146,46 @@ function onLoadError(evt) {
 	console.error('ImoSPC load error', evt);
 }
 
-var _playing = false;
+var playerState = ImoSPC.PlaybackState.STOPPED;
+var currentTrack = null;
 function onPlayStateChange(e) {
 	console.debug('ImoSPC play state change', e);
 	var PS = ImoSPC.PlaybackState;
 	switch (e.state) {
 		case PS.LOADING:
+			currentTrack = ImoSPC.currentTrack();
 			seekbar.progressbar('option', 'max', e.track.length);
 			setCurrentTimeDisplay(0);
 			setTrackLengthDisplay(e.track.length);
+			playerState = 'loading';
 		case PS.PLAYING:
-			_playing = true;
 			timerOn();
 			if(typeof(seekEnd) !== 'undefined')
 				seekEnd();
+			playerState = 'playing';
 			break;
 
 		case PS.BUFFERING:
 			timerOff(true);
 			if(typeof(seekStart) !== 'undefined')
 				seekStart();
+			playerState = 'buffering';
 			break;
 
 		case PS.PAUSED:
-			_playing = false;
 			timerOn();
+			playerState = 'paused';
 			break;
 
 		case PS.STOPPED:
-			if(_playing) {
+			if(playerState == PS.PLAYING) {
 				if(typeof(songEnded) !== 'undefined')
 					songEnded();
 			} else {
-				_playing = false;
 				timerOff();
 				setCurrentTimeDisplay(null);
 				setTrackLengthDisplay(null);
 			}
+			playerState = 'stopped';
 	}
 }

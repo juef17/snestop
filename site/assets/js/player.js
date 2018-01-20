@@ -66,15 +66,11 @@ function constructPlayerDialog() {
 	
 	$('#player-dialog .pause')
 	.button()
-	.click(playButton);
+	.click(pauseButton);
 	
 	$('#player-dialog .play')
 	.button()
-	.click(function() {
-		var currentTrack = ImoSPC.currentTrack();
-		if(currentTrack)
-			currentTrack.play();
-	});
+	.click(playButton);
 	
 	if(isUserLogged) {
 		$('#player-playlistcombo').menu();
@@ -95,9 +91,14 @@ function constructPlayerDialog() {
 }
 
 function playButton() {
-	if(_playing)
+	if(currentTrack)
+		currentTrack.play();
+}
+
+function pauseButton() {
+	if(playerState == 'playing')
 		ImoSPC.pause();
-	else
+	else if (playerState == 'paused')
 		ImoSPC.unpause();
 }
 
