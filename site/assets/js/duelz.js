@@ -78,12 +78,14 @@ function configPlayButtons() {
 	
 	$('.duelPlayer .pause')
 	.button()
-	.click(function() {
-		if(_playing)
-			ImoSPC.pause();
-		else
-			ImoSPC.unpause();
-	});
+	.click(duelzPauseButton);
+}
+
+function duelzPauseButton() {
+	if(playerState == 'playing')
+		ImoSPC.pause();
+	else if (playerState == 'paused')
+		ImoSPC.unpause();
 }
 
 function contructVoteDialog() {
