@@ -15,6 +15,15 @@ class Track_model extends CI_Model {
 			return null;
 	}
 
+	public function get_Track_spc_url($idTrack) {
+		$this->db->select('Track.spcURL');
+		$query = $this->db->get_where('Track', array('idTrack' => $idTrack));
+		if($trackrow = $query->row())
+			return $trackrow->spcURL;
+		else
+			return null;
+	}
+
 	public function getTracksForPlaylist($idTracks) {
 		$this->db->select('Track.idTrack, Track.title, Track.length, Track.isScreenshotSet, Game.idGame, Game.titleEng AS gameTitleEng');
 		$this->db->join('Game', 'Track.idGame = Game.idGame', 'INNER');

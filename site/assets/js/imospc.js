@@ -1,5 +1,6 @@
 var seekbar;
 var _timeReached = false;
+var duelzMode = false;
 
 function initPlayer(options) {
 	options = options || {
@@ -128,7 +129,8 @@ function tryFetch(key, _default) {
 }
 
 function onInitOk(evt) {
-	console.debug('ImoSPC init ok', evt);
+	if(!duelzMode)
+		console.debug('ImoSPC init ok', evt);
 	ImoSPC.setVolume(tryFetch('volume', 90) / 100);
 	playerInitialized();
 }
@@ -138,7 +140,8 @@ function onInitError(evt) {
 }
 
 function onLoadOk(evt) {
-	console.debug('ImoSPC load ok', evt);
+	if(!duelzMode)
+		console.debug('ImoSPC load ok', evt);
 	_timeReached = false;
 }
 
@@ -149,7 +152,8 @@ function onLoadError(evt) {
 var playerState = ImoSPC.PlaybackState.STOPPED;
 var currentTrack = null;
 function onPlayStateChange(e) {
-	console.debug('ImoSPC play state change', e);
+	if(!duelzMode)
+		console.debug('ImoSPC play state change', e);
 	var PS = ImoSPC.PlaybackState;
 	switch (e.state) {
 		case PS.LOADING:

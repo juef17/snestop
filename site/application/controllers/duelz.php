@@ -23,10 +23,32 @@ class Duelz extends Secure_Controller {
 	//AJAX get
 	public function getNewDuel() {
 		$idTracks = $this->Track_model->getIdTracksForDuel($_SESSION['loggedUser']->idUser);
+		$idTracks[0] = base64_encode($idTracks[0]);
+		$idTracks[1] = base64_encode($idTracks[1]);
 		echo json_encode($idTracks);
 	}
 
-	//Ajax GET
+	//AJAX get
+	public function getSpc($idTrack) {
+		$idTrack = base64_decode(urldecode($idTrack));
+		if($url = $this->Track_model->get_Track_spc_url($idTrack)) {
+			$filename = "/home/baldho/public_html/snestop/site/assets/spc/" . $url;
+			$handle = fopen($filename, "rb");
+			$contents = fread($handle, filesize($filename));
+			fclose($handle);
+			$a = substr($contents, 0, 46);
+			$b = substr($contents, 46 + 64);
+			$file = $a . '0000000000000000000000000000000000000000000000000000000000000000' . $b;
+			header("Cache-Control: no-cache private");
+			header("Content-Transfer-Encoding: binary");
+			header('Content-Length: '. strlen($file));
+			echo $file;
+		} else {
+			echo "Could not find idTrack: " . $idTrack;
+		}
+	}
+
+	//AJAX get
 	public function getNbDuelzTaken() {
 		$nb = $this->Duel_Result_model->get_number_of_duels_User($_SESSION['loggedUser']->idUser);
 		echo json_encode($nb);

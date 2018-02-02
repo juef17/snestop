@@ -27,6 +27,7 @@ var previousTracks = {
 };
 
 $(function() {
+	duelzMode = true;
 	waitModalVisible({visible: true, fade: false});
 	configPlayButtons();
 	configVoteButtons();
@@ -281,20 +282,7 @@ function playerInitialized() {
 
 function playTrack() {
 	var idTrack = tracks[tracks.current].idTrack;
-	$.getJSON(
-		baseUrl + 'index.php/game/getTrack/' + idTrack,
-		function(data, status, jqXHR) {
-			if(validateSession(jqXHR.responseText)) {
-				if(data['success']) {
-					$('#current-track').text(tracks.current.toUpperCase());
-					$('#player-message').show(500);
-					var track = data['success'];
-					var url = assetUrl + 'spc/' + track.spcEncodedURL + '?' + track.length + '?' + track.fadeLength;
-					ImoSPC.open(url);
-				} else {
-					showMessageDialog(data['message']);
-				}
-			}
-		}
-	);
+	ImoSPC.open('duelz/getSpc/' + encodeURIComponent(idTrack));
+	$('#current-track').text(tracks.current.toUpperCase());
+	$('#player-message').show(500);
 }
