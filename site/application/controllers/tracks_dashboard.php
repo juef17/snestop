@@ -13,7 +13,7 @@ class Tracks_Dashboard extends Admin_Controller {
 		$data = $this->getUserViewData();
 		$data['gameTitle'] = $this->Game_model->get_Game($idGame)->titleEng;
 		$data['idGame'] = $idGame;
-		$data['tracks'] = $this->Track_model->get_Tracks_for_Game($idGame);
+		$data['tracks'] = $this->Track_model->get_Tracks_for_Game($idGame, TRUE, TRUE, TRUE, TRUE);
 		$data['view'] = 'tracks_dashboard.php';
 		$this->load->view('template.php', $data);
 	}

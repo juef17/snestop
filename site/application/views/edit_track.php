@@ -78,34 +78,34 @@
 					<input type="number" step="any" min="0" name="eloRating" maxlength="255" class="form-control" placeholder="Float value" value="<?=set_value('eloRating', $track->eloRating)?>">
 				</label>
 			</div>
-			<div class="form-group">
+			<div class="form-check">
 				<span class="errors"><?=form_error('active')?></span>
-				<label>Active
-					<input type="checkbox" name="active" class="form-control" <?=set_value('active', !$track->turnedOffByAdmin) ? 'checked' : ''?>>
+				<label class="form-check-label">Active
+					<input type="checkbox" name="active" class="form-check-input" <?=set_value('active', !$track->turnedOffByAdmin) ? 'checked' : ''?>>
 				</label>
 			</div>
-			<div class="form-group">
+			<div class="form-check">
 				<span class="errors"><?=form_error('isJingle')?></span>
-				<label>Jingle
-					<input type="checkbox" name="isJingle" class="form-control" <?=set_value('isJingle', $track->isJingle) ? 'checked' : ''?>>
+				<label class="form-check-label">Jingle
+					<input type="checkbox" name="isJingle" class="form-check-input" <?=set_value('isJingle', $track->isJingle) ? 'checked' : ''?>>
 				</label>
 			</div>
-			<div class="form-group">
+			<div class="form-check">
 				<span class="errors"><?=form_error('isSoundEffect')?></span>
-				<label>Sound effect
-					<input type="checkbox" name="isSoundEffect" class="form-control" <?=set_value('isSoundEffect', $track->isSoundEffect) ? 'checked' : ''?>>
+				<label class="form-check-label">Sound effect
+					<input type="checkbox" name="isSoundEffect" class="form-check-input" <?=set_value('isSoundEffect', $track->isSoundEffect) ? 'checked' : ''?>>
 				</label>
 			</div>
-			<div class="form-group">
+			<div class="form-check">
 				<span class="errors"><?=form_error('isVoice')?></span>
-				<label>Voice
-					<input type="checkbox" name="isVoice" class="form-control" <?=set_value('isVoice', $track->isVoice) ? 'checked' : ''?>>
+				<label class="form-check-label">Voice
+					<input type="checkbox" name="isVoice" class="form-check-input" <?=set_value('isVoice', $track->isVoice) ? 'checked' : ''?>>
 				</label>
 			</div>
-			<div class="form-group">
+			<div class="form-check">
 				<span class="errors"><?=form_error('eloReached2400')?></span>
-				<label>Elo reached 2400
-					<input type="checkbox" name="eloReached2400" class="form-control" <?=set_value('eloReached2400', $track->eloReached2400) ? 'checked' : ''?>>
+				<label class="form-check-label">Elo reached 2400
+					<input type="checkbox" name="eloReached2400" class="form-check-input" <?=set_value('eloReached2400', $track->eloReached2400) ? 'checked' : ''?>>
 				</label>
 			</div>
 			

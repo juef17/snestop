@@ -17,13 +17,13 @@
 </div>
 
 <div style="background-color: #dddddd;" class="container_16">
-	<div class="grid_2 columnheader">
+	<div class="grid_4 columnheader">
 		<p>Title (Eng)</p>
 	</div>
-	<div class="grid_2 columnheader">
+	<div class="grid_4 columnheader">
 		<p>Title (Jap)</p>
 	</div>
-	<div class="grid_4 columnheader">
+	<div class="grid_1 columnheader">
 		<p>Screenshot</p>
 	</div>
 	<div class="grid_4 columnheader">
@@ -40,30 +40,32 @@
 	</div>
 </div>
 
-<div class="container_12">
-	<div class="grid_2">
-		<span class="errors"><?=form_error('game_titleeng')?>&nbsp;</span>
+<?php if(form_error('game_titleeng') or form_error('game_titlejap') or form_error('game_rsn')): ?>
+	<div class="container_16">
+		<div class="grid_4">
+			<span class="errors"><?=form_error('game_titleeng')?>&nbsp;</span>
+		</div>
+		<div class="grid_4">
+			<span class="errors"><?=form_error('game_titlejap')?>&nbsp;</span>
+		</div>
+		<div class="grid_1">
+			<span class="errors">&nbsp;</span>
+		</div>
+		<div class="grid_4">
+			<span class="errors"><?=form_error('game_rsn')?>&nbsp;</span>
+		</div>
 	</div>
-	<div class="grid_2">
-		<span class="errors"><?=form_error('game_titlejap')?>&nbsp;</span>
-	</div>
-	<div class="grid_4">
-		<span class="errors">&nbsp;</span>
-	</div>
-	<div class="grid_4">
-		<span class="errors"><?=form_error('game_rsn')?>&nbsp;</span>
-	</div>
-</div>
+<?php endif; ?>
 
 <div class="container_16">
 	<?= form_open(base_url() . 'index.php/games_dashboard/add', array('id' => 'addGame')) ?>
-		<div class="grid_2 columnheader">
+		<div class="grid_4 columnheader">
 			<input type="text" name="game_titleeng" placeholder="English title" maxlength="45" class="form-control" value="<?=set_value('game_titleeng')?>"/>
 		</div>
-		<div class="grid_2 columnheader">
+		<div class="grid_4 columnheader">
 			<input type="text" name="game_titlejap" placeholder="Japanese title" maxlength="45" class="form-control" value="<?=set_value('game_titlejap')?>"/>
 		</div>
-		<div class="grid_4 columnheader">
+		<div class="grid_1 columnheader">
 			&nbsp;
 		</div>
 		<div class="grid_4 columnheader">
@@ -84,30 +86,32 @@
 <?php endif; ?>
 
 <?php $b = FALSE; foreach($games as $game): ?>
-	<div style="<?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
-		<div class="grid_2">
-			<span class="errors"><?=form_error("game_{$game->idGame}_titleeng")?>&nbsp;</span>
-		</div>
-		<div class="grid_2">
-			<span class="errors"><?=form_error("game_{$game->idGame}_titlejap")?>&nbsp;</span>
-		</div>
-		<div class="grid_4">
-			<span class="errors">&nbsp;</span>
-		</div>
-		<div class="grid_4">
-			<span class="errors"><?=form_error("game_{$game->idGame}_rsn")?>&nbsp;</span>
-		</div>
-	</div>
-	<div style="<?php if($b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
-		<?= form_open(base_url() . "index.php/games_dashboard/update/$currentPage", array('id' => 'update_' . $game->idGame)) ?>
-			<input type="hidden" name="id" value="<?=$game->idGame?>" />
-			<div class="grid_2">
-				<input type="text" name="game_<?=$game->idGame?>_titleeng" maxlength="45" class="form-control" value="<?=set_value("game_{$game->idGame}_titleeng", $game->titleEng)?>" />
-			</div>
-			<div class="grid_2">
-				<input type="text" name="game_<?=$game->idGame?>_titlejap" maxlength="45" class="form-control" value="<?=set_value("game_{$game->idGame}_titlejap", $game->titleJap)?>" />
+	<?php if(form_error("game_{$game->idGame}_titleeng") or form_error("game_{$game->idGame}_titlejap") or form_error("game_{$game->idGame}_rsn")): ?>
+		<div style="<?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
+			<div class="grid_4">
+				<span class="errors"><?=form_error("game_{$game->idGame}_titleeng")?>&nbsp;</span>
 			</div>
 			<div class="grid_4">
+				<span class="errors"><?=form_error("game_{$game->idGame}_titlejap")?>&nbsp;</span>
+			</div>
+			<div class="grid_1">
+				<span class="errors">&nbsp;</span>
+			</div>
+			<div class="grid_4">
+				<span class="errors"><?=form_error("game_{$game->idGame}_rsn")?>&nbsp;</span>
+			</div>
+		</div>
+	<?php endif; ?>
+	<div style="<?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
+		<?= form_open(base_url() . "index.php/games_dashboard/update/$currentPage", array('id' => 'update_' . $game->idGame)) ?>
+			<input type="hidden" name="id" value="<?=$game->idGame?>" />
+			<div class="grid_4">
+				<input type="text" name="game_<?=$game->idGame?>_titleeng" maxlength="45" class="form-control" value="<?=set_value("game_{$game->idGame}_titleeng", $game->titleEng)?>" />
+			</div>
+			<div class="grid_4">
+				<input type="text" name="game_<?=$game->idGame?>_titlejap" maxlength="45" class="form-control" value="<?=set_value("game_{$game->idGame}_titlejap", $game->titleJap)?>" />
+			</div>
+			<div class="grid_1">
 				<?php if($game->isScreenshotSet): ?>
 					<a href="<?=asset_url()?>images/screenshots/game/<?=$game->idGame?>.png" target="_blank">Yes</a>
 				<?php else: ?>

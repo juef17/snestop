@@ -53,7 +53,7 @@
 		</div>
 	<?php endforeach; ?>
 
-	<?php $b = TRUE; foreach($gameRequests as $request): //Games ?>
+	<?php foreach($gameRequests as $request): //Games ?>
 		<div style="<?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_12">
 			<div class="grid_2">
 				<p><?= $request->userName ?></p>
