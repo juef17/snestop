@@ -244,7 +244,7 @@ function updatePreviousTracks() {
 }
 
 function fetchTrackTitle(track) {
-	$.getJSON(baseUrl + 'index.php/game/getTrack/' + previousTracks[track].idTrack, function(result, status, jqXHR){
+	$.getJSON(baseUrl + 'index.php/duelz/getTrack/' + previousTracks[track].idTrack, function(result, status, jqXHR){
 		if(validateSession(jqXHR.responseText)) {
 			if(result.success) {
 				var trackUrl = baseUrl + 'index.php/game/index/' + result.success.idGame + '/' + result.success.idTrack;
@@ -253,6 +253,7 @@ function fetchTrackTitle(track) {
 						tagContent + 
 					'</a>'
 				$('#lastTrack-' + track + '-title').html(trackTag);
+				$('#btn-addtoplaylist-' + track).attr('onclick', 'addToPlaylistDialog([' + result.success.idTrack + ']);')
 			} else {
 				alert(result.message);
 			}
@@ -281,8 +282,12 @@ function playerInitialized() {
 }
 
 function playTrack() {
-	var idTrack = tracks[tracks.current].idTrack;
-	ImoSPC.open('duelz/getSpc/' + encodeURIComponent(idTrack));
-	$('#current-track').text(tracks.current.toUpperCase());
-	$('#player-message').show(500);
+	$.getJSON(baseUrl + 'index.php/duelz/ping', function(result, status, jqXHR) {
+		if(validateSession(jqXHR.responseText)) {
+			var idTrack = tracks[tracks.current].idTrack;
+			ImoSPC.open('duelz/getSpc/' + idTrack);
+			$('#current-track').text(tracks.current.toUpperCase());
+			$('#player-message').show(500);
+		}
+	});
 }

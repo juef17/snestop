@@ -23,8 +23,8 @@ class Duelz extends Secure_Controller {
 	//AJAX get
 	public function getNewDuel() {
 		$idTracks = $this->Track_model->getIdTracksForDuel($_SESSION['loggedUser']->idUser);
-		$idTracks[0] = base64_encode($idTracks[0]);
-		$idTracks[1] = base64_encode($idTracks[1]);
+		$idTracks[0] = urlencode(base64_encode($idTracks[0]));
+		$idTracks[1] = urlencode(base64_encode($idTracks[1]));
 		echo json_encode($idTracks);
 	}
 
@@ -38,7 +38,7 @@ class Duelz extends Secure_Controller {
 			fclose($handle);
 			$a = substr($contents, 0, 46);
 			$b = substr($contents, 46 + 64);
-			$file = $a . '0000000000000000000000000000000000000000000000000000000000000000' . $b;
+			$file = $a . str_repeat('0', 64) . $b;
 			header("Cache-Control: no-cache private");
 			header("Content-Transfer-Encoding: binary");
 			header('Content-Length: '. strlen($file));
@@ -46,6 +46,25 @@ class Duelz extends Secure_Controller {
 		} else {
 			echo "Could not find idTrack: " . $idTrack;
 		}
+	}
+
+		//Ajax GET
+	public function getTrack($idTrack) {
+		$idTrack = base64_decode(urldecode($idTrack));
+		if($track = $this->Track_model->get_Track($idTrack)) {
+			$data['success'] = $track;
+			$data['message'] = '';
+		} else {
+			$data['success'] = FALSE;
+			$data['message'] = 'Can\t find track, sorry :(';
+		}
+		
+		echo json_encode($data);
+	}
+
+	//AJAX get
+	public function ping() {
+		echo json_encode("Pongn'TTT!");
 	}
 
 	//AJAX get
@@ -57,10 +76,11 @@ class Duelz extends Secure_Controller {
 	//AJAX post
 	public function castVote() {
 		$tracks = json_decode(json_encode($this->input->post('tracks'))); //Convert array to object. Slow but grabs me a nipple.
-		
 		if($tracks) {
-			$idTrackWon = $tracks->a->winner == 'true' ? $tracks->a->idTrack : $tracks->b->idTrack;
-			$idTrackLost = $tracks->a->winner == 'true' ? $tracks->b->idTrack : $tracks->a->idTrack;
+			$idTrackA = base64_decode(urldecode($tracks->a->idTrack));
+			$idTrackB = base64_decode(urldecode($tracks->b->idTrack));
+			$idTrackWon = $tracks->a->winner == 'true' ? $idTrackA : $idTrackB;
+			$idTrackLost = $tracks->a->winner == 'true' ? $idTrackB : $idTrackA;
 			$data['success'] = $this->Duel_Result_model->new_Duel_Result($idTrackWon, $idTrackLost, $_SESSION['loggedUser']->idUser);
 			$data['success'] = $this->Track_model->update_ratings_Track($idTrackWon, $idTrackLost);
 			$data['success'] = $this->Rating_Personal_model->update_ratings($idTrackWon, $idTrackLost, $_SESSION['loggedUser']->idUser);
@@ -68,12 +88,12 @@ class Duelz extends Secure_Controller {
 				$data['success'] = $this->Rating_Community_model->update_ratings($idTrackWon, $idTrackLost, $_SESSION['loggedUser']->idCommunity);
 						
 			if($tracks->a->shit == 'true')
-				$data['success'] = $data['success'] && $this->Shit_Track_model->new_Shit_Track($_SESSION['loggedUser']->idUser, $tracks->a->idTrack);
+				$data['success'] = $data['success'] && $this->Shit_Track_model->new_Shit_Track($_SESSION['loggedUser']->idUser, $idTrackA);
 			
 			if($tracks->b->shit == 'true')
-				$data['success'] = $data['success'] && $this->Shit_Track_model->new_Shit_Track($_SESSION['loggedUser']->idUser, $tracks->b->idTrack);
+				$data['success'] = $data['success'] && $this->Shit_Track_model->new_Shit_Track($_SESSION['loggedUser']->idUser, $idTrackB);
 			
-			$data['message'] = 'An unexpected error occured, sorry :(';
+			$data['message'] = 'Good!';
 		} else {
 			$data['success'] = FALSE;
 			$data['message'] = 'An unexpected error occured, sorry :(';
