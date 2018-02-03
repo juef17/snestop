@@ -55,12 +55,6 @@
 				</label>
 			</div>
 			<div class="form-group">
-				<label>SPC encoded URL
-					<span class="errors"><?=form_error('spcEncodedURL')?></span>
-					<input type="text" name="spcEncodedURL" maxlength="255" class="form-control" placeholder="http://" value="<?=set_value('spcEncodedURL', $track->spcEncodedURL)?>">
-				</label>
-			</div>
-			<div class="form-group">
 				<label>Glicko 2 RD
 					<span class="errors"><?=form_error('glicko2RD')?></span>
 					<input type="number" step="any" min="0" name="glicko2RD" maxlength="255" class="form-control" placeholder="Float value" value="<?=set_value('glicko2RD', $track->glicko2RD)?>">

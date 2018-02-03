@@ -196,7 +196,6 @@ CREATE TABLE `Track` (
   `glicko2sigma` float NOT NULL DEFAULT 0.06,
   `eloRating` float NOT NULL DEFAULT 1600,
   `spcURL` varchar(255) NOT NULL,
-  `spcEncodedURL` varchar(255) NOT NULL,
   `eloReached2400` bit(1) NOT NULL DEFAULT b'0',
   `isSoundEffect` bit(1) NOT NULL DEFAULT b'0',
   `isVoice` bit(1) NOT NULL DEFAULT b'0',

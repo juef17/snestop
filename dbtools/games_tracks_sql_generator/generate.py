@@ -1,6 +1,5 @@
 #place all rsn files in rsn folder
 #spcs will be extracted in tmp folder then moved
-#a stripped down version will be copied too
 #download an up to date version of the spcid666.py file at:
 #  https://github.com/Jerther/py_spcID666
 
@@ -64,8 +63,7 @@ for f in glob.glob(rsnfolder + "*.rsn"):
 	for sf in sorted(glob.glob(tmpfolder + "*.spc")):
 		trackNumber += 1
 		spcFileName = sf[len(tmpfolder):]
-		spcEncryptedFileName = hashlib.sha1(spcFileName[:-4].encode('ascii')).hexdigest() + '.spc'
-
+		
 		tag = spcid666.parse(sf)
 		length = tag.extended.intro_length / 64000 if tag.extended.intro_length != None else tag.base.length_before_fadeout
 		fadeoutLength = tag.extended.fade_length / 64000 if tag.extended.fade_length != None else tag.base.fadeout_length
@@ -73,30 +71,16 @@ for f in glob.glob(rsnfolder + "*.rsn"):
 		isVoice = _is_voice(spcFileName)
 		isJingle = not isVoice and not isSoundEffect and (_is_jingle(spcFileName) or length <= 20)
 
-		fsql.write(u"INSERT Track (idGame, title, length, fadeLength, composer, isJingle, spcURL, spcEncodedURL, isSoundEffect, isVoice, trackNumber) VALUES (@lastid, '{0}', {1}, {2}, '{3}', {4}, '{5}', '{6}', {7}, {8}, {9});\n".format(
+		fsql.write(u"INSERT Track (idGame, title, length, fadeLength, composer, isJingle, spcURL, isSoundEffect, isVoice, trackNumber) VALUES (@lastid, '{0}', {1}, {2}, '{3}', {4}, '{5}', '{6}', {7}, {8});\n".format(
 			(tag.extended.title or tag.base.title).replace("'", "''"),
 			length,
 			fadeoutLength,
 			(tag.extended.artist or tag.base.artist)[:150].replace("'", "''"),
 			1 if isJingle else 0,
 			spcFileName,
-			spcEncryptedFileName,
 			1 if isSoundEffect else 0,
 			1 if isVoice else 0,
 			trackNumber
 		))
 
-		shutil.copy(sf, spcfolder + spcEncryptedFileName)
 		shutil.move(sf, spcfolder)
-		encryptedTag = spcid666.parse(spcfolder + spcEncryptedFileName)
-		
-		encryptedTag.base.title = ''
-		encryptedTag.base.game = ''
-		encryptedTag.base.dumper = ''
-		encryptedTag.base.comments = ''
-		encryptedTag.base.artist = ''
-		encryptedTag.base.length_before_fadeout = length
-		encryptedTag.base.fadeout_length = fadeoutLength
-
-		spcid666.save(encryptedTag, spcfolder + spcEncryptedFileName)
-

@@ -135,7 +135,7 @@ function playTrack(idTrack) {
 			if(data['success']) {
 				_playing = false;
 				var track = data['success'];
-				var url = assetUrl + 'spc/' + track.spcURL + '?' + track.length + '?' + track.fadeLength;
+				var url = assetUrl + 'spc/' + track.spcURL;
 				setScreenshot(track);
 				setTitle(track);
 				ImoSPC.open(url);

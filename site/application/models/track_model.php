@@ -87,7 +87,6 @@ class Track_model extends CI_Model {
 			'eloRating' => 1600,
 			'eloReached2400' => FALSE,
 			'spcURL' => '',
-			'spcEncodedURL' => '',
 			'isSoundEffect' => FALSE
 		);
 
@@ -97,7 +96,7 @@ class Track_model extends CI_Model {
 		return $object;
 	}
 
-	public function set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber) {
+	public function set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber) {
 		$data = array(
 			'idGame' => $idGame,
 			'title' => $title,
@@ -112,7 +111,6 @@ class Track_model extends CI_Model {
 			'eloRating' => $eloRating,
 			'eloReached2400' => $eloReached2400,
 			'spcURL' => $spcURL,
-			'spcEncodedURL' => $spcEncodedURL,
 			'isSoundEffect' => $isSoundEffect,
 			'isVoice' => $isVoice,
 			'trackNumber' => $trackNumber
@@ -139,7 +137,7 @@ class Track_model extends CI_Model {
 		return $this->db->update('Track', array('turnedOffByAdmin' => TRUE));
 	}
 	
-	public function update_Track($idTrack, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $spcEncodedURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber) {
+	public function update_Track($idTrack, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber) {
 		$this->db->where('Track.idTrack', $idTrack);
 		$data = array(
 			'title' => $title,
@@ -154,7 +152,6 @@ class Track_model extends CI_Model {
 			'glicko2sigma' => $glicko2sigma,
 			'eloRating' => $eloRating,
 			'eloReached2400' => $eloReached2400,
-			'spcEncodedURL' => $spcEncodedURL,
 			'isSoundEffect' => $isSoundEffect,
 			'isVoice' => $isVoice,
 			'trackNumber' => $trackNumber
