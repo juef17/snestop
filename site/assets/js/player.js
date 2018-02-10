@@ -6,6 +6,7 @@ var PlayerLoopModes = {
 
 var playerDialog;
 var playingIdTrack = null;
+var loadingTrack = false;
 var playerLoopMode = PlayerLoopModes.None; //user value set in php
 
 $(function() {
@@ -138,6 +139,7 @@ function playTrack(idTrack) {
 				var url = assetUrl + 'spc/' + track.spcURL;
 				setScreenshot(track);
 				setTitle(track);
+				loadingTrack = true;
 				ImoSPC.open(url);
 				playingIdTrack = idTrack;
 			} else {
@@ -163,7 +165,7 @@ function playerInitialized() {
 
 function songEnded() {
 	var sortedIdTracks = $('#playlist-tracks').sortable('toArray');
-	if(sortedIdTracks.length > 0) {
+	if(!loadingTrack && sortedIdTracks.length > 0) {
 		var trackPosition = sortedIdTracks.indexOf(playingIdTrack);
 		if(playerLoopMode == PlayerLoopModes.All && sortedIdTracks.length == 1) {	// la 2e condition est pour qu'on n'essaie pas
 			playButton();																	// de trouver une autre track si on en a juste 1
@@ -191,6 +193,7 @@ function seekStart() {
 
 function seekEnd() {
 	$('#player-dialog #wait').hide('slide', { direction: 'down'});
+	loadingTrack = false;
 }
 
 //Playlist management
