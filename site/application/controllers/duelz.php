@@ -32,7 +32,7 @@ class Duelz extends Secure_Controller {
 	public function getSpc($idTrack) {
 		$idTrack = base64_decode(urldecode($idTrack));
 		if($url = $this->Track_model->get_Track_spc_url($idTrack)) {
-			$filename = "/home/baldho/public_html/snestop/site/assets/spc/" . $url;
+			$filename = assets_dir() . 'spc/' . $url;
 			$handle = fopen($filename, "rb");
 			$contents = fread($handle, filesize($filename));
 			fclose($handle);
