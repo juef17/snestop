@@ -71,7 +71,7 @@ for f in glob.glob(rsnfolder + "*.rsn"):
 		isVoice = _is_voice(spcFileName)
 		isJingle = not isVoice and not isSoundEffect and (_is_jingle(spcFileName) or length <= 20)
 
-		fsql.write(u"INSERT Track (idGame, title, length, fadeLength, composer, isJingle, spcURL, isSoundEffect, isVoice, trackNumber) VALUES (@lastid, '{0}', {1}, {2}, '{3}', {4}, '{5}', '{6}', {7}, {8});\n".format(
+		fsql.write(u"INSERT Track (idGame, title, length, fadeLength, composer, isJingle, spcURL, isSoundEffect, isVoice, trackNumber) VALUES (@lastid, '{0}', {1}, {2}, '{3}', {4}, '{5}', {6}, {7}, {8});\n".format(
 			(tag.extended.title or tag.base.title).replace("'", "''"),
 			length,
 			fadeoutLength,
