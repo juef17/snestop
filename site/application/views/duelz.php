@@ -107,14 +107,14 @@
 
 <div class="container_16 previous-tracks">
 	<div class="grid_16 blank"></div>
-	<div>
-		<div class="grid_7 prefix_3">
-			<p>Previous track A was: <br /><span id="lastTrack-a-title">???</span></p>
-		</div>
-		<div class="grid_9 prefix_2 suffix_3">
-			<p>Previous track B was: <br /><span id="lastTrack-b-title">???</span></p>
-		</div>
+	<div class="clear"></div>
+	<div class="grid_7 prefix_3">
+		<p>Previous track A was: <br /><span id="lastTrack-a-title">???</span></p>
 	</div>
+	<div class="grid_9 prefix_2 suffix_3">
+		<p>Previous track B was: <br /><span id="lastTrack-b-title">???</span></p>
+	</div>
+	<div class="clear"></div>
 
 	<div class="grid_7 prefix_3">
 		<div id="btn-addtoplaylist-a" class="btn btn-xs btn-default">Add to playlist...</div>

@@ -1,0 +1,6 @@
+site/application/config/database.php
+site/application/config/email.php
+site/assets/images/screenshots/game/*.png
+site/assets/images/screenshots/track/*.png
+site/assets/rsn/*.rsn
+site/assets/spc/*.spc
