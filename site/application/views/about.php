@@ -1,7 +1,7 @@
 <div class="container_12">
 	<div class="grid_12">
 		<h1>About the Top SNES tracks project</h1>
-		<p><b>More than 20 years after its release, the SNES offers music that is rightfully more appreciated than ever. We're truly passionate about it, and yet, we know so little of it! This project is our attempt to correct this while providing great audio entertainment and obtaining great statistical data about the tracks' appreciation.</b></p>
+		<p><b>More than a quarter-century after its release, the SNES offers music that is rightfully more appreciated than ever. We're truly passionate about it, and yet, we know so little of it! This project is our attempt to correct this while providing great audio entertainment and obtaining great statistical data about the tracks' appreciation.</b></p>
 
 		<h2>Who are we?</h2>
 			<ul>
@@ -20,6 +20,13 @@
 				<li><a href="http://www.codeigniter.com/" target="_blank">CodeIgniter</a>
 				<li><a href="http://www.geany.org/" target="_blank">Geany</a>
 				<li><a href="http://trac.edgewall.org/" target="_blank">Trac</a>
+				<li><a href="https://bitbucket.org/" target="_blank">Bitbucket</a>
+			</ul>
+			
+		<h2>Ranking algorithms used:</h2>
+			<ul>
+				<li><a href="https://en.wikipedia.org/wiki/Elo_rating_system" target="_blank">Elo rating system</a>
+				<li><a href="https://en.wikipedia.org/wiki/Glicko_rating_system" target="_blank">Glicko-2 rating system</a>
 			</ul>
 
 		<h2>Special thanks to:</h2>
