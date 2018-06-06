@@ -19,9 +19,10 @@ class Account extends Public_Controller {
 		}
 
 		$_SESSION['loginError'] = validation_errors();
-		if(isset($_GET['returnUrl']))
-			redirect('http://' . $_GET['returnUrl']);
-		else
+		if(isset($_GET['returnUrl'])) {
+			$protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
+			redirect($protocol . $_GET['returnUrl']);
+		} else
 			redirect('/home');
 	}
 
