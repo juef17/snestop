@@ -30,7 +30,7 @@
 					<input type="text" name="reg_email" maxlength="255" class="form-control" placeholder="your@email.com" value="<?=set_value('reg_email')?>">
 				</label>
 			</div>
-			<div class="form-group">
+			<div class="form-group" style="display: none;">
 				<label>Language
 					<span class="errors"><?=form_error('reg_language')?></span>
 					<select name="reg_language" class="form-control">
