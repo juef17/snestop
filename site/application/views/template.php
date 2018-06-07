@@ -72,6 +72,9 @@
 						<?php endif; ?>
 					</ul>
 				</li>
+				<?php if($loggedUser): ?>
+					<li><a href="<?= base_url() ?>index.php/duelz">Take the duelz!</a>
+				<?php endif; ?>
 				<?php if($loggedUser && $loggedUser->isAdmin): ?>
 					<li><a href="#!">Administration</a>
 						<ul>
