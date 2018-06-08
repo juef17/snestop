@@ -97,7 +97,7 @@ class Shit_Track_model extends CI_Model {
 	
 	public function could_the_track_be_shit($idTrack) {
 		$n = $this->get_number_of_Shit_Track_for_Track($idTrack);
-		$r = $this->get_Shit_Track_ratio_for_User($idTrack);
+		$r = $this->get_Shit_Track_ratio_for_Track($idTrack);
 		if($n >= 3 && $r == 1) return true;
 		if($n >= 4 && $r >= 0.75) return true;
 		if($n >= 5 && $r >= 0.6) return true;
