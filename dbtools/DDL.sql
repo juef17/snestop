@@ -186,7 +186,6 @@ CREATE TABLE `Track` (
   `idGame` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `length` int(11) NOT NULL,
-  `fadeLength` int(11) NOT NULL,
   `composer` varchar(150) NOT NULL,
   `turnedOffByAdmin` bit(1) NOT NULL DEFAULT b'0',
   `isScreenshotSet` bit(1) NOT NULL DEFAULT b'0',

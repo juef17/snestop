@@ -66,15 +66,14 @@ for f in glob.glob(rsnfolder + "*.rsn"):
 		
 		tag = spcid666.parse(sf)
 		length = tag.extended.intro_length / 64000 if tag.extended.intro_length != None else tag.base.length_before_fadeout
-		fadeoutLength = tag.extended.fade_length / 64000 if tag.extended.fade_length != None else tag.base.fadeout_length
+		fadeoutLength = tag.extended.fade_length / 64000 if tag.extended.fade_length != None else tag.base.fadeout_length # TODO: c'est pas toujours en millisecondes :O
 		isSoundEffect = _is_sound_effect(spcFileName)
 		isVoice = _is_voice(spcFileName)
 		isJingle = not isVoice and not isSoundEffect and (_is_jingle(spcFileName) or length <= 20)
 
-		fsql.write(u"INSERT Track (idGame, title, length, fadeLength, composer, isJingle, spcURL, isSoundEffect, isVoice, trackNumber) VALUES (@lastid, '{0}', {1}, {2}, '{3}', {4}, '{5}', {6}, {7}, {8});\n".format(
+		fsql.write(u"INSERT Track (idGame, title, length, composer, isJingle, spcURL, isSoundEffect, isVoice, trackNumber) VALUES (@lastid, '{0}', {1}, '{2}', {3}, '{4}', {5}, {6}, {7});\n".format(
 			(tag.extended.title or tag.base.title).replace("'", "''"),
 			length,
-			fadeoutLength,
 			(tag.extended.artist or tag.base.artist)[:150].replace("'", "''"),
 			1 if isJingle else 0,
 			spcFileName,

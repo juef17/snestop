@@ -17,9 +17,6 @@
 		<p>Length</p>
 	</div>
 	<div class="grid_1 columnheader">
-		<p>Fade</p>
-	</div>
-	<div class="grid_1 columnheader">
 		<p>Jingle</p>
 	</div>
 	<div class="grid_1 columnheader">
@@ -64,9 +61,6 @@
 		</div>
 		<div class="grid_1">
 			<p><?=$track->length?> s</p>
-		</div>
-		<div class="grid_1">
-			<p><?=$track->fadeLength?> s</p>
 		</div>
 		<div class="grid_1">
 			<p><?=$track->isJingle ? 'yes' : 'no'?></p>

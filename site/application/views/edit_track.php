@@ -34,12 +34,6 @@
 				</label>
 			</div>
 			<div class="form-group">
-				<label>Fade length
-					<span class="errors"><?=form_error('fadeLength')?></span>
-					<input type="text" name="fadeLength" maxlength="4" class="form-control" placeholder="Fade length in seconds" value="<?=set_value('fadeLength', $track->fadeLength)?>">
-				</label>
-			</div>
-			<div class="form-group">
 				<label>Screenshot
 					<?php if($track->isScreenshotSet): ?>
 						<p><a href="<?=asset_url() . "images/screenshots/track/{$track->idTrack}.png"?>">Yes</a></p>

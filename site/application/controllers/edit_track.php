@@ -30,7 +30,6 @@ class Edit_Track extends Admin_Controller {
 		if($this->form_validation->run()) {
 			$title = $this->input->post('title');
 			$length = $this->input->post('length');
-			$fadeLength = $this->input->post('fadeLength');
 			$composer = $this->input->post('composer');
 			$turnedOffByAdmin = ! $this->input->post('active');
 			$isJingle = $this->input->post('isJingle');
@@ -46,9 +45,9 @@ class Edit_Track extends Admin_Controller {
 			$trackNumber = $this->input->post('trackNumber');
 			
 			if($id == 0)
-				$this->Track_model->set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber);
+				$this->Track_model->set_Track($idGame, $title, $length, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber);
 			else
-				$this->Track_model->update_Track($id, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber);
+				$this->Track_model->update_Track($id, $title, $length, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber);
 				
 			redirect("/tracks_dashboard/index/{$idGame}");
 		} else {
@@ -68,7 +67,6 @@ class Edit_Track extends Admin_Controller {
 		
 		$this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('length', 'Length', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('fadeLength', 'Fade length', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('composer', 'Composer', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('spcURL', 'SPC URL', 'trim|required|xss_clean');
 	}

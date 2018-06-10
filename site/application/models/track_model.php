@@ -76,7 +76,6 @@ class Track_model extends CI_Model {
 			'idGame' => $idGame,
 			'title' => '',
 			'length' => 0,
-			'fadeLength' => 0,
 			'composer' => '',
 			'turnedOffByAdmin' => FALSE,
 			'isScreenshotSet' => 0,
@@ -96,12 +95,11 @@ class Track_model extends CI_Model {
 		return $object;
 	}
 
-	public function set_Track($idGame, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber) {
+	public function set_Track($idGame, $title, $length, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber) {
 		$data = array(
 			'idGame' => $idGame,
 			'title' => $title,
 			'length' => $length,
-			'fadeLength' => $fadeLength,
 			'composer' => $composer,
 			'turnedOffByAdmin' => $turnedOffByAdmin,
 			'isJingle' => $isJingle,
@@ -137,12 +135,11 @@ class Track_model extends CI_Model {
 		return $this->db->update('Track', array('turnedOffByAdmin' => TRUE));
 	}
 	
-	public function update_Track($idTrack, $title, $length, $fadeLength, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber) {
+	public function update_Track($idTrack, $title, $length, $composer, $turnedOffByAdmin, $isJingle, $spcURL, $glicko2RD, $glicko2rating, $glicko2sigma, $eloRating, $eloReached2400, $isSoundEffect, $isVoice, $trackNumber) {
 		$this->db->where('Track.idTrack', $idTrack);
 		$data = array(
 			'title' => $title,
 			'length' => $length,
-			'fadeLength' => $fadeLength,
 			'composer' => $composer,
 			'turnedOffByAdmin' => $turnedOffByAdmin,
 			'isJingle' => $isJingle,
