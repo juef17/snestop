@@ -68,7 +68,6 @@
 						<li><a href="<?= base_url() ?>index.php/search/browse/0">Browse games</a></li>
 						<?php if($loggedUser): ?>
 							<li><a href="<?= base_url() ?>index.php/request_mistake">Report a mistake</a></li>
-							<li><a href="<?= base_url() ?>index.php/duelz">TAKE THE DUELZ!</a></li>
 						<?php endif; ?>
 					</ul>
 				</li>
