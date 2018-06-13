@@ -66,6 +66,9 @@
 				<p style="font-size: 0.6em;">*Ratings will be updated as soon as we have enough data! Come back soon!</p>
 			</div>
 			<p><a href="#!" onClick="shareTrack(<?=$track->idTrack?>)">Share a link to this track</a></p>
+			<p>
+				<img style="width: 24px; height: 24px; cursor: pointer;" src="https://snestop.jerther.com/snestop/site/assets/images/play.png" onclick="playTrack(<?=$track->idTrack?>);">
+			</p>
 			<p id="shareTrack_<?=$track->idTrack?>" style="display: none"><input type="text" style="cursor: text" class="form-control" onClick="this.select();" value="<?=base_url()?>index.php/game/index/<?=$game->idGame?>/<?=$track->idTrack?>" readonly /></p>
 			<h3>Reviews</h3>
 			<?php if($loggedUser):?>
