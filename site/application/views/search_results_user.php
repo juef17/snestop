@@ -20,6 +20,7 @@
 		<p class="grid_3 columnheader">Registration date</p>
 		<p class="grid_2 columnheader">Community</p>
 		<p class="grid_2 columnheader">Language</p>
+		<p class="grid_2 columnheader">Duelz taken</p>
 	</div>
 	<?php $b = TRUE; foreach($users as $user): ?>
 		<div style="border-bottom: 1px; <?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
@@ -27,6 +28,7 @@
 			<p class="grid_3"><?=$user->registrationDate?></p>
 			<p class="grid_2"><a target="_blank" href="<?=$user->communityUrl?>"><?=$user->communityName?></a></p>
 			<p class="grid_2"><?=$user->language?></p>
+			<p class="grid_2"><?=$user->duelzTaken?></p>
 		</div>
 	<?php endforeach; ?>
 <?php endif; ?>
