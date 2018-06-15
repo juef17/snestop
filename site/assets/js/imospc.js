@@ -4,16 +4,15 @@ var duelzMode = false;
 
 function initPlayer(options) {
 	options = options || {
-		seek_enabled: true
+		allowSeek: function() { return true; }
 	};
-	setupImoSPC();
+	setupImoSPC(options);
 	setupSeekBar();
 	setupVolumeSlider();
-	if(options['seek_enabled'])
-		$('.imospc .seek').click(seekBarClick)
+	$('.imospc .seek').click(seekBarClick);
 }
 
-function setupImoSPC() {
+function setupImoSPC(options) {
 	ImoSPC.addEventListener('init', onInitOk);
 	ImoSPC.addEventListener('load', onLoadOk);
 	ImoSPC.addEventListener('initerror', onInitError);
@@ -23,6 +22,7 @@ function setupImoSPC() {
 		autostart: true,
 		preferredRuntime: ImoSPC.Runtime.HTML5
 	});
+	ImoSPC.allowSeek = options.allowSeek;
 }
 
 function setupSeekBar() {
@@ -36,11 +36,13 @@ function setupSeekBar() {
 }
 
 function seekBarClick(e) {
-	var track = ImoSPC.currentTrack();
-	if (track) {
-		var to = ((e.pageX - $(this).offset().left) / ($(this).width() - 1)) * track.length;
-		track.seek(to);
-		setCurrentTimeDisplay(to);
+	if(ImoSPC.allowSeek()) {
+		var track = ImoSPC.currentTrack();
+		if (track) {
+			var to = ((e.pageX - $(this).offset().left) / ($(this).width() - 1)) * track.length;
+			track.seek(to);
+			setCurrentTimeDisplay(to);
+		}
 	}
 }
 

@@ -33,7 +33,9 @@ $(function() {
 	configVoteButtons();
 	configShitCheckboxes();
 	constructDialogs();
-	initPlayer({seek_enabled: false});
+	initPlayer({
+		allowSeek: function() { return tracks[tracks.current].listened; }
+	});
 	startNewDuel();
 });
 
@@ -87,6 +89,8 @@ function duelzPauseButton() {
 		ImoSPC.pause();
 	else if (playerState == 'paused')
 		ImoSPC.unpause();
+	else if (playerState == 'stopped')
+		$('#btnPlayTrack' + tracks.current.toUpperCase()).click();
 }
 
 function contructVoteDialog() {
@@ -185,6 +189,8 @@ function castVote() {
 }
 
 function startNewDuel() {
+	if(playerState == 'paused' || playerState == 'playing')
+		ImoSPC.stop();
 	fetchNumberOfDuelsTaken();
 	resetTracksInformations();
 	$.getJSON(baseUrl + 'index.php/duelz/getNewDuel', function(idTracks, status, jqXHR) {
