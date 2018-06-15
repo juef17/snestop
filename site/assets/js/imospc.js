@@ -36,7 +36,7 @@ function setupSeekBar() {
 }
 
 function seekBarClick(e) {
-	if(ImoSPC.allowSeek()) {
+	if(!duelzMode || ImoSPC.allowSeek()) {
 		var track = ImoSPC.currentTrack();
 		if (track) {
 			var to = ((e.pageX - $(this).offset().left) / ($(this).width() - 1)) * track.length;
