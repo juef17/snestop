@@ -11,7 +11,7 @@ var playerLoopMode = PlayerLoopModes.None; //user value set in php
 
 $(function() {
 	constructPlayerDialog();
-	initPlayer({seek_enabled: true});
+	initPlayer();
 });
 
 function bindPlayerModesFunctions() {
