@@ -23,9 +23,12 @@ class Duelz extends Secure_Controller {
 	//AJAX get
 	public function getNewDuel() {
 		$idTracks = $this->Track_model->getIdTracksForDuel($_SESSION['loggedUser']->idUser);
-		$idTracks[0] = urlencode(base64_encode($idTracks[0]));
-		$idTracks[1] = urlencode(base64_encode($idTracks[1]));
-		echo json_encode($idTracks);
+		$trackInfo = array();
+		// Chacun des deux idTrack avec son shitRatio correspondant
+		for($i=0; $i<2; $i++)
+			$trackInfo[$i] = array("idTrack" => urlencode(base64_encode($idTracks[$i])), "shitRatio" => urlencode(base64_encode($this->Shit_Track_model->get_Shit_Track_ratio_for_Track($idTracks[$i]))));
+														
+		echo json_encode($trackInfo);
 	}
 
 	//AJAX get

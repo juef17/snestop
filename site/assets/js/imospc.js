@@ -94,9 +94,10 @@ function timerOff(isLoading) {
 }
 
 function checkTimeReached() {
+	currentTrackShitRatio = tracks.current == 'a' ? tracks.a.shitRatio : tracks.b.shitRatio;
 	if (ImoSPC.currentTrack()
 		&& !_timeReached
-		&& ImoSPC.time() > Math.min(60, ImoSPC.currentTrack().length / 2))
+		&& ImoSPC.time() > Math.max(5, Math.min(30, ImoSPC.currentTrack().length/2) - currentTrackShitRatio * (2/5)*ImoSPC.currentTrack().length))
 	{
 		_timeReached = true;
 		if(typeof(timeReached) !== 'undefined')

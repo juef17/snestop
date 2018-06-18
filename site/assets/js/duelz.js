@@ -7,13 +7,15 @@ var tracks = {
 		idTrack: undefined,
 		listened: false,
 		winner: false,
-		shit: false
+		shit: false,
+		shitRatio: 0
 	},
 	b: {
 		idTrack: undefined,
 		listened: false,
 		winner: false,
-		shit: false
+		shit: false,
+		shitRatio: 0			  
 	}
 };
 
@@ -193,17 +195,21 @@ function startNewDuel() {
 		ImoSPC.stop();
 	fetchNumberOfDuelsTaken();
 	resetTracksInformations();
-	$.getJSON(baseUrl + 'index.php/duelz/getNewDuel', function(idTracks, status, jqXHR) {
+	$.getJSON(baseUrl + 'index.php/duelz/getNewDuel', function(trackInfo, status, jqXHR) {
 		if(validateSession(jqXHR.responseText)) {
-			if(idTracks.length == 2) {
-				tracks.a.idTrack = idTracks[0];
-				tracks.b.idTrack = idTracks[1];
+			if(trackInfo.length == 2) {
+				tracks.a.idTrack = trackInfo[0].idTrack;
+				tracks.a.shitRatio = atob(decodeURIComponent(trackInfo[0].shitRatio));
+				tracks.b.idTrack = trackInfo[1].idTrack;
+				tracks.b.shitRatio = atob(decodeURIComponent(trackInfo[1].shitRatio));
 				$('.voting-tools').hide(500);
 				$('#shit-a-group, #shit-b-group').fadeTo(500, 0);
 				$('#enough-a, #enough-b').fadeTo(500, 0);
 			} else {
 				tracks.a.idTrack = -1;
 				tracks.b.idTrack = -1;
+				tracks.a.shitRatio = 0;
+				tracks.b.shitRatio = 0;
 				$('#dialog-nomore').dialog('open');
 			}
 		}
