@@ -15,7 +15,7 @@ var tracks = {
 		listened: false,
 		winner: false,
 		shit: false,
-		shitRatio: 0			  
+		shitRatio: 0
 	}
 };
 
@@ -223,6 +223,7 @@ function resetTracksInformations() {
 		tracks[track].listened = false;
 		tracks[track].winner = false;
 		tracks[track].shit = false;
+		tracks[track].shitRatio = 0;
 	});
 	
 	if(playerIsInitialized)
