@@ -35,7 +35,7 @@
 	</div>
 </form>
 
-<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/js/nicEdit-latest.js" type="text/javascript"></script>
 <script>
 	$(function() {
 		new nicEditor({fullPanel : true}).panelInstance('text');

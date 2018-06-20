@@ -57,7 +57,7 @@
 		<textarea class="form-control" id="review-edit"></textarea>
 	</div>
 	
-	<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+	<script src="<?=base_url()?>assets/js/nicEdit-latest.js" type="text/javascript"></script>
 	<script>
 		$(function() {
 			$('#unapprovedonly').change(function() {
