@@ -21,30 +21,24 @@ class Duel_Result_model extends CI_Model {
 		} // si on a juste des infos partielles, voir les autres méthodes ci-bas
 	}
 	
-	public function get_Duel_Result_for_User($idUser = FALSE) {
-		$this->db->join('User', 'DuelResult.idUser = User.idUser', 'inner');
-		if($idUser === FALSE) { //devrait pas arriver...?
-			$query = $this->db->get('DuelResult');
-			return $query->result_array();
-		} else {
-			$this->db->where('DuelResult.idUser', $idUser); 
-			$query = $this->db->get('DuelResult');
-			return $query->result_array();
-		}
+	public function get_Duel_Result_for_User($idUser) {
+		$this->db->select('GWon.idGame as idGameWon, GWon.titleEng as gameTitleWon, TWon.idTrack as idTrackWon, TWon.title as trackTitleWon, GLost.idGame as idGameLost, GLost.titleEng as gameTitleLost, TLost.idTrack as idTrackLost, TLost.title as trackTitleLost');
+		$this->db->join('Track AS TWon', 'DuelResult.idTrackWon = TWon.idTrack', 'inner');
+		$this->db->join('Game AS GWon', 'TWon.idGame = GWon.idGame', 'inner');
+		$this->db->join('Track AS TLost', 'DuelResult.idTrackLost = TLost.idTrack', 'inner');
+		$this->db->join('Game AS GLost', 'TLost.idGame = GLost.idGame', 'inner');
+		$this->db->where('DuelResult.idUser', $idUser);
+		$query = $this->db->get('DuelResult');
+		return $query->result();
 	}
 	
-	public function get_Duel_Result_for_Track($idTrack = FALSE) {
+	public function get_Duel_Result_for_Track($idTrack) {
 		$this->db->join('Track AS T1', 'DuelResult.idTrackWon = T1.idTrack', 'inner');
 		$this->db->join('Track AS T2', 'DuelResult.idTrackLost = T2.idTrack', 'inner');
-		if($idTrack === FALSE) { //devrait pas arriver...?
-			$query = $this->db->get('DuelResult');
-			return $query->result_array();
-		} else {
-			$this->db->where('DuelResult.idTrackWon', $idTrack); 
-			$this->db->or_where('DuelResult.idTrackLost =', $idTrack); 
-			$query = $this->db->get('DuelResult');
-			return $query->result_array();
-		}
+		$this->db->where('DuelResult.idTrackWon', $idTrack); 
+		$this->db->or_where('DuelResult.idTrackLost =', $idTrack); 
+		$query = $this->db->get('DuelResult');
+		return $query->result_array();
 	}
 
 	public function new_Duel_Result($idTrackWon, $idTrackLost, $idUser) {

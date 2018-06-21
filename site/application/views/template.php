@@ -72,7 +72,12 @@
 					</ul>
 				</li>
 				<?php if($loggedUser): ?>
-					<li><a href="<?= base_url() ?>index.php/duelz">Take the duelz!</a>
+					<li><a href="#!">Tracks duelz</a>
+						<ul>
+							<li><a href="<?= base_url() ?>index.php/duelz">Take the duelz!</a>
+							<li><a href="<?= base_url() ?>index.php/duelz_history">Duelz history</a></li>
+						</ul>
+					</li>
 				<?php endif; ?>
 				<?php if($loggedUser && $loggedUser->isAdmin): ?>
 					<li><a href="#!">Administration</a>
