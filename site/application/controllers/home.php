@@ -12,7 +12,7 @@ class Home extends Public_Controller {
 		$data = $this->getUserViewData();
 		$data['news'] = $this->News_model->get_news();
 		$data['view'] = 'home.php';
-		$data['page_title'] = 'The top SNES tracks project';
+		$data['page_title'] = 'Top SNES tracks project';
 		$data['page_description'] = 'Welcome to the top SNES tracks project!';
 		
 		

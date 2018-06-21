@@ -5,7 +5,7 @@
 <meta name="description" content="<?= $page_description ?>">
 <!--FACEBOOK-->
 <meta property="og:title" content="<?= $page_title ?>" >
-<meta property="og:site_name" content="The top SNES tracks project">
+<meta property="og:site_name" content="Top SNES tracks project">
 <meta property="og:description" content="<?= $page_description ?>" >
 <meta property="og:image" content="<?= $page_image?>" >
 <meta property="og:type" content="website" >
