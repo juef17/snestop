@@ -173,6 +173,7 @@ class User_model extends CI_Model {
 		$this->db->join('Community', 'User.idCommunity = Community.idCommunity', 'left');
 		$this->db->join('DuelResult', 'User.idUser = DuelResult.idUser', 'left');
 		$this->db->where('userName RLIKE', "{$regex}");
+		$this->db->group_by('DuelResult.idUser');
 		$this->db->limit(50);
 		$this->db->order_by('userName');
 		
