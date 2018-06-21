@@ -1,7 +1,7 @@
 <div class="container_12">
 	<div class="grid_12">
 		<h1>Duelz history</h1>
-		<p>In no specific order</p>
+		<p>In no specific order:</p>
 	</div>
 </div>
 
@@ -10,7 +10,7 @@
 		<p>Winner</p>
 	</div>
 	<div class="grid_6 columnheader">
-		<p>Looser</p>
+		<p>Loser</p>
 	</div>
 </div>
 
