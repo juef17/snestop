@@ -21,8 +21,11 @@
 		<div class="grid_2 columnheader">
 			<p>Track</p>
 		</div>
-		<div class="grid_5 columnheader">
+		<div class="grid_4 columnheader">
 			<p>Screenshot URL</a></p>
+		</div>
+		<div class="grid_1">
+			&nbsp;
 		</div>
 		<div class="grid_1 columnheader">
 			<!--delete -->
@@ -32,16 +35,19 @@
 	<?php $b = TRUE; foreach($trackRequests as $request): //Tracks ?>
 		<div style="<?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_12">
 			<div class="grid_2">
-				<p><?= $request->userName ?></p>
+				<p><a href="<?=base_url()?>index.php/user_profile/index/<?=$request->userName?>"><?= $request->userName ?></a></p>
 			</div>
 			<div class="grid_2">
-				<p><?= $request->titleEng ?></p>
+				<p><a href="<?=base_url()?>index.php/game/index/<?=$request->idGame?>"><?= $request->titleEng ?></a></p>
 			</div>
 			<div class="grid_2">
-				<p><?= $request->title ?></p>
+				<p><a href="<?=base_url()?>index.php/game/index/<?=$request->idGame?>/<?=$request->idTrack?>"><?= $request->title ?></a></p>
 			</div>
-			<div class="grid_5">
+			<div class="grid_4 break-word">
 				<p><a href="<?= $request->requestSreenshotUrl ?>"><?= $request->requestSreenshotUrl ?></a></p>
+			</div>
+			<div class="grid_1">
+				<a href="#" class="btn btn-xs btn-default" onclick="showUploadScreenshotDialog(<?=$request->idTrack?>, 1)">Upload...</a>
 			</div>
 			<div class="grid_1">
 				<?= form_open(base_url() . 'index.php/screenshot_request_dashboard/deleteTrack', array('id' => 'delete_' . $request->idTrack . $request->idUserRequester)) ?>
@@ -56,16 +62,19 @@
 	<?php foreach($gameRequests as $request): //Games ?>
 		<div style="<?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_12">
 			<div class="grid_2">
-				<p><?= $request->userName ?></p>
+				<p><a href="<?=base_url()?>index.php/user_profile/index/<?=$request->userName?>"><?= $request->userName ?></a></p>
 			</div>
 			<div class="grid_2">
-				<p><?= $request->titleEng ?></p>
+				<p><a href="<?=base_url()?>index.php/game/index/<?=$request->idGame?>"><?= $request->titleEng ?></a></p>
 			</div>
 			<div class="grid_2">
 				<p>-</p>
 			</div>
-			<div class="grid_5">
+			<div class="grid_4 break-word">
 				<p><a href="<?= $request->requestSreenshotUrl ?>"><?= $request->requestSreenshotUrl ?></a></p>
+			</div>
+			<div class="grid_1">
+				<a href="#" class="btn btn-xs btn-default" onclick="showUploadScreenshotDialog(<?=$request->idGame?>, 0);">Upload...</a>
 			</div>
 			<div class="grid_1">
 				<?= form_open(base_url() . 'index.php/screenshot_request_dashboard/deleteGame', array('id' => 'delete_' . $request->idGame . $request->idUserRequester)) ?>
@@ -77,3 +86,5 @@
 		</div>
 	<?php endforeach; ?>
 <?php endif; ?>
+
+<?php require_once(views_dir() . 'includes/screenshot_upload.php'); ?>

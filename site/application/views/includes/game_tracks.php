@@ -23,7 +23,7 @@
 
 		<!-- details dialog -->
 		<div style="display: none; padding-top: 15px;" id="dialog-details_<?=$track->idTrack?>" title="<?=$game->titleEng . ' - ' . $track->title?>">
-			<?php if($loggedUser && $loggedUser->isAdmin):?><a href="#!" onclick="showUploadScreenshotDialog(<?=$track->idTrack?>, 1); return false;">
+			<?php if($loggedUser && $loggedUser->isAdmin):?><a tabindex="-1" href="#!" onclick="showUploadScreenshotDialog(<?=$track->idTrack?>, 1); return false;">
 			<?php elseif($loggedUser && !$track->isScreenshotSet):?><a href="<?=base_url()?>index.php/request_screenshot_track/index/<?=$track->idTrack?>"><?php endif;?>
 				<div class="tv" style="position: relative; background-image: url('<?=$track->isScreenshotSet ? asset_url() . "images/screenshots/track/{$track->idTrack}.png" : asset_url() . 'images/en/no_track_ss.png'?>');">
 					<?php if($loggedUser && $loggedUser->isAdmin && $track->isScreenshotSet):?><img id="unset-screenshot" style="position: absolute; top: 24px; right: 24px; width: 24px; height: 24px;" src="<?=asset_url()?>images/delete.png" onclick="unsetScreenshot(<?=$track->idTrack?>, 1);"/><?php endif;?>

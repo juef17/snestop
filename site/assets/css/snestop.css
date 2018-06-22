@@ -236,3 +236,7 @@ body.loading .waitmodal {
 .no-close .ui-dialog-titlebar-close {
   display: none;
 }
+
+.break-word {
+  overflow-wrap: break-word;
+}
