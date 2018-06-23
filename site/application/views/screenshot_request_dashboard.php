@@ -50,7 +50,7 @@
 				<p><?= ($request->isScreenshotSet == 1 ? "&#x2714;" : "") ?></p> <!-- Checkmark si on a le screenshot -->
 			</div>
 			<div class="grid_4 break-word">
-				<p><a href="<?= $request->requestSreenshotUrl ?>"><?= $request->requestSreenshotUrl ?></a></p>
+				<p><a href="<?= $request->requestSreenshotUrl ?>" target="_blank"><?= $request->requestSreenshotUrl ?></a></p>
 			</div>
 			<div class="grid_1">
 				<a href="#" class="btn btn-xs btn-default" onclick="showUploadScreenshotDialog(<?=$request->idTrack?>, 1)">Upload...</a>
@@ -80,7 +80,7 @@
 				<p><?= ($request->isScreenshotSet == 1 ? "&#x2714;" : "") ?></p> <!-- Checkmark si on a le screenshot -->
 			</div>
 			<div class="grid_4 break-word">
-				<p><a href="<?= $request->requestSreenshotUrl ?>"><?= $request->requestSreenshotUrl ?></a></p>
+				<p><a href="<?= $request->requestSreenshotUrl ?>" target="_blank"><?= $request->requestSreenshotUrl ?></a></p>
 			</div>
 			<div class="grid_1">
 				<a href="#" class="btn btn-xs btn-default" onclick="showUploadScreenshotDialog(<?=$request->idGame?>, 0);">Upload...</a>
