@@ -6,7 +6,7 @@ class Game_Screenshot_Request_model extends CI_Model {
 	}
 
 	public function get_Game_Screenshot_request($idGame = FALSE, $idUserRequester = FALSE) {
-		$this->db->select('*, GameScreenshotRequest.screenshotUrl AS requestSreenshotUrl');
+		$this->db->select('*, GameScreenshotRequest.screenshotUrl AS requestSreenshotUrl, CAST(isScreenshotSet AS unsigned integer) AS isScreenshotSet');
 		$this->db->join('User', 'GameScreenshotRequest.idUserRequester = User.idUser', 'inner');
 		$this->db->join('Game', 'GameScreenshotRequest.idGame = Game.idGame', 'inner');
 		if ($idGame === FALSE && $idUserRequester === FALSE) { // on n'a rien
