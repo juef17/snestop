@@ -6,7 +6,7 @@ class Track_Screenshot_Request_model extends CI_Model {
 	}
 
 	public function get_Track_Screenshot_request($idTrack = FALSE, $idUserRequester = FALSE) {
-		$this->db->select('*, TrackScreenshotRequest.screenshotUrl AS requestSreenshotUrl');
+		$this->db->select('*, TrackScreenshotRequest.screenshotUrl AS requestSreenshotUrl, CAST(Track.isScreenshotSet AS unsigned integer) AS isScreenshotSet');
 		$this->db->join('User', 'TrackScreenshotRequest.idUserRequester = User.idUser', 'inner');
 		$this->db->join('Track', 'TrackScreenshotRequest.idTrack = Track.idTrack', 'inner');
 		$this->db->join('Game', 'Track.idGame = Game.idGame', 'inner');
