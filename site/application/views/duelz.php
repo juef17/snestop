@@ -122,6 +122,14 @@
 	<div class="grid_9 prefix_2 suffix_3">
 		<div id="btn-addtoplaylist-b" class="btn btn-xs btn-default">Add to playlist...</div>
 	</div>
+	<div class="clear"></div>
+
+	<div class="grid_7 prefix_3" style="margin-top: 8px;">
+		<div id="lastTrack-a-screenshot" class="tv" style="position: relative;"></div>
+	</div>
+	<div class="grid_9 prefix_2 suffix_3" style="margin-top: 8px;">
+		<div id="lastTrack-b-screenshot" class="tv" style="position: relative;"></div>
+	</div>
 </div>
 
 <div id="dialog-vote" title="Cast a vote">

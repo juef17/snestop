@@ -267,11 +267,20 @@ function fetchTrackTitle(track) {
 					'</a>'
 				$('#lastTrack-' + track + '-title').html(trackTag);
 				$('#btn-addtoplaylist-' + track).attr('onclick', 'addToPlaylistDialog([' + result.success.idTrack + ']);')
+				var ssUrl = getScreenshotUrl(result.success);
+				$('#lastTrack-' + track + '-screenshot').css('background-image', 'url(' + ssUrl + ')');
 			} else {
 				alert(result.message);
 			}
 		}
 	});
+}
+
+function getScreenshotUrl(trackData) {
+	if(trackData.isScreenshotSet)
+		return assetUrl + 'images/screenshots/track/' + trackData.idTrack + '.png';
+	else
+		return assetUrl + 'images/en/no_track_ss.png';
 }
 
 function fetchNumberOfDuelsTaken() {
