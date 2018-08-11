@@ -52,7 +52,7 @@
 			<?php endif; ?>
 			
 			<ul id="menuprincipal" style="width: 100%; margin: 5px 0;" class="jdropdown-menu dropdown-menu-skin">
-				<?php require_once(views_dir() . 'includes/search_box.php'); ?>
+				<?php if(!isset($duelzMode)): require_once(views_dir() . 'includes/search_box.php'); endif;?>
 				<li><a href="<?=base_url()?>">Home</a></li>
 				<?php if($loggedUser): ?>
 					<li><a href="#!">Requests</a>
@@ -100,11 +100,13 @@
 				<?php endif; ?>
 			</ul>
 			
-			<ul id="search-menu">
-				<li id="search-games"><a href="#!" onclick="setSearchTarget(0);"><span class="fa fa-fw fa-gamepad"></span>Games</a></li>
-				<li id="search-tracks"><a href="#!" onclick="setSearchTarget(1);"><span class="fa fa-fw fa-music"></span>Tracks</a></li>
-				<li id="search-users"><a href="#!" onclick="setSearchTarget(2);"><span class="fa fa-fw fa-user"></span>Users</a></li>
-			</ul>
+			<?php if(!isset($duelzMode)): ?>
+				<ul id="search-menu">
+					<li id="search-games"><a href="#!" onclick="setSearchTarget(0);"><span class="fa fa-fw fa-gamepad"></span>Games</a></li>
+					<li id="search-tracks"><a href="#!" onclick="setSearchTarget(1);"><span class="fa fa-fw fa-music"></span>Tracks</a></li>
+					<li id="search-users"><a href="#!" onclick="setSearchTarget(2);"><span class="fa fa-fw fa-user"></span>Users</a></li>
+				</ul>
+			<?php endif; ?>
 
 			<script type="text/javascript">
 				$(function() {

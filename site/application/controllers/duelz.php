@@ -14,6 +14,7 @@ class Duelz extends Secure_Controller {
 	public function index()
 	{
 		$data = $this->getUserViewData();
+		$data['duelzMode'] = true;
 		$data['view'] = 'duelz.php';
 		$data['winape_enabled'] = false;
 		
