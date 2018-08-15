@@ -277,10 +277,13 @@ function fetchTrackTitle(track) {
 }
 
 function getScreenshotUrl(trackData) {
+	debugger;
 	if(trackData.isScreenshotSet)
 		return assetUrl + 'images/screenshots/track/' + trackData.idTrack + '.png';
+	else if(trackData.gameIsScreenshotSet)
+		return assetUrl + 'images/screenshots/game/' + trackData.idGame + '.png';
 	else
-		return assetUrl + 'images/en/no_track_ss.png';
+		return assetUrl + 'images/en/no_ss_duel.png';
 }
 
 function fetchNumberOfDuelsTaken() {

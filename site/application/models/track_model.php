@@ -6,13 +6,15 @@ class Track_model extends CI_Model {
 	}
 
 	public function get_Track($idTrack) {
-		$this->db->select('Game.titleEng AS gameTitleEng, Track.*');
+		$this->db->select('Game.titleEng AS gameTitleEng, Game.isScreenshotSet as gameIsScreenshotSet, Track.*');
 		$this->db->join('Game', 'Track.idGame = Game.idGame', 'inner');
 		$query = $this->db->get_where('Track', array('idTrack' => $idTrack));
-		if($trackrow = $query->row())
+		if($trackrow = $query->row()) {
+			$trackrow->gameIsScreenshotSet = ord($trackrow->gameIsScreenshotSet) == 1 || $trackrow->gameIsScreenshotSet == 1;
 			return $this->getTrackFromRow($trackrow);
-		else
+		} else {
 			return null;
+		}
 	}
 
 	public function get_Track_spc_url($idTrack) {
