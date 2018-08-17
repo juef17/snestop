@@ -40,6 +40,10 @@ function bindPlayerModesFunctions() {
 	});
 }
 
+function applyPlayerLoopMode() {
+	ImoSPC.setRepeat(playerLoopMode == PlayerLoopModes.Single);
+}
+
 function setLoopButtonVisual() {
 	$('#player-loop').prop('checked', playerLoopMode > 0);
 	$('#player-loop').button('refresh')
@@ -160,7 +164,7 @@ function setTitle(track) {
 
 //imospc events
 function playerInitialized() {
-	ImoSPC.setRepeat(playerLoopMode == PlayerLoopModes.Single);
+	applyPlayerLoopMode();
 }
 
 function songEnded() {
