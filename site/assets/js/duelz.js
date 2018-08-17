@@ -277,7 +277,6 @@ function fetchTrackTitle(track) {
 }
 
 function getScreenshotUrl(trackData) {
-	debugger;
 	if(trackData.isScreenshotSet)
 		return assetUrl + 'images/screenshots/track/' + trackData.idTrack + '.png';
 	else if(trackData.gameIsScreenshotSet)

@@ -81,7 +81,8 @@ function timerOn() {
 		var time = Math.max(0, ImoSPC.time());
 		seekbar.progressbar('option', 'value', time);
 		setCurrentTimeDisplay(time);
-		checkTimeReached();
+		if(duelzMode)
+			checkTimeReached();
 	}, 100);
 }
 
