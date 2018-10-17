@@ -69,6 +69,8 @@ function constructPlayerDialog() {
 		close: function(event, ui) { ImoSPC.pause(); }
 	});
 	
+	constructScreenshotDialog();
+	
 	$('#player-dialog .pause')
 	.button()
 	.click(pauseButton);
@@ -95,6 +97,28 @@ function constructPlayerDialog() {
 	}
 }
 
+function constructScreenshotDialog() {
+	var closeFunction = function () {
+		$('#track-screenshot-dialog').dialog('close');
+	}
+	$('#track-screenshot-dialog').dialog({
+		modal: true,
+		resizable: false,
+		autoOpen: false,
+		minHeight: 'auto',
+		height: 'auto',
+		maxHeight: 'auto',
+		show: { effect: 'fade', duration: 200 },
+		hide: { effect: 'fade', duration: 200 },
+		dialogClass: 'transparent-dialog',
+		open: function(event, ui) {
+			$('.ui-widget-overlay').bind('click', closeFunction);
+		}
+	})
+	.click(closeFunction)
+	.siblings('.ui-dialog-titlebar').remove();
+}
+
 function playButton() {
 	if(currentTrack)
 		currentTrack.play();
@@ -113,7 +137,11 @@ function setScreenshot(track) {
 	if(track.isScreenshotSet) {
 		$('#playerScreenshot').css({
 			'background-image': 'url(' + assetUrl + 'images/screenshots/track/' + track.idTrack + '.png)',
-			'cursor': 'auto'
+			'cursor': 'pointer'
+		})
+		.click(function() {
+			$('#track-screenshot-dialog .tv').css({'background-image': 'url(' + assetUrl + 'images/screenshots/track/' + track.idTrack + '.png)'});
+			$('#track-screenshot-dialog').dialog('open');
 		});
 	} else {
 		$('#playerScreenshot').css({

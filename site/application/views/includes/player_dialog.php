@@ -69,6 +69,10 @@
 	<span>Are you sure you want to delete this playlist?</span>
 </div>
 
+<div id="track-screenshot-dialog" style="display: none;">
+	<div class="tv"></div>
+</div>
+
 <script type="text/javascript" src="<?=asset_url()?>js/imospc.js"></script>
 <script type="text/javascript" src="<?=asset_url()?>js/player.js"></script>
 <?php if($loggedUser): ?>
