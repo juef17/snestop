@@ -17,14 +17,12 @@
 	</div>
 <?php else: ?>
 	<div style="background-color: #dddddd;" class="container_16">
-		<p class="grid_1 columnheader"><!-- play --></p>
 		<p class="grid_2 columnheader"><!-- screenshot --></p>
 		<p class="grid_4 columnheader">Title</p>
 		<p class="grid_4 columnheader">Game</p>
 	</div>
 	<?php $b = TRUE; foreach($tracks as $track): ?>
 		<div style="border-bottom: 1px; <?php if($b = !$b): ?> background-color: #dddddd;<?php endif; ?>" class="container_16">
-			<img class="grid_1" style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="playTrack(<?=$track->idTrack?>);" />
 			<?php if($track->isScreenshotSet): ?>
 				<p class="grid_2"><img src="data:image/jpg;base64,<?=thumbnail($track->idTrack)?>" /></p>
 			<?php else: ?>
