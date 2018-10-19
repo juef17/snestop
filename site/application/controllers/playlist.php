@@ -89,6 +89,14 @@ class Playlist extends Secure_Controller {
 		$data['playlistItems'] = $tracks;
 		$this->load->view('includes/playlist_content.php', $data);
 	}
+	
+	public function playlistItemsForIdTracks($idTracks) {
+		$data = $this->getUserViewData();
+		$tracks = $this->Track_model->getTracksForPlaylist($idTracks);
+		$data['playlistItems'] = $tracks;
+		$data['playlistEditable'] = TRUE;
+		$this->load->view('includes/playlist_items.php', $data);
+	}
 
 	//Ajax POST
 	public function setPublic() {

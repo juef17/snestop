@@ -80,7 +80,7 @@ function addToPlaylist(idTracks, idPlaylist, callback) {
 				$('#dialog-addToPlaylist').dialog('close');
 				if(json.success) {
 					if(idPlaylist == $('#player-playlistcombo').val())
-						loadPlaylist(idPlaylist);
+						addTracksToCurrentPlaylist(idTracks);
 				} else {
 					showMessageDialog('D\'oh!', json.message);
 				}
@@ -105,5 +105,12 @@ function addToNewPlaylist(idTracks, playlistName, callback) {
 			if(callback != undefined)
 				callback(json.success);
 		}
+	});
+}
+
+function addTracksToCurrentPlaylist(idTracks) {
+	$.get(baseUrl + 'index.php/playlist/playlistItemsForIdTracks/' + encodeURIComponent(idTracks), function(data) {
+		$('#playlist-tracks').append(data);
+		$('#playlist-tracks').sortable('refresh');
 	});
 }

@@ -2,18 +2,7 @@
 
 <div class="playlist-container">
 	<ul id="playlist-tracks" class="playlist">
-		<?php foreach($playlistItems as $item):
-			$text = $item->gameTitleEng . ' - ' . $item->title; ?>
-			<li class="ui-state-default" title="<?=$text?>" id="<?=$item->idTrack?>">
-			<?php if($playlistEditable): ?>
-				<span class="fa fa-unsorted fa-lg"></span>
-			<?php endif; ?>
-			<span><?=$text?></span>
-			<?php if($playlistEditable): ?>
-				<img id="deleteItemButton" src="<?=asset_url()?>images/delete.png" onclick="deleteItem(this, <?=$item->idTrack?>);"/>
-			<?php endif; ?>
-			</li>
-		<?php endforeach; ?>
+		<?php require_once(views_dir() . 'includes/playlist_items.php'); ?>
 	</ul>
 </div>
 
