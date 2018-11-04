@@ -222,14 +222,13 @@ class Track_model extends CI_Model {
 	}
 
 	public function getIdTracksForDuel($idUser) {
-		$this->db->select('idTrackWon, idTrackLost');
-		$query = $this->db->get_where('DuelResult', array('idUser' => $idUser));
-		$idTracksWon = array_map(function($o) { return (int)$o->idTrackWon; }, $query->result());
-		$idTracksLost = array_map(function($o) { return (int)$o->idTrackLost; }, $query->result());
+		// On veut pas que le user vote encore sur des tracks qui étaient de la marde
+		$this->db->select('idTrack');
+		$query = $this->db->get_where('ShitTrack', array('idUser' => $idUser));
+		$idTracksShit = array_map(function($o) { return (int)$o->idTrack; }, $query->result());
 
-		$userAlreadyVotedIdTracks = array_merge($idTracksWon, $idTracksLost);
-		if(count($userAlreadyVotedIdTracks) > 0)
-			$this->db->where_not_in('idTrack', $userAlreadyVotedIdTracks);
+		if(count($idTracksShit) > 0)
+			$this->db->where_not_in('idTrack', $idTracksShit);
 
 		$this->db->limit(2);
 		$this->db->order_by('idTrack', 'random');
