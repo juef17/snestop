@@ -59,15 +59,7 @@
 			}
 		});
 
-		//show delete button
-		$('.playlist li').hover(
-			function() {
-				$(this).find('img').fadeTo(50, 1); //hack sur l'opacity pcq hide et show ont arrete de marcher.
-			},
-			function() {
-				$(this).find('img').fadeTo(50, 0);
-			}
-		);
+		bindPlaylistDeleteButtonsHover();
 	}
 
 	<?php if($playlistEditable): ?>

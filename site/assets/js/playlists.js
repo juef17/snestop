@@ -112,5 +112,17 @@ function addTracksToCurrentPlaylist(idTracks) {
 	$.get(baseUrl + 'index.php/playlist/playlistItemsForIdTracks/' + encodeURIComponent(idTracks), function(data) {
 		$('#playlist-tracks').append(data);
 		$('#playlist-tracks').sortable('refresh');
+		bindPlaylistDeleteButtonsHover();
 	});
+}
+
+function bindPlaylistDeleteButtonsHover() {
+	$('.playlist li').hover(
+		function() {
+			$(this).find('img').fadeTo(50, 1); //hack sur l'opacity pcq hide et show ont arrete de marcher.
+		},
+		function() {
+			$(this).find('img').fadeTo(50, 0);
+		}
+	);
 }
