@@ -5,7 +5,7 @@
 		</div>
 	</div>
 <?php else: ?>
-	<?php $b = TRUE; foreach($tracks as $track): ?>
+	<?php $b = TRUE; date_default_timezone_set("America/New_York"); foreach($tracks as $track): ?>
 		<div <?php if($b = !$b): ?> style="background-color: #dddddd;" <?php endif; ?> class="container_16">
 			<p class="grid_1"><?=$track->trackNumber?></p>
 			<p class="grid_1"><img style="width: 24px; height: 24px; cursor: pointer;" src="<?=asset_url() . 'images/play.png'?>" onclick="playTrack(<?=$track->idTrack?>);" /></p>
