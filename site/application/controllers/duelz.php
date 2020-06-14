@@ -26,9 +26,12 @@ class Duelz extends Secure_Controller {
 		$idTracks = $this->Track_model->getIdTracksForDuel($_SESSION['loggedUser']->idUser);
 		$trackInfo = array();
 		// Chacun des deux idTrack avec son shitRatio correspondant
-		for($i=0; $i<2; $i++)
-			$trackInfo[$i] = array("idTrack" => urlencode(base64_encode($idTracks[$i])), "shitRatio" => urlencode(base64_encode($this->Shit_Track_model->get_Shit_Track_ratio_for_Track($idTracks[$i]))));
-														
+		for($i=0; $i<2; $i++) {
+			$base64IdTrack = base64_encode($idTracks[$i]);
+			$sanitizedIdTrack = rtrim($base64IdTrack, '='); // Equals signs in URL stopped working/started appearing in june 2020. No idea why but they should be safe to remove here.
+			$encodedIdTrack = urlencode($sanitizedIdTrack);
+			$trackInfo[$i] = array("idTrack" => $encodedIdTrack, "shitRatio" => urlencode(base64_encode($this->Shit_Track_model->get_Shit_Track_ratio_for_Track($idTracks[$i]))));
+		}
 		echo json_encode($trackInfo);
 	}
 
