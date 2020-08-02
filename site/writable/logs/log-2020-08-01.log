@@ -1,0 +1,781 @@
+CRITICAL - 2020-08-01 06:35:20 --> ini_set(): Headers already sent. You cannot change the session module's ini settings at this time
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Session/Handlers/FileHandler.php(101): ini_set()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Config/Services.php(763): CodeIgniter\Session\Handlers\FileHandler->__construct()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Config/BaseService.php(123): CodeIgniter\Config\Services::session()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Config/Services.php(752): CodeIgniter\Config\BaseService::getSharedInstance()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/BaseController.php(47): CodeIgniter\Config\Services::session()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(887): App\Controllers\BaseController->initController()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(395): CodeIgniter\CodeIgniter->createController()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#11 {main}
+CRITICAL - 2020-08-01 06:35:20 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php:2) in /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Debug/Exceptions.php:162
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Debug/Exceptions.php(162): header()
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2020-08-01 06:35:20 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php:2) in /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Debug/Exceptions.php:162
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Debug/Exceptions.php(162): header()
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2020-08-01 06:35:47 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php:2) in /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Debug/Exceptions.php:162
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Debug/Exceptions.php(162): header()
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2020-08-01 06:37:18 --> ini_set(): Headers already sent. You cannot change the session module's ini settings at this time
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Session/Handlers/FileHandler.php(101): ini_set()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Config/Services.php(763): CodeIgniter\Session\Handlers\FileHandler->__construct()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Config/BaseService.php(123): CodeIgniter\Config\Services::session()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Config/Services.php(752): CodeIgniter\Config\BaseService::getSharedInstance()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/BaseController.php(47): CodeIgniter\Config\Services::session()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(887): App\Controllers\BaseController->initController()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(395): CodeIgniter\CodeIgniter->createController()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#11 {main}
+CRITICAL - 2020-08-01 06:37:18 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php:2) in /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Debug/Exceptions.php:162
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Debug/Exceptions.php(162): header()
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2020-08-01 06:37:21 --> ini_set(): Headers already sent. You cannot change the session module's ini settings at this time
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Session/Handlers/FileHandler.php(101): ini_set()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Config/Services.php(763): CodeIgniter\Session\Handlers\FileHandler->__construct()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Config/BaseService.php(123): CodeIgniter\Config\Services::session()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Config/Services.php(752): CodeIgniter\Config\BaseService::getSharedInstance()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/BaseController.php(47): CodeIgniter\Config\Services::session()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(887): App\Controllers\BaseController->initController()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(395): CodeIgniter\CodeIgniter->createController()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#11 {main}
+CRITICAL - 2020-08-01 06:37:21 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php:2) in /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Debug/Exceptions.php:162
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Debug/Exceptions.php(162): header()
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2020-08-01 06:38:45 --> fopen(http://localhost:8080/assets/images/screenshots/game/859.png): failed to open stream: HTTP request failed!
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/search_results_game.php(76): fopen()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/search_results_game.php(49): thumbnail()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once('/home/francois/...')
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Search.php(45): view()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Search->index()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#11 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#12 {main}
+CRITICAL - 2020-08-01 06:44:29 --> fopen(http://localhost:8080/assets/images/screenshots/game/859.png): failed to open stream: HTTP request failed!
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/search_results_game.php(77): fopen()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/search_results_game.php(49): thumbnail()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once('/home/francois/...')
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Search.php(45): view()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Search->index()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#11 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#12 {main}
+CRITICAL - 2020-08-01 06:45:44 --> file_get_contents(http://localhost:8080/assets/images/screenshots/game/859.png): failed to open stream: HTTP request failed!
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/search_results_game.php(76): file_get_contents()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/search_results_game.php(49): thumbnail()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once('/home/francois/...')
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Search.php(45): view()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Search->index()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#10 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#11 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#12 {main}
+CRITICAL - 2020-08-01 06:51:47 --> Undefined variable: handle
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/search_results_game.php(80): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/search_results_game.php(49): thumbnail()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once('/home/francois/...')
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Search.php(45): view()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Search->index()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#11 {main}
+CRITICAL - 2020-08-01 07:21:48 --> Call to undefined method App\Models\Review_model::get_user_profile
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/User_profile.php(20): CodeIgniter\Model->__call()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\User_profile->index()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 07:22:08 --> Undefined variable: duel_result_model
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/User_profile.php(23): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\User_profile->index()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 07:24:57 --> Call to undefined function form_error()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_community.php(13): view()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Request_community->index()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#9 {main}
+CRITICAL - 2020-08-01 07:26:41 --> Undefined property: App\Controllers\Request_community::$load
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_community.php(36): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_community.php(19): App\Controllers\Request_community->setValidationRules()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Request_community->submit()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#7 {main}
+CRITICAL - 2020-08-01 07:27:12 --> Undefined property: App\Controllers\Request_community::$form_validation
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_community.php(20): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Request_community->submit()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 07:27:42 --> Class 'App\Models\Community_request_model' not found
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_community.php(22): App\Controllers\Request_community->saveRequest()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Request_community->submit()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 07:28:06 --> Class 'App\Models\Community_request_model' not found
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_community.php(22): App\Controllers\Request_community->saveRequest()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Request_community->submit()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 07:31:41 --> Undefined property: App\Controllers\Request_Mistake::$input
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_mistake.php(14): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Request_Mistake->index()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 07:32:22 --> Call to undefined function form_error()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_mistake.php(21): view()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Request_Mistake->index()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#9 {main}
+CRITICAL - 2020-08-01 07:44:57 --> syntax error, unexpected ')'
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Router/Router.php(192): CodeIgniter\Router\Router->autoRoute()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(789): CodeIgniter\Router\Router->handle()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(360): CodeIgniter\CodeIgniter->tryToRouteIt()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 07:45:06 --> Declaration of App\Controllers\Request_Review::index($idTrack) should be compatible with App\Controllers\Secure_controller::index()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_review.php(9): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Router/Router.php(575): include_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Router/Router.php(192): CodeIgniter\Router\Router->autoRoute()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(789): CodeIgniter\Router\Router->handle()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(360): CodeIgniter\CodeIgniter->tryToRouteIt()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#8 {main}
+CRITICAL - 2020-08-01 07:45:51 --> Declaration of App\Controllers\Request_review::index($idTrack) should be compatible with App\Controllers\Secure_controller::index()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_review.php(9): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Router/Router.php(575): include_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Router/Router.php(192): CodeIgniter\Router\Router->autoRoute()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(789): CodeIgniter\Router\Router->handle()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(360): CodeIgniter\CodeIgniter->tryToRouteIt()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#8 {main}
+CRITICAL - 2020-08-01 07:49:26 --> Cannot call constructor
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(886): App\Controllers\Secure_controller->__construct()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(395): CodeIgniter\CodeIgniter->createController()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#5 {main}
+CRITICAL - 2020-08-01 07:50:29 --> Declaration of App\Controllers\Secure_controller::initController() should be compatible with App\Controllers\BaseController::initController(CodeIgniter\HTTP\RequestInterface $request, CodeIgniter\HTTP\ResponseInterface $response, Psr\Log\LoggerInterface $logger)
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Secure_controller.php(5): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Autoloader/Autoloader.php(365): require_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Autoloader/Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->requireFile()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Autoloader/Autoloader.php(258): CodeIgniter\Autoloader\Autoloader->loadInNamespace()
+#4 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_review.php(9): spl_autoload_call()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Router/Router.php(575): include_once('/home/francois/...')
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Router/Router.php(192): CodeIgniter\Router\Router->autoRoute()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(789): CodeIgniter\Router\Router->handle()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(360): CodeIgniter\CodeIgniter->tryToRouteIt()
+#10 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#11 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#12 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#13 {main}
+CRITICAL - 2020-08-01 08:02:44 --> Call to undefined function form_error()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_screenshot_game.php(16): view()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Request_screenshot_game->index()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#9 {main}
+CRITICAL - 2020-08-01 08:03:28 --> Undefined variable: row
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Models/Game_screenshot_request_model.php(22): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_screenshot_game.php(29): App\Models\Game_screenshot_request_model->get_Game_Screenshot_request()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Request_screenshot_game->submit()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#7 {main}
+CRITICAL - 2020-08-01 08:10:58 --> Undefined variable: row
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Models/Track_screenshot_request_model.php(23): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_screenshot_track.php(28): App\Models\Track_screenshot_request_model->get_Track_Screenshot_request()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Request_screenshot_track->submit()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#7 {main}
+CRITICAL - 2020-08-01 08:11:18 --> Undefined variable: track_screenshot_request_model
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_screenshot_track.php(54): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_screenshot_track.php(29): App\Controllers\Request_screenshot_track->saveRequest()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Request_screenshot_track->submit()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#7 {main}
+CRITICAL - 2020-08-01 08:13:28 --> Call to undefined function form_error()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Request_track.php(14): view()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Request_track->index()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#9 {main}
+CRITICAL - 2020-08-01 08:23:52 --> Call to undefined function form_error()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(18): view()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->index()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#9 {main}
+CRITICAL - 2020-08-01 08:24:38 --> syntax error, unexpected '?>'
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(18): view()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->index()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#8 {main}
+CRITICAL - 2020-08-01 08:25:15 --> 
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/HTTP/RedirectResponse.php(92): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(813): CodeIgniter\HTTP\RedirectResponse->route()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(59): redirect()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->submit()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#8 {main}
+CRITICAL - 2020-08-01 08:36:36 --> 
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/HTTP/RedirectResponse.php(92): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(813): CodeIgniter\HTTP\RedirectResponse->route()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(59): redirect()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->submit()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#8 {main}
+CRITICAL - 2020-08-01 08:37:19 --> 
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/HTTP/RedirectResponse.php(92): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(813): CodeIgniter\HTTP\RedirectResponse->route()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(59): redirect()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->submit()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#8 {main}
+CRITICAL - 2020-08-01 08:39:06 --> Class 'App\Models\stdClass' not found
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(25): App\Models\Track_model->get_new_Track()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->create()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 08:42:26 --> Undefined property: stdClass::$trackNumber
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/edit_track.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(28): view()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->create()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#10 {main}
+CRITICAL - 2020-08-01 09:11:34 --> Class 'App\Models\stdClass' not found
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(25): App\Models\Track_model->get_new_Track()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->create()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 09:12:59 --> Undefined property: stdClass::$trackNumber
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/edit_track.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(28): view()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->create()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#10 {main}
+CRITICAL - 2020-08-01 09:15:12 --> Undefined property: stdClass::$trackNumber
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/edit_track.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(28): view()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->create()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#10 {main}
+CRITICAL - 2020-08-01 09:18:07 --> Undefined property: stdClass::$trackNumber
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/edit_track.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(28): view()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->create()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#10 {main}
+CRITICAL - 2020-08-01 09:21:54 --> Undefined property: stdClass::$isVoice
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/edit_track.php(96): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(28): view()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->create()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#10 {main}
+CRITICAL - 2020-08-01 09:24:47 --> Undefined property: stdClass::$trackNumber
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/edit_track.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(28): view()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->create()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#10 {main}
+CRITICAL - 2020-08-01 09:26:44 --> Column 'isJingle' cannot be null
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(331): mysqli->query()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Database/BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Database/BaseConnection.php(666): CodeIgniter\Database\BaseConnection->simpleQuery()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(2234): CodeIgniter\Database\BaseConnection->query()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Models/Track_model.php(131): CodeIgniter\Database\BaseBuilder->insert()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(55): App\Models\Track_model->set_Track()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->submit()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#11 {main}
+CRITICAL - 2020-08-01 09:42:08 --> Column 'eloReached2400' cannot be null
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(331): mysqli->query()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Database/BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Database/BaseConnection.php(666): CodeIgniter\Database\BaseConnection->simpleQuery()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(2234): CodeIgniter\Database\BaseConnection->query()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Models/Track_model.php(131): CodeIgniter\Database\BaseBuilder->insert()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_track.php(55): App\Models\Track_model->set_Track()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_Track->submit()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#11 {main}
+CRITICAL - 2020-08-01 11:30:35 --> Call to undefined function form_error()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_user_profile.php(19): view()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_user_profile->index()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#9 {main}
+CRITICAL - 2020-08-01 11:31:05 --> Argument 2 passed to set_value() must be of the type string, null given, called in /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/edit_user_profile.php on line 43
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/edit_user_profile.php(43): set_value()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_user_profile.php(19): view()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_user_profile->index()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#10 {main}
+CRITICAL - 2020-08-01 11:35:27 --> Argument 2 passed to set_value() must be of the type string, null given, called in /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/edit_user_profile.php on line 43
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/edit_user_profile.php(43): set_value()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_user_profile.php(19): view()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_user_profile->index()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#10 {main}
+CRITICAL - 2020-08-01 11:39:18 --> Undefined property: App\Controllers\Edit_user_profile::$load
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_user_profile.php(79): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_user_profile.php(34): App\Controllers\Edit_user_profile->setValidationRules()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_user_profile->submit()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#7 {main}
+CRITICAL - 2020-08-01 11:39:57 --> Undefined property: App\Controllers\Edit_user_profile::$User_model
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_user_profile.php(46): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_user_profile->submit()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 11:40:25 --> Undefined variable: user_model
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_user_profile.php(47): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_user_profile->submit()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 11:40:43 --> 
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/HTTP/RedirectResponse.php(92): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(813): CodeIgniter\HTTP\RedirectResponse->route()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_user_profile.php(49): redirect()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_user_profile->submit()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#8 {main}
+CRITICAL - 2020-08-01 11:43:46 --> Call to undefined function App\Models\mcrypt_create_iv()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Models/User_model.php(154): App\Models\User_model->create_hash()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Edit_user_profile.php(48): App\Models\User_model->updateUser()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Edit_user_profile->submit()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#7 {main}
+CRITICAL - 2020-08-01 13:01:35 --> Call to undefined function form_error()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Register.php(20): view()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Register->index()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#9 {main}
+CRITICAL - 2020-08-01 13:02:00 --> Undefined variable: captcha
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/register.php(63): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Register.php(20): view()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Register->index()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#10 {main}
+CRITICAL - 2020-08-01 13:05:18 --> Undefined property: App\Controllers\Register::$load
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Register.php(75): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Register.php(40): App\Controllers\Register->sendConfirmationEmail()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Register->submit()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#7 {main}
+CRITICAL - 2020-08-01 13:09:08 --> strpos() expects parameter 1 to be string, object given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Email/Email.php(709): strpos()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Email/Email.php(519): CodeIgniter\Email\Email->stringToArray()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Register.php(79): CodeIgniter\Email\Email->setTo()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Register.php(40): App\Controllers\Register->sendConfirmationEmail()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Register->submit()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#10 {main}
+CRITICAL - 2020-08-01 13:11:01 --> Call to undefined method CodeIgniter\Email\Email::print_debugger()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Register.php(40): App\Controllers\Register->sendConfirmationEmail()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Register->submit()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 13:31:49 --> Declaration of App\Controllers\Communities_dashboard::index() should be compatible with App\Controllers\Admin_controller::index($idGame)
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Communities_dashboard.php(7): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Router/Router.php(575): include_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Router/Router.php(192): CodeIgniter\Router\Router->autoRoute()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(789): CodeIgniter\Router\Router->handle()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(360): CodeIgniter\CodeIgniter->tryToRouteIt()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#8 {main}
+CRITICAL - 2020-08-01 13:33:06 --> Call to undefined function views_dir()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Communities_dashboard.php(17): view()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Communities_dashboard->index()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#8 {main}
+CRITICAL - 2020-08-01 13:41:29 --> Cannot call constructor
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(886): App\Controllers\Games_Dashboard->__construct()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(395): CodeIgniter\CodeIgniter->createController()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#5 {main}
+CRITICAL - 2020-08-01 13:41:58 --> Call to undefined function form_error()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Views/template.php(135): require_once()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/View/View.php(246): include('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(1087): CodeIgniter\View\View->render()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Games_dashboard.php(18): view()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Games_Dashboard->index()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#9 {main}
+CRITICAL - 2020-08-01 13:43:06 --> Declaration of App\Controllers\Tracks_dashboard::index($idGame) should be compatible with App\Controllers\Admin_controller::index()
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Tracks_dashboard.php(9): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Router/Router.php(575): include_once('/home/francois/...')
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Router/Router.php(192): CodeIgniter\Router\Router->autoRoute()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(789): CodeIgniter\Router\Router->handle()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(360): CodeIgniter\CodeIgniter->tryToRouteIt()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#8 {main}
+CRITICAL - 2020-08-01 13:51:07 --> Undefined property: App\Controllers\Games_Dashboard::$load
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Games_dashboard.php(66): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Games_dashboard.php(24): App\Controllers\Games_Dashboard->setAddValidationRules()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Games_Dashboard->add()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#7 {main}
+CRITICAL - 2020-08-01 13:52:01 --> Too few arguments to function App\Controllers\Games_Dashboard::delete(), 0 passed in /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php on line 914 and exactly 1 expected
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Games_Dashboard->delete()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#5 {main}
+CRITICAL - 2020-08-01 13:54:39 --> Undefined property: App\Controllers\Games_Dashboard::$load
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Games_dashboard.php(76): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Games_dashboard.php(41): App\Controllers\Games_Dashboard->setUpdateValidationRules()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Games_Dashboard->update()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#7 {main}
+CRITICAL - 2020-08-01 13:56:17 --> Too few arguments to function App\Controllers\Games_Dashboard::delete(), 0 passed in /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php on line 914 and exactly 1 expected
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Games_Dashboard->delete()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#5 {main}
+CRITICAL - 2020-08-01 14:01:07 --> Too few arguments to function App\Controllers\Games_Dashboard::delete(), 0 passed in /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php on line 914 and exactly 1 expected
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Games_Dashboard->delete()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#5 {main}
+CRITICAL - 2020-08-01 14:04:58 --> Too few arguments to function App\Controllers\Games_Dashboard::delete(), 0 passed in /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php on line 914 and exactly 1 expected
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Games_Dashboard->delete()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#5 {main}
+CRITICAL - 2020-08-01 18:36:04 --> 
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/HTTP/RedirectResponse.php(92): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(813): CodeIgniter\HTTP\RedirectResponse->route()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Admin_controller.php(11): redirect()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(887): App\Controllers\Admin_controller->initController()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(395): CodeIgniter\CodeIgniter->createController()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#8 {main}
+CRITICAL - 2020-08-01 18:37:35 --> 
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/HTTP/RedirectResponse.php(92): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidRedirectRoute()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Common.php(813): CodeIgniter\HTTP\RedirectResponse->route()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Admin_controller.php(11): redirect()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(887): App\Controllers\Admin_controller->initController()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(395): CodeIgniter\CodeIgniter->createController()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#8 {main}
+CRITICAL - 2020-08-01 18:38:14 --> Too few arguments to function App\Controllers\Games_Dashboard::delete(), 0 passed in /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php on line 914 and exactly 1 expected
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Games_Dashboard->delete()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#5 {main}
+CRITICAL - 2020-08-01 18:43:35 --> Too few arguments to function App\Controllers\Games_Dashboard::delete(), 0 passed in /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php on line 914 and exactly 1 expected
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Games_Dashboard->delete()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#5 {main}
+CRITICAL - 2020-08-01 18:48:51 --> Undefined variable: unapprovedOnly
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Models/Review_model.php(15): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Reviews_dashboard.php(14): App\Models\Review_model->get_Review()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Reviews_dashboard->index()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#7 {main}
+CRITICAL - 2020-08-01 19:06:44 --> Cannot call constructor
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(886): App\Controllers\Screenshot_request_Dashboard->__construct()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(395): CodeIgniter\CodeIgniter->createController()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#5 {main}
+CRITICAL - 2020-08-01 19:08:24 --> Undefined property: App\Controllers\Screenshot_request_Dashboard::$load
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Screenshot_request_dashboard.php(19): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(887): App\Controllers\Screenshot_request_Dashboard->initController()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(395): CodeIgniter\CodeIgniter->createController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 19:23:58 --> Undefined property: App\Controllers\Screenshot_request_Dashboard::$upload
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Screenshot_request_dashboard.php(66): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Screenshot_request_Dashboard->uploadScreenshot()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
+CRITICAL - 2020-08-01 19:40:25 --> Undefined property: App\Controllers\Users_management_dashboard::$User_model
+#0 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/app/Controllers/Users_management_dashboard.php(45): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(914): App\Controllers\Users_management_dashboard->reset_password()
+#2 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController()
+#3 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 /home/francois/Desktop/Top SNES tracks/snestopBitBucket/snestop/site/snestop/vendor/codeigniter4/framework/system/Commands/Server/rewrite.php(34): require_once('/home/francois/...')
+#6 {main}
