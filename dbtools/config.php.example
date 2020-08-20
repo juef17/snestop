@@ -1,0 +1,10 @@
+<?php
+
+	$dbhost = "localhost";
+	$dbport = 3306;
+	$dbusername = "a_username";
+	$dbpass = "some_password";
+	$dbname = "snestop";
+	$sqlcode = "DDL.sql";
+
+?>
