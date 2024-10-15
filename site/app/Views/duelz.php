@@ -84,12 +84,12 @@
 <div class="container_16">
 	<div class="grid_7 prefix_3">
 		<div class="checkbox shitgroup" id="shit-a-group">
-			<label><input type="checkbox" id="shitA"> This track is shit! D:</label>
+			<label><input type="checkbox" id="shitA"> Don't play this track again</label>
 		</div>
 	</div>
 	<div class="grid_9 prefix_2 suffix_3">
 		<div class="checkbox shitgroup" id="shit-b-group">
-			<label><input type="checkbox" id="shitB"> This track is shit! D:</label>
+			<label><input type="checkbox" id="shitB"> Don't play this track again</label>
 		</div>
 	</div>
 </div>
@@ -134,8 +134,8 @@
 
 <div id="dialog-vote" title="Cast a vote">
 	<ul>
-		<li id="dialog-shitA">Track A is shit</li>
-		<li id="dialog-shitB">Track B is shit</li>
+		<li id="dialog-shitA">I don't want to hear Track A again</li>
+		<li id="dialog-shitB">I don't want to hear Track B again</li>
 		<li id="dialog-winnerA"><b>Winner is track A</b></li>
 		<li id="dialog-winnerB"><b>Winner is track B</b></li>
 	</ul>
