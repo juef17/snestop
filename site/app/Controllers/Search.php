@@ -10,7 +10,7 @@ class Search extends BaseController
 {
 	public function browse($target, $page = 'A') {
 		$data = $this->getUserViewData();
-		$target = $this->request->getVar('target');
+		$target = $this->request->getVar('target') ?? '0';
 		
 		if($target == '0') {
 			$game_model = new Game_model();
@@ -25,8 +25,8 @@ class Search extends BaseController
 	//POST
 	public function index() {
 		$data = $this->getUserViewData();
-		$target = $this->request->getVar('target');
-		
+		$target = $this->request->getVar('target') ?? '0';
+
 		$data['searchString'] = $this->request->getVar('searchString');
 		if($target == '0') {
 			$game_model = new Game_model();
