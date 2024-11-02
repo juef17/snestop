@@ -65,7 +65,7 @@ if (! function_exists('set_cookie'))
 	 * @see (\Config\Services::response())->setCookie()
 	 * @see \CodeIgniter\HTTP\Response::setCookie()
 	 */
-	function set_cookie($name, string $value = '', string $expire = '', string $domain = '', string $path = '/', string $prefix = '', bool $secure = false, bool $httpOnly = false)
+	function set_cookie($name, string $value = '', string $expire = '', string $domain = '', string $path = '/', string $prefix = '', bool $secure = true, bool $httpOnly = true)
 	{
 		// The following line shows as a syntax error in NetBeans IDE
 		//(\Config\Services::response())->setcookie

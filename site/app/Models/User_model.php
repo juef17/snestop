@@ -31,7 +31,7 @@ class User_model extends Model
 
 	public function remembered_login($token) {
 		$builder = $this->db->table('User');
-		$$builder->where('rememberMeSnestopToken', $token);
+		$builder->where('rememberMeSnestopToken', $token);
 		$builder->limit(1);
 
 		if($builder->countAllResults(false) == 1){

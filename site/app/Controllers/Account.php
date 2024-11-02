@@ -44,7 +44,7 @@ class Account extends Public_controller
 		$cookie = [
 			'name'   => 'rememberMeSnestopToken',
 			'value'  => $token,
-			'expire' => '63072000'  // Two years
+			'expire' => '157680000'  // 5 years
 		];
 		set_cookie($cookie);
 		$user_model->set_token($this->request->getVar('username'), $token);

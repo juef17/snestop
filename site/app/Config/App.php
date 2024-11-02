@@ -21,7 +21,8 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-	public $baseURL = 'http://localhost:8080/';
+	//public $baseURL = 'http://localhost:8080/';
+	public $baseURL = 'https://snestop.jerther.com/';
 
 	/*
 	|--------------------------------------------------------------------------
@@ -34,6 +35,7 @@ class App extends BaseConfig
 	|
 	*/
 	public $indexPage = 'index.php';
+	//public $indexPage = '';
 
 	/*
 	|--------------------------------------------------------------------------
@@ -50,7 +52,8 @@ class App extends BaseConfig
 	|
 	| WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 	*/
-	public $uriProtocol = 'REQUEST_URI';
+	//public $uriProtocol = 'REQUEST_URI';
+	public $uriProtocol = 'PATH_INFO';
 
 	/*
 	|--------------------------------------------------------------------------
@@ -183,7 +186,7 @@ class App extends BaseConfig
 	*/
 	public $sessionDriver            = 'CodeIgniter\Session\Handlers\FileHandler';
 	public $sessionCookieName        = 'ci_session';
-	public $sessionExpiration        = 7200;
+	public $sessionExpiration        = 157680000;
 	public $sessionSavePath          = WRITEPATH . 'session';
 	public $sessionMatchIP           = false;
 	public $sessionTimeToUpdate      = 300;
@@ -246,7 +249,7 @@ class App extends BaseConfig
 	public $CSRFTokenName  = 'csrf_test_name';
 	public $CSRFHeaderName = 'X-CSRF-TOKEN';
 	public $CSRFCookieName = 'csrf_cookie_name';
-	public $CSRFExpire     = 7200;
+	public $CSRFExpire     = 15768000;
 	public $CSRFRegenerate = true;
 	public $CSRFRedirect   = true;
 
