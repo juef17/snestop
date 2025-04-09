@@ -1,0 +1,25 @@
+------------============ 1. Database config   ============------------
+
+DB info is in /app/Config/Database.php. It could also be set in .env like this:
+
+database.default.hostname = localhost
+database.default.database = good_schtuff
+database.default.username = me
+database.default.password = mypassword
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+database.default.port = 3306
+
+
+------------============ 2. Base Site URL     ============------------
+
+Edit $baseURL in /app/Config/App.php .
+
+
+------------============ 3. Write permissions ============------------
+
+Make sure these and their entire contents is writable:
+
+/public/assets/upload/
+/public/assets/images/captcha/
+/writable/

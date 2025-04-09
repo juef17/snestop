@@ -1,4 +1,0 @@
-AuthUserFile /home/baldho/public_html/snestop/dbtools/.htpasswd
-AuthType Basic
-AuthName "DB Tools - S'assurer que le fichier .htaccess pointe directement sur .htpasswd"
-Require valid-user
