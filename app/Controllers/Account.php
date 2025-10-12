@@ -45,26 +45,53 @@ class Account extends Public_controller
 	}
 
 	private function setCookie() {
-		//TODO: Cookie “snestop” will be soon rejected because it has the “sameSite” attribute set to “none” or an invalid value, without the “secure” attribute. To know more about the “sameSite“ attribute, read https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 		$user_model = new User_model();
 		$token = generate_random_string();
-		$cookie = [
+/*		$cookie = [
 			'name'   => 'rememberMeSnestopToken',
 			'value'  => $token,
 			'expire' => '157680000'  // 5 years
 		];
-		set_cookie($cookie);
+*/
+/*		$cookie = [
+			'name'   => 'rememberMeSnestopToken',
+			'value'  => $token,
+			'secure'   => true,      // only send over HTTPS
+			'httponly' => true,      // not accessible to JS
+			'samesite' => 'Lax',     // or 'Strict', avoid 'None' unless you force HTTPS
+			'expire' => '157680000'  // 5 years
+		];
+		set_cookie($cookie); // CI's set_cookie
+*/
+		
+		setcookie('rememberMeSnestopToken', $token, [
+			'expires' => time() + 60*60*24*365*5, // 5 years
+			'path' => '/',
+			'secure' => true,
+			'httponly' => true,
+			'samesite' => 'Lax'
+		]);
+
 		$user_model->set_token($this->request->getVar('username'), $token);
 	}
 
 	private function deleteCookie() {
 		$user_model = new User_model();
-		$cookie = [
+/*		$cookie = [
 			'name' => 'rememberMeSnestopToken',
 			'value' => '',
 			'expire' => '0'
 		];
 		set_cookie($cookie);
+*/
+		setcookie('rememberMeSnestopToken', '', [
+			'expires' => 0,
+			'path' => '/',
+			'secure' => true,
+			'httponly' => true,
+			'samesite' => 'Lax'
+		]);
+		
 		$username = $_SESSION['loggedUser']->userName;
 		$user_model->set_token($username, NULL);
 	}

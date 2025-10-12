@@ -36,7 +36,8 @@ class User_model extends Model
 
 		if($builder->countAllResults(false) == 1){
 			$query = $builder->get();
-			return $this->getUserFromRow($query->getResult());
+			$row = $query->getRow();
+			return $this->getUserFromRow($row);
 		}
 		else
 			return false;

@@ -92,7 +92,8 @@ abstract class BaseController extends Controller
 		unset($_SESSION['loggedUser']);
 		$token = get_cookie('rememberMeSnestopToken');
 		if($token) {
-			$user = $this->User_model->remembered_login($token);
+			$user_model = new User_model();
+			$user = $user_model->remembered_login($token);
 			if($user) {
 				$_SESSION['loggedUser'] = $user;
 			}
